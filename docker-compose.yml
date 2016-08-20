@@ -1,0 +1,22 @@
+version: '2'
+services:
+  proxy:
+    build: ./proxy
+    container_name: proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./proxy/nginx.conf:/etc/nginx/conf.d/matthew-lavin.conf
+  
+
+  matthew-lavin:
+    build: ./matthew-lavin
+    container_name: matthew-lavin
+
+  thedatahumanist:
+    build: ./thedatahumanist
+    container_name: thedatahumanist
+
+  humanitiesdata:
+    build: ./humanitiesdata
+    container_name: humanitiesdata
