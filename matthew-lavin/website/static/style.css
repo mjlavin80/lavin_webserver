@@ -39,8 +39,31 @@ body {
 .social {
   padding: 5px 5px;
   height: 50px;
+  line-height: 50px;
   float: left;
 }
 li.social>a {
   padding: 0 10px 0 10px;
+}
+#active {
+  color: white;
+
+}
+@media (min-width: 768px){
+    #soc_media{
+        float:none;
+        margin: -5px auto;
+        min-width: 758px;
+        display: table;
+        table-layout: fixed;
+    }
+}
+@media (max-width: 767px){
+  #icon_nav {
+    margin-top: -5px;
+  }
+  li.social {
+    width: 100%;
+    position: relative;
+  }
 }

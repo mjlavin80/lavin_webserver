@@ -7,18 +7,16 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="favicon.ico">
 
-    <title>About Me </title>
+    <title>Welcome to Matthew J. Lavin!</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="./static/bootstrap.min.css" rel="stylesheet">
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="./static/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="./static/style.css" rel="stylesheet">
+    <link href="/static/style.css" rel="stylesheet">
 
   </head>
 
@@ -32,48 +30,54 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Matthew J. Lavin</a>
+          <a id="active"  class="navbar-brand" href="/">Matthew J. Lavin</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="./">Home</a></li>
             
               <li><a href="./teaching/">Teaching</a></li>
             
               <li><a href="./projects/">Projects</a></li>
             
-            <li><a href="./static/documents/Lavin-CV-110215.pdf">CV</a></li>
+            <li><a href="/static/documents/Lavin-CV-110215.pdf">CV</a></li>
             <li><a href="http://humanitiesdata.com">Open Data</a></li>
             <li><a href="http://thedatahumanist.website">The Data Humanist</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+    <div class="container">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#soc_media" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span>+/-</span>
+
+        </button>
+        <div class="social navbar-brand">Some Affiliations/Accounts:</div>
+      </div>
+      <div id="soc_media" class="collapse navbar-collapse">
+      <ul id="icon_nav" class="nav navbar-nav">
+      <li class="social"><a href="http://github.com/mjlavin80"><img src="/static/images/GitHub_Logo.png"/></a></li>
+      <li class="social"><a href="http://english.pitt.edu"><img src="/static/images/eng_logo_pitt.png"/></a></li>
+      <li class="social"><a href="http://dhrx.pitt.edu"><img src="/static/images/dhrx_logo.png"/></a></li>
+      <li class="social"><a href="http://twitter.com/mjlavin80"><img src="/static/images/twitter_logo.png"/></a></li>
+    </ul>
+  </div>
+  </div>
     <div class="page-header">
       <div class="container">
       <div><h1>About Me</h1></div>
       </div>
     </div>
-    <div class="container">
-    
-    <div class="col-md-8">
-    
-      <div class="navbar-brand">Some Affiliations/Accounts:</div>
-      <ul class="nav navbar-nav">
-      <li class="social"><a href="http://github.com/mjlavin80"><img src="./static/images/GitHub_Logo.png"/></a></li>
-      <li class="social"><a href="http://english.pitt.edu"><img src="./static/images/eng_logo_pitt.png"/></a></li>
-      <li class="social"><a href="http://dhrx.pitt.edu"><img src="./static/images/dhrx_logo.png"/></a></li>
-      <li class="social"><a href="http://twitter.com/mjlavin80"><img src="./static/images/twitter_logo.png"/></a></li>
-    </ul>
-  </div>
-  </div>
-    <div class="container">
-        
-        <div class="col-md-8">
-        
-        
 
-     <div class="content"><p>Greetings, traveler. My name is Matt Lavin, and this is my website.</p>
+    <div class="container">
+
+        <div class="col-md-8 content">
+
+  
+  
+  <p>Greetings, traveler. My name is Matt Lavin, and this is my website.</p>
 <p>I'm a Clinical Assistant Professor of English at the University of Pittsburgh, and Director of the department's Digital Media Lab. My scholarly interests include the various ways that book history and digital humanities intersect, especially in terms of computational methods and humanities data. I'm also interested in American authorship, book technologies, open access and copyright, and digital pedagogy.</p>
 <p>I finished a PhD in English at the University of Iowa in 2012; a master's degree in American studies at Utah State University in 2006; and a bachelor's degree at St. Lawrence University in 2002.</p>
 <p>In conjunction with my doctoral work on turn-of-the-century American authorship, I received the Lilly Library's Everett Helm Fellowship in 2010 and the University of Iowa's Frederick F. Seely Distinguished Dissertation Fellowship for Teaching and Research in 2011. My scholarly work has appeared in Western American Literature and Cather Studies 9: Willa Cather and Modern Cultures, Studies in the Novel, Literary and Linguistic Computing, and Auto | Biography Studies.</p>
@@ -82,25 +86,20 @@
 <p>From 2013 to 2015, I was Associate Program Coordinator of a Mellon-funded digital humanities initiative at St. Lawrence University in Canton, NY titled "Crossing Boundaries: Re-envisioning the Humanities for the 21st Century."</p>
 <p>For more information, have a look at my CV.</p>
 
-</div>
 
 
         </div>
-        
+
         <div class="col-md-4">
-        <a class="twitter-timeline" href="https://twitter.com/mjlavin80">Tweets by mjlavin80</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+        <a class="twitter-timeline" data-lang="en" data-height="800" href="https://twitter.com/mjlavin80">Tweets by mjlavin80</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
-        
     </div><!-- /.container -->
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- Bootstrap core JavaScript-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-    <script src="./static/bootstrap.min.js"</script>
+    <script src="/js/bootstrap.min.js"</script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="./static/ie10-viewport-bug-workaround.js"></script>
+    <script src="/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
