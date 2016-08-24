@@ -3,17 +3,17 @@
   <title type="text">Feed One</title>
   <id>urn:uuid:e5f22007-723a-33d8-b444-1b6f2e11d6d8</id>
   <updated>2016-09-01T00:00:00Z</updated>
-  <link href="http://http://thedatahumanist.website/" />
-  <link href="http://http://thedatahumanist.website/feed.xml" rel="self" />
+  <link href="http://bookhistorydata.com/thedatahumanist/" />
+  <link href="http://bookhistorydata.com/thedatahumanist/feed.xml" rel="self" />
   <author>
     <name></name>
   </author>
   <generator uri="https://github.com/ajdavis/lektor-atom" version="0.2">Lektor Atom Plugin</generator>
-  <entry xml:base="http://http://thedatahumanist.website/foreword/">
+  <entry xml:base="http://bookhistorydata.com/thedatahumanist/foreword/">
     <title type="text">This Blog-like Thing is Coming Soon</title>
     <id>urn:uuid:efa6642e-66ae-309e-8045-0d808299827f</id>
     <updated>2016-09-01T00:00:00Z</updated>
-    <link href="http://http://thedatahumanist.website/foreword/" />
+    <link href="http://bookhistorydata.com/thedatahumanist/foreword/" />
     <author>
       <name>Matt Lavin</name>
     </author>
@@ -22,11 +22,11 @@ My first post will be October 1, 2016, and I will follow with a once-a-month pos
 At the end of this 12-month period, I will decide whether to continue publishing my work in this form or to do something new.&lt;/p&gt;
 </content>
   </entry>
-  <entry xml:base="http://http://thedatahumanist.website/about/">
+  <entry xml:base="http://bookhistorydata.com/thedatahumanist/about/">
     <title type="text">About</title>
     <id>urn:uuid:69c79689-cc76-3142-a0cf-cf83249b5721</id>
-    <updated>2016-08-24T17:24:40.917815Z</updated>
-    <link href="http://http://thedatahumanist.website/about/" />
+    <updated>2016-08-24T17:29:47.464205Z</updated>
+    <link href="http://bookhistorydata.com/thedatahumanist/about/" />
     <author>
       <name></name>
     </author>
