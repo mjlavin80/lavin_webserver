@@ -40,3 +40,9 @@ header nav ul li {
 div.page {
     background: #f1fbfe;
 }
+
+.footnote {
+
+    vertical-align: super;
+    font-size: 65%;
+}
