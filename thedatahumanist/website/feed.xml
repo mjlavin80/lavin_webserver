@@ -25,7 +25,7 @@ At the end of this 12-month period, I will decide whether to continue publishing
   <entry xml:base="http://bookhistorydata.com/thedatahumanist/about/">
     <title type="text">About</title>
     <id>urn:uuid:69c79689-cc76-3142-a0cf-cf83249b5721</id>
-    <updated>2016-08-25T15:50:08.882123Z</updated>
+    <updated>2016-08-25T18:44:31.771456Z</updated>
     <link href="http://bookhistorydata.com/thedatahumanist/about/" />
     <author>
       <name></name>
@@ -42,12 +42,8 @@ and others, who are crucial to the successful management of a digital data colle
 &lt;p&gt;Data remains the backstop of much if not all digital humanities work, either directly (in the case of, say, Matt Jockers' work on sentiment analysis) or indirectly (as in, say, the numerous critiques of Jockers' work on sentiment analysis).&lt;/p&gt;
 &lt;p&gt;This particular topic is of interest me because I work in a space where digital humanities and digital media intersect. I'm a Clinical Assistant Professor of English and Director of the Digital Media Lab at the University of Pittsburgh. My most recent scholarship focuses on the intersection of digital humanities, book history, and U.S. literature. My programming languages of choice are Python and javascript, will a little R peppered in. My web stack includes, Ubuntu, Docker, Nginx, WSGI, and Python.
 I use Lektor and Flask for websites, and I like Jupyter Notebooks.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://github.com/mjlavin80&quot;&gt;This &lt;/a&gt;is Me.&lt;/li&gt;
-&lt;li&gt;And &lt;a href=&quot;http://twitter.com/mjlavin80&quot;&gt;This &lt;/a&gt; is Me.&lt;/li&gt;
-&lt;li&gt;And &lt;a href=&quot;http://www.english.pitt.edu/person/matthew-j-lavin&quot;&gt;This &lt;/a&gt; is Me.&lt;/li&gt;
-&lt;li&gt;And &lt;a href=&quot;http://matthew-lavin.com&quot;&gt;This &lt;/a&gt;is Me.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;http://github.com/mjlavin80&quot;&gt;This&lt;/a&gt; is me, and &lt;a href=&quot;http://twitter.com/mjlavin80&quot;&gt;this&lt;/a&gt; is me, and &lt;a href=&quot;http://www.english.pitt.edu/person/matthew-j-lavin&quot;&gt;this&lt;/a&gt; is me,
+and &lt;a href=&quot;http://matthew-lavin.com&quot;&gt;this&lt;/a&gt; is me.&lt;/p&gt;
 &lt;p&gt;I should probably mention that the Data Humanist won't be a very good blog, because it's barely a blog at all. Most blogs (even really good digital humanities blogs) feel a certain amount of pressure to post regularly and, to accommodate that pressure, they sometimes feel the need to slap together very short or shoddy or off-topic filler to give the appearance of an active blog.
 I don't mean to be overly critical of this impulse; I'm just saying it's stupid and I hate it. :)&lt;/p&gt;
 &lt;p&gt;So I will aspire to do less posting but to release posts will a bit more heft. Hence the phrase &quot;blog-like thing.&quot;&lt;/p&gt;
