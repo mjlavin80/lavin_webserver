@@ -7,7 +7,6 @@ services:
       - "80:80"
     volumes:
       - ./proxy/nginx.conf:/etc/nginx/conf.d/matthew-lavin.conf
-  
 
   matthew-lavin:
     build: ./matthew-lavin
@@ -20,3 +19,28 @@ services:
   humanitiesdata:
     build: ./humanitiesdata
     container_name: humanitiesdata
+
+  digiped_fall_2016:
+    build: ./digiped_fall_2016
+    container_name: digiped_fall_2016
+    links:
+      - flask_db:mysql
+    ports:
+      - 8080:80
+
+  flask_db:
+    build: ./mariadb
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQLPASS}"
+
+  phpmyadmin:
+    image: corbinu/docker-phpmyadmin
+    links:
+      - flask_db:mysql
+    ports:
+      - 8181:80
+    environment:
+      MYSQL_USERNAME: root
+      MYSQL_ROOT_PASSWORD: "${MYSQLPASS}"
