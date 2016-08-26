@@ -19,6 +19,10 @@ services:
   humanitiesdata:
     build: ./humanitiesdata
     container_name: humanitiesdata
+  flask_db:
+    build: ./mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQLPASS}"
 
   digiped_fall_2016:
     build: ./digiped_fall_2016
@@ -27,11 +31,6 @@ services:
       - flask_db:mysql
     ports:
       - 8080:80
-
-  flask_db:
-    build: ./mariadb
-    environment:
-      MYSQL_ROOT_PASSWORD: "${MYSQLPASS}"
 
   phpmyadmin:
     image: corbinu/docker-phpmyadmin
