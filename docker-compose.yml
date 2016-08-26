@@ -31,13 +31,3 @@ services:
       - flask_db:mysql
     ports:
       - 8080:80
-
-  phpmyadmin:
-    image: corbinu/docker-phpmyadmin
-    links:
-      - flask_db:mysql
-    ports:
-      - 8181:80
-    environment:
-      MYSQL_USERNAME: root
-      MYSQL_ROOT_PASSWORD: "${MYSQLPASS}"
