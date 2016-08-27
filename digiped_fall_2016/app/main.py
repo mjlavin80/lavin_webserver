@@ -6,6 +6,9 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
+    return "Hello World from Flask"
+@app.route("/setup")
+def setup():
     try:
         uri = "mysql://%s:%s@mysql:3306/digiped_fall_2016" % (dbuser, dbpass)
         engine = sqlalchemy.create_engine(uri) # connect to server
@@ -18,7 +21,7 @@ def hello():
         try:
             uri = "mysql://%s:%s@mysql:3306" % (dbuser, dbpass)
             engine = sqlalchemy.create_engine(uri) # connect to server
-            a = engine.execute("CREATE DATABASE digiped_fall_2016 CHARACTER SET='utf8' COLLATE='utf8_general_ci'")
+            a = engine.execute("CREATE DATABASE IF NOT EXISTS digiped_fall_2016 CHARACTER SET='utf8' COLLATE='utf8_general_ci'")
             return "created database. Reload to see contents."
         except Exception, e:
             return repr(e)
