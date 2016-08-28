@@ -11,7 +11,7 @@ def hello():
 @app.route("/setup")
 def setup():
     try:
-        uri = "mysql://root:%s@127.0.0.1:3306/digiped_fall_2016" % 'goblin55'
+        uri = "mysql://root:%s@mysql:3306/digiped_fall_2016" % dbpass
         engine = sqlalchemy.create_engine(uri) # connect to server
         a = engine.execute("SELECT * FROM test")
         test = ""
