@@ -6,4 +6,4 @@ phpmyadmin:
     - 8181:80
   environment:
     MYSQL_USERNAME: root
-    MYSQL_ROOT_PASSWORD: "goblin55"
+    MYSQL_ROOT_PASSWORD: ${MYSQLPASS}
