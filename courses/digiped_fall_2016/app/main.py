@@ -42,7 +42,7 @@ def setup():
 
 if __name__ == "__main__":
     #for local dev
-    app.run(host='0.0.0.0', debug=True)
+    #app.run(host='0.0.0.0', debug=True)
 
     #for production
-    #app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=80)
