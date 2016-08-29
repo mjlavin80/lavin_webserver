@@ -1,27 +1,28 @@
 from flask import Flask
 import os
-import sqlalchemy
-from config import dbuser, dbpass
+from application.models import *
+from application import db
+
 app = Flask(__name__)
 
 @app.route("/")
-def hello():
+def index():
+    return "Hello World from Flask"
+
+#this section needs a layer of protection so a user can't resest the db
+"""
+@app.route("/setup")
+def setup():
     try:
-        uri = "mysql://%s:%s@mysql:3306/digiped_fall_2016" % (dbuser, dbpass)
-        engine = sqlalchemy.create_engine(uri) # connect to server
-        a = engine.execute("SELECT * FROM test")
-        test = ""
-        for i in a:
-            test += str(i)
-        return test
+        db.create_all()
+        return "DB successfully set up."
     except:
-        try:
-            uri = "mysql://%s:%s@mysql:3306" % (dbuser, dbpass)
-            engine = sqlalchemy.create_engine(uri) # connect to server
-            a = engine.execute("CREATE DATABASE digiped_fall_2016 CHARACTER SET='utf8' COLLATE='utf8_general_ci'")
-            return "created database. Reload to see contents."
-        except Exception, e:
-            return repr(e)
+        return "Database already set up. No action needed."
+"""
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True, port=80)
+    #for local dev
+    #app.run(host='0.0.0.0', debug=True)
+
+    #for production
+    app.run(host='0.0.0.0', port=80)

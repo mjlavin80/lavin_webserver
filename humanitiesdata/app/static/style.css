@@ -1,0 +1,52 @@
+html, body {
+  height: 100%;
+}
+@media (min-width: 768px) {
+
+#top {
+  padding-top: 48px;
+}
+.jumbotron {
+  background-color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;;
+}
+.container{
+  width: 1025px;
+}
+.text-center {
+  min-height: 90vh;
+  border-radius: 14px;
+
+}
+.vertical-center {
+  width: 100%;
+  text-align: center;  /* align the inline(-block) elements horizontally */
+  font: 0/0 a;         /* remove the gap between inline(-block) elements */
+}
+
+.vertical-center:before {    /* create a full-height inline block pseudo=element */
+  content: ' ';
+  display: inline-block;
+  vertical-align: middle;  /* vertical alignment of the inline element */
+  height: 100vh;
+}
+
+.vertical-center > .container {
+  max-width: 100%;
+  background-color: #EEE;
+  /*border: 1px solid #FFD69A;*/
+  border-radius: 14px;
+  display: inline-block;
+  vertical-align: middle;  /* vertical alignment of the inline element */
+  font: 16px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;        /* <-- reset the font property */
+}
+}
+
+
+@media (max-width: 768px) {
+  .vertical-center:before {
+    /* height: auto; */
+    display: none;
+  }
+}
