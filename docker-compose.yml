@@ -25,5 +25,3 @@ services:
     container_name: digiped_fall_2016
     external_links:
       - flask_db:mysql
-    ports:
-      - 8080:80
