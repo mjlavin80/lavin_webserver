@@ -20,3 +20,35 @@ body {
   /* Set the fixed height of the footer here */
   background-color: #f5f5f5;
 }
+
+.list-group-item.activity {
+    background-color: #5cb85c;
+    border: 1px solid #5cb85c;
+    color: white;
+}
+
+.list-group-item.assignment {
+    background-color: #e38d13;
+    border: 1px solid #e38d13;
+    color: white;
+}
+.reading {
+    color: red;
+
+}
+.reading.book {
+    font-style: italic;
+}
+a.assignment {
+    color: white;
+    text-decoration: underline;
+
+}
+a.assignment:hover {
+    color: black;
+    cursor: pointer;
+}
+a.assignment:active {
+    color: white;
+    cursor: pointer;
+}
