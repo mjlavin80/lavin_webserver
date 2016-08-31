@@ -6,3 +6,4 @@ Flask-WTF==0.9.3
 Flask-Script
 Flask-Migrate
 simplejson
+flask-login
