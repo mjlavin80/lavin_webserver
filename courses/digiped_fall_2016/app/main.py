@@ -1,13 +1,16 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, url_for, send_from_directory
 import os
 from application.models import *
 from application import db
+from flask_login import login_required
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    #url_for('protected', filename='losh_public_education.pdf')
+
+    return render_template("index.html", urls=urls)
 
 @app.route("/policies")
 def policies():
@@ -28,6 +31,17 @@ def readings():
 @app.route("/bibliography")
 def biblio():
     return render_template("bibliography.html")
+
+@app.route('/protected/<path:filename>')
+#login_required
+def protected(filename):
+    path = os.path.join(app.instance_path, 'protected')
+    return send_from_directory(path, filename)
+
+@app.route('/coming_soon')
+#login_required
+def soon():
+    return render_template("soon.html")
 
 #this section needs a layer of protection so a user can't reset the db
 #@app.route("/setup")

@@ -32,11 +32,11 @@ body {
     border: 1px solid #e38d13;
     color: white;
 }
-.reading {
+.book-title, .article-title {
     color: red;
 
 }
-.reading.book {
+.book-title {
     font-style: italic;
 }
 a.assignment {
