@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, send_from_directory
 import os
-from application.models import *
-from application import db
+#from application.models import *
+#from application import db
 #from flask_login import login_required
 
 app = Flask(__name__)
