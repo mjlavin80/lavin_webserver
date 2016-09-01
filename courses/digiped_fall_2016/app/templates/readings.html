@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_readings.html" %}
 
 {% block menu %}
 {% include "menu.html" %}
@@ -9,6 +9,8 @@
 <h3>Readings</h3>
 <p>This page is a quick reference for all course readings, some hosted locally, most linked externally. If you discover a broken link, please notify me immediately.</p>
 </div>
+{% include "weeks.html" %}
+
 {% endblock %}
 
 {% block footer %}
