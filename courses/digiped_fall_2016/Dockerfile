@@ -8,6 +8,9 @@ RUN apt-get -y install \
     libmysqlclient-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+EXPOSE 8080
+
 COPY ./app /app
+COPY ./app2 /app2
 
 RUN pip install -r /app/requirements.txt
