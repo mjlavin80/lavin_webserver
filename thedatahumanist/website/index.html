@@ -1,41 +1,64 @@
 <!doctype html>
+<html>
+<head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="/static/style.css">
+<link type="text/css" rel="stylesheet" href="/static/dist/css/bootstrap.css" />
+<link type="text/css" rel="stylesheet" href="/static/datahumanist.css" />
 <title>The Data Humanist</title>
+</head>
 <body>
   <header>
-    <h1>The Data Humanist</h1>
+
+      <div class="container header"><div class="row">
+        <span id="logo" class="glyphicon glyphicon-download-alt"></span>
+    <h1>The Data Humanist Website</h1>
+
+</div>
+</div>
+
+<div class="container"><div class="row">
     <nav>
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
         
           <li><a href="/about/">About</a></li>
         
+          <li><a href="/apps">Web Apps</a></li>
+        
+          <li><a href="/notebooks">Jupyter Notebooks</a></li>
+        
           <li><a href="/feed.xml">Feed</a></li>
         
+        <li class="active"><a href="http://humanitiesdata.com">Humanities Data</a></li>
       </ul>
     </nav>
+</div>
+</div>
+
   </header>
-  <div class="page">
+  <div class="container">
+      <div class="row">
     
   
     
   <div class="blog-post">
   
-    <h2><a href="/foreword/">This Blog-like Thing is Coming Soon</a></h2>
+    <h2><a href="/about/">About this Blog-like Thing</a></h2>
   
   <p class="meta">
-    written by
+    Written by
     
       Matt Lavin
     
     on 2016-09-01
   </p>
-  <p>The Data Humanist (this blog-like thing that you are currently reading) is coming soon.
-My first post will be October 1, 2016, and I will follow with a once-a-month post thereafter for 12 months.
-At the end of this 12-month period, I will decide whether to continue publishing my work in this form or to do something new.</p>
+  <p>Since the late 1990s, the business world and academia alike have seen the rise of the data scientist as an icon of a changing information landscape.
+Though the term <em>data science</em> dates back to early 1960s, figure of the data scientist took on additional cache with the popularization of the World Wide Web and the data revolution that accompanied it.</p>
+
+  <p class="readmore"><a href="/about/">[Read More]</a></p>
 
   </div>
+
 
   
 
@@ -51,8 +74,17 @@ At the end of this 12-month period, I will decide whether to continue publishing
   </div>
 
 
+</div>
   </div>
   <footer>
-    &copy; Copyright 2016 by Matthew J. Lavin
+      <div class="container"><div class="row">
+    <p>&copy; Copyright 2016 by Matthew J. Lavin</p>
+
+</div>
+</div>
   </footer>
+  <!-- JavaScript -->
+  <script src="/static/js/jquery-3.1.0.min.js"></script>
+  <script src="/static/dist/js/bootstrap.js"></script>
 </body>
+</html>

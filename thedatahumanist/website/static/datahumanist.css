@@ -1,0 +1,32 @@
+.header h1 {
+    font-size: 48px;
+    display: inline-block;
+    font-family: Garamond, serif;
+    color: #337ab7;
+    padding-left: 10px;
+
+}
+
+h2, h2 a {
+  font-family: Garamond, serif;
+  font-variant: small-caps;
+  color: gray;
+}
+#logo {
+  font-size: 255%;
+  color: #337ab7;
+}
+footer {
+  margin-top: 15px;
+}
+footer .row {
+  border-top: 1px solid gray;
+  padding-top: 15px;
+}
+.navbar-nav > li{
+  border-top: 3px double black;
+  border-bottom: 3px double black;
+}
+.readmore {
+    font-weight: bold;
+}
