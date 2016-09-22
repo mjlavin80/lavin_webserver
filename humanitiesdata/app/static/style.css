@@ -52,5 +52,10 @@ html, body {
 }
 
 .inner {
-text-align: left;   
+text-align: left;
+}
+.jumbotron ol {
+  margin-bottom: 15px;
+font-size: 21px;
+font-weight: 200;
 }
