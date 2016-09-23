@@ -18,9 +18,15 @@ def policies():
 def calendar():
     return render_template("calendar.html")
 
+@app.route("/assignments/<assignment>")
 @app.route("/assignments")
-def assignments():
-    return render_template("assignments.html")
+def assignments(assignment="all"):
+    assign_dict = {"all": "all_assignments.html", "teaching_philosophy": "philo.html", "skills_proposal": "proposal.html", "skills_assignment": "skills.html", "lesson_plan": "lesson.html", "seminar_paper": "seminar.html"}
+    try:
+        assign_text = assign_dict[assignment]
+    except:
+        return redirect(url_for('assignments', assignment="all"))
+    return render_template("assignments.html", assign_text=assign_text)
 
 @app.route("/readings")
 def readings():
