@@ -5,6 +5,14 @@ html, body {
 #search, #signup, #about, #submit{
   padding-bottom: 35px;
 }
+#submit_resource {
+  padding: 10px;
+  margin-bottom: 15px;
+}
+.form_row {
+  margin-bottom: 4px;
+    margin-top: 4px;
+}
 .container.outer{
   min-height: 90vh;
   width: 100vw;
@@ -16,8 +24,10 @@ html, body {
   width: 95vw;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
   border-radius: 14px;
 }
 
@@ -58,4 +68,7 @@ text-align: left;
   margin-bottom: 15px;
 font-size: 21px;
 font-weight: 200;
+}
+.form-control {
+      height: 100%;
 }

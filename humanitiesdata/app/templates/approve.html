@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% if q_ids|length > 0 %}
+
+<div class="row"><p>
+<input id='checkAll' name='checkAll' type="checkbox" value='checkAll'> <span>Check all documents in queue</span></p>
+</div>
+<form method="POST" action="{{ url_for('approve') }}">
+
+{% for i in q_ids %}
+<div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <input id='{{i.id}}' class="check" name='check-list[]' type="checkbox" aria-label="..." value='{{i.id}}'>
+      </span>
+      <div class="form-control"><p>Title: {{i.title}}</p><p>URL: {{i.uri}}</p><p>Submitted By: {{i.submitted_by}}</p></div>
+    </div><!-- /input-group -->
+
+{% endfor %}
+<div class="row">
+<div class="col-md-12"><input type="submit" class="btn btn-primary" value="Approve Selected"/></div>
+</div>
+</form>
+{% else %}
+<h2>No items in Queue</h2>
+{% endif %}
+</div>
+{% endblock %}
+{% block custom_js %}
+<script>
+$("#checkAll").click(function () {
+    $(".check").prop('checked', $(this).prop('checked'));
+});
+</script>
+{% endblock %}

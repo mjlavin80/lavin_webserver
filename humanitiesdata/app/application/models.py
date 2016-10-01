@@ -1,13 +1,15 @@
 from application import db
+from sqlalchemy.ext.declarative import declarative_base
+Base = declarative_base()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), index=True, unique=True)
+    username = db.Column(db.String(128), index=True, unique=True)
     is_admin = db.Column(db.Boolean, default=False)
     profile_image = db.Column(db.String(128), index=True, unique=False)
-    display_name = db.Column(db.String(50), index=True, unique=True)
-    email = db.Column(db.String(50), index=True, unique=True)
-    password = db.Column(db.String(50))
+    display_name = db.Column(db.String(128), index=True, unique=True)
+    email = db.Column(db.String(128), index=True, unique=True)
+    password = db.Column(db.String(512))
     authenticated = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
@@ -18,7 +20,7 @@ class User(db.Model):
         return True
 
     def get_id(self):
-        """Return the email address to satisfy Flask-Login's requirements."""
+        """Return the id to satisfy Flask-Login's requirements."""
         return self.id
 
     def is_authenticated(self):
@@ -29,26 +31,39 @@ class User(db.Model):
         """False, as anonymous users aren't supported."""
         return False
 
+tags = db.Table('tags',
+    db.Column('tag_id', db.Integer, db.ForeignKey('tag.id')),
+    db.Column('resource_id', db.Integer, db.ForeignKey('resource.id'))
+)
+
+class Tag(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    tagname = db.Column(db.String(128), index=True, unique=True)
+
+    def __repr__(self):
+        return '<Tag %r>' % self.tagname
+
 class Resource(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50), index=True)
+    title = db.Column(db.String(128), index=True)
     description = db.Column(db.String(512), index=True)
-    uri = db.Column(db.String(50), index=True)
-    submitted_by = db.Column(db.String(50), index=True)
-    email = db.Column(db.String(50), index=True, unique=True)
+    uri = db.Column(db.String(128), index=True)
+    submitted_by = db.Column(db.String(128), index=True)
+    email = db.Column(db.String(128), index=True)
     date = db.Column(db.DateTime)
+    resource_type = db.Column(db.String(128), index=True) #only dataset and recipe?
+    status = db.Column(db.String(128), index=True)
+    tags = db.relationship('Tag', secondary=tags,
+        backref=db.backref('resources', lazy='dynamic'))
 
     def __repr__(self):
         return '<Resource %r>' % self.uri
 
-class Tag(db.Model):
+class Signup(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    tagname = db.Column(db.String(50), index=True, unique=True)
+    display_name = db.Column(db.String(128), index=True, unique=True)
+    email = db.Column(db.String(128), index=True, unique=True)
+    date = db.Column(db.DateTime)
 
     def __repr__(self):
-        return '<Resource %r>' % self.tagname
-
-class Resource_Tag(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    tag_id = db.Column(db.Integer, db.ForeignKey('tag.id'))
-    resource_id = db.Column(db.Integer, db.ForeignKey('resource.id'))
+        return '<Email %r>' % self.email

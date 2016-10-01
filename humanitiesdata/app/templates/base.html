@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <!-- Credit: http://stackoverflow.com/questions/22196587/how-to-center-align-vertically-the-container-in-bootstrap -->
+  <title>Humanities Data</title>
+  <meta charset="utf-8" />
+
+  <link type="text/css" rel="stylesheet" href="static/dist/css/bootstrap.css" />
+  <link type="text/css" rel="stylesheet" href="static/style.css" />
+
+</head>
+<body>
+  <!-- Static navbar -->
+{% include "menu.html" %}
+
+{% block body %} {% endblock %}
+  <!-- JavaScript -->
+  <script src="static/js/jquery-3.1.0.min.js"></script>
+  <script src="static/dist/js/bootstrap.js"></script>
+{% block custom_js %}{% endblock %}
+</body>
+</html>

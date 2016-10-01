@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container outer">
+  <div id="top" class="jumbotron vertical-center">
+    <div class="container text-center">
+      <h1>Humanities Data</h1>
+      <div class="row">
+        <h2>About this website</h2>
+        <p>What we are trying to do, and why we are trying to do it</p>
+        <p><a class="btn btn-success btn-lg" href="{{url_for('about')}}"  role="button">Read More</a></p>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+          <h2>Find Data</h2>
+          <p>Ssearch engine with free tagging structure.</p>
+          <p><a class="btn btn-primary btn-lg" href="{{url_for('search')}}" role="button">Search the Collection</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Submit Data</h2>
+            <p>Bibliographical, Network, Geospatial, Text, and More</p>
+          </ul>
+          <p><a class="btn btn-primary btn-lg" href="{{url_for('submit')}}" role="button">Find Out What We Track</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>Volunteer</h2>
+          <p>Volunteer to help out or ask to be notified as features develop.</p>
+          <p><a class="btn btn-primary btn-lg" href="{{ url_for('signup')}}" role="button">Sign Up</a></p>
+        </div>
+      </div>
+
+  </div>
+</div>
+</div>
+
+</div>
+{% endblock %}
