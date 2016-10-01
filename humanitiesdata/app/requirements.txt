@@ -3,3 +3,7 @@ Flask==0.10.1
 Flask-WTF==0.9.3
 Flask-Script
 simplejson
+flask-login
+flask-security
+flask-admin
+flask-bcrypt

@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-from flask.ext.login import LoginManager, login_user, logout_user, current_user
-from flask.ext.security import login_required
+from flask_login import LoginManager, login_user, logout_user, current_user
+from flask_security import login_required
 from flask_admin import Admin#, AdminIndexView, BaseView, expose
 from application.models import *
 from application.views import *
-from flask.ext.bcrypt import Bcrypt
+from flask_bcrypt import Bcrypt
 from application.forms import *
 from config import *
 from datetime import datetime
@@ -137,7 +137,7 @@ def signup():
 
 if __name__ == "__main__":
     #for local dev
-    #app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=True)
 
     #for production
-    app.run(host='0.0.0.0', port=80)
+    #app.run(host='0.0.0.0', port=80)
