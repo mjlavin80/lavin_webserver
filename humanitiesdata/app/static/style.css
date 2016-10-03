@@ -83,3 +83,7 @@ font-weight: 200;
     display: block;
     float: none;
 }
+.required {
+    content:"*";
+    color:red;
+}
