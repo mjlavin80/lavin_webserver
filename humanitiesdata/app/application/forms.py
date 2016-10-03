@@ -19,6 +19,18 @@ class AddResource(Form):
     resource_type = SelectField(label='Dataset or Recipe', choices=[("Dataset", "Dataset"), ("Recipe", "Recipe")])
     tags = TextField(label='Tag(s)', validators=[validators.required(message="At least one tag is required"), validators.Length(min=0, message=u'Please enter at least one tag or multiple tags separated by commas')])
     submit = SubmitField("Submit Resource")
+
+    modified = TextField(label='Date dataset was last modified')
+    publisher = TextField(label='Publisher')
+    contact_point = TextField(label='Contact Point')
+    identifier = TextField(label='Unique Identifier (if applicable)')
+    access_level = TextField(label='Access Level')
+    bureau_code = TextField(label='Bureau Code')
+    license = TextField(label='License')
+    rights = TextField(label='Rights')
+    spatial = TextField(label='Spatial Parameters of Data (if applicable)')
+    temporal = TextField(label='Temporal Parameters of Data (if applicable)')
+
     #recaptcha = RecaptchaField()
 
 class AddTag(Form):
