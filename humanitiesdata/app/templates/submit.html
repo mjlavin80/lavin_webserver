@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block body %}
+{% if {{resource_type}} %}
+{% include "form.html" %}
+{% else %}
 <div class="container outer">
   <div  class="jumbotron vertical-center">
     <div class="container text-center">
@@ -8,17 +11,21 @@
         <div class="col-md-12" >
         <h2 class="container_head">How to Submit</h2>
       </div>
-      <div class="col-md-12 inner" >
+      <div class="row">
+      <div class="col-md-6 inner" >
         <p>Humanitiesdata.com is starting with two content types: datasets and recipes. We may expand to include additional resources types based on demand.</p>
-        <p>Our goal is to make it easy for users to search for data by keyword or by tag. Would-be contributors are encouraged to submit either. A name and email address are required. We hope to expand to accept Twitter or Githuib credentials in lieu of this information.</p>=
+        <p>Our goal is to make it easy for users to search for data by keyword or by tag. Would-be contributors are encouraged to submit either. A name and email address are required. We hope to expand to accept Twitter or Githuib credentials in lieu of this information.</p>
       </div>
+  </div>
       <div class="col-md-6 inner" >
         <p>A dataset contribution should describe the data, provide a link to a web-based endpoint where the data can be
           found, and suggest at least three tags for the dataset. Our current schema is designed to be compatible with <a href="https://www.w3.org/TR/vocab-dcat/">Data Catalog Vocabulary (DCAT)</a> and <a href="http://ckan.org">CKAN</a></p>
+          <h3><a href="./dataset">Submit a Dataset</a></h3>
       </div>
       <div class="col-md-6 inner" >
         <p>A recipe should also include a descrption, tags, and a link. The link to lead to a code snippet on a publicly available endpoint, such as
         Gist or JSfiddle. Code should not be pasted into the submission description. One of your tags should indicate the programming language of the snippet.</p>
+        <h3><a href="./recipe">Submit a Recipe</a></h3>
       </div>
 </div>
 </div>
@@ -26,5 +33,5 @@
 </div>
 </div>
 </div>
-
+{% endif %}
 {% endblock %}
