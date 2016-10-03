@@ -94,7 +94,20 @@ def submit(resource_type=None):
             ins.submitted_by = add_resource.submitted_by.data
             ins.email = add_resource.email.data
             ins.date = date
-            ins.resource_type = add_resource.resource_type.data
+            ins.resource_type = resource_type
+
+            if resource_type == "dataset":
+                ins.modified = add_resource.modified.data
+                ins.publisher = add_resource.publisher.data
+                ins.contact_point = add_resource.identifier.data
+                ins.identifier = add_resource..data
+                ins.access_level = add_resource.access_level.data
+                ins.bureau_code = add_resource.bureau_code.data
+                ins.license = add_resource.license.data
+                ins.rights = add_resource.rights.data
+                ins.spatial = add_resource.spatial.data
+                ins.temporal = add_resource.temporal.data
+
             if current_user.is_admin:
                 ins.status = "published"
             else:
