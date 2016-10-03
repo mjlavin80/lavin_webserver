@@ -10,11 +10,10 @@
 
             {% if current_user.is_admin %}
             <div class="col-md-12 form_row">{{ add_resource.resource_type.label }}</div> <div class="col-md-8">{{ add_resource.resource_type(class_="form-control") }}</div>
-            <div class="col-md-4 error"></div>
             {% endif %}
 
             {% for corefield in [add_resource.submitted_by, add_resource.email, add_resource.title, add_resource.uri, add_resource.tags] %}
-            <div class="col-md-12 form_row">{{ corefield.label }}<span class="required">*</span></div> <div class="col-md-8 form_row">{{ corefield(class_="form-control") }}</div>
+            <div class="col-md-12 form_row">{{ corefield.label }}<span class="required"> *</span></div> <div class="col-md-8 form_row">{{ corefield(class_="form-control") }}</div>
             {% endfor %}
 
             {% if resource_type == "dataset" %}
@@ -24,8 +23,8 @@
             {% endfor %}
             {% endif %}
 
-            <div class="col-md-12 form_row">{{ add_resource.description.label }}</div> <div class="col-md-8 form_row">{{ add_resource.description(rows='22',cols='100', class_="form-control") }}</div>
-            <div class="col-md-4 error"></div>
+            <div class="col-md-12 form_row">{{ add_resource.description.label }}<span class="required"> *</span></div> <div class="col-md-8 form_row">{{ add_resource.description(rows='22',cols='100', class_="form-control") }}</div>
+
 
             <!--<div class="col-md-12 form_row">{{ add_resource.recaptcha }}</div>-->
 
