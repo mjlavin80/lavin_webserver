@@ -52,10 +52,6 @@ def load_user(user_id):
 def index():
     return render_template("main.html")
 
-@app.route("/login")
-def login():
-    return "Login page"
-
 @app.route("/about")
 def about():
     return render_template("about.html")
