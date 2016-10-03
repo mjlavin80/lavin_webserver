@@ -78,8 +78,9 @@ def approve():
             db.session.commit()
     return render_template("approve.html", approval_q= approval_q, q_ids=q_ids)
 
+@app.route("/submit/<resource_type>", methods=["GET", "POST"])
 @app.route("/submit", methods=["GET", "POST"])
-def submit():
+def submit(number=None):
     add_resource = AddResource(request.form)
     if request.method == 'POST':
 
@@ -128,7 +129,7 @@ def submit():
         else:
             errors = compile_errors(add_resource)
             return render_template("errors.html", add_resource=add_resource, errors=errors)
-    return render_template("submit.html", add_resource=add_resource)
+    return render_template("submit.html", add_resource=add_resource, resource_type=resource_type)
 
 @app.route("/signup")
 def signup():
