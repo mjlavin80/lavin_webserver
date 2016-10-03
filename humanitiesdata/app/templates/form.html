@@ -32,8 +32,9 @@
             <div class="col-md-4 error"></div>
 
             {% if resource_type == "dataset" %}
-            {% for datafield in ["modified", "publisher", "contact_point", "identifier", "access_level", "bureau_code", "license", "rights", "spatial", "temporal"] %}
-            <div class="col-md-12 form_row">{{ add_resource.datafield.label }}</div> <div class="col-md-8 form_row">{{ add_resource.datafield(class_="form-control") }}</div>
+            {% for datafield in [add_resource.modified, add_resource.publisher, add_resource.contact_point, add_resource.identifier, add_resource.access_level,
+                add_resource.bureau_code, add_resource.license, add_resource.rights, add_resource.spatial, add_resource.temporal] %}
+            <div class="col-md-12 form_row">{{ datafield.label }}</div> <div class="col-md-8 form_row">{{ datafield(class_="form-control") }}</div>
             {% endfor %}
             {% endif %}
 
