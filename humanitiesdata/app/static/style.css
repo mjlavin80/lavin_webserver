@@ -77,3 +77,8 @@ font-weight: 200;
     float: none;
     display: inline-block;
 }
+.middle {
+    text-align: center;
+    display: block;
+    float: none;
+}
