@@ -14,7 +14,7 @@
             {% endif %}
 
             {% for corefield in [add_resource.submitted_by, add_resource.email, add_resource.title, add_resource.uri, add_resource.tags] %}
-            <div class="col-md-12 form_row">{{ corefield.label }}<span class="required"></span></div> <div class="col-md-8 form_row">{{ corefield(class_="form-control") }}</div>
+            <div class="col-md-12 form_row">{{ corefield.label }}<span class="required">*</span></div> <div class="col-md-8 form_row">{{ corefield(class_="form-control") }}</div>
             {% endfor %}
 
             {% if resource_type == "dataset" %}
