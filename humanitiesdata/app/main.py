@@ -80,7 +80,7 @@ def approve():
 
 @app.route("/submit/<resource_type>", methods=["GET", "POST"])
 @app.route("/submit", methods=["GET", "POST"])
-def submit(number=None):
+def submit(resource_type=None):
     add_resource = AddResource(request.form)
     if request.method == 'POST':
 
