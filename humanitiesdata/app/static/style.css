@@ -72,7 +72,7 @@ font-weight: 200;
 .form-control {
       height: 100%;
 }
-.no-float, .no-float a {
+.no-float {
     margin: 0 auto;
     float: none;
     display: inline-block;
