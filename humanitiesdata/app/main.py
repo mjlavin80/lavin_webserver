@@ -31,8 +31,9 @@ app.config['RECAPTCHA_PRIVATE_KEY'] = RECAPTCHA_PRIVATE_KEY
 def shutdown_session(exception=None):
     db.session.remove()
 
-#admin
+#admin instance
 admin = Admin(app, index_view=CustomBaseView(url='/admin'), name='Humanities Data', template_mode='bootstrap3', )
+
 #required user loader method
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -77,6 +78,8 @@ def approve():
 @app.route("/submit/<resource_type>", methods=["GET", "POST"])
 @app.route("/submit", methods=["GET", "POST"])
 def submit(resource_type=None):
+    if resource_type != "dataset" and resource_type != "recipe":
+        return redirect(url_for("submit"))
     add_resource = AddResource(request.form)
     if request.method == 'POST':
 
