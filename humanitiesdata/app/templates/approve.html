@@ -1,6 +1,21 @@
 {% extends 'base.html' %}
 
 {% block body %}
+<div class="container">
+
+
+<div class="row">
+  <div class="col-lg-10">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <input id='7' class="check" name='check-list[]' type="checkbox" aria-label="..." value='id'>
+      </span>
+      <div class="form-control"><p>Title: </p><p>URL: </p><p>Submitted By:</p>
+
+        <input type="submit" name="approve_7" class="btn btn-success" value="Approve this Resource"/>
+        <input type="submit" name="edit_7" class="btn btn-info" value="Edit this Resource"/>
+      </div>
+    </div>
 
 {% if q_ids|length > 0 %}
 
@@ -11,12 +26,15 @@
 
 {% for i in q_ids %}
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-10">
     <div class="input-group">
       <span class="input-group-addon">
         <input id='{{i.id}}' class="check" name='check-list[]' type="checkbox" aria-label="..." value='{{i.id}}'>
       </span>
-      <div class="form-control"><p>Title: {{i.title}}</p><p>URL: {{i.uri}}</p><p>Submitted By: {{i.submitted_by}}</p></div>
+      <div class="form-control"><p>Title: {{i.title}}</p><p>URL: {{i.uri}}</p><p>Submitted By: {{i.submitted_by}}</p>
+        <input type="submit" name="approve" id="approve_{{i.id}}" class="btn btn-success" value="Approve this Resource"/>
+        <input type="submit" name="edit" id="edit_{{i.id}}" class="btn btn-info" value="Edit this Resource"/>
+      </div>
     </div><!-- /input-group -->
 
 {% endfor %}
@@ -25,8 +43,13 @@
 </div>
 </form>
 {% else %}
-<h2>No items in Queue</h2>
+  <div class="row">
+  <h2>No items in Queue</h2>
+</div>
+
 {% endif %}
+</div>
+
 </div>
 {% endblock %}
 {% block custom_js %}
