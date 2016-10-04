@@ -6,6 +6,8 @@
 
 <div class="row">
         <form name="add_a_resource" method="POST" action="{{ url_for('submit') }}">
+
+            <div class="col-md-12 form_row"><input type="hidden" name="resource_type" value={{resource_type}}></div>
             <div class="col-md-12 form_row">{{ add_resource.hidden_tag() }}</div>
 
             {% for corefield in [add_resource.submitted_by, add_resource.email, add_resource.title, add_resource.uri, add_resource.tags] %}

@@ -62,12 +62,41 @@ def search():
     return render_template("search.html")
 
 @login_required
+@app.route("/resource/<editmode>/edit/<_id>/", methods=["GET", "POST"])
+@app.route("/resource/<_id>", methods=["GET", "POST"])
+@app.route("/resource", methods=["GET", "POST"])
+def resource(editmode=False, _id=0):
+    if editmode != "dataset" and editmode != "recipe" and editmode is not False:
+        return redirect(url_for("resource", editmode=False, _id=0))
+    else:
+        if editmode == "dataset":
+            pass
+        elif editmode == "recipe":
+            pass
+        else:
+            return "no edit"
+@login_required
 @app.route("/approve", methods=["GET", "POST"])
 def approve():
+    try:
+        instruction = request.form.keys()[0].split("_")
+
+        if "edit" in instruction:
+
+            #get id
+            return redirect(url_for("resource/edit"))
+        if "approve" in instruction:
+            #get id
+            return (render_template("success.html"))
+    except:
+        pass
+        
+    #for testing
+    #q_ids = Resource.query.all()
     q_ids = Resource.query.filter(Resource.status=="draft").all()
-    #print q_ids
+
     approval_q = request.form.getlist('check-list[]')
-    print approval_q
+
     if request.method == 'POST' and len(approval_q) > 0:
         for _id in approval_q:
             to_update = Resource.query.filter(Resource.id==_id).one_or_none()
@@ -81,8 +110,8 @@ def submit(resource_type=None):
     if resource_type != "dataset" and resource_type != "recipe" and resource_type != None:
         return redirect(url_for("submit"))
     add_resource = AddResource(request.form)
-    if request.method == 'POST':
 
+    if request.method == 'POST':
         if add_resource.validate():
             date = datetime.now()
             #add to db
@@ -93,9 +122,9 @@ def submit(resource_type=None):
             ins.submitted_by = add_resource.submitted_by.data
             ins.email = add_resource.email.data
             ins.date = date
-            ins.resource_type = resource_type
+            ins.resource_type = request.form['resource_type']
 
-            if resource_type == "dataset":
+            if ins.resource_type == "dataset":
                 ins.modified = add_resource.modified.data
                 ins.publisher = add_resource.publisher.data
                 ins.contact_point = add_resource.identifier.data
