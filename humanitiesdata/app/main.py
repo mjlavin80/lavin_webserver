@@ -31,8 +31,9 @@ app.config['RECAPTCHA_PRIVATE_KEY'] = RECAPTCHA_PRIVATE_KEY
 def shutdown_session(exception=None):
     db.session.remove()
 
-#admin
+#admin instance
 admin = Admin(app, index_view=CustomBaseView(url='/admin'), name='Humanities Data', template_mode='bootstrap3', )
+
 #required user loader method
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -52,10 +53,6 @@ def load_user(user_id):
 def index():
     return render_template("main.html")
 
-@app.route("/login")
-def login():
-    return "Login page"
-
 @app.route("/about")
 def about():
     return render_template("about.html")
@@ -65,12 +62,41 @@ def search():
     return render_template("search.html")
 
 @login_required
+@app.route("/resource/<editmode>/edit/<_id>/", methods=["GET", "POST"])
+@app.route("/resource/<_id>", methods=["GET", "POST"])
+@app.route("/resource", methods=["GET", "POST"])
+def resource(editmode=False, _id=0):
+    if editmode != "dataset" and editmode != "recipe" and editmode is not False:
+        return redirect(url_for("resource", editmode=False, _id=0))
+    else:
+        if editmode == "dataset":
+            pass
+        elif editmode == "recipe":
+            pass
+        else:
+            return "no edit"
+@login_required
 @app.route("/approve", methods=["GET", "POST"])
 def approve():
+    try:
+        instruction = request.form.keys()[0].split("_")
+
+        if "edit" in instruction:
+
+            #get id
+            return redirect(url_for("resource/edit"))
+        if "approve" in instruction:
+            #get id
+            return (render_template("success.html"))
+    except:
+        pass
+        
+    #for testing
+    #q_ids = Resource.query.all()
     q_ids = Resource.query.filter(Resource.status=="draft").all()
-    #print q_ids
+
     approval_q = request.form.getlist('check-list[]')
-    print approval_q
+
     if request.method == 'POST' and len(approval_q) > 0:
         for _id in approval_q:
             to_update = Resource.query.filter(Resource.id==_id).one_or_none()
@@ -78,11 +104,14 @@ def approve():
             db.session.commit()
     return render_template("approve.html", approval_q= approval_q, q_ids=q_ids)
 
+@app.route("/submit/<resource_type>", methods=["GET", "POST"])
 @app.route("/submit", methods=["GET", "POST"])
-def submit():
+def submit(resource_type=None):
+    if resource_type != "dataset" and resource_type != "recipe" and resource_type != None:
+        return redirect(url_for("submit"))
     add_resource = AddResource(request.form)
-    if request.method == 'POST':
 
+    if request.method == 'POST':
         if add_resource.validate():
             date = datetime.now()
             #add to db
@@ -93,7 +122,20 @@ def submit():
             ins.submitted_by = add_resource.submitted_by.data
             ins.email = add_resource.email.data
             ins.date = date
-            ins.resource_type = add_resource.resource_type.data
+            ins.resource_type = request.form['resource_type']
+
+            if ins.resource_type == "dataset":
+                ins.modified = add_resource.modified.data
+                ins.publisher = add_resource.publisher.data
+                ins.contact_point = add_resource.identifier.data
+                ins.identifier = add_resource.identifier.data
+                ins.access_level = add_resource.access_level.data
+                ins.bureau_code = add_resource.bureau_code.data
+                ins.license = add_resource.license.data
+                ins.rights = add_resource.rights.data
+                ins.spatial = add_resource.spatial.data
+                ins.temporal = add_resource.temporal.data
+
             if current_user.is_admin:
                 ins.status = "published"
             else:
@@ -128,7 +170,7 @@ def submit():
         else:
             errors = compile_errors(add_resource)
             return render_template("errors.html", add_resource=add_resource, errors=errors)
-    return render_template("submit.html", add_resource=add_resource)
+    return render_template("submit.html", add_resource=add_resource, resource_type=resource_type)
 
 @app.route("/signup")
 def signup():

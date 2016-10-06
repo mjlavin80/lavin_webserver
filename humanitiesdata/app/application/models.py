@@ -50,7 +50,17 @@ class Resource(db.Model):
     uri = db.Column(db.String(128), index=True)
     submitted_by = db.Column(db.String(128), index=True)
     email = db.Column(db.String(128), index=True)
-    date = db.Column(db.DateTime)
+    date_submitted = db.Column(db.DateTime)
+    modified = db.Column(db.String(128))
+    publisher = db.Column(db.String(512), index=True)
+    contact_point = db.Column(db.String(128), index=True)
+    identifier = db.Column(db.String(128), index=True)
+    access_level = db.Column(db.String(128), index=True)
+    bureau_code = db.Column(db.String(128), index=True)
+    license = db.Column(db.String(128), index=True)
+    rights = db.Column(db.String(128), index=True)
+    spatial = db.Column(db.String(128), index=True)
+    temporal = db.Column(db.String(128), index=True)
     resource_type = db.Column(db.String(128), index=True) #only dataset and recipe?
     status = db.Column(db.String(128), index=True)
     tags = db.relationship('Tag', secondary=tags,

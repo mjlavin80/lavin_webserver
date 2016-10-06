@@ -1,5 +1,5 @@
 from flask.ext.wtf import Form, RecaptchaField
-from wtforms import TextField, PasswordField, SubmitField, SelectField, BooleanField, validators
+from wtforms import TextField, PasswordField, SubmitField, SelectField, BooleanField, HiddenField, validators
 from wtforms.widgets import TextArea
 from application.models import User
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
@@ -16,9 +16,22 @@ class AddResource(Form):
     uri = TextField(label='Resource URL', validators=[validators.required(message="Resource URL is required"), validators.URL(message="You must provide a URL endpoint for datasets and recipes")])
     submitted_by = TextField(label='Your Name', validators=[validators.required(message="Submitting a resource requires a name")])
     email = TextField(label='Email', validators=[validators.required(message="You must provide a valid email address to submit"), validators.Email(message="Submissions must include a valid email address")])
-    resource_type = SelectField(label='Dataset or Recipe', choices=[("Dataset", "Dataset"), ("Recipe", "Recipe")])
     tags = TextField(label='Tag(s)', validators=[validators.required(message="At least one tag is required"), validators.Length(min=0, message=u'Please enter at least one tag or multiple tags separated by commas')])
     submit = SubmitField("Submit Resource")
+
+    modified = TextField(label='Date dataset was last modified')
+    publisher = TextField(label='Publisher')
+    contact_point = TextField(label='Contact Point')
+    identifier = TextField(label='Unique Identifier (if applicable)')
+    access_level = TextField(label='Access Level')
+    bureau_code = TextField(label='Bureau Code')
+    license = TextField(label='License')
+    rights = TextField(label='Rights')
+    spatial = TextField(label='Spatial Parameters of Data (if applicable)')
+    temporal = TextField(label='Temporal Parameters of Data (if applicable)')
+    #resource_type_dataset = HiddenField('dataset', default='dataset')
+    #resource_type_recipe = HiddenField('recipe', default='recipe')
+
     #recaptcha = RecaptchaField()
 
 class AddTag(Form):
