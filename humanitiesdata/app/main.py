@@ -75,6 +75,7 @@ def resource(editmode=False, _id=0):
             pass
         else:
             return "no edit"
+
 @login_required
 @app.route("/approve", methods=["GET", "POST"])
 def approve():
@@ -90,7 +91,7 @@ def approve():
             return (render_template("success.html"))
     except:
         pass
-        
+
     #for testing
     #q_ids = Resource.query.all()
     q_ids = Resource.query.filter(Resource.status=="draft").all()
@@ -182,4 +183,4 @@ if __name__ == "__main__":
     #app.run(host='0.0.0.0', debug=True)
 
     #for production
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', debug=True, port=80)
