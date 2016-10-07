@@ -19,6 +19,8 @@ services:
   humanitiesdata:
     build: ./humanitiesdata
     container_name: humanitiesdata
+    external_links:
+      - flask_db:mysql
 
   digiped_fall_2016:
     build: ./courses/digiped_fall_2016

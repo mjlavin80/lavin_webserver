@@ -92,8 +92,8 @@ def approve():
         pass
         
     #for testing
-    #q_ids = Resource.query.all()
-    q_ids = Resource.query.filter(Resource.status=="draft").all()
+    q_ids = Resource.query.all()
+    #q_ids = Resource.query.filter(Resource.status=="draft").all()
 
     approval_q = request.form.getlist('check-list[]')
 
