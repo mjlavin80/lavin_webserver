@@ -163,9 +163,10 @@ def submit(resource_type=None):
             try:
                 db.session.add(ins)
                 db.session.commit()
-            except:
+            except Exception, exc:
                 db.session.rollback()
-                raise
+                error=exc.decode('utf8', errors='replace')
+                return error
 
             return render_template("success.html", add_resource=add_resource)
         else:
