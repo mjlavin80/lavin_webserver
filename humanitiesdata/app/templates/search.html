@@ -32,7 +32,7 @@
 {% block custom_js %}
 <script src="/static/bootstrap-table/dist/bootstrap-table.min.js"></script>
 <script>
-populate = function (mode='') {
+function populate(mode='') {
 $('#table').bootstrapTable({
     url: 'datastream', pagination: 'true', search:'true', searchOnEnterKey: 'true', getAllSelections: mode,
     columns: [{
