@@ -32,8 +32,9 @@
 {% block custom_js %}
 <script src="/static/bootstrap-table/dist/bootstrap-table.min.js"></script>
 <script>
+populate = function (mode='') {
 $('#table').bootstrapTable({
-    url: 'datastream', pagination: 'true', search:'true', searchOnEnterKey: 'true',
+    url: 'datastream', pagination: 'true', search:'true', searchOnEnterKey: 'true', getAllSelections: mode,
     columns: [{
         field: 'title',
 	sortable: 'true',
@@ -53,5 +54,13 @@ $('#table').bootstrapTable({
     }, ]
 });
 $('.search').addClass('pull-left').removeClass('pull-right').css('width', '45%');
+$('fixed-table-toolbar').append('<button id="datasets" type="submit" class="btn btn-default">View Only Datasets</button><button id="recipes" type="submit" class="btn btn-default">View Only Recipes</button><button id="both" type="submit" class="btn btn-default">View Both Resource Types</button>');
+
+}
+populate();
+
+$('#datasets').populate("dataset");
+$('#recipes').populate("recipe");
+$('#both').populate();
 </script>
 {% endblock %}
