@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block custom_css %}
+<link type="text/css" rel="stylesheet" href="/static/bootstrap-table/dist/bootstrap-table.min.css" />
+{% endblock %}
 
 {% block body %}
 <div class="container outer">
@@ -6,7 +9,7 @@
     <div class="container text-center">
       <div class="row">
         <div class="col-md-12" >
-        <h2 class="container_head">Search</h2>
+        <h2 class="container_head">Search or Browse Resources</h2>
     </div>
       </div>
     </div>
@@ -15,12 +18,35 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-4">One
-    </div>
-    <div class="col-lg-4">Two
-    </div>
-    <div class="col-lg-4">Three
+    <div class="col-lg-12">
+
+      <!-- Begin bootstrap-table block -->
+
+      <!-- End bootstrap-table block -->
+
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block custom_js %}
+<script src="/static/bootstrap-table/dist/bootstrap-table.min.js"></script>
+<script>
+$('#table').bootstrapTable({
+    url: 'datastream',
+    columns: [{
+        field: 'title',
+        title: 'Title'
+    }, {
+        field: 'uri',
+        title: 'URL'
+    }, {
+        field: 'excerpt',
+        title: 'Description'
+    },{
+        field: 'more_link',
+        title: 'Full Record'
+    }, ]
+});
+</script>
 {% endblock %}

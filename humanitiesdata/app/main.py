@@ -51,11 +51,14 @@ def load_user(user_id):
 def index():
     return render_template("main.html")
 
-@app.route("/resources")
-def resources():
+@app.route("/datastream")
+def datastream():
     def removekeys(d):
+        #build href using id
+        d[more_link] = "<a href=/resources/%s>Full Record</a>" % str("".join([i for i in d["id"] if i.isalpha() == False]))
+        d["excerpt"] = "".join([" ".join(d["description"].split(" ")[:5]), " ..."])
         del d["id"]
-	del d["_sa_instance_state"]
+        del d["_sa_instance_state"]
         return d
     #get from db
     rows = db.session.query(Resource).all()
@@ -88,26 +91,24 @@ def test():
 def about():
     return render_template("about.html")
 
-@app.route("/search")
-def search():
-    return render_template("search.html")
-
-
-@app.route("/resource/<editmode>/edit/<_id>/", methods=["GET", "POST"])
-@app.route("/resource/<_id>", methods=["GET", "POST"])
-@app.route("/resource", methods=["GET", "POST"])
-@login_required
-def resource(editmode=False, _id=0):
-    if editmode != "dataset" and editmode != "recipe" and editmode is not False:
-        return redirect(url_for("resource", editmode=False, _id=0))
+@app.route("/resources")
+@app.route("/resources/<_id>")
+def resources(_id=None):
+    if _id:
+        return "Endpoint for " + str(_id) + " in view mode"
     else:
-        if editmode == "dataset":
-            pass
-        elif editmode == "recipe":
-            pass
-        else:
-            return "no edit"
+        return render_template("search.html")
 
+@app.route("/resources/<_id>/edit/<edit_id>", methods=["GET", "POST"])
+@login_required
+def edit_resources(_id=0, edit_id=0):
+    if _id != 0:
+        if edit_id != _id:
+            return redirect(url_for("edit_resources", _id=_id, edit_id=_id))
+        else:
+            return "Endpoint for " + str(_id) + " in edit mode"
+    else:
+        return redirect(url_for("resources"))
 
 @app.route("/approve", methods=["GET", "POST"])
 @login_required
