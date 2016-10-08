@@ -53,12 +53,16 @@ def index():
 
 @app.route("/resources")
 def resources():
+    def removekeys(d):
+        del d["id"]
+	del d["_sa_instance_state"]
+        return d
     #get from db
-    r = Resource.query.all().asdict()
+    rows = db.session.query(Resource).all()
+    r = [removekeys(u.__dict__) for u in rows]
     #jsonify
     json_data = json.dumps(r)
-    #print
-    #print(resource_dicts)
+    #return json_data
     return json_data
 
 @app.route("/test_db")
@@ -210,7 +214,7 @@ def signup():
 
 if __name__ == "__main__":
     #for local dev
-    #app.run(host='0.0.0.0', debug=True)
+    #app.run(host='0.0.0.0', debug=True, port=5000)
 
     #for production
     app.run(host='0.0.0.0', debug=True, port=80)

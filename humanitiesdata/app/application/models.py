@@ -1,7 +1,7 @@
 from application import db
+from dictalchemy import DictableModel
 from sqlalchemy.ext.declarative import declarative_base
 #Base = declarative_base()
-from dictalchemy import DictableModel
 
 Base = declarative_base(cls=DictableModel)
 
