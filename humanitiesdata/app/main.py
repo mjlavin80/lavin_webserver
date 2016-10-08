@@ -24,6 +24,7 @@ app.config['RECAPTCHA_USE_SSL'] = False
 app.config['RECAPTCHA_PUBLIC_KEY'] = RECAPTCHA_PUBLIC_KEY
 app.config['RECAPTCHA_PRIVATE_KEY'] = RECAPTCHA_PRIVATE_KEY
 
+migrate = Migrate(app, db)
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
@@ -51,6 +52,7 @@ def load_user(user_id):
 def index():
     return render_template("main.html")
 
+@login_required
 @app.route("/test_db")
 def test():
     try:
