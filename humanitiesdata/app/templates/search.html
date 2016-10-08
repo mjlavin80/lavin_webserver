@@ -32,9 +32,8 @@
 {% block custom_js %}
 <script src="/static/bootstrap-table/dist/bootstrap-table.min.js"></script>
 <script>
-function populate(mode='') {
 $('#table').bootstrapTable({
-    url: 'datastream', pagination: 'true', search:'true', searchOnEnterKey: 'true', getAllSelections: mode,
+    url: 'datastream', pagination: 'true', search:'true', getAllSelections: '',
     columns: [{
         field: 'title',
 	sortable: 'true',
@@ -47,20 +46,26 @@ $('#table').bootstrapTable({
         field: 'resource_type',
         sortable: 'true',
         title: 'Resource Type'
-    },{
+    },
+    {
         field: 'more_link',
         sortable: 'true',
         title: 'Full Record'
     }, ]
 });
+
 $('.search').addClass('pull-left').removeClass('pull-right').css('width', '45%');
-$('.fixed-table-toolbar').append('<button id="datasets" type="submit" class="btn btn-default">View Only Datasets</button><button id="recipes" type="submit" class="btn btn-default">View Only Recipes</button><button id="both" type="submit" class="btn btn-default">View Both Resource Types</button>');
 
-}
-populate();
+$('.fixed-table-toolbar').append('<button id="datasets" type="submit" class="btn btn-default filter">View Only Datasets</button><button id="recipes" type="submit" class="btn btn-default filter">View Only Recipes</button><button id="both" type="submit" class="btn btn-default filter">View Both Resource Types</button>');
 
-$('#datasets').click(populate("dataset"));
-$('#recipes').click(populate("recipe"));
-$('#both').click(populate());
+$('#datasets').click( function () {
+  $('#table').bootstrapTable('filterBy', {resource_type: "dataset"});
+});
+$('#recipes').click(function () {
+  $('#table').bootstrapTable('filterBy', {resource_type: "recipe"});
+});
+$('#both').click( function () {
+  $('#table').bootstrapTable('filterBy', {});
+});
 </script>
 {% endblock %}

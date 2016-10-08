@@ -53,16 +53,17 @@ def index():
 
 @app.route("/datastream")
 def datastream():
-    def removekeys(d):
+    def setkeys(d):
         #build href using id
         d["more_link"] = "".join(["<a href='/resources/", str("".join([i for i in str(d["id"]) if i.isalpha() == False])), "'>Full Record</a>"])
         d["excerpt"] = "".join([" ".join(d["description"].split(" ")[:9]), " ..."])
+        
         del d["id"]
         del d["_sa_instance_state"]
         return d
     #get from db
     rows = db.session.query(Resource).filter(Resource.status=='published').all()
-    r = [removekeys(u.__dict__) for u in rows]
+    r = [setkeys(u.__dict__) for u in rows]
     #jsonify
     json_data = json.dumps(r)
     #return json_data
@@ -215,7 +216,7 @@ def signup():
 
 if __name__ == "__main__":
     #for local dev
-    #app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
 
     #for production
-    app.run(host='0.0.0.0', debug=True, port=80)
+    #app.run(host='0.0.0.0', debug=True, port=80)
