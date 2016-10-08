@@ -50,8 +50,8 @@ def load_user(user_id):
 def index():
     return render_template("main.html")
 
-@login_required
 @app.route("/test_db")
+@login_required
 def test():
     try:
         password = 'goblin55'
@@ -77,10 +77,11 @@ def about():
 def search():
     return render_template("search.html")
 
-@login_required
+
 @app.route("/resource/<editmode>/edit/<_id>/", methods=["GET", "POST"])
 @app.route("/resource/<_id>", methods=["GET", "POST"])
 @app.route("/resource", methods=["GET", "POST"])
+@login_required
 def resource(editmode=False, _id=0):
     if editmode != "dataset" and editmode != "recipe" and editmode is not False:
         return redirect(url_for("resource", editmode=False, _id=0))
@@ -92,8 +93,9 @@ def resource(editmode=False, _id=0):
         else:
             return "no edit"
 
-@login_required
+
 @app.route("/approve", methods=["GET", "POST"])
+@login_required
 def approve():
     try:
         instruction = request.form.keys()[0].split("_")
