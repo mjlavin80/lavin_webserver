@@ -24,8 +24,6 @@ app.config['RECAPTCHA_USE_SSL'] = False
 app.config['RECAPTCHA_PUBLIC_KEY'] = RECAPTCHA_PUBLIC_KEY
 app.config['RECAPTCHA_PRIVATE_KEY'] = RECAPTCHA_PRIVATE_KEY
 
-migrate = Migrate(app, db)
-
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     db.session.remove()
