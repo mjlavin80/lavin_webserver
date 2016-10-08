@@ -54,11 +54,9 @@ def index():
 @app.route("/resources")
 def resources():
     #get from db
-    r = Resource.query.all()
-    resource_dicts = [u.title for u in r]
-    #resource_dicts = [u.__dict__ for u in r]
+    r = Resource.query.all().asDict()
     #jsonify
-    json_data = json.dumps(resource_dicts)
+    json_data = json.dumps(r)
     #print
     #print(resource_dicts)
     return json_data

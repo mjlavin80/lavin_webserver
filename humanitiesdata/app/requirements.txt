@@ -1,6 +1,6 @@
 mysql-python
 sqlalchemy
-Flask==0.10.1
+Flask
 Flask-SQLAlchemy==1.0
 Flask-WTF==0.9.3
 Flask-Script
@@ -10,3 +10,4 @@ flask-login
 flask-security
 flask-admin
 flask-bcrypt
+dictalchemy

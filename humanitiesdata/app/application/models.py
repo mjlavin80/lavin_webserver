@@ -1,6 +1,9 @@
 from application import db
-from sqlalchemy.ext.declarative import declarative_base
-Base = declarative_base()
+#from sqlalchemy.ext.declarative import declarative_base
+#Base = declarative_base()
+from dictalchemy import DictableModel
+from slqlachemy.ext.declarative import declarative_base
+Base = declarative_base(cls=DictableModel)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
