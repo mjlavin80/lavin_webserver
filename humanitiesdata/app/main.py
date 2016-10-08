@@ -13,9 +13,7 @@ def compile_errors(form):
     errs = []
     for field, errors in form.errors.items():
         for error in errors:
-            text = u"Error in the %s field - %s" % (
-                getattr(form, field).label.text,
-                error)
+            text = u"Error in the %s field - %s" % (getattr(form, field).label.text, error)
             errs.append(text)
     return errs
 
@@ -52,6 +50,24 @@ def load_user(user_id):
 @app.route("/")
 def index():
     return render_template("main.html")
+
+@app.route("/test_db")
+def test():
+    try:
+        password = 'goblin55'
+        hashed = bcrypt.generate_password_hash(password)
+        ins = User(username='mjlavin80', is_admin=True, display_name='Matt', email='digitalmedialab@pitt.edu', password=hashed, authenticated=True)
+
+        try:
+            db.session.add(ins)
+            db.session.commit()
+        except:
+            db.session.rollback()
+        return "success"
+    except Exception, exc:
+        db.session.rollback()
+        error=exc.decode('utf8', errors='replace')
+        return error
 
 @app.route("/about")
 def about():
