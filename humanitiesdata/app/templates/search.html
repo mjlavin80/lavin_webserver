@@ -59,8 +59,8 @@ $('.fixed-table-toolbar').append('<button id="datasets" type="submit" class="btn
 }
 populate();
 
-$('#datasets').populate("dataset");
-$('#recipes').populate("recipe");
-$('#both').populate();
+$('#datasets').click(populate("dataset"));
+$('#recipes').click(populate("recipe"));
+$('#both').click(populate());
 </script>
 {% endblock %}
