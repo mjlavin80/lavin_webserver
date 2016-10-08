@@ -8,6 +8,7 @@ from flask_bcrypt import Bcrypt
 from application.forms import *
 from config import *
 from datetime import datetime
+import json
 
 def compile_errors(form):
     errs = []
@@ -49,6 +50,17 @@ def load_user(user_id):
 @app.route("/")
 def index():
     return render_template("main.html")
+
+@app.route("/resources")
+def resources():
+    #get from db
+    resources = Resource.query.all()
+    resource_dicts = [u.__dict__ for u in resources]
+    #jsonify
+    json_data = json.dumps(resource_dicts)
+    #print
+    #print(resource_dicts)
+    return json_data
 
 @app.route("/test_db")
 @login_required
