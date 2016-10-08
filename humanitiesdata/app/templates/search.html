@@ -21,7 +21,7 @@
     <div class="col-lg-12">
 
       <!-- Begin bootstrap-table block -->
-
+	<div id="table"></div>
       <!-- End bootstrap-table block -->
 
     </div>
@@ -33,20 +33,25 @@
 <script src="/static/bootstrap-table/dist/bootstrap-table.min.js"></script>
 <script>
 $('#table').bootstrapTable({
-    url: 'datastream',
+    url: 'datastream', pagination: 'true', search:'true', searchOnEnterKey: 'true',
     columns: [{
         field: 'title',
+	sortable: 'true',
         title: 'Title'
     }, {
-        field: 'uri',
-        title: 'URL'
-    }, {
         field: 'excerpt',
-        title: 'Description'
+        sortable: 'true',
+	title: 'Description'
+    },{
+        field: 'resource_type',
+        sortable: 'true',
+        title: 'Resource Type'
     },{
         field: 'more_link',
+        sortable: 'true',
         title: 'Full Record'
     }, ]
 });
+$('.search').addClass('pull-left').removeClass('pull-right').css('width', '45%');
 </script>
 {% endblock %}

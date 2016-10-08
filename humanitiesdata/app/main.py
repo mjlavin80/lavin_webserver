@@ -55,13 +55,13 @@ def index():
 def datastream():
     def removekeys(d):
         #build href using id
-        d[more_link] = "<a href=/resources/%s>Full Record</a>" % str("".join([i for i in d["id"] if i.isalpha() == False]))
-        d["excerpt"] = "".join([" ".join(d["description"].split(" ")[:5]), " ..."])
+        d["more_link"] = "".join(["<a href='/resources/", str("".join([i for i in str(d["id"]) if i.isalpha() == False])), "'>Full Record</a>"])
+        d["excerpt"] = "".join([" ".join(d["description"].split(" ")[:9]), " ..."])
         del d["id"]
         del d["_sa_instance_state"]
         return d
     #get from db
-    rows = db.session.query(Resource).all()
+    rows = db.session.query(Resource).filter(Resource.status=='published').all()
     r = [removekeys(u.__dict__) for u in rows]
     #jsonify
     json_data = json.dumps(r)
