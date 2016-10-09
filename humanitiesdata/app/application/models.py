@@ -9,7 +9,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(128), index=True, unique=True)
     is_admin = db.Column(db.Boolean, default=False)
-    profile_image = db.Column(db.String(128), index=True, unique=False)
+    profile_image = db.Column(db.String(128), index=True)
     display_name = db.Column(db.String(128), index=True, unique=True)
     email = db.Column(db.String(128), index=True, unique=True)
     password = db.Column(db.String(512))
@@ -49,7 +49,7 @@ class Tag(db.Model):
 class Resource(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(128), index=True)
-    description = db.Column(db.String(512), index=True)
+    description = db.Column(db.String(10000))
     uri = db.Column(db.String(128), index=True)
     submitted_by = db.Column(db.String(128), index=True)
     email = db.Column(db.String(128), index=True)

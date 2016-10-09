@@ -57,7 +57,7 @@ def datastream():
         #build href using id
         d["more_link"] = "".join(["<a href='/resources/", str("".join([i for i in str(d["id"]) if i.isalpha() == False])), "'>Full Record</a>"])
         d["excerpt"] = "".join([" ".join(d["description"].split(" ")[:9]), " ..."])
-        
+
         del d["id"]
         del d["_sa_instance_state"]
         return d
@@ -68,25 +68,6 @@ def datastream():
     json_data = json.dumps(r)
     #return json_data
     return json_data
-
-@app.route("/test_db")
-@login_required
-def test():
-    try:
-        password = 'goblin55'
-        hashed = bcrypt.generate_password_hash(password)
-        ins = User(username='mjlavin80', is_admin=True, display_name='Matt', email='digitalmedialab@pitt.edu', password=hashed, authenticated=True)
-
-        try:
-            db.session.add(ins)
-            db.session.commit()
-        except:
-            db.session.rollback()
-        return "success"
-    except Exception, exc:
-        db.session.rollback()
-        error=exc.decode('utf8', errors='replace')
-        return error
 
 @app.route("/about")
 def about():
@@ -216,7 +197,7 @@ def signup():
 
 if __name__ == "__main__":
     #for local dev
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    #app.run(host='0.0.0.0', debug=True, port=5000)
 
     #for production
-    #app.run(host='0.0.0.0', debug=True, port=80)
+    app.run(host='0.0.0.0', debug=True, port=80)
