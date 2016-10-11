@@ -1,4 +1,4 @@
-{% extends "/admin/base2.html" %}{% import 'admin/macros.html' as macros %}
+{% extends "base.html" %}
 {{ form.csrf_token }}
 {% block body %}
 <div class="container">
@@ -6,12 +6,13 @@
 
 
   {% if current_user.is_authenticated %}
-  <h2>Congratulations. You are now logged in.</h2>
-  <p><a href="{{ url_for('admin.logout') }}"> Logout</a></p>
+  <h2>You are logged in</h2>
+  <p><big><a href="{{url_for('logout')}}">Log out</a></big></p>
   {% else %}
   <div class="col-sm-6">
-    <h2>Fill in the following information to log in:</h2>
-  <form action="{{ url_for('admin.admin_index') }}" method=post>
+    <h2>You are logged out</h2>
+    <p><big>Fill in the following information to log in</big></p>
+  <form action="{{ url_for('login') }}" method=post>
      {{form.hidden_tag()}}
     <hr>
 

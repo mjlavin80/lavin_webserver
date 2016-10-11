@@ -12,15 +12,42 @@
     </div>
   </div>
 </div>
-
+{% if status == "success" %}
 <div class="container">
   <div class="row">
-    <div class="col-lg-4">One
-    </div>
-    <div class="col-lg-4">Two
-    </div>
-    <div class="col-lg-4">Three
+    <div class="col-lg-8">
+      <h3 class="alert alert-success">Thank you for signing up!</h3>
+      <p><big>Perhaps now you'd like to contribute by <a href="/submit">submitting a resource</a>?</big></p>
     </div>
   </div>
 </div>
+{% elif status == "error" %}
+{% include "errors.html" %}
+{% endif %}
+{% if status== "error" or not status %}
+<div class="container">
+  <div class="row"><div class="col-md-12">
+    <p><big>We are looking for volunteers to be a part of our project evaluation period.
+      Your contributions might involve peer reviewing the website, testing its functionality,
+      or filling at a short user survey. I promise not to spam your email address.
+      If any of this sounds interesting, please sign up below.</big></p></div></div>
+  <div class="row">
+    <div class="col-lg-8">
+      <form method="POST" action="{{ url_for('signup') }}">
+          {{ signupform.hidden_tag()}}
+          {{ signupform.date}}
+          <div class="col-md-12 form_row">Your Name<span class="required"> *</span></div>
+          <div class="col-md-8 form_row">{{ signupform.display_name(class_="form-control") }}</div>
+
+          <div class="col-md-12 form_row">Valid Email Address<span class="required"> *</span></div>
+          <div class="col-md-8 form_row">{{ signupform.email(class_="form-control") }}</div>
+
+        <div class="col-md-12 form_row"><input class="btn btn-primary" type="submit" value="Sign Up"></div>
+</form>
+    </div>
+
+  </div>
+</div>
+{% endif %}
+
 {% endblock %}

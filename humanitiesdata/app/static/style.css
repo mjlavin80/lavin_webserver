@@ -104,3 +104,6 @@ font-weight: 200;
   width: 100%;
   font-size: 1000%;
 }
+.form-control {
+  margin-bottom: 15px;
+}

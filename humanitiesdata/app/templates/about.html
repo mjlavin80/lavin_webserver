@@ -53,25 +53,67 @@
   <p class="list-group-item disabled">
     Do you host datasets?
   </p>
-  <p class="list-group-item">No, we do not. We only collect links to datasets and data fetch recipes.</p>
+  <p class="list-group-item">No, we do not. We only collect links to datasets and "recipes" that demonstrate some kind of data fetch operation (scraping, API, etc.).</p>
 </div>
 <div class="list-group">
 <p class="list-group-item disabled">
   Then how can I host a dataset?
 </p>
-<p class="list-group-item">You can use <a href="http://ckan.org">CKAN</a> services like datahub.io, host your own data via Github/Github LFS, and share recipes using Gist.
-  If hosting your own data, you can use our metadata schema to make sure you've filled in the
-<a href="https://www.w3.org/TR/vocab-dcat/">Data Catalog Vocabulary (DCAT)</a> required fields. Our fields also map to <a href="http://ckan.org">CKAN</a>sites because <a href="http://ckan.org">CKAN</a> is purposefully <a href="https://www.w3.org/TR/vocab-dcat/">DCAT</a> compatible. (Read more about <a href="http://ckan.org/open-standards/"> CKAN standards</a>.)</p>
+<p class="list-group-item">You can use <a href="http://ckan.org">CKAN</a> services like datahub.io, host your own
+  data via Github or Github Large File Storage, and share recipes using Gist.
+  If hosting your own data, you can use our metadata schema to make sure you've filled in the required and
+  required-if-applicable data fields associated with
+  <a href="https://project-open-data.cio.gov/v1.1/schema/">Project Open Data version 1.1</a>.
+  These fields are specifically design to map to
+  <a href="https://www.w3.org/TR/vocab-dcat/">Data Catalog Vocabulary (DCAT)</a> and
+  <a href="http://ckan.org">CKAN</a> sites.
+  Some <a href="https://project-open-data.cio.gov/schema/">POD schema version 1.0</a>
+  fields are also included in order to assure mappings.</p>
+</div>
+<div class="list-group">
+<p class="list-group-item disabled">
+How can I help with this project?
+</p>
+<p class="list-group-item">
+  We are looking for volunteers to be a part of our project evaluation period.
+  Your contributions might involve peer reviewing the website, testing its functionality,
+  or filling at a short user survey. We promise not to spam your email address.
+  To be a part of humanitiesdata.com, go to <a href="/signup">Sign Up</a> and provide your name and email.</p>
+  <p class="list-group-item">Other forms of support include adding datasets and recipes,
+    letting me know if anything seems to be broken, and spreading the word about this site via social media, word-of-mouth,
+    or messenger bird.</p>
+  <p class="list-group-item"> We are also accepting small financial contributions to pay for web hosting so that we can move
+    humanitiesdata.com to its own virtual host.</p>
+</div>
 </div>
 </big>
-</div>
         <div class="col-lg-4">
           <h3 class="text-center">Some Details</h3>
-          <big>
-            <p>Credits</p>
-            <p>Under the Hood</p>
-            <p>Donate</p>
-          </big>
+
+            <p><big><strong>Correspondence Address</strong></big></p>
+            <p><big> Matthew J. Lavin
+            <br/>Department of English
+            <br/>526 Cathedral of Learning
+            <br/>4200 Fifth Ave.
+            <br/>Pittsburgh, PA 15260</big></p>
+            <p><big><strong>Email</strong></big></p>
+            <p><big>lavin [at] pitt.edu</big></p>
+            <h4>Under the Hood</h4>
+            <p><big>Humanitiesdata.com is one component of the webserver, which is represented by this
+              <a href="https://github.com/mjlavin80/lavin_webserver">Github repository</a>.
+              The webserver uses Docker to containerize a proxy server (nginx), and several other Docker containers.
+              Humanitiesdata.com is container running Flask (Python for the web) with WSGI. The page design uses bootstrap3
+              to achieve responsiveness (i.e., mobile website compatible). As the site grows in size, it would ideal to add elasticsearch to power
+              a search engine but, for now, a lightweight javascript search (over json) seems to be performin adequately.
+            </big></p>
+            <h4>Support this Website</h4>
+            <p><big>Okay, for now, the "we" stuff is just optimism. This is a one-person project, and that person. I do not have nonprofit status for this project. I am collecting donations purely as an individual.
+              I plan to use donations to pay for virtual hosting for the site. The current campaign would cover one year of hosting.</big></p>
+
+            <p>
+              <a href='https://fundly.com/humanitiesdata-com#donate'><img src='//fundly.com/assets/widgets/donate_now.png' title='Humanitiesdata.com'></a>
+            </p>
+
           </div>
     </div>
 </div>

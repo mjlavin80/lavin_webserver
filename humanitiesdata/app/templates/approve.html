@@ -3,20 +3,6 @@
 {% block body %}
 <div class="container">
 
-<!--
-<div class="row">
-  <div class="col-lg-10">
-    <div class="input-group">
-      <span class="input-group-addon">
-        <input id='7' class="check" name='check-list[]' type="checkbox" aria-label="..." value='id'>
-      </span>
-      <div class="form-control"><p>Title: </p><p>URL: </p><p>Submitted By:</p>
-
-        <input type="submit" name="approve_7" class="btn btn-success" value="Approve this Resource"/>
-        <input type="submit" name="edit_7" class="btn btn-info" value="Edit this Resource"/>
-      </div>
-    </div>
--->
 {% if q_ids|length > 0 %}
 
 <form method="POST" action="{{ url_for('approve') }}">
@@ -37,7 +23,7 @@
       </span>
       <div class="form-control"><p>Title: {{i.title}}</p><p>URL: {{i.uri}}</p><p>Submitted By: {{i.submitted_by}}</p>
         <input type="submit" name="approve_{{i.id}}" class="btn btn-success" value="Approve this Resource"/>
-        <input type="submit" name="edit_{{i.id}}_{{i.resource_type}}" class="btn btn-info" value="Edit this Resource"/>
+        <a class="btn btn-info" href="/resources/{{i.id}}/edit">Edit this Resource</a>
       </div>
     </div>
   </div>
@@ -49,6 +35,7 @@
 {% else %}
   <div class="row">
   <h2>No Items in Queue</h2>
+  <p><big><a href="/resources">Browse resources</a></big></p>
 </div>
 
 {% endif %}
