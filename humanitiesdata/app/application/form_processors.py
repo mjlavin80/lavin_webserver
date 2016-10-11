@@ -77,9 +77,12 @@ def process_resource(request, _type, resource_type, _id=None,):
                 new_resource.date_submitted = datetime.utcnow()
             if _type == "edit":
                 new_resource.date_submitted = date_sub
-            if current_user.is_admin:
-                new_resource.status = "published"
-            else:
+            try:
+                if current_user.is_admin:
+                    new_resource.status = "published"
+                else:
+                    new_resource.status = "draft"
+            except:
                 new_resource.status = "draft"
 
             db.session.add(new_resource)
