@@ -29,18 +29,22 @@
   <div class="row"><div class="col-md-12">
     <p><big>We are looking for volunteers to be a part of our project evaluation period.
       Your contributions might involve peer reviewing the website, testing its functionality,
-      or filling at a short user survey. I promise not to spam your email address.
-      If any of this sounds interesting, please sign up below.</big></p></div></div>
+      or filling at a short user survey. We promise not to spam your email address.
+      If any of this sounds interesting, please sign up below. The "How You Would Like to Help"
+      field is not required but will be useful as we make plans for the future of the site.</big></p></div></div>
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
       <form method="POST" action="{{ url_for('signup') }}">
           {{ signupform.hidden_tag()}}
           {{ signupform.date}}
           <div class="col-md-12 form_row">Your Name<span class="required"> *</span></div>
-          <div class="col-md-8 form_row">{{ signupform.display_name(class_="form-control") }}</div>
+          <div class="col-md-6 form_row">{{ signupform.display_name(class_="form-control") }}</div>
 
           <div class="col-md-12 form_row">Valid Email Address<span class="required"> *</span></div>
-          <div class="col-md-8 form_row">{{ signupform.email(class_="form-control") }}</div>
+          <div class="col-md-6 form_row">{{ signupform.email(class_="form-control") }}</div>
+
+          <div class="col-md-12 form_row">How You Would Like to Help</div>
+          <div class="col-md-10 form_row">{{ signupform.comments(class_="form-control") }}</div>
 
         <div class="col-md-12 form_row"><input class="btn btn-primary" type="submit" value="Sign Up"></div>
 </form>

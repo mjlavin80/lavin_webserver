@@ -84,6 +84,7 @@ class Signup(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     display_name = db.Column(db.String(128), index=True, unique=True, nullable=False)
     email = db.Column(EmailType, index=True, unique=True, nullable=False)
+    comments = db.Column(db.String(2000))
     date = db.Column(db.DateTime, default=datetime.now(), nullable=False)
 
     def __repr__(self):
