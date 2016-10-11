@@ -18,7 +18,7 @@ def setkeys(d):
     del d["id"]
     del d["_sa_instance_state"]
     return d
-    
+
 def compile_errors(form):
     errs = []
     for field, errors in form.errors.items():
@@ -74,7 +74,7 @@ def process_resource(request, _type, resource_type, _id=None,):
                 render_template("submit.html", status="errors", errors=['One or more tags exceeds max tag length (30 characters)'], resource_type=resource_type)
 
             if _type == "submit":
-                new_resource.date_submitted = datetime.now()
+                new_resource.date_submitted = datetime.utcnow()
             if _type == "edit":
                 new_resource.date_submitted = date_sub
             if current_user.is_admin:

@@ -128,7 +128,7 @@ def signup():
         if signupform.validate():
             new_signup = Signup()
             signupform.populate_obj(new_signup)
-            new_signup.date = datetime.now()
+            new_signup.date = datetime.utcnow()
             db.session.add(new_signup)
             db.session.commit()
             return render_template("signup.html", signupform=signupform, status="success")
