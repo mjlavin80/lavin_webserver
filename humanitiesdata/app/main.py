@@ -70,8 +70,13 @@ def tags(tagname=None):
         json_data = json.dumps(r)
         return render_template("tags.html", tagname=tagname, json_data = json_data)
     else:
-        all_tags = [i.tagname for i in Tag.query.all()]
-        return render_template("tags.html", all_tags=all_tags)
+        all = [i.tagname for i in Tag.query.all()]
+	all_tags = []
+	for tag in all:
+	    published =  Resource.query.join(Tag.resources).filter(Tag.tagname == tag).filter(Resource.status=='published').all()
+	    if len(published) > 0:
+		all_tags.append(tag.tagname)
+	return render_template("tags.html", all_tags=all_tags)
 
 @app.route("/resources")
 @app.route("/resources/<_id>")
