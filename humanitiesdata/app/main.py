@@ -62,7 +62,7 @@ def about():
 @app.route("/tags/<tagname>")
 def tags(tagname=None):
     if tagname:
-        rows = Resource.query.join(Tag.resources).filter(Tag.tagname == tagname).all()
+        rows = Resource.query.join(Tag.resources).filter(Tag.tagname == tagname).filter(Resource.status=='published').all()
         if len(rows) == 0:
             return redirect(url_for('tags', tagname=None))
         r = [setkeys(u.__dict__) for u in rows]
