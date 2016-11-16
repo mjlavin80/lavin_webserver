@@ -19,11 +19,15 @@ services:
   humanitiesdata:
     build: ./humanitiesdata
     container_name: humanitiesdata
-    external_links:
-      - flask_db:mysql
 
   digiped_fall_2016:
     build: ./courses/digiped_fall_2016
     container_name: digiped_fall_2016
-    external_links:
-      - flask_db:mysql
+
+  acdm_spring_2017:
+    build: ./courses/acdm_spring_2017
+    container_name: acdm_spring_2017
+
+  nt_spring_2017:
+    build: ./courses/nt_spring_2017
+    container_name: nt_spring_2017
