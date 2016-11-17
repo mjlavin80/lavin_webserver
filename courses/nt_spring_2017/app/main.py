@@ -170,7 +170,7 @@ def login():
     form = LoginForm()
     next = request.args.get('next')
     if form.validate():
-        user = User.query.filter(User.username==form.username.data).first()
+        user = User.query.filter(User.username==form.username.data).one_or_none()
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 user.authenticated = True
