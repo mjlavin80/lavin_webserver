@@ -9,7 +9,11 @@
     </div>
     <div class="row">
 
-        {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+        {% if errors %}
+        {% for e in errors %}
+        <p>{{ e }}</p>
+        {% endfor %}
+        {% endif %}
           <form action="{{ url_for('login') }}" method=post>
              {{form.hidden_tag()}}
             <hr>

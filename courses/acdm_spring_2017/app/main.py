@@ -11,6 +11,14 @@ from flask_migrate import Migrate
 from flask.ext.bcrypt import Bcrypt
 from flask.ext.admin.base import MenuLink
 
+def compile_errors(form):
+    errs = []
+    for field, errors in form.errors.items():
+        for error in errors:
+            text = u"Error in the %s field - %s" % (getattr(form, field).label.text, error)
+            errs.append(text)
+    return errs
+
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 bcrypt = Bcrypt(app)
@@ -161,6 +169,13 @@ def protected(filename):
 def coming_soon():
     return render_template("soon.html")
 
+def compile_errors(form):
+    errs = []
+    for field, errors in form.errors.items():
+        for error in errors:
+            text = u"Error in the %s field - %s" % (getattr(form, field).label.text, error)
+            errs.append(text)
+    return errs
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -181,7 +196,8 @@ def login():
                 flash("You have successfully logged in")
                 return redirect(next or url_for('index'))
     #print(form.errors)
-    return render_template("login.html", form=form)
+    errors = compile_errors(form)
+    return render_template("login.html", form=form, errors=errors)
 
 @app.route("/logout", methods=["GET"])
 @login_required
