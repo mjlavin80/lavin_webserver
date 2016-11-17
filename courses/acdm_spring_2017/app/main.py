@@ -1,26 +1,90 @@
-from flask import Flask, render_template, redirect, url_for, send_from_directory
-from flask_admin import Admin
+from flask import Flask, render_template, redirect, url_for, send_from_directory, request, flash
+from flask_admin import Admin, AdminIndexView, BaseView, expose
 from flask_admin.contrib.sqla import ModelView
 import os
 from application.models import *
 from application import db
+from application.forms import LoginForm
 from flask_login import login_required
+from flask_login import LoginManager, login_user, logout_user, current_user
 from flask_migrate import Migrate
+from flask.ext.bcrypt import Bcrypt
+from flask.ext.admin.base import MenuLink
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
+bcrypt = Bcrypt(app)
 
-admin = Admin(app, name='Dashboard', template_mode='bootstrap3')
+#ends session so there's no mysql timeout
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    db.session.remove()
+
+class MyAdminIndexView(AdminIndexView):
+    @expose('/')
+    def index(self):
+        if not current_user.is_authenticated:
+            return redirect('login')
+        else:
+            return self.render('admin/index.html')
+
+# Create menu links classes with reloaded accessible
+class AuthenticatedMenuLink(MenuLink):
+    def is_accessible(self):
+        return current_user.is_authenticated
+
+# Create customized model view classes
+class ModelViewUser(ModelView):
+    column_exclude_list = ('password')
+    can_create = False
+    def on_form_prefill(self, form, id):
+        form.password.data = '[current password hidden]'
+    def on_model_change(self, form, User, is_created=False):
+        a = b.hashpw(form.password.data.encode('utf8'), b.gensalt())
+        User.password = a
+    def is_accessible(self):
+        if current_user.is_authenticated and current_user.is_admin:
+            return current_user.is_authenticated
+    def inaccessible_callback(self, name, **kwargs):
+        # redirect to login page if user doesn't have access
+        return redirect(url_for('login'))
+
+class ModelViewAdmin(ModelView):
+    def is_accessible(self):
+        if current_user.is_authenticated and current_user.is_admin:
+            return current_user.is_authenticated
+    def inaccessible_callback(self, name, **kwargs):
+        # redirect to login page if user doesn't have access
+        return redirect(url_for('login'))
+
+admin = Admin(app, name='Dashboard', template_mode='bootstrap3', index_view=MyAdminIndexView())
+
 # Add administrative views here
-admin.add_view(ModelView(Reading, db.session))
-admin.add_view(ModelView(Assignment, db.session))
-admin.add_view(ModelView(Day, db.session))
-admin.add_view(ModelView(Week, db.session))
-admin.add_view(ModelView(Basics, db.session))
+admin.add_view(ModelViewAdmin(User, db.session))
+admin.add_view(ModelViewAdmin(Reading, db.session))
+admin.add_view(ModelViewAdmin(Assignment, db.session))
+admin.add_view(ModelViewAdmin(Day, db.session))
+admin.add_view(ModelViewAdmin(Week, db.session))
+admin.add_view(ModelViewAdmin(Basics, db.session))
+
+#required user loader method
+login_manager = LoginManager()
+
+login_manager.init_app(app)
+login_manager.login_view = "login"
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    # do stuff
+    return redirect(url_for('login'))
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
 
 #helper function for decorator to pass global info to templates
 def generate_site_data():
-    basics = Basics.query.one_or_none()
+    basics = Basics.query.first()
     return basics
 
 #app context processor for sitewide data. Use as a decorator @include_site_data after @app.route to include a variable called basics in rendered template
@@ -98,10 +162,44 @@ def coming_soon():
     return render_template("soon.html")
 
 
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    """For GET requests, display the login form. For POSTS, login the current user
+    by processing the form."""
+
+    form = LoginForm()
+    next = request.args.get('next')
+    if form.validate():
+        user = User.query.filter(User.username==form.username.data).first()
+        if user:
+            if bcrypt.check_password_hash(user.password, form.password.data):
+                user.authenticated = True
+                db.session.add(user)
+                db.session.commit()
+                login_user(user, force=True)
+                next = request.args.get('next')
+                flash("You have successfully logged in")
+                return redirect(next or url_for('index'))
+    #print(form.errors)
+    return render_template("login.html", form=form)
+
+@app.route("/logout", methods=["GET"])
+@login_required
+def logout():
+    """Logout the current user."""
+    user = current_user
+    user.authenticated = False
+    db.session.add(user)
+    db.session.commit()
+    logout_user()
+    next = request.args.get('next')
+    flash("You have successfully logged out")
+    return redirect(url_for('login'))
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 80))
     #for production
-    app.run(host='0.0.0.0', port=port)
+    #app.run(host='0.0.0.0', port=port)
 
     #for dev
-    #app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
