@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{{ form.csrf_token }}
+{% block content %}
+{% include "menu.html" %}
+
+<div class="container">
+    <div class="row">
+        <h3>Login Required to View that Page</h3>
+    </div>
+    <div class="row">
+
+        {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+          <form action="{{ url_for('login') }}" method=post>
+             {{form.hidden_tag()}}
+            <hr>
+
+              <div class="form-group">
+                <label for="username">Username</label>
+              <input class="form-control" type=text name=username>
+              </div>
+              <div class="form-group">
+              <label for="password">Password:</label>
+              <input class="form-control" type=password name=password>
+              </div>
+              <div class="form-group">
+              <input type="submit" class="btn btn-primary" value=Login>
+              </div>
+              <hr>
+          </form>
+
+    </div>
+</div>
+
+{% endblock %}
