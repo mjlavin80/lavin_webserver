@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+<h3>Course Policies</h3>
+
+{% for policy in policies %}
+<div class="policy">
+    <h4>{{ policy.title }}</h4>
+    <p>{{ policy.description|safe }}</p>
+
+</div>
+{% endfor %}
+
+
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}
