@@ -7,8 +7,16 @@
 {% block content %}
 <div class="col-md-12">
 <h3>Course Policies</h3>
-<h4>Title</h4>
-<p>Policy description</p>
+
+{% for policy in policies %}
+<div class="policy">
+    <h4>{{ policy.title }}</h4>
+    <p>{{ policy.description|safe }}</p>
+
+</div>
+{% endfor %}
+
+
 {% endblock %}
 
 {% block footer %}

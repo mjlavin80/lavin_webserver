@@ -85,3 +85,8 @@ class Basics(db.Model):
     semester_year = db.Column(db.String(128))
     department = db.Column(db.String(128))
     institution = db.Column(db.String(128))
+
+class Policy(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(128))
+    description = db.Column(db.String(9999))
