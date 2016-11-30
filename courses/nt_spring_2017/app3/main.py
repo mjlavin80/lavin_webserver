@@ -66,6 +66,7 @@ admin.add_view(ModelViewAdmin(Assignment, db.session))
 admin.add_view(ModelViewAdmin(Day, db.session))
 admin.add_view(ModelViewAdmin(Week, db.session))
 admin.add_view(ModelViewAdmin(Basics, db.session))
+admin.add_view(ModelViewAdmin(Policy, db.session))
 
 #required user loader method
 login_manager = LoginManager()
