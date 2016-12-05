@@ -70,9 +70,9 @@ def tags(tagname=None):
         json_data = json.dumps(r)
         return render_template("tags.html", tagname=tagname, json_data = json_data)
     else:
-        all = [i.tagname for i in Tag.query.all()]
+        _all = [i for i in Tag.query.all()]
 	all_tags = []
-	for tag in all:
+	for tag in _all:
 	    published =  Resource.query.join(Tag.resources).filter(Tag.tagname == tag).filter(Resource.status=='published').all()
 	    if len(published) > 0:
 		all_tags.append(tag.tagname)
@@ -179,7 +179,7 @@ def logout():
 
 if __name__ == "__main__":
     #for local dev
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    #app.run(host='0.0.0.0', debug=True, port=5000)
 
     #for production
-    #app.run(host='0.0.0.0', debug=True, port=80)
+    app.run(host='0.0.0.0', debug=True, port=80)
