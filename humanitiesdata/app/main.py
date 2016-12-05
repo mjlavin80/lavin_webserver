@@ -73,7 +73,7 @@ def tags(tagname=None):
         _all = [i for i in Tag.query.all()]
 	all_tags = []
 	for tag in _all:
-	    published =  Resource.query.join(Tag.resources).filter(Tag.tagname == tag).filter(Resource.status=='published').all()
+	    published =  Resource.query.join(Tag.resources).filter(Tag.tagname == tag.tagname).filter(Resource.status=='published').all()
 	    if len(published) > 0:
 		all_tags.append(tag.tagname)
 	return render_template("tags.html", all_tags=all_tags)
