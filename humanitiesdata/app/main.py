@@ -86,7 +86,8 @@ def resources(_id=None):
         if not obj:
             return redirect(url_for('resources', _id=None))
         tags_ = [str(i.tagname) for i in obj.tags]
-        return render_template("single_resource.html", tags=tags_, obj=obj.__dict__)
+
+        return render_template("single_resource.html", tags=tags_, obj=obj.__dict__, _id=_id)
     else:
         return render_template("search.html")
 
@@ -148,20 +149,19 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         u = form.data['username']
-        user = User().query.filter(User.username==u).one()
-        #check password
-        next = request.args.get('next')
-        if bcrypt.check_password_hash(user.password, form.data['password']):
-            login_user(user)
+        user = User().query.filter(User.username==u).one_or_none()
+        if user:
+            #check password
+            next = request.args.get('next')
+            if bcrypt.check_password_hash(user.password, form.data['password']):
+                login_user(user)
 
-            flash('Logged in successfully.')
+                flash('Logged in successfully.')
 
-            return redirect(next or url_for('login'))
-        else:
-            flash('Bad password.')
-            return redirect(url_for('login'))
-        if not next_is_valid(next):
-            return abort(400)
+                return redirect(next or url_for('login'))
+            else:
+                flash('Bad user name or password.')
+                return redirect(url_for('login'))
     return render_template('login.html', form=form)
 
 @app.route("/submit/<resource_type>", methods=["GET", "POST"])
@@ -179,7 +179,7 @@ def logout():
 
 if __name__ == "__main__":
     #for local dev
-    #app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
 
     #for production
-    app.run(host='0.0.0.0', debug=True, port=80)
+    #app.run(host='0.0.0.0', debug=True, port=80)

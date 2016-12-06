@@ -49,7 +49,7 @@ def handle_tags_on_submit(tag_list, ins):
                         ins.tags.append(just_added)
             return ins
 
-def process_resource(request, _type, resource_type, _id=None,):
+def process_resource(request, _type, resource_type, _id=None):
     tags = ""
     #instantiate form
     add_resource = AddResource(request.form)
@@ -69,6 +69,16 @@ def process_resource(request, _type, resource_type, _id=None,):
                     except:
                         pass
             #handle tags
+            #check for deleted tags
+            for old in new_resource.tags:
+                if old.tagname not in add_resource.data["tags"]:
+                    #check if tag  exists elsewhere
+                    r = Resource.query.filter(Resource.tags.any(tagname=old.tagname)).all()
+                    if len(r) == 1:
+                        db.session.delete(old)
+                        db.session.commit()
+                    else:
+                        new_resource.tags.remove(old)
             new_resource = handle_tags_on_submit(add_resource.data["tags"], new_resource)
             if new_resource == "len_error":
                 render_template("submit.html", status="errors", errors=['One or more tags exceeds max tag length (30 characters)'], resource_type=resource_type)
@@ -90,17 +100,17 @@ def process_resource(request, _type, resource_type, _id=None,):
             if _type == "submit":
                 return render_template("submit.html", add_resource=add_resource, status="success", resource_type=resource_type)
             else:
-
-                #return render_template("submit.html", add_resource=add_resource, status="success", resource_type=resource_type)
                 new_resource = Resource().query.filter(Resource.id == _id).one_or_none()
                 #convert to dictionary
                 resource_dict = new_resource.__dict__
                 #fill in values and pass to template
                 tags = ",".join([str(i.tagname) for i in new_resource.tags])
+
+                #d = Tag.delete(Tag == 1)
+                #d.execute()
                 return render_template("submit.html", _id=_id, tags=tags, add_resource=add_resource, status="success", resource_type=add_resource.data["resource_type"], resource_dict=resource_dict)
 
         else:
-            print "error in form"
             errors = compile_errors(add_resource)
             if _type=="submit":
                 return render_template("submit.html", add_resource=add_resource, status="error", errors=errors, resource_type=add_resource.data["resource_type"])

@@ -7,6 +7,7 @@
       <div class="row">
         <div class="col-md-12" >
         <h2 class="container_head">{{obj["title"]}}</h2>
+        {% if current_user.is_admin %}<p><a href="./{{_id}}/edit">Edit</a></p>{% endif %}
       </div>
     </div>
   </div>
