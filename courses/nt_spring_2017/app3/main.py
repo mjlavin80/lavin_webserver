@@ -111,7 +111,8 @@ def policies():
 @include_site_data
 def calendar():
     #get weeks from db
-    weeks = Week.query.all()
+    weeks = Week.query.order_by(Week.week_number).all()
+    print(weeks)
     return render_template("calendar.html", weeks=weeks)
 
 @app.route("/assignments/<this_assignment>")

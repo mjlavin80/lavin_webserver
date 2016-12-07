@@ -9,7 +9,7 @@
   <h3>Weekly Calendar</h3>
   <hr>
 
-{% for week in weeks|sort(attribute='id') %}
+{% for week in weeks %}
 <h4>{{ week.week_number }}: {{ week.week_topic }}</h4>
 
 {% for day in week.days|sort(attribute='id') %}
