@@ -179,7 +179,7 @@ def logout():
 
 if __name__ == "__main__":
     #for local dev
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    #app.run(host='0.0.0.0', debug=True, port=5000)
 
     #for production
-    #app.run(host='0.0.0.0', debug=True, port=80)
+    app.run(host='0.0.0.0', debug=True, port=80)

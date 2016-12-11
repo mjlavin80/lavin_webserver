@@ -26,28 +26,67 @@ def compile_errors(form):
             text = u"Error in the %s field - %s" % (getattr(form, field).label.text, error)
             errs.append(text)
     return errs
+def handle_tags_on_edit(tag_list, ins):
+    #change spaces and underscores to hyphens
+    suggested_tags = [x.strip().replace(" ", "-").replace("_", "-") for x in tag_list.split(',')]
+
+    for old in ins.tags:
+        if old.tagname not in suggested_tags:
+            #check if tag  exists elsewhere
+            ins.tags.remove(old)
+    tagnames = [z.tagname for z in ins.tags]
+    for a_tag in suggested_tags:
+        if len(a_tag) > 30 or len(a_tag) < 3:
+            return "len_error"
+        else:
+            #check for tag in db
+            newtag = Tag.query.filter(Tag.tagname==a_tag).one_or_none()
+            #if found
+            if newtag is not None:
+                #attach if not already attached to the instance
+                if newtag not in tagnames:
+                    ins.tags.append(newtag)
+            else:
+                #instantiate a new tag by tagname
+                newtag = Tag(tagname=a_tag)
+                #add tag to db
+                db.session.add(newtag)
+                db.session.commit()
+                #query tag object just added
+                just_added = Tag.query.filter(Tag.tagname==a_tag).one_or_none()
+                #make sure it's in the database, then append to the taglist
+                if newtag is not None:
+                    ins.tags.append(just_added)
+    return ins
 
 def handle_tags_on_submit(tag_list, ins):
     # split on commas, make sure no single tag is too long
-    suggested_tags = [x.strip() for x in tag_list.split(',')]
+    suggested_tags = [x.strip().replace(" ", "-").replace("_", "-") for x in tag_list.split(',')]
+
+    tagnames = [z.tagname for z in ins.tags]
     for a_tag in suggested_tags:
-        if len(a_tag) > 30:
+        if len(a_tag) > 30 or len(a_tag) < 3:
             return "len_error"
         else:
-            # append tags to tags
-            for i in suggested_tags:
-                #insert
-                newtag = Tag.query.filter(Tag.tagname==i).one_or_none()
-                if newtag is not None:
+            #check for tag in db
+            newtag = Tag.query.filter(Tag.tagname==a_tag).one_or_none()
+            #if found
+            if newtag is not None:
+                #attach if not already attached to the instance
+                if newtag not in tagnames:
                     ins.tags.append(newtag)
-                else:
-                    newtag = Tag(tagname=i)
-                    db.session.add(newtag)
-                    db.session.commit()
-                    just_added = Tag.query.filter(Tag.tagname==i).one_or_none()
-                    if newtag is not None:
-                        ins.tags.append(just_added)
-            return ins
+            else:
+                #instantiate a new tag by tagname
+                newtag = Tag(tagname=a_tag)
+                #add tag to db
+                db.session.add(newtag)
+                db.session.commit()
+                #query tag object just added
+                just_added = Tag.query.filter(Tag.tagname==a_tag).one_or_none()
+                #make sure it's in the database, then append to the taglist
+                if newtag is not None:
+                    ins.tags.append(just_added)
+    return ins
 
 def process_resource(request, _type, resource_type, _id=None):
     tags = ""
@@ -62,6 +101,7 @@ def process_resource(request, _type, resource_type, _id=None):
             elif _type == "edit":
                 new_resource = Resource().query.filter(Resource.id == _id).one_or_none()
                 date_sub = new_resource.date_submitted
+
             for field in add_resource.data.keys():
                 if field != "tags":
                     try:
@@ -69,20 +109,10 @@ def process_resource(request, _type, resource_type, _id=None):
                     except:
                         pass
             #handle tags
-            #check for deleted tags
-            for old in new_resource.tags:
-                if old.tagname not in add_resource.data["tags"]:
-                    #check if tag  exists elsewhere
-                    r = Resource.query.filter(Resource.tags.any(tagname=old.tagname)).all()
-                    if len(r) == 1:
-                        db.session.delete(old)
-                        db.session.commit()
-                    else:
-                        new_resource.tags.remove(old)
-            new_resource = handle_tags_on_submit(add_resource.data["tags"], new_resource)
+            if _type == "submit":
+                new_resource = handle_tags_on_submit(add_resource.data["tags"], new_resource)
             if new_resource == "len_error":
-                render_template("submit.html", status="errors", errors=['One or more tags exceeds max tag length (30 characters)'], resource_type=resource_type)
-
+                render_template("submit.html", status="errors", errors=['Length error. All tags must be min 3, max 30 characters.'], resource_type=resource_type)
             if _type == "submit":
                 new_resource.date_submitted = datetime.utcnow()
             if _type == "edit":
@@ -95,8 +125,14 @@ def process_resource(request, _type, resource_type, _id=None):
             except:
                 new_resource.status = "draft"
 
+            if _type =="edit":
+                new_resource = handle_tags_on_edit(add_resource.data["tags"], new_resource)
+
             db.session.add(new_resource)
             db.session.commit()
+            suggested_tags = [x.strip() for x in add_resource.data["tags"].split(',')]
+
+
             if _type == "submit":
                 return render_template("submit.html", add_resource=add_resource, status="success", resource_type=resource_type)
             else:
