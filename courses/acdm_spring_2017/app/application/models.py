@@ -35,6 +35,7 @@ class Day(db.Model):
     name = db.Column(db.String(50))
     assignments = db.relationship('Assignment', backref='day', lazy='joined')
     readings = db.relationship('Reading', backref='day', lazy='joined')
+    activities = db.relationship('Activity', backref='day', lazy='joined')
     week_id = db.Column(db.Integer, db.ForeignKey('week.id'))
 
     def __repr__(self):
@@ -90,4 +91,11 @@ class Policy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(128))
     description = db.Column(db.String(9999))
-    
+
+class Activity(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    link = db.Column(db.String(500))
+    description = db.Column(db.String(9999))
+    day_id = db.Column(db.Integer, db.ForeignKey('day.id'))
+    def __repr__(self):
+        return '<Activity %r %r >' % (self.link, self.description)

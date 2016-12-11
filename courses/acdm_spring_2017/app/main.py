@@ -71,6 +71,7 @@ admin = Admin(app, name='Dashboard', template_mode='bootstrap3', index_view=MyAd
 admin.add_view(ModelViewAdmin(User, db.session))
 admin.add_view(ModelViewAdmin(Reading, db.session))
 admin.add_view(ModelViewAdmin(Assignment, db.session))
+admin.add_view(ModelViewAdmin(Activity, db.session))
 admin.add_view(ModelViewAdmin(Day, db.session))
 admin.add_view(ModelViewAdmin(Week, db.session))
 admin.add_view(ModelViewAdmin(Basics, db.session))
