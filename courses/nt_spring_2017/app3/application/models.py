@@ -81,6 +81,8 @@ class Basics(db.Model):
     office = db.Column(db.String(128))
     office_hours = db.Column(db.String(128))
     email = db.Column(db.String(128))
+    zotero = db.Column(db.String(500))
+    github = db.Column(db.String(500))
     course_name = db.Column(db.String(512))
     course_description =  db.Column(db.String(9999))
     semester_year = db.Column(db.String(128))
