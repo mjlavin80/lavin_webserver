@@ -52,3 +52,7 @@ a.assignment:active {
     color: white;
     cursor: pointer;
 }
+.bottom {
+    opacity: .25;
+    margin-bottom: 24px;
+}
