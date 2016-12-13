@@ -52,8 +52,7 @@ a.assignment:active {
     color: white;
     cursor: pointer;
 }
-.bottom {
-
+.row.bottom {
     margin-bottom: 24px;
 }
 .glyphicon.glyphicon-asterisk {
