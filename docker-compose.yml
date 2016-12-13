@@ -8,6 +8,11 @@ services:
     volumes:
       - ./proxy/nginx.conf:/etc/nginx/conf.d/matthew-lavin.conf
 
+  flask_base:
+    build: ./flaskbase
+    container_name: flask_empty
+    image: lavinflaskbase
+
   matthew-lavin:
     build: ./matthew-lavin
     container_name: matthew-lavin
@@ -19,15 +24,19 @@ services:
   humanitiesdata:
     build: ./humanitiesdata
     container_name: humanitiesdata
+    link: flask_base
 
   digiped_fall_2016:
     build: ./courses/digiped_fall_2016
     container_name: digiped_fall_2016
+    link: flask_base
 
   acdm_spring_2017:
     build: ./courses/acdm_spring_2017
     container_name: acdm_spring_2017
+    link: flask_base
 
   nt_spring_2017:
     build: ./courses/nt_spring_2017
     container_name: nt_spring_2017
+    link: flask_base
