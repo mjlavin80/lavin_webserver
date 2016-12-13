@@ -6,7 +6,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./proxy/nginx.conf:/etc/nginx/conf.d/matthew-lavin.conf
+      - /root/apps/proxy/nginx.conf:/etc/nginx/conf.d/matthew-lavin.conf
 
   flask_base:
     build: ./flaskbase
