@@ -17,6 +17,7 @@ body {
   bottom: 0;
   width: 100%;
   padding-top: 5px;
+  margin-top: 25px;
   /* Set the fixed height of the footer here */
   background-color: #f5f5f5;
 }
@@ -51,8 +52,4 @@ a.assignment:hover {
 a.assignment:active {
     color: white;
     cursor: pointer;
-}
-.glyphicon.glyphicon-asterisk {
-    opacity: .25;
-    margin-bottom: 24px;
 }
