@@ -9,6 +9,7 @@
 
 h2, h2 a {
   font-family: Garamond, serif;
+  font-size: 36px;
   font-variant: small-caps;
   color: gray;
 }
@@ -29,4 +30,19 @@ footer .row {
 }
 .readmore {
     font-weight: bold;
+}
+.blog-body {
+  font-size: 18px;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.meta {
+  font-weight: bold;
+}
+div.follow-ups {
+    font-weight: 700;
+}
+div.notes
+{
+    font-weight: 700;
 }

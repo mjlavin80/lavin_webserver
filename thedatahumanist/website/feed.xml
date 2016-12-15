@@ -1,17 +1,661 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">Feed One</title>
-  <id>urn:uuid:c80944b9-ac1f-303e-b532-1e9b14d3bdcc</id>
-  <updated>2016-09-01T00:00:00Z</updated>
+  <id>urn:uuid:724ebe19-d029-3d88-a47a-8e4b81d1edaf</id>
+  <updated>2016-12-15T21:14:58.640774Z</updated>
   <link href="http://thedatahumanist.website/" />
   <link href="http://thedatahumanist.website/feed.xml" rel="self" />
   <author>
     <name></name>
   </author>
   <generator uri="https://github.com/ajdavis/lektor-atom" version="0.2">Lektor Atom Plugin</generator>
+  <entry xml:base="http://thedatahumanist.website/the-alice-problem/">
+    <title type="text">The Alice Problem</title>
+    <id>urn:uuid:4d8aaaf8-3b52-3786-981d-9ed36230cc8b</id>
+    <updated>2016-12-15T00:00:00Z</updated>
+    <link href="http://thedatahumanist.website/the-alice-problem/" />
+    <author>
+      <name>Matt Lavin</name>
+    </author>
+    <content type="html">&lt;h3&gt;The Conceit&lt;/h3&gt;&lt;p&gt;Not very long ago, one of my colleagues hired a programmer for his institution's digital humanities initiative. In advertising the position, he designed a set of three challenges designed to test candidates for baseline competency with programming as it might apply to the humanities. All three of the tasks were of the same sort and, honestly, I can only remember one of them.&lt;/p&gt;
+&lt;p&gt;It asked the candidate programmer to design a simple block of code, in any programming language, to return a list of the most frequent adjectives preceding the name &lt;em&gt;Alice&lt;/em&gt; in the book &lt;em&gt;Alice’s Adventures in Wonderland&lt;/em&gt; (1865).&lt;/p&gt;
+&lt;p&gt;Programmer competency tasks are fairly common but, in the constellation of what would-be programmers are asked to do, this one seemed different.&lt;/p&gt;
+&lt;p&gt;This task is not remarkable in its difficulty. In general, I tend to get sucked into coding when I'm presented with something challenging. I suspect this is the case for almost anyone who codes regularly. Programming can be very difficult, but it's often difficult in exactly the right way: even partial successes are immediately observable and utterly distinct from an outright failure. In video game studies, gamers motivated like I am are called &quot;achievers.&quot; Making something work, especially it was hard, feels good, much like beating a boss, or earning a badge, or unlocking a secret level.&lt;/p&gt;
+&lt;p&gt;&lt;h3&gt;A Solution&lt;/h3&gt;
+But I can’t say that the Alice Problem really appeals to my achiever side, because it isn't very hard. A simplified solution might go something like this:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Read the full text of &lt;em&gt;Alice’s Adventures in Wonderland&lt;/em&gt; into memory and store it as a string.&lt;/li&gt;
+&lt;li&gt;Go through the text and tokenize such that every word is treated separately from every other word.&lt;/li&gt;
+&lt;li&gt;Use one of any number of Part-of-Speech (POS) taggers to generate a best guess for the part of speech for each token.&lt;/li&gt;
+&lt;li&gt;Go through the text word by word. If the word is &quot;Alice,&quot; look at the part of speech value to the left (one common approach to this type of question is called Key Words in Context or KWIC).&lt;/li&gt;
+&lt;li&gt;If the word to the left is an adjective, store its value. If the word has appeared before, add to a count of the total number of occurrences for that adjective&lt;/li&gt;
+&lt;li&gt;Sort the results by the number of occurrences.&lt;/li&gt;
+&lt;li&gt;Return or print the result.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;h3&gt;Some Code&lt;/h3&gt;
+Using Python, my typical programming language of choice, this task is especially easy to tackle because the pieces needed to accomplish the tasks are all associated with one very popular library, the Natural Language Toolkit (nltk). This script does approximately what my list above describes.&lt;a class=&quot;footnote&quot; href=&quot;#note_1&quot;&gt;1&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;
+import nltk
+with open('alice.txt') as a:
+    alice_text = a.read()
+alice_tokens = nltk.word_tokenize(alice_text.lower())
+alice_pos = nltk.pos_tag(alice_tokens)
+alice_pos = [i for i in alice_pos if i[0].isalpha()]
+adjs = []
+for i, j in enumerate(alice_pos):
+    if j[0]=='alice':
+        before = i-1
+        if alice_pos[before][1] == 'JJ':
+            adjs.append(alice_pos[before][0])
+from collections import Counter
+print(Counter(adjs).most_common())
+&lt;/pre&gt;
+The output, using the Natural Language Toolkit's default Part-of-Speech tagger, is a list of term counts that looks like this:
+&lt;pre&gt;
+[('thought', 26), ('poor', 11), ('cried', 7), ('little', 3), ('exclaimed', 3), ('shouted', 1), ('red', 1), ('inquired', 1), ('foolish', 1), ('interrupted', 1), ('pleaded', 1), ('replied', 1), ('noticed', 1), ('miss', 1), ('anxious', 1), ('different', 1), ('upon', 1)]
+&lt;/pre&gt;&lt;p&gt;&lt;h3&gt;Some Immediate Caveats&lt;/h3&gt;
+Before anything else, I should acknowledge issues with the accuracy of this tagger. It has incorrectly labelled &quot;thought,&quot; &quot;cried,&quot; and multiple other verbs as adjectives. We might hypothesize that adjectives such as &quot;poor&quot; and &quot;little&quot; will remain our top results with these mislabeled verbs excluded, but a parser with this
+many false positives could be missing any number of adjectives. On the other hand, these verbs are all like to be associated with dialogue attribution (as in &quot;cried Alice&quot; and &quot;thought Alice&quot;), so the errors could be concentrated around this particular sentence structure.&lt;/p&gt;
+&lt;p&gt;I also want to signal my awareness of numerous general ways to improve the code overall. An employer hiring an imaginary programmer for a digital humanities initiative might be specifically interested in whether the candidates used object-oriented programming,
+particular libraries, and any number of stylistic approaches.&lt;/p&gt;
+&lt;p&gt;These caveats aside, the necessary steps I've outlined would be quite familiar to any programmer computationally-inclined digital humanist, so
+I can see why a task like this might serve as a reasonable as a measure of a programmer's ability to write code that engages with a humanities computing problem.&lt;/p&gt;
+&lt;p&gt;&lt;h3&gt;Simplicity is Complicated&lt;/h3&gt;
+The problem is simple. The problem is deceptively complicated. Welcome to humanities computing.&lt;/p&gt;
+&lt;p&gt;One solution or another is easy to code, but the underlying question is complex, especially if one chooses to emphasize how this problem relates to reading &lt;em&gt;Alice's Adventures in Wonderland&lt;/em&gt;.
+There is a question beneath this problem that has little to do with adjectives directly to the left of the name &lt;em&gt;Alice&lt;/em&gt;. Rather, adjectives and adjacency are boundaries for the applicant to work with while sketching a computational perimeter
+around a more nuanced question:&lt;/p&gt;
+&lt;blockquote&gt;
+&quot;How does Carroll describe Alice, and what are the implications of this description?&quot;
+&lt;/blockquote&gt;
+Or, perhaps more ambitiously:
+&lt;blockquote&gt;
+&quot;How does Carroll's description of Alice compare with other characters in other texts?&quot;&lt;/blockquote&gt;
+Or, perhaps going even further:
+&lt;blockquote&gt;
+&quot;How does descriptive language in &lt;em&gt;Alice's Adventures in Wonderland&lt;/em&gt; compare broadly to other narratives with imagined landscapes?
+And how might descriptive patterns help a reader situate &lt;em&gt;Alice&lt;/em&gt; in relation to its historical and formal context?&quot;
+&lt;/blockquote&gt;&lt;p&gt;These questions should have implications for the various humanities scholarship that has considered &lt;em&gt;Alice&lt;/em&gt;'s place in the history of children's literature.
+For example, Beatrice Turner's &quot;'Which is to be master?': Language as Power in &lt;em&gt;Alice in Wonderland&lt;/em&gt; and &lt;em&gt;Through the Looking-Glass&lt;/em&gt;&quot;
+argues that &quot;most of [Alice's] exchanges with the inhabitants of Wonderland and the Looking-glass world&quot; are marked
+by a &quot;power imbalance ... that is worked out at the level of language&quot; (246).&lt;a class=&quot;footnote&quot; href=&quot;#note_2&quot;&gt;2&lt;/a&gt; I am not immediately persuaded by Turner's argument,
+but it represents for me a productive site of engagement with the text because it invites additional interpretation.&lt;/p&gt;
+&lt;p&gt;Most immediately, Turner's work reminds me that questions about descriptive norms in &lt;em&gt;Alice's Adventures in Wonderland&lt;/em&gt; and other children's fiction are affected by
+the way people (men, women, children, adults) interact, and those interactions legitimize or undermine a person's right to observe, react, and speak.&lt;/p&gt;
+&lt;p&gt;I think Turner's sharpest point is that Alice is a little girl, and the characters around her, despite being erratic and nonsensical and even infuriating at times, are basically cast as adults.&lt;/p&gt;
+&lt;p&gt;&quot;The texts grant linguistic control to those who inhabit Wonderland and the Looking-glass world,&quot; she argues, &quot;and, in doing so, define them as adults. They use this
+control in a very adult way, too: they exercise the adult’s right to tell the child what she is&quot; (249). Looking at adjectives to the immediate left of the name &lt;em&gt;Alice&lt;/em&gt; is merely one
+immediate and quantifiable way to gesture at broader issues like this one. The fact that &lt;em&gt;Alice&lt;/em&gt; is described as little, poor, foolish, anxious, and different begins to substantiate
+Turner's initial observation about how Carroll frames Alice.&lt;/p&gt;
+&lt;p&gt;&lt;h3&gt;&quot;Through the Looking Glass&quot; as a Strained Metaphor for Something Far Less Interesting than Interdimensional Travel&lt;/h3&gt;
+One issue with &quot;adjectives to the left of Alice&quot; is that it's a relatively narrow way to think about how Alice is described. To begin to address the broader question,&lt;/p&gt;
+&lt;p&gt;&lt;blockquote&gt;
+&quot;How does Carroll describe Alice, and what are the implications of this description?&quot;
+&lt;/blockquote&gt;
+I would prefer a computational method with more interpretive reach. Instead of designing a tool to look specifically for adjectives next to Alice,
+for example, we could design an instrument to ask what kinds of term pairs tend to co-occur more generally in the novel. To set up this test, I could use the NLTK's collocations function.&lt;/p&gt;
+&lt;pre&gt;
+from nltk.collocations import *
+bigram_measures = nltk.collocations.BigramAssocMeasures()
+at = [i for i in alice_tokens if i.isalpha()]
+finder = BigramCollocationFinder.from_words(at)
+finder.apply_freq_filter(3)
+ignored_words = nltk.corpus.stopwords.words('english')
+finder.apply_word_filter(lambda w: len(w) &lt; 3 or w.lower() in ignored_words)
+terms = []
+for i in finder.nbest(bigram_measures.pmi, 10000):
+    if &quot;alice&quot; in i:
+        print(i)
+&lt;/pre&gt;&lt;p&gt;This code uses a function called &quot;collocations&quot; to look for common bigrams in &lt;em&gt;Alice's Adventures in Wonderland&lt;/em&gt;. By bigrams, I mean pairs of adjacent words.
+For the purposes of this measure, I've removed all punctuation from the text and made all words lowercase so that &quot;afraid&quot; and &quot;Afraid&quot;, for example, would read as the same term.
+I've set the code to ignore any term that doesn't appear at least three times, and I've removed from consideration any pairs that use excessively common &quot;function words&quot; like &lt;em&gt;the&lt;/em&gt;, &lt;em&gt;as&lt;/em&gt;, and &lt;em&gt;in&lt;/em&gt;.
+(For a full list of these stopwords, see this &lt;a href=&quot;https://gist.github.com/sebleier/554280&quot;&gt;Github Gist&lt;/a&gt;.)
+The above code snippet will only output term pairs of one of the terms is &quot;Alice.&quot; The result of collocated terms does not focus on any particular part-of-speech, but several adjectives are easy to pick out.&lt;/p&gt;
+&lt;pre&gt;
+('alice', 'ventured')
+('alice', 'indignantly')
+('exclaimed', 'alice')
+('poor', 'alice')
+('thought', 'alice')
+('cried', 'alice')
+('together', 'alice')
+('alice', 'replied')
+('alice', 'waited')
+('said', 'alice')
+('alice', 'hastily')
+('alice', 'felt')
+('alice', 'looked')
+('alice', 'asked')
+('alice', 'thought')
+('alice', 'could')
+('alice', 'began')
+('alice', 'rather')
+('caterpillar', 'alice')
+('alice', 'heard')
+('alice', 'quite')
+('alice', 'must')
+('alice', 'went')
+('alice', 'said')
+('little', 'alice')
+&lt;/pre&gt;&lt;p&gt;In the context of this collocations analysis, the only two adjectives that rank among the top associations with &quot;Alice&quot; are &quot;poor&quot; and &quot;little.&quot;
+One renders the protagonist (albeit ironically) as an object of pity, and the other reinforces her status as a child and a figure of reduced physical and social stature.&lt;/p&gt;&lt;p&gt;Perhaps more striking is the fact that so many of these collocations situate Alice in dialogue. Terms like &quot;asked&quot;, &quot;began&quot;, &quot;said&quot;, &quot;exclaimed&quot;, and &quot;ventured&quot; are specific dialogue tags (i.e., verbs).
+Terms like &quot;thought&quot;, &quot;look&quot;, &quot;felt&quot;, &quot;heard&quot;, and &quot;indignantly&quot; indirectly situate her in dialogue as well. These terms convey an Alice who is often listening, reacting internally, or conveying confusion or frustration without
+necessarily taking specific actions to resist.&lt;/p&gt;&lt;p&gt;&lt;h3&gt;A Continuously Widening Spiral of Comparison&lt;/h3&gt;&lt;/p&gt;
+&lt;p&gt;Still, we might ask whether these word associations are the symptoms of a character constrained by her age and gender, or simply the kinds of words that any main character is
+likely to be associated with in a children's novel of this time period. After all, the rise of dialogue in 19th-century fiction could easily account for at least some of these associations.&lt;/p&gt;&lt;p&gt;One way to address these concerns is to compare &lt;em&gt;Alice's Adventures in Wonderland&lt;/em&gt; to other texts (or authors, or genres, etc.).
+Take, for example, a a quick analysis of just a few female protagonists from novels about girls who visit other worlds. How do descriptions of these female main characters differ from how Alice is described?&lt;/p&gt;&lt;p&gt;A question like this is one that Turner (and many others), using situationally specific methods, cannot answer. Queries with large-scale scope are notoriously difficult to approach without computation.&lt;/p&gt;&lt;p&gt;An extensive search for novels about girls who visit other worlds would no doubt reveal any examples, but a few very well known archetypes come to mind: Dorothy in
+&lt;em&gt;The Wonderful Wizard of Oz&lt;/em&gt; (1900), Wendy in &lt;em&gt;Peter and Wendy&lt;/em&gt; (1910), and Lucy and Susan in &lt;em&gt;The Lion, the Witch, and the Wardrobe&lt;/em&gt; (1950).&lt;/p&gt;&lt;p&gt;If we replicate the two computations I performed on &lt;em&gt;Alice's Adventures in Wonderland&lt;/em&gt; using these three texts, we can begin to form a basis for comparison.&lt;/p&gt;&lt;p&gt;It's important to note that these are all male authors. Here I am not asking a question like, &quot;Did women authors of the 19th and 20th centuries write female characters with more signs of individual agency than men,&quot; although I think a question like this one would be fascinating to explore. Instead, I'm merely
+investigating which terms are most often adjacent to five characters names in four very well known novels about girls who visit fantasy realms.&lt;/p&gt;&lt;pre&gt;
+import nltk
+import nltk.collocations
+def collocation_analysis(text, character):
+    with open(text) as a:
+        my_text = a.read()
+    my_tokens = nltk.word_tokenize(my_text.lower())
+    bigram_measures = nltk.collocations.BigramAssocMeasures()
+    at = [i for i in my_tokens if i.isalpha()]
+    finder = BigramCollocationFinder.from_words(at)
+    finder.apply_freq_filter(3)
+    ignored_words = nltk.corpus.stopwords.words('english')
+    finder.apply_word_filter(lambda w: len(w) &lt; 3 or w.lower() in ignored_words)
+    terms = []
+    pairs = []
+    for i in finder.nbest(bigram_measures.pmi, 10000):
+        if character in i:
+            pairs.append(i)
+    return pairs
+
+output = []
+for i, j in comparison_texts:
+    pairs = collocation_analysis(i, j)
+    output.append(pairs)
+&lt;/pre&gt;&lt;p&gt;Granted, these texts are separate by many years, and Lucy and Susan might be prone to appearing as outliers because they are two of four main characters in &lt;em&gt;The Lion, the Witch, and the Wardrobe&lt;/em&gt;.
+Still, I think the commonalities among these books are more important than the differences.&lt;/p&gt;
+&lt;p&gt;The above code will output a list of term pairs for each text just like the one for Alice shown above. However, this output doesn't necessarily help us compare the various characters.
+In the following table, I've made a row for each term and a column for each character. An X in a cell means that a given term and a given character can be considered a computed association:&lt;/p&gt;&lt;table class=&quot;table table-bordered table-hover table-condensed&quot;&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th title=&quot;Field #1&quot; &gt;&lt;/th&gt;
+&lt;th title=&quot;Field #2&quot;&gt;term&lt;/th&gt;
+&lt;th title=&quot;Field #3&quot;&gt;lucy&lt;/th&gt;
+&lt;th title=&quot;Field #4&quot;&gt;susan&lt;/th&gt;
+&lt;th title=&quot;Field #5&quot;&gt;dorothy&lt;/th&gt;
+&lt;th title=&quot;Field #6&quot;&gt;wendy&lt;/th&gt;
+&lt;th title=&quot;Field #7&quot;&gt;alice&lt;/th&gt;
+&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;0&lt;/td&gt;
+&lt;td&gt;saw&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;1&lt;/td&gt;
+&lt;td&gt;picked&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;2&lt;/td&gt;
+&lt;td&gt;story&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;3&lt;/td&gt;
+&lt;td&gt;queen&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;4&lt;/td&gt;
+&lt;td&gt;exclaimed&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;5&lt;/td&gt;
+&lt;td&gt;went&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;6&lt;/td&gt;
+&lt;td&gt;little&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;7&lt;/td&gt;
+&lt;td&gt;returned&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;8&lt;/td&gt;
+&lt;td&gt;asked&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;9&lt;/td&gt;
+&lt;td&gt;could&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;10&lt;/td&gt;
+&lt;td&gt;presently&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;11&lt;/td&gt;
+&lt;td&gt;together&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;12&lt;/td&gt;
+&lt;td&gt;heard&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;13&lt;/td&gt;
+&lt;td&gt;thought&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;14&lt;/td&gt;
+&lt;td&gt;answered&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;15&lt;/td&gt;
+&lt;td&gt;began&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;16&lt;/td&gt;
+&lt;td&gt;lady&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;17&lt;/td&gt;
+&lt;td&gt;walked&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;18&lt;/td&gt;
+&lt;td&gt;waited&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;19&lt;/td&gt;
+&lt;td&gt;wendy&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;20&lt;/td&gt;
+&lt;td&gt;whispered&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;21&lt;/td&gt;
+&lt;td&gt;put&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;22&lt;/td&gt;
+&lt;td&gt;hastily&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;23&lt;/td&gt;
+&lt;td&gt;mother&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;24&lt;/td&gt;
+&lt;td&gt;said&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;25&lt;/td&gt;
+&lt;td&gt;poor&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;26&lt;/td&gt;
+&lt;td&gt;peter&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;27&lt;/td&gt;
+&lt;td&gt;last&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;28&lt;/td&gt;
+&lt;td&gt;ventured&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;29&lt;/td&gt;
+&lt;td&gt;sat&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;30&lt;/td&gt;
+&lt;td&gt;felt&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;31&lt;/td&gt;
+&lt;td&gt;replied&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;32&lt;/td&gt;
+&lt;td&gt;must&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;33&lt;/td&gt;
+&lt;td&gt;indignantly&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;34&lt;/td&gt;
+&lt;td&gt;caterpillar&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;35&lt;/td&gt;
+&lt;td&gt;suddenly&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;36&lt;/td&gt;
+&lt;td&gt;came&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;37&lt;/td&gt;
+&lt;td&gt;looked&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;38&lt;/td&gt;
+&lt;td&gt;would&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;39&lt;/td&gt;
+&lt;td&gt;rather&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;40&lt;/td&gt;
+&lt;td&gt;quite&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;41&lt;/td&gt;
+&lt;td&gt;stood&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;42&lt;/td&gt;
+&lt;td&gt;see&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;43&lt;/td&gt;
+&lt;td&gt;cried&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;44&lt;/td&gt;
+&lt;td&gt;well&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;45&lt;/td&gt;
+&lt;td&gt;moment&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;46&lt;/td&gt;
+&lt;td&gt;says&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;47&lt;/td&gt;
+&lt;td&gt;knew&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;right&quot;&gt;48&lt;/td&gt;
+&lt;td&gt;found&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;XXXXX&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;td&gt;-----&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;Based on this table, we can notice some immediately fascinating aspects of the comparison. It makes it much easier to find terms associated with only one or two characters, as well as associations present for all &lt;em&gt;but&lt;/em&gt; one or two characters. For example:&lt;/p&gt;&lt;p&gt;Lucy: uniquely associated with last and suddenly. No unique absences.&lt;/p&gt;
+&lt;p&gt;Susan: uniquely associated with presently, whispered, and Peter. Uniquely not associated with cried and could.&lt;/p&gt;
+&lt;p&gt;Wendy: uniquely associated with story, lady, mother, see, says, and knew. Uniquely not associated with absent and asked
+&lt;p&gt;Dorothy: uniquely associated with returned, answered, walked, and put. No unique absences.&lt;/p&gt;
+&lt;p&gt;Susan and Wendy: neither associated with thought or looked&lt;/p&gt;
+&lt;p&gt;Alice and Dorothy; associated with replied&lt;/p&gt;
+&lt;p&gt;Dorothy and Wendy: associated with saw, would&lt;/p&gt;
+&lt;p&gt;Lucy and Wendy: associated with moment&lt;/p&gt;
+&lt;p&gt;Alice: uniquely associated with little, poor, together, heard, began, waited, hastily, ventured, must, indignantly, caterpillar, rather, quite&lt;/p&gt;&lt;p&gt;These findings warrant more discussion than I'm planning on doing here today. For now, a few highlights. First, this comparative approach only strengthens the association between Alice, little, and poor established by a part-of-speech tagging approach.
+Further, the pairing of waited and hastily, typically oppositional terms, reminds of a character constantly trying to move along but getting held up by others. Similarly, the term &lt;em&gt;began&lt;/em&gt;, likewise, conjures images of a character attempting to speak but getting consistently interrupted.
+Adding to the sense of both situational and verbal irony are the terms &lt;em&gt;rather&lt;/em&gt; and &lt;em&gt;quite&lt;/em&gt; both of which seem likely to be tongue-in-cheek qualifiers. &lt;/p&gt;&lt;p&gt;In this example, we knew the main characters' names, so the comparison is a bit easier. Scaling this question beyond our example would requiring making a dictionary of main character names or developing a method that detected character names automatically.
+This is just one example of a continuously widening spiral of comparison. Additional layers are always possible, which is one of the main reasons it's so appealing to sit and tinker.&lt;/p&gt;&lt;p&gt;In the past, I have described digital humanities using the metaphor of an investigator who uses advances tools and approaches look through a keyhole, only to find that, inside the locked room there is only a mirror.
+This is to say that digital humanities methods, too often, become lenses through which the only result is a more nuanced understanding of digital humanities. I am confident that meditating on
+the advantages and limits of our methods has purchase, yet, here I believe light is also shed on &lt;em&gt;Alice's Adventures in Wonderland&lt;/em&gt;.&lt;/p&gt;&lt;p&gt;&lt;p&gt;I must concede, of course, that it is possible that these alternative close reading strategies mostly confirm what others have noticed using more traditional literary analysis methods.
+If this is so, then code is still a way to get to where we want to go, a way to establish the habits of mind that lovers of close reading are always trying to instill in their students and colleagues.
+The real challenge is taking the time to share one's results with others. This is inevitably a decision to stop, which eventually requires stopping. And so I have chosen to conclude with a partial list of how much more I want to do.&lt;/p&gt;
+&lt;div class=&quot;follow-ups&quot;&gt;
+Ideas for Follow-up
+&lt;/div&gt;
+&lt;div class=&quot;follow-up-entry&quot;&gt;Compare adjectives overall to lots of novels&lt;/div&gt;
+&lt;div class=&quot;follow-up-entry&quot;&gt;On many novels: return the names after &quot;little&quot; (and other adjectives) ranked by how often those names are referred to as little. Are those names gendered?&lt;/div&gt;
+&lt;div class=&quot;follow-up-entry&quot;&gt;Explore character-based sentiment tagging, in response to (if possible) Michael Mendelson's &quot;The phenomenology of deep surprise in &lt;em&gt;Alice's Adventures in Wonderland&lt;/em&gt;&quot;&lt;/div&gt;
+&lt;div class=&quot;follow-up-entry&quot;&gt;Use SpaCy or Parsey McParseface or for better POS tagging&lt;/div&gt;
+&lt;div class=&quot;follow-up-entry&quot;&gt;Explore how to perform similar analysis on novels without knowing main characters' names&lt;/div&gt;
+&lt;div class=&quot;follow-up-entry&quot;&gt;Attempt to run using pronoun disambiguation&lt;/div&gt;
+&lt;div class=&quot;follow-up-entry&quot;&gt;Re-run multi-novel analysis using collocations two and three words away from characters' names&lt;/div&gt;&lt;div class=&quot;notes&quot;&gt;Notes&lt;/div&gt;
+&lt;div class=&quot;note_entry&quot; name=&quot;note_1&quot;&gt;1. Code excerpts can be viewed in or downloaded/run from the .ipynb file in &lt;a href=&quot;https://github.com/mjlavin80/the-data-humanist-jupyter-notebooks/tree/master/alice&quot;&gt;this folder&lt;/a&gt; in my Jupyter Notebooks Github repository&lt;/div&gt;
+&lt;div class=&quot;note_entry&quot; name=&quot;note_2&quot;&gt;2. Turner, Beatrice. &quot;'Which is to be master?': Language as Power in &lt;em&gt;Alice in Wonderland&lt;/em&gt; and &lt;em&gt;Through the Looking-Glass&lt;/em&gt;,&quot;
+ &lt;em&gt;Children's Literature Association Quarterly&lt;/em&gt;, 35.3 (Fall 2010): 243-254.
+&lt;/div&gt;</content>
+  </entry>
   <entry xml:base="http://thedatahumanist.website/about/">
     <title type="text">About this Blog-like Thing</title>
-    <id>urn:uuid:3e8c2da0-a047-3687-93f8-1ba6e2f05a91</id>
+    <id>urn:uuid:07f49c6f-bf4b-3f5f-9136-55bd7574b7aa</id>
     <updated>2016-09-01T00:00:00Z</updated>
     <link href="http://thedatahumanist.website/about/" />
     <author>
@@ -24,7 +668,7 @@ Though the term &lt;em&gt;data science&lt;/em&gt; dates back to early 1960s, fig
 &quot;the information and computer scientists, database and software engineers and programmers,
 disciplinary experts, curators and expert annotators, librarians, archivists,
 and others, who are crucial to the successful management of a digital data collection.&quot;&lt;a class=&quot;footnote&quot; href=&quot;#note_2&quot;&gt;2&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;In 2012, Harvard Business Review named data scientist the &quot;sexiest job of the 21st century.&quot;&lt;a class=&quot;footnote&quot; href=&quot;#note_3&quot;&gt;3&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In 2012, &lt;em&gt;Harvard Business Review&lt;/em&gt; named data scientist the &quot;sexiest job of the 21st century.&quot;&lt;a class=&quot;footnote&quot; href=&quot;#note_3&quot;&gt;3&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The data humanist, in contrast, has not arisen as a figure. Instead of &lt;em&gt;data humanities&lt;/em&gt;, we have seen the rise of &lt;em&gt;digital humanities&lt;/em&gt; as a catch-all term for humanities computing, digital librarianship, digital project development, digital pedagogy, and humanities-based data curation.&lt;/p&gt;
 &lt;p&gt;Data remains the backstop of much if not all digital humanities work, either directly (in the case of, say, Matt Jockers' work on sentiment analysis) or indirectly (as in, say, the numerous critiques of Jockers' work on sentiment analysis).&lt;/p&gt;
 &lt;p&gt;This particular topic is of interest me because I work in a space where digital humanities and digital media intersect. I'm a Clinical Assistant Professor of English and Director of the Digital Media Lab at the University of Pittsburgh. My most recent scholarship focuses on the intersection of digital humanities, book history, and U.S. literature. My programming languages of choice are Python and javascript, will a little R peppered in. My web stack includes, Ubuntu, Docker, Nginx, WSGI, and Python.
@@ -34,16 +678,27 @@ and &lt;a href=&quot;http://matthew-lavin.com&quot;&gt;this&lt;/a&gt; is me.&lt;
 &lt;p&gt;I should probably mention that the Data Humanist won't be a very good blog, because it's barely a blog at all. Most blogs (even really good digital humanities blogs) feel a certain amount of pressure to post regularly and, to accommodate that pressure, they sometimes feel the need to slap together very short or shoddy or off-topic filler to give the appearance of an active blog.
 I don't mean to be overly critical of this impulse; I'm just saying it's stupid and I hate it. :)&lt;/p&gt;
 &lt;p&gt;So I will aspire to do less posting but to release posts will a bit more heft. Hence the phrase &quot;blog-like thing.&quot;&lt;/p&gt;
-&lt;p&gt;Content will begin in October and follow approximately once per month. I plan to do this for 12 months, and then reevaluate my approach.&lt;/p&gt;
+&lt;p&gt;Content will begin in &lt;span style=&quot;text-decoration: line-through;&quot;&gt;October&lt;/span&gt; &lt;em&gt;[edit: well, that didn't happen. Here it is mid-December, and I'm about to publish my first post.]&lt;/em&gt; and follow approximately once per month. I plan to do this for 12 months, and then reevaluate my approach.&lt;/p&gt;
 &lt;p&gt;I hope this blog-like thing will be a space where &lt;em&gt;data&lt;/em&gt; isn't a dirty word. I plan to write about scraping, wrangling, curating, analyzing, visualizing, teaching, and critique--the entire lifecycle of humanities data. I plan to integrate multi-modal content and dissect it. I plan to share Jupyter Notebooks via Github so people can see my code.&lt;/p&gt;
-&lt;div&gt;Notes&lt;/div&gt;
+&lt;div class=&quot;notes&quot;&gt;Notes&lt;/div&gt;
 &lt;div class=&quot;note_entry&quot; name=&quot;note_1&quot;&gt;1. Press, Gil. &lt;a href=&quot;http://www.forbes.com/sites/gilpress/2013/05/28/a-very-short-history-of-data-science/&quot;&gt;
-&quot;A Very Short History of Data Science,&quot;&lt;/a&gt; Forbes (May 28, 2013).
+&quot;A Very Short History of Data Science,&quot;&lt;/a&gt; &lt;em&gt;Forbes&lt;/em&gt; (May 28, 2013).
 &lt;/div&gt;
 &lt;div class=&quot;note_entry&quot; name=&quot;note_2&quot;&gt;2. &lt;a href=&quot;http://www.nsf.gov/pubs/2005/nsb0540/&quot;&gt;&quot;Long-Lived Digital Data Collections: Enabling Research and Education in the 21st Century,&quot;&lt;/a&gt;
 September 2005, National Science Foundation, NSB-05-40.
 &lt;/div&gt;
-&lt;div class=&quot;note_entry&quot; name=&quot;note_3&quot;&gt;3. Davenport, Thomas H., and D.J. Patil. &lt;a href=&quot;https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century&quot;&gt;&quot;Data Scientist: The Sexiest Job of the 21st Century,&quot;&lt;/a&gt; Harvard Business Review (October 2012).
+&lt;div class=&quot;note_entry&quot; name=&quot;note_3&quot;&gt;3. Davenport, Thomas H., and D.J. Patil. &lt;a href=&quot;https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century&quot;&gt;&quot;Data Scientist: The Sexiest Job of the 21st Century,&quot;&lt;/a&gt; &lt;em&gt;Harvard Business Review&lt;/em&gt; (October 2012).
 &lt;/div&gt;</content>
+  </entry>
+  <entry xml:base="http://thedatahumanist.website/apps/">
+    <title type="text">Interactives and Web Apps</title>
+    <id>urn:uuid:320a56e6-bea3-34c0-83a0-afe07168bd96</id>
+    <updated>2016-12-15T21:14:58.640774Z</updated>
+    <link href="http://thedatahumanist.website/apps/" />
+    <author>
+      <name></name>
+    </author>
+    <content type="html">&lt;p&gt;Because I've elected to present my work as a blog with an RSS feed, I will from time to time use this space to publish more complex standalone web applications.&lt;/p&gt;
+</content>
   </entry>
 </feed>
