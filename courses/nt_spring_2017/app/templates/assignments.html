@@ -23,7 +23,7 @@
   <p><big><strong>Due Date:</strong> {{ this_assignment.day.name }}</big></p>
   <p><strong>Submission Instructions:</strong> {{ this_assignment.submit_instructions }}</p>
 
-  <p><strong>Assignment Description:</strong> {{ this_assignment.description }}</p>
+  <p><strong>Assignment Description:</strong> {{ this_assignment.description|safe }}</p>
   {% endif %}
 </div>
 {% endblock %}
