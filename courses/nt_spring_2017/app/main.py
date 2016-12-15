@@ -149,7 +149,8 @@ def readings():
 @app.route("/bibliography")
 @include_site_data
 def biblio():
-    #get items from Zotero
+    #get items from Zotero by
+
     return render_template("bibliography.html")
 
 @app.route('/protected/<path:filename>')
