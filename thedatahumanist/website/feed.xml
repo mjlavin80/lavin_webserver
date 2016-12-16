@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">Feed One</title>
-  <id>urn:uuid:724ebe19-d029-3d88-a47a-8e4b81d1edaf</id>
-  <updated>2016-12-15T21:14:58.640774Z</updated>
+  <id>urn:uuid:c80944b9-ac1f-303e-b532-1e9b14d3bdcc</id>
+  <updated>2016-12-16T22:22:41.672325Z</updated>
   <link href="http://thedatahumanist.website/" />
   <link href="http://thedatahumanist.website/feed.xml" rel="self" />
   <author>
@@ -11,7 +11,7 @@
   <generator uri="https://github.com/ajdavis/lektor-atom" version="0.2">Lektor Atom Plugin</generator>
   <entry xml:base="http://thedatahumanist.website/the-alice-problem/">
     <title type="text">The Alice Problem</title>
-    <id>urn:uuid:4d8aaaf8-3b52-3786-981d-9ed36230cc8b</id>
+    <id>urn:uuid:102d7d23-ed6a-3aa5-a525-4fe032c1af26</id>
     <updated>2016-12-15T00:00:00Z</updated>
     <link href="http://thedatahumanist.website/the-alice-problem/" />
     <author>
@@ -627,7 +627,7 @@ In the following table, I've made a row for each term and a column for each char
 &lt;p&gt;Wendy: uniquely associated with story, lady, mother, see, says, and knew. Uniquely not associated with absent and asked
 &lt;p&gt;Dorothy: uniquely associated with returned, answered, walked, and put. No unique absences.&lt;/p&gt;
 &lt;p&gt;Susan and Wendy: neither associated with thought or looked&lt;/p&gt;
-&lt;p&gt;Alice and Dorothy; associated with replied&lt;/p&gt;
+&lt;p&gt;Alice and Dorothy; associated with replied, exclaimed, went&lt;/p&gt;
 &lt;p&gt;Dorothy and Wendy: associated with saw, would&lt;/p&gt;
 &lt;p&gt;Lucy and Wendy: associated with moment&lt;/p&gt;
 &lt;p&gt;Alice: uniquely associated with little, poor, together, heard, began, waited, hastily, ventured, must, indignantly, caterpillar, rather, quite&lt;/p&gt;&lt;p&gt;These findings warrant more discussion than I'm planning on doing here today. For now, a few highlights. First, this comparative approach only strengthens the association between Alice, little, and poor established by a part-of-speech tagging approach.
@@ -638,16 +638,14 @@ This is to say that digital humanities methods, too often, become lenses through
 the advantages and limits of our methods has purchase, yet, here I believe light is also shed on &lt;em&gt;Alice's Adventures in Wonderland&lt;/em&gt;.&lt;/p&gt;&lt;p&gt;&lt;p&gt;I must concede, of course, that it is possible that these alternative close reading strategies mostly confirm what others have noticed using more traditional literary analysis methods.
 If this is so, then code is still a way to get to where we want to go, a way to establish the habits of mind that lovers of close reading are always trying to instill in their students and colleagues.
 The real challenge is taking the time to share one's results with others. This is inevitably a decision to stop, which eventually requires stopping. And so I have chosen to conclude with a partial list of how much more I want to do.&lt;/p&gt;
-&lt;div class=&quot;follow-ups&quot;&gt;
-Ideas for Follow-up
-&lt;/div&gt;
+&lt;p&gt;&lt;h3&gt;Ideas for Follow-up&lt;/h3&gt;&lt;/p&gt;
 &lt;div class=&quot;follow-up-entry&quot;&gt;Compare adjectives overall to lots of novels&lt;/div&gt;
 &lt;div class=&quot;follow-up-entry&quot;&gt;On many novels: return the names after &quot;little&quot; (and other adjectives) ranked by how often those names are referred to as little. Are those names gendered?&lt;/div&gt;
 &lt;div class=&quot;follow-up-entry&quot;&gt;Explore character-based sentiment tagging, in response to (if possible) Michael Mendelson's &quot;The phenomenology of deep surprise in &lt;em&gt;Alice's Adventures in Wonderland&lt;/em&gt;&quot;&lt;/div&gt;
 &lt;div class=&quot;follow-up-entry&quot;&gt;Use SpaCy or Parsey McParseface or for better POS tagging&lt;/div&gt;
 &lt;div class=&quot;follow-up-entry&quot;&gt;Explore how to perform similar analysis on novels without knowing main characters' names&lt;/div&gt;
 &lt;div class=&quot;follow-up-entry&quot;&gt;Attempt to run using pronoun disambiguation&lt;/div&gt;
-&lt;div class=&quot;follow-up-entry&quot;&gt;Re-run multi-novel analysis using collocations two and three words away from characters' names&lt;/div&gt;&lt;div class=&quot;notes&quot;&gt;Notes&lt;/div&gt;
+&lt;div class=&quot;follow-up-entry&quot;&gt;Re-run multi-novel analysis using collocations two and three words away from characters' names&lt;/div&gt;&lt;p&gt;&lt;h3&gt;Notes&lt;/h3&gt;&lt;/p&gt;
 &lt;div class=&quot;note_entry&quot; name=&quot;note_1&quot;&gt;1. Code excerpts can be viewed in or downloaded/run from the .ipynb file in &lt;a href=&quot;https://github.com/mjlavin80/the-data-humanist-jupyter-notebooks/tree/master/alice&quot;&gt;this folder&lt;/a&gt; in my Jupyter Notebooks Github repository&lt;/div&gt;
 &lt;div class=&quot;note_entry&quot; name=&quot;note_2&quot;&gt;2. Turner, Beatrice. &quot;'Which is to be master?': Language as Power in &lt;em&gt;Alice in Wonderland&lt;/em&gt; and &lt;em&gt;Through the Looking-Glass&lt;/em&gt;,&quot;
  &lt;em&gt;Children's Literature Association Quarterly&lt;/em&gt;, 35.3 (Fall 2010): 243-254.
@@ -655,7 +653,7 @@ Ideas for Follow-up
   </entry>
   <entry xml:base="http://thedatahumanist.website/about/">
     <title type="text">About this Blog-like Thing</title>
-    <id>urn:uuid:07f49c6f-bf4b-3f5f-9136-55bd7574b7aa</id>
+    <id>urn:uuid:3e8c2da0-a047-3687-93f8-1ba6e2f05a91</id>
     <updated>2016-09-01T00:00:00Z</updated>
     <link href="http://thedatahumanist.website/about/" />
     <author>
@@ -680,7 +678,7 @@ I don't mean to be overly critical of this impulse; I'm just saying it's stupid 
 &lt;p&gt;So I will aspire to do less posting but to release posts will a bit more heft. Hence the phrase &quot;blog-like thing.&quot;&lt;/p&gt;
 &lt;p&gt;Content will begin in &lt;span style=&quot;text-decoration: line-through;&quot;&gt;October&lt;/span&gt; &lt;em&gt;[edit: well, that didn't happen. Here it is mid-December, and I'm about to publish my first post.]&lt;/em&gt; and follow approximately once per month. I plan to do this for 12 months, and then reevaluate my approach.&lt;/p&gt;
 &lt;p&gt;I hope this blog-like thing will be a space where &lt;em&gt;data&lt;/em&gt; isn't a dirty word. I plan to write about scraping, wrangling, curating, analyzing, visualizing, teaching, and critique--the entire lifecycle of humanities data. I plan to integrate multi-modal content and dissect it. I plan to share Jupyter Notebooks via Github so people can see my code.&lt;/p&gt;
-&lt;div class=&quot;notes&quot;&gt;Notes&lt;/div&gt;
+&lt;p&gt;&lt;h3&gt;Notes&lt;/h3&gt;&lt;/p&gt;
 &lt;div class=&quot;note_entry&quot; name=&quot;note_1&quot;&gt;1. Press, Gil. &lt;a href=&quot;http://www.forbes.com/sites/gilpress/2013/05/28/a-very-short-history-of-data-science/&quot;&gt;
 &quot;A Very Short History of Data Science,&quot;&lt;/a&gt; &lt;em&gt;Forbes&lt;/em&gt; (May 28, 2013).
 &lt;/div&gt;
@@ -692,8 +690,8 @@ September 2005, National Science Foundation, NSB-05-40.
   </entry>
   <entry xml:base="http://thedatahumanist.website/apps/">
     <title type="text">Interactives and Web Apps</title>
-    <id>urn:uuid:320a56e6-bea3-34c0-83a0-afe07168bd96</id>
-    <updated>2016-12-15T21:14:58.640774Z</updated>
+    <id>urn:uuid:ac88eff5-c306-3975-8bf3-4908b5df08a4</id>
+    <updated>2016-12-16T22:22:41.672325Z</updated>
     <link href="http://thedatahumanist.website/apps/" />
     <author>
       <name></name>
