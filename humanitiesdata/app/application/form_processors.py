@@ -36,7 +36,7 @@ def handle_tags_on_edit(tag_list, ins):
             ins.tags.remove(old)
     tagnames = [z.tagname for z in ins.tags]
     for a_tag in suggested_tags:
-        if len(a_tag) > 30 or len(a_tag) < 3:
+        if len(a_tag) > 30 or len(a_tag) < 1:
             return "len_error"
         else:
             #check for tag in db
@@ -50,8 +50,11 @@ def handle_tags_on_edit(tag_list, ins):
                 #instantiate a new tag by tagname
                 newtag = Tag(tagname=a_tag)
                 #add tag to db
-                db.session.add(newtag)
-                db.session.commit()
+                try:
+                    db.session.add(newtag)
+                    db.session.commit()
+                except:
+                    db.session.rollback()
                 #query tag object just added
                 just_added = Tag.query.filter(Tag.tagname==a_tag).one_or_none()
                 #make sure it's in the database, then append to the taglist
@@ -65,7 +68,7 @@ def handle_tags_on_submit(tag_list, ins):
 
     tagnames = [z.tagname for z in ins.tags]
     for a_tag in suggested_tags:
-        if len(a_tag) > 30 or len(a_tag) < 3:
+        if len(a_tag) > 30 or len(a_tag) < 1:
             return "len_error"
         else:
             #check for tag in db
@@ -79,8 +82,11 @@ def handle_tags_on_submit(tag_list, ins):
                 #instantiate a new tag by tagname
                 newtag = Tag(tagname=a_tag)
                 #add tag to db
-                db.session.add(newtag)
-                db.session.commit()
+                try:
+                    db.session.add(newtag)
+                    db.session.commit()
+                except:
+                    db.session.rollback()
                 #query tag object just added
                 just_added = Tag.query.filter(Tag.tagname==a_tag).one_or_none()
                 #make sure it's in the database, then append to the taglist
@@ -108,15 +114,14 @@ def process_resource(request, _type, resource_type, _id=None):
                         setattr(new_resource, field, add_resource.data[field])
                     except:
                         pass
-            #handle tags
-            if _type == "submit":
-                new_resource = handle_tags_on_submit(add_resource.data["tags"], new_resource)
+
             if new_resource == "len_error":
-                render_template("submit.html", status="errors", errors=['Length error. All tags must be min 3, max 30 characters.'], resource_type=resource_type)
+                render_template("submit.html", status="errors", errors=['Length error. All tags must be min 2, max 30 characters.'], resource_type=resource_type)
             if _type == "submit":
                 new_resource.date_submitted = datetime.utcnow()
             if _type == "edit":
                 new_resource.date_submitted = date_sub
+
             try:
                 if current_user.is_admin:
                     new_resource.status = "published"
@@ -125,13 +130,16 @@ def process_resource(request, _type, resource_type, _id=None):
             except:
                 new_resource.status = "draft"
 
+            #handle tags
             if _type =="edit":
                 new_resource = handle_tags_on_edit(add_resource.data["tags"], new_resource)
-
-            db.session.add(new_resource)
-            db.session.commit()
-            suggested_tags = [x.strip() for x in add_resource.data["tags"].split(',')]
-
+            if _type == "submit":
+                new_resource = handle_tags_on_submit(add_resource.data["tags"], new_resource)
+            try:
+                db.session.add(new_resource)
+                db.session.commit()
+            except:
+                db.session.rollback()
 
             if _type == "submit":
                 return render_template("submit.html", add_resource=add_resource, status="success", resource_type=resource_type)
@@ -139,11 +147,8 @@ def process_resource(request, _type, resource_type, _id=None):
                 new_resource = Resource().query.filter(Resource.id == _id).one_or_none()
                 #convert to dictionary
                 resource_dict = new_resource.__dict__
-                #fill in values and pass to template
+                #format tag values for pass to template
                 tags = ",".join([str(i.tagname) for i in new_resource.tags])
-
-                #d = Tag.delete(Tag == 1)
-                #d.execute()
                 return render_template("submit.html", _id=_id, tags=tags, add_resource=add_resource, status="success", resource_type=add_resource.data["resource_type"], resource_dict=resource_dict)
 
         else:
