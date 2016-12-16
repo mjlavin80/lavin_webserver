@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">Feed One</title>
   <id>urn:uuid:c80944b9-ac1f-303e-b532-1e9b14d3bdcc</id>
-  <updated>2016-12-16T22:22:41.672325Z</updated>
+  <updated>2016-12-16T22:38:57.482789Z</updated>
   <link href="http://thedatahumanist.website/" />
   <link href="http://thedatahumanist.website/feed.xml" rel="self" />
   <author>
@@ -632,7 +632,7 @@ In the following table, I've made a row for each term and a column for each char
 &lt;p&gt;Lucy and Wendy: associated with moment&lt;/p&gt;
 &lt;p&gt;Alice: uniquely associated with little, poor, together, heard, began, waited, hastily, ventured, must, indignantly, caterpillar, rather, quite&lt;/p&gt;&lt;p&gt;These findings warrant more discussion than I'm planning on doing here today. For now, a few highlights. First, this comparative approach only strengthens the association between Alice, little, and poor established by a part-of-speech tagging approach.
 Further, the pairing of waited and hastily, typically oppositional terms, reminds of a character constantly trying to move along but getting held up by others. Similarly, the term &lt;em&gt;began&lt;/em&gt;, likewise, conjures images of a character attempting to speak but getting consistently interrupted.
-Adding to the sense of both situational and verbal irony are the terms &lt;em&gt;rather&lt;/em&gt; and &lt;em&gt;quite&lt;/em&gt; both of which seem likely to be tongue-in-cheek qualifiers. &lt;/p&gt;&lt;p&gt;In this example, we knew the main characters' names, so the comparison is a bit easier. Scaling this question beyond our example would requiring making a dictionary of main character names or developing a method that detected character names automatically.
+Adding to the sense of both situational and verbal irony are the terms &lt;em&gt;rather&lt;/em&gt; and &lt;em&gt;quite&lt;/em&gt;, both of which seem likely to be tongue-in-cheek qualifiers (e.g. &quot;Alice quite jumped&quot;). &lt;/p&gt;&lt;p&gt;In this example, we knew the main characters' names, so the comparison is a bit easier. Scaling this question beyond our example would requiring making a dictionary of main character names or developing a method that detected character names automatically.
 This is just one example of a continuously widening spiral of comparison. Additional layers are always possible, which is one of the main reasons it's so appealing to sit and tinker.&lt;/p&gt;&lt;p&gt;In the past, I have described digital humanities using the metaphor of an investigator who uses advances tools and approaches look through a keyhole, only to find that, inside the locked room there is only a mirror.
 This is to say that digital humanities methods, too often, become lenses through which the only result is a more nuanced understanding of digital humanities. I am confident that meditating on
 the advantages and limits of our methods has purchase, yet, here I believe light is also shed on &lt;em&gt;Alice's Adventures in Wonderland&lt;/em&gt;.&lt;/p&gt;&lt;p&gt;&lt;p&gt;I must concede, of course, that it is possible that these alternative close reading strategies mostly confirm what others have noticed using more traditional literary analysis methods.
@@ -691,7 +691,7 @@ September 2005, National Science Foundation, NSB-05-40.
   <entry xml:base="http://thedatahumanist.website/apps/">
     <title type="text">Interactives and Web Apps</title>
     <id>urn:uuid:ac88eff5-c306-3975-8bf3-4908b5df08a4</id>
-    <updated>2016-12-16T22:22:41.672325Z</updated>
+    <updated>2016-12-16T22:38:57.482789Z</updated>
     <link href="http://thedatahumanist.website/apps/" />
     <author>
       <name></name>
