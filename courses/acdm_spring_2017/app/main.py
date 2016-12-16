@@ -58,6 +58,9 @@ class ModelViewUser(ModelView):
         return redirect(url_for('login'))
 
 class ModelViewAdmin(ModelView):
+    column_formatters = dict(course_description=lambda v, c, m, p: m.course_description[:25]+ " ...")
+    form_overrides = dict(description=TextAreaField, course_description=TextAreaField)
+    form_widget_args = dict(description=dict(rows=10), course_description=dict(rows=10))
     def is_accessible(self):
         if current_user.is_authenticated and current_user.is_admin:
             return current_user.is_authenticated
