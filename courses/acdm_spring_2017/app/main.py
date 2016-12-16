@@ -10,6 +10,7 @@ from flask_login import LoginManager, login_user, logout_user, current_user
 from flask_migrate import Migrate
 from flask.ext.bcrypt import Bcrypt
 from flask.ext.admin.base import MenuLink
+from wtforms.fields import TextAreaField
 
 def compile_errors(form):
     errs = []

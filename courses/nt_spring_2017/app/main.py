@@ -10,6 +10,7 @@ from flask_login import LoginManager, login_user, logout_user, current_user
 from flask_migrate import Migrate
 from flask.ext.bcrypt import Bcrypt
 from flask.ext.admin.base import MenuLink
+from wtforms.fields import TextAreaField
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -48,7 +49,7 @@ class ModelViewUser(ModelView):
     def inaccessible_callback(self, name, **kwargs):
         # redirect to login page if user doesn't have access
         return redirect(url_for('login'))
-from wtforms.fields import TextAreaField
+
 
 class ModelViewAdmin(ModelView):
     column_formatters = dict(course_description=lambda v, c, m, p: m.course_description[:25]+ " ...")
