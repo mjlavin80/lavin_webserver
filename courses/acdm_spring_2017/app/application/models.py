@@ -57,6 +57,7 @@ class Assignment(db.Model):
     description = db.Column(db.String(9999))
     link_title = db.Column(db.String(128))
     day_id = db.Column(db.Integer, db.ForeignKey('day.id'))
+    text_date = db.Column(db.String(128))
     def __repr__(self):
         return '<Assignment %r %r>' % (self.id, self.title)
 
