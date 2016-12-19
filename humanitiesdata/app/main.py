@@ -44,6 +44,26 @@ def load_user(user_id):
 def index():
     return render_template("main.html")
 
+
+
+@app.route("/json")
+@app.route("/json/<_id>")
+@app.route("/json/search/<parameters>")
+def json(_id="", parameters=""):
+    if _id == "" and parameters == "":
+        #get from db
+        rows = db.session.query(Resource).filter(Resource.status=='published').all()
+        r = [setkeys(u.__dict__) for u in rows]
+        #jsonify
+        json_data = json.dumps(r)
+        #return json_data
+        return json_data
+    elif _id != "" and _id != "search":
+        return "yay, id!"
+        
+    elif parameters != "":
+        return "yay, parameters!"
+
 @app.route("/datastream")
 def datastream():
     #get from db
