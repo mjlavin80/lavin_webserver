@@ -18,13 +18,15 @@
             <li><a href="/assignments">Assignments</a></li>
             <li><a href="/readings">Readings</a></li>
             <li><a href="/bibliography">Bibliography</a></li>
-            {% if not current_user.is_authenticated %}
+            {% if not g.user %}
             <li><a href="/login">Login</a></li>
+            {% else %}
+            <li><a href="/logout">Logout</a></li>
             {% endif %}
-            {% if current_user.is_authenticated %}
+            {% if current_user.is_admin %}
             <ul class="nav navbar-nav">
               <li><a href="/admin">Admin Dashboard</a>
-              <li><a href="/logout">Logout</a></li>
+
               {% endif %}
           </ul>
         </div><!--/.nav-collapse -->

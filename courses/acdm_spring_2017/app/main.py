@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, send_from_directory, request, flash
+from flask import Flask, render_template, redirect, url_for, send_from_directory, request, flash, g, session
 from flask_admin import Admin, AdminIndexView, BaseView, expose
 from flask_admin.contrib.sqla import ModelView
 import os
@@ -11,6 +11,8 @@ from flask_migrate import Migrate
 from flask.ext.bcrypt import Bcrypt
 from flask.ext.admin.base import MenuLink
 from wtforms.fields import TextAreaField
+from flask.ext.github import GitHub
+from config import GITHUB_ADMIN
 
 def compile_errors(form):
     errs = []
@@ -23,6 +25,8 @@ def compile_errors(form):
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 bcrypt = Bcrypt(app)
+# setup github-flask
+github = GitHub(app)
 
 #ends session so there's no mysql timeout
 @app.teardown_appcontext
@@ -32,10 +36,11 @@ def shutdown_session(exception=None):
 class MyAdminIndexView(AdminIndexView):
     @expose('/')
     def index(self):
-        if not current_user.is_authenticated:
-            return redirect('login')
-        else:
+        try:
+            current_user.is_admin == True
             return self.render('admin/index.html')
+        except:
+            return redirect(url_for('status', message="unauthorized"))
 
 # Create menu links classes with reloaded accessible
 class AuthenticatedMenuLink(MenuLink):
@@ -94,7 +99,7 @@ def unauthorized():
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(user_id)
+    return AdminUser.query.get(user_id)
 
 #helper function for decorator to pass global info to templates
 def generate_site_data():
@@ -113,7 +118,8 @@ def include_site_data(fn):
 @app.route("/")
 @include_site_data
 def index():
-     return render_template("index.html")
+    print(current_user)
+    return render_template("index.html")
 
 @app.route("/policies")
 @include_site_data
@@ -176,48 +182,70 @@ def protected(filename):
 def coming_soon():
     return render_template("soon.html")
 
-def compile_errors(form):
-    errs = []
-    for field, errors in form.errors.items():
-        for error in errors:
-            text = u"Error in the %s field - %s" % (getattr(form, field).label.text, error)
-            errs.append(text)
-    return errs
+@app.before_request
+def before_request():
+    g.user = None
+    if 'user_id' in session:
+        g.user = User.query.get(session['user_id'])
 
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    """For GET requests, display the login form. For POSTS, login the current user
-    by processing the form."""
+@app.after_request
+def after_request(response):
+    db.session.remove()
+    return response
 
-    form = LoginForm()
-    next = request.args.get('next')
-    if form.validate():
-        user = User.query.filter(User.username==form.username.data).one_or_none()
-        if user:
-            if bcrypt.check_password_hash(user.password, form.password.data):
-                user.authenticated = True
-                db.session.add(user)
-                db.session.commit()
-                login_user(user, force=True)
-                next = request.args.get('next')
-                flash("You have successfully logged in")
-                return redirect(next or url_for('index'))
-    #print(form.errors)
-    errors = compile_errors(form)
-    return render_template("login.html", form=form, errors=errors)
+@github.access_token_getter
+def token_getter():
+    user = g.user
+    if user is not None:
+        return user.github_access_token
 
-@app.route("/logout", methods=["GET"])
-@login_required
-def logout():
-    """Logout the current user."""
-    user = current_user
-    user.authenticated = False
-    db.session.add(user)
+@app.route('/github-callback')
+@github.authorized_handler
+def authorized(access_token):
+    next_url = request.args.get('next') or url_for('index')
+    if access_token is None:
+        return redirect(next_url)
+    user = User.query.filter_by(github_access_token=access_token).first()
+    if user is None:
+        user = User(access_token)
+        db.session.add(user)
+    user.github_access_token = access_token
     db.session.commit()
-    logout_user()
-    next = request.args.get('next')
-    flash("You have successfully logged out")
-    return redirect(url_for('login'))
+
+    session['user_id'] = user.id
+    return redirect(url_for('status'))
+
+@app.route('/login')
+def login():
+    try:
+        c_u = github.get('user')
+        return "Already logged in."
+    except:
+        return github.authorize()
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    return redirect(url_for('status'))
+
+@app.route('/status')
+def status(message=""):
+    try:
+        c_u = github.get('user')
+        if c_u['login'] == GITHUB_ADMIN:
+            user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
+            user.authenticated = True
+            db.session.add(user)
+            db.session.commit()
+            login_user(user, force=True)
+    except:
+        pass
+    if message=="":
+        if g.user:
+            message="in"
+        else:
+            message="out"
+    return render_template('status.html', message=message)
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -234,7 +262,7 @@ def gateway_error(e):
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 80))
     #for production
-    app.run(host='0.0.0.0', port=port)
+    #app.run(host='0.0.0.0', port=port)
 
     #for dev
-    #app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='127.0.0.1', debug=True, port=5000)
