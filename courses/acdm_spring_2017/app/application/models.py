@@ -84,6 +84,7 @@ class Basics(db.Model):
     email = db.Column(db.String(128))
     zotero = db.Column(db.String(500))
     github = db.Column(db.String(500))
+    hypoth = db.Column(db.String(500))
     course_name = db.Column(db.String(512))
     course_description =  db.Column(db.String(9999))
     semester_year = db.Column(db.String(128))
