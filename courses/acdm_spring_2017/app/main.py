@@ -108,7 +108,7 @@ def include_site_data(fn):
         #site_basics
         basics = generate_site_data()
         #user_authorization
-        
+
         return {"basics":basics}
     return fn
 
