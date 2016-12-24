@@ -110,7 +110,10 @@ def generate_site_data():
 def include_site_data(fn):
     @app.context_processor
     def additional_context():
+        #site_basics
         basics = generate_site_data()
+        #user_authorization
+
         return {"basics":basics}
     return fn
 
