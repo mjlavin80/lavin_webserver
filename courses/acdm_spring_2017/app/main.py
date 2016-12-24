@@ -235,7 +235,7 @@ def logout():
 def status(message=""):
     try:
         c_u = github.get('user')
-        if c_u['login'] == GITHUB_ADMIN:
+        if str(c_u['login']) == str(GITHUB_ADMIN):
             user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
             user.authenticated = True
             db.session.add(user)
@@ -265,7 +265,7 @@ def gateway_error(e):
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 80))
     #for production
-    #app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port)
 
     #for dev
-    app.run(host='127.0.0.1', debug=True, port=5000)
+    #app.run(host='0.0.0.0', debug=True, port=5000)
