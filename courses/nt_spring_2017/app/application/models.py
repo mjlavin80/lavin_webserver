@@ -107,7 +107,7 @@ class Policy(db.Model):
 
 class Activity(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    order =   db.Column(db.Integer)
+    order = db.Column(db.String(100))
     link = db.Column(db.String(500))
     description = db.Column(db.String(9999))
     day_id = db.Column(db.Integer, db.ForeignKey('day.id'))
