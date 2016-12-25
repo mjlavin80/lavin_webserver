@@ -1,9 +1,19 @@
 from application import db
 
 class User(db.Model):
+    __tablename__ = 'users'
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(200))
+    github_access_token = db.Column(db.String(200))
+
+    def __init__(self, github_access_token):
+        self.github_access_token = github_access_token
+
+class AdminUser(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(250), index=True, unique=True)
-    is_admin = db.Column(db.Boolean, default=False)
+    is_admin = db.Column(db.Boolean, default=True)
     profile_image = db.Column(db.String(250), index=True, unique=False)
     display_name = db.Column(db.String(250), index=True, unique=True)
     email = db.Column(db.String(250), index=True, unique=True)
@@ -29,12 +39,11 @@ class User(db.Model):
         """False, as anonymous users aren't supported."""
         return False
 
-
 class Day(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     assignments = db.relationship('Assignment', backref='day', lazy='joined')
-    readings = db.relationship('Reading', backref='day', lazy='joined')
+    s = db.relationship('', backref='day', lazy='joined')
     activities = db.relationship('Activity', backref='day', lazy='joined')
     week_id = db.Column(db.Integer, db.ForeignKey('week.id'))
 
@@ -69,7 +78,7 @@ class Reading(db.Model):
     publisher = db.Column(db.String(50))
     pubdate = db.Column(db.String(50))
     pubplace = db.Column(db.String(50))
-    link = db.Column(db.String(50))
+    link = db.Column(db.String(128))
     article_title = db.Column(db.String(128))
     book_title = db.Column(db.String(128))
     day_id = db.Column(db.Integer, db.ForeignKey('day.id'))
@@ -98,8 +107,10 @@ class Policy(db.Model):
 
 class Activity(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    order =   db.Column(db.Integer)
     link = db.Column(db.String(500))
     description = db.Column(db.String(9999))
     day_id = db.Column(db.Integer, db.ForeignKey('day.id'))
+
     def __repr__(self):
         return '<Activity %r %r >' % (self.link, self.description)

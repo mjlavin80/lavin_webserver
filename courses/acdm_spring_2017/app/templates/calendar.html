@@ -22,7 +22,7 @@
 
 {% for reading in day.readings|sort(attribute='id') %}
 <div class="list-group-item">
-<p class="bibl">{{reading.last_name}}, {{reading.first_name}}. <a class="article-title" href="{{reading.link}}">{{reading.article_title}}</a>, {% if reading.book_title %}<span class="book-title">{{reading.book_title}}. {% endif %}</span> {{reading.pubplace}}: {{reading.publisher}}, {{reading.pubdate}}</p>
+<p class="bibl">{{reading.last_name}}, {{reading.first_name}}. "{{reading.article_title}}," {% if reading.book_title %}<span class="book-title">{{reading.book_title}}. {% endif %}</span> {{reading.pubplace}}, {{reading.publisher}}, {{reading.pubdate}}. {{reading.page_range}}. [<a href="{{reading.link}}">Link</a>]</p>
 </div>
 {% endfor %}
 
