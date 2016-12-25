@@ -1,17 +1,19 @@
 {% extends "base.html" %}
-
+{{ form.csrf_token }}
 {% block content %}
 {% include "menu.html" %}
 
-<div class="container">
-    <div class="row">
+<div class="col-md-12">
+
         <h3>
           {% if message=="unauthorized" %}You are not authorized to view that page. <a href="/">Home</a>{% endif %}
           {% if message=="in" %} You are logged in. <a href="/logout">Log out</a> {% endif %}
           {% if message=="out" %} You are logged out. <a href="/login">Log in</a> {% endif %}
           {% if message=="required" %} You must be logged in to do that. <a href="/login">Log in</a> {% endif %}
         </h3>
-    </div>
 </div>
 
+{% endblock %}
+{% block footer %}
+{% include "footer.html" %}
 {% endblock %}
