@@ -43,7 +43,7 @@ class Day(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     assignments = db.relationship('Assignment', backref='day', lazy='joined')
-    s = db.relationship('', backref='day', lazy='joined')
+    readings = db.relationship('Reading', backref='day', lazy='joined')
     activities = db.relationship('Activity', backref='day', lazy='joined')
     week_id = db.Column(db.Integer, db.ForeignKey('week.id'))
 
@@ -82,6 +82,7 @@ class Reading(db.Model):
     article_title = db.Column(db.String(128))
     book_title = db.Column(db.String(128))
     day_id = db.Column(db.Integer, db.ForeignKey('day.id'))
+
     def __repr__(self):
         return '<Reading %r %r >' % (self.last_name, self.article_title)
 
