@@ -58,3 +58,15 @@
 </div>
 {% endif %}
 {% endblock %}
+
+{% block custom_js %}
+{% if resource_type %}
+<script>
+$(".field_accordion").hide();
+$(".expand_collapse").click(function(){
+    $(".field_accordion").toggle();
+});
+
+</script>
+{% endif %}
+{% endblock %}

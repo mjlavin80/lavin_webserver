@@ -9,7 +9,9 @@ html, body {
   padding: 10px;
   margin-bottom: 15px;
 }
-
+.expand_collapse:hover {
+  cursor: pointer;
+}
 .form_row {
   margin-bottom: 4px;
     margin-top: 4px;

@@ -32,64 +32,81 @@
                   {% endif %}
                   {{ corefield(class_="form-control") }}</div>
           {% endfor %}
-          {% if resource_type == "dataset" %}
-          <div class="col-md-12 form_row"><h3>Additional Project Open Data Required Fields (version 1.1)</h3></div>
-          {% for datafield in [add_resource.modified, add_resource.publisher, add_resource.contact_point,
-            add_resource.identifier, add_resource.access_level ] %}
 
-          <div class="col-md-3 form_row"><label>{{ datafield.label.text|capitalize()|replace("_", " ") }}</label></div>
-          <div class="col-md-9 form_row">{% if resource_dict %}{% set a = datafield.label.text %}
-            {% set f = datafield.process_data(resource_dict[a]) %}{%endif%}{{ datafield(class_="form-control") }}</div>
-          {% endfor %}
-          </div>
-          {% endif %}
+</div>
+</div>
 
-
+<!-- begin conditional for dataset -->
 
 {% if resource_type == "dataset" %}
+
+<div class="row">
+  <div class="col-md-12"><div class="col-md-12 form_row">
+    <hr/><button type="button" class="btn btn-info expand_collapse">Expand/Collapse More Fields</button>
+    <hr/>
+  </div></div>
+<div class="field_accordion">
+<div class="col-md-6">
+<div class="col-md-12 form_row"><h3>Additional Project Open Data Required Fields (version 1.1)</h3></div>
+{% for datafield in [add_resource.modified, add_resource.publisher, add_resource.contact_point,
+  add_resource.identifier, add_resource.access_level ] %}
+
+<div class="col-md-3 form_row"><label>{{ datafield.label.text|capitalize()|replace("_", " ") }}</label></div>
+<div class="col-md-9 form_row">{% if resource_dict %}{% set a = datafield.label.text %}
+  {% set f = datafield.process_data(resource_dict[a]) %}{%endif%}{{ datafield(class_="form-control") }}</div>
+{% endfor %}
+</div>
+
 <div class="col-md-6">
 <div class="col-md-12 form_row"><h3>Project Open Data Required-if-Applicable Fields (version 1.1)</h3></div>
 
 {% for datafield in [add_resource.bureau_code, add_resource.program_code,  add_resource.license, add_resource.rights,
-  add_resource.spatial, add_resource.temporal] %}
+add_resource.spatial, add_resource.temporal] %}
 
 <div class="col-md-3 form_row"><label>{{ datafield.label.text|capitalize()|replace("_", " ") }}</label></div>
 <div class="col-md-9 form_row">{% if resource_dict %}{% set a = datafield.label.text %}
-  {% set f = datafield.process_data(resource_dict[a]) %}{%endif%}{{ datafield(class_="form-control") }}</div>
+{% set f = datafield.process_data(resource_dict[a]) %}{%endif%}{{ datafield(class_="form-control") }}</div>
 {% endfor %}
 </div>
+<div class="col-md-12">
 <div class="col-md-12 form_row"><h3>Project Open Data Additional Fields (version 1.0)</h3></div>
 {% for datafield in [add_resource.contact_email, add_resource.web_service, add_resource.format_] %}
 <div class="col-md-3 form_row"><label>{{ datafield.label.text|capitalize()|replace("_", " ") }}</label></div>
 <div class="col-md-9 form_row">{% if resource_dict %}{% set a = datafield.label.text %}
-  {% set f = datafield.process_data(resource_dict[a]) %}{%endif%}{{ datafield(class_="form-control") }}</div>
+{% set f = datafield.process_data(resource_dict[a]) %}{%endif%}{{ datafield(class_="form-control") }}</div>
 
 {% endfor %}
 </div>
-
+</div>
+</div>
 {% endif %}
-
+<!-- end dataset -->
 
 <div class="row">
+<div class="col-md-12">
+<div class="col-md-4 form_row"><label>Tags (comma-separated, must add at least one)<span class="required">*</span></label>
+  </div>
 
-  <div class="col-md-4 form_row"><label>Tags (comma-separated, must add at least one)<span class="required">*</span></label>
-  </div> <div class="col-md-8 form_row">
+<div class="col-md-8 form_row">
   <input class="form-control" id="tags" name="tags" type="text" value{% if tags %}="{{tags}}"{% endif %}></div>
 </div>
+</div>
+
 
 <div class="row">
+<div class="col-md-12">
 <div class="col-md-12 form_row"><label>{{ add_resource.description.label.text|capitalize()|replace("_", " ") }}<span class="required">*</span></label>
 </div>
 <div class="col-md-12 form_row">
 <textarea class="form-control" cols="100" id="description" name="description" required="" rows="12" value="">
 {% if resource_dict %}{{ resource_dict['description']}}{% endif%}
 </textarea></div>
-</div>
+
 
 <!--<div class="col-md-12 form_row">{{ add_resource.recaptcha }}</div>-->
 
 <div class="col-md-12 form_row"><input class="btn btn-primary" type="submit" value="Submit"></div>
 </form>
-
+</div>
 </div>
 </div>
