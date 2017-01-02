@@ -1,9 +1,7 @@
 .navbar-toggle .icon-bar {
 background-color: black;
 }
-.table > tbody > tr > td {
-  width: 33%;
-}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
