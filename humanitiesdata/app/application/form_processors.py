@@ -35,10 +35,12 @@ def handle_tags_on_edit(tag_list, ins):
             return "len_error"
     for old in ins.tags:
         ins.tags.remove(old)
-    try:
-        db.session.commit()
-    except:
-        db.session.rollback()
+        print(type(old))
+    print(type(ins.tags))
+    # try:
+    #     db.session.commit()
+    # except:
+    #     db.session.rollback()
     for a_tag in suggested_tags:
         #check for tag in db
         newtag = Tag.query.filter(Tag.tagname==a_tag).one_or_none()
