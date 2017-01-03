@@ -26,40 +26,39 @@ def compile_errors(form):
             text = u"Error in the %s field - %s" % (getattr(form, field).label.text, error)
             errs.append(text)
     return errs
+
 def handle_tags_on_edit(tag_list, ins):
     #change spaces and underscores to hyphens
     suggested_tags = [x.strip().replace(" ", "-").replace("_", "-") for x in tag_list.split(',')]
-
-    for old in ins.tags:
-        if old.tagname not in suggested_tags:
-            #check if tag  exists elsewhere
-            ins.tags.remove(old)
-    tagnames = [z.tagname for z in ins.tags]
     for a_tag in suggested_tags:
         if len(a_tag) > 30 or len(a_tag) < 1:
             return "len_error"
-        else:
-            #check for tag in db
-            newtag = Tag.query.filter(Tag.tagname==a_tag).one_or_none()
-            #if found
-            if newtag is not None:
-                #attach if not already attached to the instance
-                if newtag not in tagnames:
-                    ins.tags.append(newtag)
-            else:
-                #instantiate a new tag by tagname
-                newtag = Tag(tagname=a_tag)
-                #add tag to db
-                try:
-                    db.session.add(newtag)
-                    db.session.commit()
-                except:
-                    db.session.rollback()
-                #query tag object just added
-                just_added = Tag.query.filter(Tag.tagname==a_tag).one_or_none()
-                #make sure it's in the database, then append to the taglist
-                if newtag is not None:
-                    ins.tags.append(just_added)
+    for old in ins.tags:
+        ins.tags.remove(old)
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+    tagnames = [z.tagname for z in ins.tags]
+    for a_tag in suggested_tags:
+        #check for tag in db
+        newtag = Tag.query.filter(Tag.tagname==a_tag).one_or_none()
+        #if found
+        if newtag:
+            #instantiate a new tag by tagname
+            newtag = Tag(tagname=a_tag)
+            #add tag to db
+            try:
+                db.session.add(newtag)
+                db.session.commit()
+            except:
+                db.session.rollback()
+    for a_tag in suggested_tags:
+        ins.tags.append(newtag)
+    try:
+        db.session.commit()
+    except:
+        db.session.rollback()
     return ins
 
 def handle_tags_on_submit(tag_list, ins):
