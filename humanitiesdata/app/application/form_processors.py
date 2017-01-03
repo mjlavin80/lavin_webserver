@@ -44,7 +44,7 @@ def handle_tags_on_edit(tag_list, ins):
         #check for tag in db
         newtag = Tag.query.filter(Tag.tagname==a_tag).one_or_none()
         #if found
-        if newtag:
+        if newtag is not None:
             #instantiate a new tag by tagname
             newtag = Tag(tagname=a_tag)
             #add tag to db
@@ -55,7 +55,8 @@ def handle_tags_on_edit(tag_list, ins):
                 db.session.rollback()
     for a_tag in suggested_tags:
         newtag = Tag.query.filter(Tag.tagname==a_tag).one_or_none()
-        ins.tags.append(newtag)
+        if newtag not in ins.tags:
+            ins.tags.append(newtag)
     try:
         db.session.commit()
     except:
