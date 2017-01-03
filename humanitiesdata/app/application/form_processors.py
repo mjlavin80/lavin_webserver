@@ -35,7 +35,7 @@ def handle_tags_on_edit(tag_list, ins):
             return "len_error"
     for old in ins.tags:
         ins.tags.remove(old)
-    db.session.commit()
+        db.session.commit()
     # try:
     #     db.session.commit()
     # except:
