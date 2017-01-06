@@ -25,6 +25,7 @@
     <div class="col-md-12"><p><strong>Resource Type: </strong></p><p>{{obj.resource_type }}</p></div>
     <div class="col-md-12"><p><strong>Submitted By: </strong></p><p>{{obj.submitted_by }}</p></div>
     <div class="col-md-12"><p><strong>Date Submitted: </strong></p><p>{{obj.date_submitted }}</p></div>
+    <div class="col-md-12"><p><strong>Access URL: </strong></p><p><a href="{{obj.access_url }}">{{obj.access_url }}</a></p></div>
 </div>
 
 <div class="row">
@@ -55,11 +56,10 @@
   </div>
 
   <div class="col-md-6"><h3>Project Open Data Required-if-Applicable Fields (version 1.1)</h3>
-      {% for datafield in [("access_url", "Download URL"),
-      ("access_level_comment", "Access Level Comment"), ("bureau_code", "Bureau Code"), ("program_code", "Program Code"),
+      {% for datafield in [("access_level_comment", "Access Level Comment"), ("bureau_code", "Bureau Code"), ("program_code", "Program Code"),
       ("license", "License"), ("rights", "Rights"), ("spatial", "Spatial"), ("temporal", "Temporal")] %}
 
-      <div class="col-md-12"><p><strong>{{datafield[1]|capitalize()|replace("_", " ") }}</strong></p></div>
+      <div class="col-md-12"><p><strong>{{ datafield[1] }}</strong></p></div>
       <div class="col-md-12"><p>{{obj[datafield[0]] or "[No Data]"}}</p></div>
  {% endfor %}
 
