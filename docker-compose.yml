@@ -13,7 +13,7 @@ services:
     container_name: flask_empty
     image: lavinflaskbase
 
-  matthew-lavin:
+  faculty_activity:
     build: ./faculty-activity
     container_name: faculty_activity
 
