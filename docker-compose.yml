@@ -16,6 +16,8 @@ services:
   faculty_activity:
     build: ./faculty-activity
     container_name: faculty_activity
+    links:
+      - flask_base
 
   matthew-lavin:
     build: ./matthew-lavin
