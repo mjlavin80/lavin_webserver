@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="col-md-12">
+<h3>Curriculum Vitae</h3>
+
+{% for activitycategory in data %}
+<div class="activity-category">
+    <h4>{{ activitycategory.title }}</h4>
+    <p>{{ activitycategory.description|safe }}</p>
+
+</div>
+{% endfor %}
+
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}

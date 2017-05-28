@@ -38,7 +38,6 @@ class ModelViewAdmin(ModelView):
 #admin instance
 admin = Admin(app, index_view=CustomBaseView(url='/admin'), name='Faculty Activity Portfolio', template_mode='bootstrap3', )
 
-
 # Add administrative views here
 admin.add_view(ModelViewAdmin(Portfolio, db.session))
 
@@ -60,6 +59,11 @@ def load_user(user_id):
 @app.route("/", methods=["GET", "POST"])
 def index():
     return render_template("index.html")
+
+@app.route("/cv", methods=["GET", "POST"])
+def cv():
+    data = Portfolio.query.filter(Portfolio.date == "cv").order_by(Portfolio.sort_order).all()
+    return render_template("cv.html", data=data)
 
 @app.route("/activity/<year>", methods=["GET", "POST"])
 def activity(year):
