@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+    <html>
+      <head>
+        <title>Datahumanist Web App</title>
+        <meta charset="utf-8" />
+        <link type="text/css" rel="stylesheet" href="/static/dist/css/bootstrap.css" />
+        <link type="text/css" rel="stylesheet" href="/static/bootstrap-table/dist/bootstrap-table.min.css" />
+        <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
+        <script src='/static/dist/js/data.js'></script>
+        <script src='/static/dist/js/scale.js'></script>
+
+        <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
+        <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/leaflet.markercluster.js'></script>
+
+        <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/MarkerCluster.css' rel='stylesheet' />
+        <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/MarkerCluster.Default.css' rel='stylesheet' />
+
+
+
+        <link href="/static/lightbox/dist/ekko-lightbox.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/static/style.css" />
+        <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+        <script src="/static/js/jquery-3.1.0.min.js"></script>
+
+
+      </head>
+
+      <body>
+              {%block menu %} {% endblock %}
+              <!-- Begin page content -->
+              <div class="container">
+
+                {% block content %} {% endblock %}
+              </div>
+
+
+              {%block footer%} {%endblock%}
+
+          <!-- JavaScript -->
+
+          <script src="/static/dist/js/bootstrap.js"></script>
+
+      </body>
+    </html>

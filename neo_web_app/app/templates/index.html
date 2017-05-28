@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+
+<div class="col-md-12">
+<h2>Summary of Date Predictions</h2>
+</div>
+<div class="col-md-12">
+  <div class="note"><p>The orange line projected through this visualization represents a one-to-one ratio of the predicted
+    value and the metadata value. In other words, the closer a point is to this line, the more accurate the model predicted
+    its date. Similarly, a point farther away from the line represents a less accurate prediction or, in some cases, an
+    inaccurate date in the original metadata.
+   </p></div>
+<div id='map'></div>
+</div>
+<div class="col-md-12">
+
+  <p>*Metadata fields are automatically generated from the data found in <a href="https://github.com/tedunderwood/fiction">this repository</a>. Special thanks to Ted Underwood for publishing this repository in connection with his 2016 article <a href="http://culturalanalytics.org/2016/05/the-life-cycles-of-genres/">"The Lifecycles of Genres."</a></p></div>
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+<script>
+// Access token
+L.mapbox.accessToken = 'pk.eyJ1IjoibWpsYXZpbjgwIiwiYSI6ImNqMzdrMzZqeDAweG4yd256cnJrejE4NG0ifQ.bbJ6_S9EUcq1ucvioqdrYw';
+
+var bounds = [[0,0], [540,730]];
+// Create a map in the div #map
+var map = L.mapbox.map('map', 'mapbox.light', {
+  center: [0, 0],
+  crs: L.CRS.Simple,
+  maxBounds: [[0,-80], [680,880]]
+
+});
+
+var img = '/static/images/graph.gif';
+
+var image = L.imageOverlay(img, bounds).addTo(map);
+var image2 = L.imageOverlay(img, [[-525,0], [0,730]]).addTo(map);
+// calculate the edges of the image, in coordinate space
+map.fitBounds(bounds);
+
+var markers = new L.MarkerClusterGroup({ disableClusteringAtZoom: 2, showCoverageOnHover: true });
+
+// scale data and add to map
+var predicted = []
+var actual = []
+var doc_id = []
+for (x=0; x < data.length; x++ ) {
+   predicted.push(Math.round(data[x].predicted));
+   actual.push(data[x].actual);
+   doc_id.push(data[x].doc_id);
+}
+
+var p = scaleScores(predicted, 515, lowvalue=1);
+var act = scaleScores(actual, 730, lowvalue=1);
+
+
+for (q=0; q < data.length; q++) {
+  var d = L.latLng([ p[q], act[q]]);
+  var m = L.marker(d);
+  var html = "Underwood ID*: " + doc_id[q]+"<br/>Predicted: "+predicted[q]+"<br/>Actual: "+actual[q]+"<br/>Z-Score of Margin: "+data[q].zscore;
+  var html = html + "<br/><a href='/"+doc_id[q]+"'>More Details</a>";
+  m.bindPopup(html);
+  markers.addLayer(m);
+}
+map.addLayer( markers );
+
+var firstpolyline = new L.Polyline([[0,0], [515,730]], {
+    color: 'red',
+    weight: 3,
+    opacity: 0.5,
+    smoothFactor: 1
+});
+firstpolyline.addTo(map);
+</script>
+{% endblock %}

@@ -33,6 +33,12 @@ services:
     links:
       - flask_base
 
+  neo_web_app:
+    build: ./neo_web_app
+    container_name: neo_web_app
+    links:
+      - flask_base
+
   digiped_fall_2016:
     build: ./courses/digiped_fall_2016
     container_name: digiped_fall_2016
