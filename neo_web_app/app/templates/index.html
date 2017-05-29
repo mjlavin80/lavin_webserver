@@ -11,7 +11,7 @@
 </div>
 <div class="col-md-12">
   <div class="note"><p><big>This interactive shows the results of a linear regression model to predict the publication date (or date written)
-    of book-length works published between 1765 and 2000. Many of the texts belong to market genres such as horror/gothic,
+    of book-length works published between 1760 and 1990. Many of the texts belong to market genres such as horror/gothic,
     mystery/crime and science fiction. Each point represents a text, and its position along the x-y axis represents the predicted year
     and the actual year. The orange line projected through this visualization represents a one-to-one ratio of the predicted
     value and the metadata value. In other words, the closer a point is to this line, the more accurate the model predicted
@@ -36,14 +36,14 @@ var bounds = [[0,0], [540,730]];
 var map = L.mapbox.map('map', 'mapbox.light', {
   center: [0, 0],
   crs: L.CRS.Simple,
-  maxBounds: [[0,-120], [680,880]]
+  maxBounds: [[0,-150], [680,880]]
 
 });
 
 var img = '/static/images/graph.gif';
-
+var img2 = '/static/images/graph2.gif';
 var image = L.imageOverlay(img, bounds).addTo(map);
-var image2 = L.imageOverlay(img, [[-525,0], [0,730]]).addTo(map);
+var image2 = L.imageOverlay(img2, [[-525,0], [0,730]]).addTo(map);
 // calculate the edges of the image, in coordinate space
 map.fitBounds(bounds);
 
