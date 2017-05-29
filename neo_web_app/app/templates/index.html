@@ -10,10 +10,13 @@
 <h2>Summary of Date Predictions</h2>
 </div>
 <div class="col-md-12">
-  <div class="note"><p>The orange line projected through this visualization represents a one-to-one ratio of the predicted
+  <div class="note"><p><big>This interactive shows the results of a linear regression model to predict the publication date (or date written)
+    of book-length works published between 1765 and 2000. Many of the texts belong to market genres such as horror/gothic,
+    mystery/crime and science fiction. Each point represents a text, and its position along the x-y axis represents the predicted year
+    and the actual year. The orange line projected through this visualization represents a one-to-one ratio of the predicted
     value and the metadata value. In other words, the closer a point is to this line, the more accurate the model predicted
     its date. Similarly, a point farther away from the line represents a less accurate prediction or, in some cases, an
-    inaccurate date in the original metadata.
+    inaccurate date in the original metadata.</big>
    </p></div>
 <div id='map'></div>
 </div>
@@ -33,7 +36,7 @@ var bounds = [[0,0], [540,730]];
 var map = L.mapbox.map('map', 'mapbox.light', {
   center: [0, 0],
   crs: L.CRS.Simple,
-  maxBounds: [[0,-80], [680,880]]
+  maxBounds: [[0,-120], [680,880]]
 
 });
 

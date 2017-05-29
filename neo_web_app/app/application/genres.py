@@ -1,9 +1,8 @@
 def make_genres_big_and_lavin(piped_genres):
-    import pandas as pd
-    big_genres = pd.read_csv("datadictionary.csv")
     gen_dict = {}
-    for i in big_genres.itertuples():
-        gen_dict[i[1]] = i[2]
+    with open("datadictionary.csv") as dd:
+        for i in dd.readlines():
+            gen_dict[i[1]] = i[2]
     gen_dict["chimyst"] = "crime"
     gen_dict["locghost"] = "gothic"
     gen_dict["lockandkey"] = "crime"
@@ -45,15 +44,3 @@ def make_genres_big_and_lavin(piped_genres):
     processed_genre = [i[0] for i in genres_main]
     final_genre = [i[1] for i in genres_main]
     return processed_genre, final_genre, genres_lavin
-
-def make_feature_list(csv, col, N):
-    import pandas as pd
-    df = pd.read_csv(csv)
-    #sort by col
-    ## make sure it's descending
-    df[col] = [abs(i) for i in list(df[col])]
-    # Convert correlations to absolute values
-    new_df = df.sort_values(by=col)
-    #convert top N features to list
-    list_of_features = list(new_df["term"])[-N:]
-    return list_of_features
