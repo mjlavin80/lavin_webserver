@@ -1,17 +1,345 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">Feed One</title>
-  <id>urn:uuid:c80944b9-ac1f-303e-b532-1e9b14d3bdcc</id>
-  <updated>2016-12-16T22:38:57.482789Z</updated>
+  <id>urn:uuid:8e3c61cd-9200-3a3f-ba0f-35f0edfb7e64</id>
+  <updated>2017-06-01T00:00:00Z</updated>
   <link href="http://thedatahumanist.website/" />
   <link href="http://thedatahumanist.website/feed.xml" rel="self" />
   <author>
     <name></name>
   </author>
   <generator uri="https://github.com/ajdavis/lektor-atom" version="0.2">Lektor Atom Plugin</generator>
+  <entry xml:base="http://thedatahumanist.website/neologophobia/">
+    <title type="text">Diagnosis: Neologophobia</title>
+    <id>urn:uuid:4c820e33-4c1b-3f50-992a-d7a05bc543a8</id>
+    <updated>2017-06-01T00:00:00Z</updated>
+    <link href="http://thedatahumanist.website/neologophobia/" />
+    <author>
+      <name>Matt Lavin</name>
+    </author>
+    <content type="html">&lt;h3&gt;A Provocation&lt;/h3&gt;
+&lt;p&gt;With the spring semester over, I've been coming back to a project I haven't worked on in almost a year.
+It originated with my collaboration with Alex Gladwin and Dan Look on H.P. Lovecraft's role in revising C.M. Eddy's
+&quot;The Loved Dead.&quot; Sometime during that collaboration, Dan mentioned to us that Lovecraft had said in a letter that
+he didn't tend to use words in his writing that had come into the English language more recently.&lt;/p&gt;
+&lt;p&gt;At the time, I had read Ted Underwood's article on &quot;The Emergence of Literary Diction,&quot; and I was immediately interested
+in whether a computational approach could look closer at Lovecraft's use (or not) of neologisms and or archaisms.
+At Keystone DH in June 2016, I presented a solo conference paper on some of the work I'd done to interrogate this subject,
+especially focusing on how to measure a single author's use of neologisms. The summer, however, was short, and I found myself
+scrambling to finish my fall syllabi before I'd had the chance to work on adapting the conference presentation into
+an article.&lt;/p&gt;
+&lt;p&gt;Before I say more about what I did in this presentation and what I am doing for the article, let me back up and say that,
+some time between the initial conversation with Alex and Dan and the conference paper, I asked Dan to help me find the original
+letter he was talking about. He provided two letter citations, both found in &lt;em&gt;H.P. Lovecraft Selected Letters&lt;/em&gt;,
+but the first of them, Lovecraft to Maurice W. Moe, January 1, 1915, really got me excited:&lt;/p&gt;
+&lt;blockquote&gt;
+The books which are used were not modern reprints, but musty old volumes written with &quot;long s'ses.&quot; By some freak of
+childish perversity, I began to use long s's myself, and to date everything two centuries back. I would sign myself
+&quot;H. Lovecraft, Gent., 1698&quot;, etc. Latin came quite naturally to me, and in other studies my mother, aunts, and grandfather
+helped me greatly. ... When I was ten I set to work to delete every modern word for my vocabulary, and to this and I
+adopted an old Walker's dictionary (1804) which was for sometime my sole authority. All the Queen Anne authors combined
+to form my literary diet. (qtd. in Derleth and Wandrei, 5-6)
+&lt;/blockquote&gt;&lt;p&gt;A consider this letter a provocation of sorts. The literary biographer wonders simply how accurate Lovecraft's narrative of
+self-fashioning could be. Is it possible to read so much from an historic period that one's prose begins to look and feel like
+a throwback? Is it possible to use an historic dictionary to purge one's writing of neologisms? And if so,
+why would you want to do that? In this blog post, I will unfortunately answer none of these questions, as most of them are
+the heart of the article I'm working on. Instead, I'm going to focus on one particular computational method that I've been
+working on to describe an author's relationship with their historical moment: a linear regression algorithm to predict a text's
+year of origin.&lt;/p&gt;
+&lt;h3&gt;Defending an Over-the-Top Blog Title&lt;/h3&gt;
+&lt;p&gt;What is neologophobia? If you ask the Google machine, it might reply: &quot;Did you mean: monologophobia&quot;? Monologophobia is,
+I just learned, is &quot;A fear of using a word more than once in a single sentence or paragraph.&quot; However, if you look up
+the Greek origin of the terms &lt;em&gt;philia&lt;/em&gt; and &lt;em&gt;phobia&lt;/em&gt;, I believe that you will find them to be antonyms.
+-Philia and -phile refer to abnormal attraction or a tendency toward, and -phobia and -phobe refer to abnormal
+repulsion (fear, hate) or a tendency against. It is with this definition in mind that I am using the term neologophobia:
+an abnormal aversion or tendency away from neologisms.&lt;/p&gt;
+&lt;h3&gt;Stylochronometry: Because Big Words Are Fun&lt;/h3&gt;
+&lt;p&gt;I don't want to do an extensive literature review here, but the study of a text's date signature is not new. Some
+have been interested in questions like &quot;when did Shakespeare most likely write [name your play]&quot; or &quot;which came first? novel
+A or novel B?&quot; The idea that a text contains information about its approximate date in history is a bit more recent, or maybe
+it's just become more prominent with the rise of machine learning methods.&lt;/p&gt;
+&lt;p&gt;I should mention that I emailed with Ted Underwood about a year ago about date prediction, and he suggested that
+I look into machine learning, especially linear regression, as a text's publication date is considered continuous data,
+which is to say that the year 1785 is more related to 1786 than 1800 whereas, in a classification task like sentiment tagging,
+&quot;happy&quot;, &quot;sad&quot;, &quot;afraid&quot; and &quot;angry&quot; are all equally related to one another. &lt;a href=&quot;/neologophobia/&amp;#39;http://www.differencebetween.com/difference-between-classification-and-vs-regression/&amp;#39;&quot;&gt;This page&lt;/a&gt; has a better summary.&lt;/p&gt;
+&lt;p&gt;I was very new to machine learning at the time, and I was grateful for the nudge in
+the right direction. I did a bit of classification for Keystone DH 2016, but I put it aside with everything else
+when school started last fall. My next big nudge was meeting David Bamman when he came to Pittsburgh to give a talk.
+I missed his talk (for a dissertation defense) but got to talk to him later that day. I later found his article, &lt;a href=&quot;/neologophobia/&amp;#39;http://people.ischool.berkeley.edu/~dbamman/pubs/pdf/jcdl2017.pdf&amp;#39;&quot;&gt;&quot;Estimating the Date of First Publication in a Large-Scale Digital
+Library&quot;&lt;/a&gt;, which is the best work on this topic I've found.&lt;/p&gt;
+&lt;p&gt;Bamman et. al. ultimately conclude that &quot;the best method for estimating the date of first publication for books in a
+large digital library is to leverage the depth of the collection, identifying duplicates and assigning the first date of
+publication for a book to be the earliest date attested among its near-duplicates&quot; (6). However, this assertion pertains specifically
+to the information retrieval or quality assurance aspect of their work. They add:&lt;/p&gt;
+&lt;blockquote&gt;
+Even though our estimates of the true first date of publication are better served with deduplication-based methods,
+learning a model to predict this date from the content of the book gives us the potential for deeper insight into the
+books in our collection by providing a mechanism for measuring apparent time, as distinct from both the observed
+publication date or the narrative time. (8)
+&lt;/blockquote&gt;&lt;p&gt;In other words, an added bonus of employing machine learning methods rests in the way the model relates to its outliers.
+In a linear regression model in particular, the you're essentially drawing a line (or a multi-dimensional vector)
+designed to accurately predict a variable based on inputs. Given the input of a text's term frequencies, a well-trained
+model can produce a reasonably accurate prediction of that text's likely date of inception.&lt;/p&gt;
+&lt;p&gt;However, there are always outliers, texts whose predicted date is way off from its actual date. If you're in QA, you might use
+this outlier status to flag a text for a possible metadata error (Bamman et. al. 7). Once a date error has been ruled out, however,
+we must consider the notion that a text whose predicted date differs from what its term frequencies suggest might do so
+because its textual features defy the norms of its historical period.&lt;/p&gt;
+&lt;h3&gt;Dataset and Some Code&lt;/h3&gt;
+&lt;p&gt;Around May of 2016, I was putting a lot of energy into how I might create a dataset to compare Lovecraft's &quot;date signal&quot; to
+other authors of interest. Then I came upon Ted Underwood's &quot;The Lifecycles of Genres&quot; and realized that he'd shared publicly
+a dataset that I could use for my work and easily build upon. As a result, the methods I've been playing with are tested on
+this corpus of general metadata, genre tags (science fiction, crime/mystery, gothic/horror and non-genre) and term frequency
+tables for more than 950 novels. I was also able to use the same codebase for a conference paper on genre analysis at the
+&quot;How to Do Things with Millions of Words&quot; conference in November 2016.&lt;/p&gt;
+&lt;p&gt;Ted also shared his code. It focuses on using a logistic regression to make genre predicts, so it needed some adapting.
+I focused my edits on two fronts: designing my own tests and adding features that would make the code run faster.
+The first way I thought to speed it up was to take a block of code that imports term frequency tables and store that data so
+that you don't need to rerun it every time you run a regression. Reading many text files is an infamously memory-intensive
+process.&lt;/p&gt;
+&lt;p&gt;You can get some major memory benefits using a datastore (mysql, psql, redis, etc.) but, after a lot of playtime, I opted to
+load the data as a series of Python pickles, which are surprisingly efficient. Here's what some of that code looks like:&lt;/p&gt;
+&lt;pre&gt;
+import pickle
+import csv
+
+dict_of_10k = {}
+with open (&quot;lexicon/new10k.csv&quot;, &quot;r&quot;) as myfile:
+    for m_line in csv.reader(myfile):
+        if m_line[0] != &quot;word&quot;:
+            dict_of_10k[m_line[0]] = m_line[1]
+
+docids = []
+with open (&quot;meta/finalmeta.csv&quot;, &quot;r&quot;) as myfile:
+    for m_line in csv.reader(myfile):
+        if m_line[0] != &quot;docid&quot;:
+            docids.append(m_line[0])
+
+full_feature_dicts = []
+feature_dicts = []
+excluded_ids = []
+for _id in docids:
+    try:
+        full_fdict = {}
+        fdict = {}
+        with open(&quot;newdata/%s.fic.tsv&quot; % str(_id)) as f:
+            s = f.read()
+            s = s.replace(&quot;\n\&quot;\t&quot;, &quot;\n\\\&quot;\t&quot;)
+            row = s.split(&quot;\n&quot;)
+            cells = [tuple(i.split(&quot;\t&quot;)) for i in row]
+            for y in cells:
+                try:
+                    full_fdict[y[0]] = int(y[1])
+                except:
+                    pass
+                #check for top 10k terms
+                try:
+                    test = dict_of_10k[y[0]]
+                    fdict[y[0]] = int(y[1])
+                except:
+                    pass
+        full_feature_dicts.append(full_fdict)
+        feature_dicts.append(fdict)
+    except:
+        print(_id)
+        excluded_ids.append(_id)
+
+pickle.dump(feature_dicts, open( &quot;pickled_data/feature_dicts_10k.p&quot;, &quot;wb&quot; ))
+pickle.dump(full_feature_dicts, open( &quot;pickled_data/full_feature_dicts.p&quot;, &quot;wb&quot; ))
+pickle.dump(excluded_ids, open( &quot;pickled_data/excluded_ids.p&quot;, &quot;wb&quot; ))
+&lt;/pre&gt;&lt;p&gt;I use similar scripts to load metadata and genre tags, but the term frequency feature data is where you make all your gains
+in terms of efficiency. This part of code takes several minutes to run but, now that you have your data
+saved as a set of pickles, you can load those files instead of reloading and reprocessing the text files
+every time you run a regression.&lt;/p&gt;
+&lt;h3&gt;C10H15N + OD = Method? (That Title is the Worst Joke I've Ever Thought Of)&lt;/h3&gt;
+&lt;p&gt;Methods overall:
+  Germanic-latinate ratio, dictionary.com
+  Walker ratio
+Linear regression
+Show code
+hold out number ... train set = 500&lt;/p&gt;
+&lt;pre&gt;
+from random import shuffle
+import pickle
+import numpy as np
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.feature_extraction import DictVectorizer
+from sklearn.linear_model import LinearRegression
+
+#load 10k feature dicts and metadata
+metadata = pickle.load( open( &quot;pickled_data/metadata.p&quot;, &quot;rb&quot; ) )
+feature_dicts = pickle.load( open( &quot;pickled_data/feature_dicts_10k.p&quot;, &quot;rb&quot; ) )
+
+def predict_years(metadata, feature_dicts):
+
+    all_years = [int(i[8]) for i in metadata]
+    all_ids = [i[0] for i in metadata]
+    myrange = list(range(0, len(metadata)))
+    shuffle(myrange)
+
+    randoms = myrange[:500]
+    randoms.sort()
+
+    #define train_years, test_years
+    train_years = []
+    test_years = []
+
+    #define train_dicts, test_dicts
+    train_dicts = []
+    test_dicts = []
+
+    train_ids = []
+    test_ids = []
+
+    for num in myrange:
+        if num in randoms:
+            train_years.append(all_years[num])
+            train_dicts.append(feature_dicts[num])
+            train_ids.append(all_ids[num])
+        else:
+            test_years.append(all_years[num])
+            test_dicts.append(feature_dicts[num])
+            test_ids.append(all_ids[num])
+
+    #print(len(train_years) == len(train_dicts))
+    #print(len(test_years) == len(test_dicts))
+    train_ids_str = &quot;, &quot;.join(train_ids)
+    test_ids_str = &quot;, &quot;.join(test_ids)
+
+    #use scikit learn Pipeline functionality to vectorize from dictionaries, run tfidf, and perform linear regression
+    text_clf = Pipeline([('vect', DictVectorizer()), ('tfidf', TfidfTransformer()),('clf', LinearRegression()),])
+    text_clf = text_clf.fit(train_dicts, train_years)
+    predicted = text_clf.predict(test_dicts)
+
+    result_rows = []
+    margin = []
+    for i,j in enumerate(predicted):
+        m = abs(j - test_years[i])
+        margin.append(m)
+        row = [test_ids[i], j, test_years[i], m]
+        rows.append(row)
+
+    mean = np.mean(margin)
+    main_row = [test_ids_str, train_ids_str, mean]
+    return (main_row, result_rows)
+&lt;/pre&gt;&lt;p&gt;Once you've run the regression, it's probably a good idea to store your results for later use.
+One way to do that is with csv or Microsoft Excel output, as these are widely used and easy-to-access
+output formats. Another way to go is to make a simple sqlite database. Sqlite3 is built into Python
+and is very easy to use. It's also another area of performance optimization, as an sqlite storage engine
+will increase retrieval speed when you go back to your results for analysis or visualization. Third,
+you gain all the same interoperability benefits you would get from using a format like .csv, as it's very
+easy to load sqlite in R and other programming languages. Here's a function that takes linear regression results
+stores them in two sqlite tables:&lt;/p&gt;
+&lt;pre&gt;
+import sqlite3
+
+def store_results(main_row, result_rows):
+    conn = sqlite3.connect('regression_scores.db')
+    c = conn.cursor()
+    make_main = &quot;&quot;&quot;CREATE TABLE IF NOT EXISTS main (id INTEGER PRIMARY KEY, test_ids TEXT, train_ids TEXT, mean_margin REAL)&quot;&quot;&quot;
+    c.execute(make_main)
+    make_results = &quot;&quot;&quot;CREATE TABLE IF NOT EXISTS results (id INTEGER PRIMARY KEY, main_id INTEGER, doc_id TEXT, predicted REAL, actual REAL, margin REAL, FOREIGN KEY(main_id) REFERENCES main(id))&quot;&quot;&quot;
+    c.execute(make_results)
+
+    insert_main = &quot;&quot;&quot;INSERT INTO main (id, test_ids, train_ids, mean_margin) VALUES (null, ?, ?, ?)&quot;&quot;&quot;
+    c.execute(insert_main, main_row)
+    conn.commit()
+
+    #get id for row you just inserted
+    main_id = c.execute(&quot;&quot;&quot;SELECT id FROM main ORDER BY id DESC&quot;&quot;&quot;).fetchone()[0]
+    insert_result = &quot;&quot;&quot;INSERT INTO results (id, main_id, doc_id, predicted, actual, margin) VALUES (null, ?, ?, ?, ?, ?)&quot;&quot;&quot;
+    for result_row in result_rows:
+        new_row = [main_id]
+        new_row.extend(result_row)
+        c.execute(insert_result, new_row)
+    conn.commit()
+&lt;/pre&gt;&lt;h3&gt;Shuffle Up and Deal&lt;/h3&gt;
+&lt;p&gt;Randomization, round robin
+Whenever you run a supervised learning model, it's typical to partition your dataset into a training set and test set.
+You train the model one partition (term counts and dates) and test your data on the other partition, feeding it only term counts
+and generating predicted dates. You can then compare the predicted dates to the labeled dates for your test set to see
+how accurate your model is. My code achieves this task by generating 500 random numbers to indicate which texts will be in the training
+set.&lt;/p&gt;
+&lt;p&gt;In many cases, however, it's best to add second layer of randomness. Instead of simply partitioning your data once and checking your
+performance, you can run the model and collect results, then shuffle up the memberships of test and train and re-run. If you go through this
+process enough times, you start to get a sense of which random arrangements of the training set might be outliers when compared with all the
+other potential arrangements. Since my regression function will shuffle train and test automatically each time it is run, the code to
+execute this shuffle and re-run method can be as simple as this:&lt;/p&gt;
+&lt;pre&gt;
+#for every number, 0 to 299
+for z in range(300):
+    #re-run the result function
+    result_tuple = predict_years(metadata, feature_dicts)
+    #re-run the datastore function
+    store_results(result_tuple[0], result_tuple[1])
+    #this print statement is just here to print a progress report to the terminal every tenth time the functions finish
+    if z % 10 == 0:
+        print(z)
+&lt;/pre&gt;&lt;h3&gt;Normal Distribution?&lt;/h3&gt;
+&lt;p&gt;After running the regression 100, 200 or even 600 times (which is easier to cope with since we've improved the overall speed
+of the program), we start to get a sense of what most models tend to predict a document's date to be. Using our sqlite database,
+we can quickly get all the results for a given Document ID:&lt;/p&gt;
+&lt;pre&gt;
+&quot;&quot;&quot;SELECT avg(predicted) as a, actual, doc_id FROM results GROUP BY doc_id;&quot;&quot;&quot;
+&lt;/pre&gt;&lt;p&gt;This query will give us the mean prediction, a labeled date, and a Document ID from our results table.
+From here, we can calculate the margin between each prediction and its corresponding metadata.
+If we bundle all of these together predictions and margins together, we can get a sense of their overall
+distribution.&lt;/p&gt;
+&lt;p&gt;&lt;img src='/static/images/distribution.png' /&gt;&lt;/p&gt;
+&lt;p&gt;What we see here is something resembling normal distribution. The peak in the middle is higher than you would expect
+of a normal distribution (or more kurtotic in stat-speak), and there are some extreme outliers if you look at either tail.
+Since we're grabbing values from our database, the code to generate this plot is as simple as:&lt;/p&gt;
+&lt;p&gt;&lt;pre&gt;
+import seaborn as sns
+conn = sqlite3.connect('regression_scores.db')
+c = conn.cursor()
+query = &quot;&quot;&quot; SELECT avg(predicted) as m, actual, doc_id FROM results GROUP BY doc_id; &quot;&quot;&quot;
+results_two_sided = c.execute(query).fetchall()
+results_two_sided_margins = [(i[0] - i[1]) for i in results_two_sided]
+pylab.rcParams['figure.figsize'] = (11, 6)
+sns.distplot(results_two_sided_margins)&lt;/p&gt;
+&lt;pre&gt;
+
+&lt;p&gt;We can now compute how far from the mean our outliers are. Anything more than 2.5 standard deviations from the mean should
+be immediately suspect. These would be good targets for additional scrutiny. (I've read that the MAD score or &quot;median absolute
+distance&quot; is a better way to detect fishy outliers but I'm sticking with standard deviation for the moment out of expediency).&lt;/p&gt;
+&lt;h3&gt;Visualizing Date Predictions&lt;/h3&gt;
+&lt;p&gt;At Keystone DH, I presented a static scatter plot of predicted dates vs. labeled dates based upon a far less successful date
+prediction model (based on neologism ratios instead of term frequencies).&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;lovecraft_machine_learn.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;People were interested in the visualization, but almost everyone I talked to wanted a way to look closer which texts were
+outliers. Scatter plots in matplotlib (which is how I made the plot) tend to be all or nothing in terms of labels, so I
+started thinking about how I could make an interactive web app to show the same kind of data. Here's what I came up with:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://neologophobia.thedatahumanist.website&quot; /&gt; Neologophobia Web Application&amp;lt;/a&amp;gt;&lt;/p&gt;
+&lt;p&gt;To make this interactive scatter plot, I've hijacked the Mapbox visualization codebase to and replaced the base map with
+graph lines. Mapbox.js handles the panning, zooming, and marker clustering. If you click on any cluser, the map will
+automatically zoom in and unpack the data data points. Clicking on any data point will open a document popup, and clicking
+the link on a popup will bring you to a landing page for that document.&lt;/p&gt;
+&lt;h3&gt;Outliers&lt;/h3&gt;
+&lt;p&gt;Visually, it's easy to spot totally bizarre results. Any plotted point that's on its own (not clustered with others is a clear
+outlier.) Still others can be identified by zooming in one step further. The closer a point is to the red-orange line, the
+less distance there is between the predicted date and the labeled date. For example, if you go to the web app and click on
+this point ...&lt;/p&gt;
+&lt;p&gt;... you will see that the document is Ludwig Geissler's &lt;em&gt;Looking Beyond&lt;/em&gt;. The predicted date is 1893, and the metadata
+lists it as a text published in 1971. This is one of the largest margins of error in the entire set. However, if we look up
+Ludwig Geissler's &lt;em&gt;Looking Beyond&lt;/em&gt;, we can easily discover that this work was in fact published in 1891.
+(See this &lt;a href=&quot;http://www.sf-encyclopedia.com/entry/geissler_ludwig_a&quot;&gt;SF Encyclopedia&lt;/a&gt; entry.) Our model has successfully
+located a metadata error.&lt;/p&gt;
+&lt;p&gt;Another example is &lt;em&gt;Weird Tidbits&lt;/em&gt;, New York, 1888, with a mean predicted date of 1848. Here the model might just be wrong,
+but it's worth noting that the volume was advertised as a five-volume collection of excerpts &quot;from various sources,&quot; so any
+number of these might be older than others.&lt;/p&gt;
+&lt;p&gt;My favorite example is &lt;em&gt;Madame de Maintenon&lt;/em&gt;, published in 1806, predicted at 1918, but with predictions all over the map
+(1998, 1796, etc.) if you look at the results data. Closer inspection of this document reveals that it is in French. The model
+assumes English language texts, so it's no wonder that this text is an outlier!&lt;/p&gt;
+&lt;h3&gt;Next steps&lt;/h3&gt;
+&lt;p&gt;The next step is to cull or relabel erroneous texts, retrain the model, and see how it performs. Once its date prediction
+accuracy seems stable, I'll start looking at the next set of outliers, whose status as such should have more literary
+or cultural significance.&lt;/p&gt;
+</content>
+  </entry>
   <entry xml:base="http://thedatahumanist.website/the-alice-problem/">
     <title type="text">The Alice Problem</title>
-    <id>urn:uuid:102d7d23-ed6a-3aa5-a525-4fe032c1af26</id>
+    <id>urn:uuid:ced982df-27c1-39dc-8403-d4292a4cc4bc</id>
     <updated>2016-12-15T00:00:00Z</updated>
     <link href="http://thedatahumanist.website/the-alice-problem/" />
     <author>
@@ -653,7 +981,7 @@ The real challenge is taking the time to share one's results with others. This i
   </entry>
   <entry xml:base="http://thedatahumanist.website/about/">
     <title type="text">About this Blog-like Thing</title>
-    <id>urn:uuid:3e8c2da0-a047-3687-93f8-1ba6e2f05a91</id>
+    <id>urn:uuid:25a52a2b-f8da-3fd2-99a5-3b6e5aa7b904</id>
     <updated>2016-09-01T00:00:00Z</updated>
     <link href="http://thedatahumanist.website/about/" />
     <author>
@@ -690,8 +1018,8 @@ September 2005, National Science Foundation, NSB-05-40.
   </entry>
   <entry xml:base="http://thedatahumanist.website/apps/">
     <title type="text">Interactives and Web Apps</title>
-    <id>urn:uuid:ac88eff5-c306-3975-8bf3-4908b5df08a4</id>
-    <updated>2016-12-16T22:38:57.482789Z</updated>
+    <id>urn:uuid:cc9faa1c-2bcb-3714-a3f8-57f43df5c851</id>
+    <updated>2017-05-30T19:47:37.106976Z</updated>
     <link href="http://thedatahumanist.website/apps/" />
     <author>
       <name></name>
