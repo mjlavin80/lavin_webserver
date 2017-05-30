@@ -304,13 +304,13 @@ distance&quot; is a better way to detect fishy outliers but I'm sticking with st
 &lt;h3&gt;Visualizing Date Predictions&lt;/h3&gt;
 &lt;p&gt;At Keystone DH, I presented a static scatter plot of predicted dates vs. labeled dates based upon a far less successful date
 prediction model (based on neologism ratios instead of term frequencies).&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;'/static/images/lovecraft_machine_learn.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/images/lovecraft_machine_learn.png&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;People were interested in the visualization, but almost everyone I talked to wanted a way to look closer which texts were
 outliers. Scatter plots in matplotlib (which is how I made the plot) tend to be all or nothing in terms of labels, so I
 started thinking about how I could make an interactive web app to show the same kind of data. Here's what I came up with:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://neologophobia.thedatahumanist.website&quot; /&gt; Neologophobia Web Application&amp;lt;/a&amp;gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://neologophobia.thedatahumanist.website&quot;&gt;Neologophobia Web Application&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;To make this interactive scatter plot, I've hijacked the Mapbox visualization codebase to and replaced the base map with
-graph lines. Mapbox.js handles the panning, zooming, and marker clustering. If you click on any cluser, the map will
+graph lines. Mapbox.js handles the panning, zooming, and marker clustering. If you click on any cluster, the map will
 automatically zoom in and unpack the data data points. Clicking on any data point will open a document popup, and clicking
 the link on a popup will bring you to a landing page for that document.&lt;/p&gt;
 &lt;h3&gt;Outliers&lt;/h3&gt;
@@ -1017,7 +1017,7 @@ September 2005, National Science Foundation, NSB-05-40.
   <entry xml:base="http://thedatahumanist.website/apps/">
     <title type="text">Interactives and Web Apps</title>
     <id>urn:uuid:cc9faa1c-2bcb-3714-a3f8-57f43df5c851</id>
-    <updated>2017-05-30T19:53:41.446670Z</updated>
+    <updated>2017-05-30T19:57:34.063645Z</updated>
     <link href="http://thedatahumanist.website/apps/" />
     <author>
       <name></name>
