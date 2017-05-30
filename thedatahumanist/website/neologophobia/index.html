@@ -351,6 +351,7 @@ prediction model (based on neologism ratios instead of term frequencies).</p>
 outliers. Scatter plots in matplotlib (which is how I made the plot) tend to be all or nothing in terms of labels, so I
 started thinking about how I could make an interactive web app to show the same kind of data. Here's what I came up with:</p>
 <p><a href="http://neologophobia.thedatahumanist.website">Neologophobia Web Application</a></p>
+<p><img src="/static/images/app_screen.png" /></p>
 <p>To make this interactive scatter plot, I've hijacked the Mapbox visualization codebase to and replaced the base map with
 graph lines. Mapbox.js handles the panning, zooming, and marker clustering. If you click on any cluster, the map will
 automatically zoom in and unpack the data data points. Clicking on any data point will open a document popup, and clicking
