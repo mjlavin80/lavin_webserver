@@ -49,7 +49,7 @@
   <div class="blog-post">
     <div class="blog-body">
   
-    <h2>Diagnosis: Neologophobia</h2>
+    <h2>Diagnosis: Neologophobia (Part 1 of ?)</h2>
   
   <p class="meta">
     Written By: 
@@ -131,7 +131,7 @@ because its textual features defy the norms of its historical period.</p>
 other authors of interest. Then I came upon Ted Underwood's "The Lifecycles of Genres" and realized that he'd shared publicly
 a dataset that I could use for my work and easily build upon. As a result, the methods I've been playing with are tested on
 this corpus of general metadata, genre tags (science fiction, crime/mystery, gothic/horror and non-genre) and term frequency
-tables for more than 950 novels. I was also able to use the same codebase for a conference paper on genre analysis at the
+tables for more than 950 novels. Here's <a href="https://github.com/tedunderwood/fiction">the repo</a>. I was also able to use the same codebase for a conference paper on genre analysis at the
 "How to Do Things with Millions of Words" conference in November 2016.</p>
 <p>Ted also shared his code. It focuses on using a logistic regression to make genre predicts, so it needed some adapting.
 I focused my edits on two fronts: designing my own tests and adding features that would make the code run faster.
@@ -193,12 +193,14 @@ in terms of efficiency. This part of code takes several minutes to run but, now 
 saved as a set of pickles, you can load those files instead of reloading and reprocessing the text files
 every time you run a regression.</p>
 <h3>C10H15N + OD = Method? (That Title is the Worst Joke I've Ever Thought Of)</h3>
-<p>Methods overall:
-  Germanic-latinate ratio, dictionary.com
-  Walker ratio
-Linear regression
-Show code
-hold out number ... train set = 500</p>
+<p>So far, in one form or another, I've played with characterizing a text's date by looking at its Germanic-Latinate word origin ratio (using dictionary.com word origin data
+from Underwood and Sellers' work and a scraped dataset from the OED Online); calculating a "Walker ratio" by seeing how many words in a text are also in an OCRed version of
+<em>Walker's Dictionary</em>, and various machine learning methods, including linear regression. In this version of the code,</p>
+<p>Whenever you run a supervised learning model, it's typical to partition your dataset into a training set and test set.
+You train the model one partition (term counts and dates) and test your data on the other partition, feeding it only term counts
+and generating predicted dates. You can then compare the predicted dates to the labeled dates for your test set to see
+how accurate your model is. My code achieves this task by generating 500 random numbers to indicate which texts will be in the training
+set.</p>
 <pre>
 from random import shuffle
 import pickle
@@ -296,13 +298,7 @@ def store_results(main_row, result_rows):
         c.execute(insert_result, new_row)
     conn.commit()
 </pre><h3>Shuffle Up and Deal</h3>
-<p>Randomization, round robin
-Whenever you run a supervised learning model, it's typical to partition your dataset into a training set and test set.
-You train the model one partition (term counts and dates) and test your data on the other partition, feeding it only term counts
-and generating predicted dates. You can then compare the predicted dates to the labeled dates for your test set to see
-how accurate your model is. My code achieves this task by generating 500 random numbers to indicate which texts will be in the training
-set.</p>
-<p>In many cases, however, it's best to add second layer of randomness. Instead of simply partitioning your data once and checking your
+<p>In many cases, it's best to add second layer of randomness. Instead of simply partitioning your data once and checking your
 performance, you can run the model and collect results, then shuffle up the memberships of test and train and re-run. If you go through this
 process enough times, you start to get a sense of which random arrangements of the training set might be outliers when compared with all the
 other potential arrangements. Since my regression function will shuffle train and test automatically each time it is run, the code to
