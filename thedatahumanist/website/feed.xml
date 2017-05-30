@@ -17,7 +17,8 @@
     <author>
       <name>Matt Lavin</name>
     </author>
-    <content type="html">&lt;h3&gt;A Provocation&lt;/h3&gt;
+    <content type="html">&lt;p&gt;&lt;img src=&quot;/static/images/app_screen.png&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;A Provocation&lt;/h3&gt;
 &lt;p&gt;With the spring semester over, I've been coming back to a project I haven't worked on in almost a year.
 It originated with my collaboration with Alex Gladwin and Dan Look on H.P. Lovecraft's role in revising C.M. Eddy's
 &quot;The Loved Dead.&quot; Sometime during that collaboration, Dan mentioned to us that Lovecraft had said in a letter that
@@ -305,7 +306,6 @@ prediction model (based on neologism ratios instead of term frequencies).&lt;/p&
 outliers. Scatter plots in matplotlib (which is how I made the plot) tend to be all or nothing in terms of labels, so I
 started thinking about how I could make an interactive web app to show the same kind of data. Here's what I came up with:&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://neologophobia.thedatahumanist.website&quot;&gt;Neologophobia Web Application&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/static/images/app_screen.png&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;To make this interactive scatter plot, I've hijacked the Mapbox visualization codebase to and replaced the base map with
 graph lines. Mapbox.js handles the panning, zooming, and marker clustering. If you click on any cluster, the map will
 automatically zoom in and unpack the data data points. Clicking on any data point will open a document popup, and clicking
@@ -321,8 +321,8 @@ Ludwig Geissler's &lt;em&gt;Looking Beyond&lt;/em&gt;, we can easily discover th
 (See this &lt;a href=&quot;http://www.sf-encyclopedia.com/entry/geissler_ludwig_a&quot;&gt;SF Encyclopedia&lt;/a&gt; entry.) Our model has successfully
 located a metadata error.&lt;/p&gt;
 &lt;p&gt;Another example is &lt;em&gt;Weird Tidbits&lt;/em&gt;, New York, 1888, with a mean predicted date of 1848. Here the model might just be wrong,
-but it's worth noting that the volume was advertised as a five-volume collection of excerpts &quot;from various sources,&quot; so any
-number of these might be older than others.&lt;/p&gt;
+but it's worth noting that it seems to have been advertised as a five-volume collection of pieces &quot;from various sources,&quot; so any
+number of these might be older than others (See &quot;Books Wanted,&quot; &lt;em&gt;Publisher's Weekly&lt;/em&gt;, July 22, 1905. 138.). Further inspection is warranted here, of course.&lt;/p&gt;
 &lt;p&gt;My favorite example is &lt;em&gt;Madame de Maintenon&lt;/em&gt;, published in 1806, predicted at 1918, but with predictions all over the map
 (1998, 1796, etc.) if you look at the results data. Closer inspection of this document reveals that it is in French. The model
 assumes English language texts, so it's no wonder that this text is an outlier!&lt;/p&gt;
@@ -1014,12 +1014,15 @@ September 2005, National Science Foundation, NSB-05-40.
   <entry xml:base="http://thedatahumanist.website/apps/">
     <title type="text">Interactives and Web Apps</title>
     <id>urn:uuid:cc9faa1c-2bcb-3714-a3f8-57f43df5c851</id>
-    <updated>2017-05-30T20:26:48.816580Z</updated>
+    <updated>2017-05-30T20:42:40.282476Z</updated>
     <link href="http://thedatahumanist.website/apps/" />
     <author>
       <name></name>
     </author>
     <content type="html">&lt;p&gt;Because I've elected to present my work as a blog with an RSS feed, I will from time to time use this space to publish more complex standalone web applications.&lt;/p&gt;
-</content>
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://neologophobia.thedatahumanist.website&quot;&gt;Neologophobia Browser&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content>
   </entry>
 </feed>

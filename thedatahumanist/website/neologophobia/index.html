@@ -59,7 +59,8 @@
     Published On: June 01, 2017
   </p>
 
-  <h3>A Provocation</h3>
+  <p><img src="/static/images/app_screen.png" /></p>
+<h3>A Provocation</h3>
 <p>With the spring semester over, I've been coming back to a project I haven't worked on in almost a year.
 It originated with my collaboration with Alex Gladwin and Dan Look on H.P. Lovecraft's role in revising C.M. Eddy's
 "The Loved Dead." Sometime during that collaboration, Dan mentioned to us that Lovecraft had said in a letter that
@@ -347,7 +348,6 @@ prediction model (based on neologism ratios instead of term frequencies).</p>
 outliers. Scatter plots in matplotlib (which is how I made the plot) tend to be all or nothing in terms of labels, so I
 started thinking about how I could make an interactive web app to show the same kind of data. Here's what I came up with:</p>
 <p><a href="http://neologophobia.thedatahumanist.website">Neologophobia Web Application</a></p>
-<p><img src="/static/images/app_screen.png" /></p>
 <p>To make this interactive scatter plot, I've hijacked the Mapbox visualization codebase to and replaced the base map with
 graph lines. Mapbox.js handles the panning, zooming, and marker clustering. If you click on any cluster, the map will
 automatically zoom in and unpack the data data points. Clicking on any data point will open a document popup, and clicking
@@ -363,8 +363,8 @@ Ludwig Geissler's <em>Looking Beyond</em>, we can easily discover that this work
 (See this <a href="http://www.sf-encyclopedia.com/entry/geissler_ludwig_a">SF Encyclopedia</a> entry.) Our model has successfully
 located a metadata error.</p>
 <p>Another example is <em>Weird Tidbits</em>, New York, 1888, with a mean predicted date of 1848. Here the model might just be wrong,
-but it's worth noting that the volume was advertised as a five-volume collection of excerpts "from various sources," so any
-number of these might be older than others.</p>
+but it's worth noting that it seems to have been advertised as a five-volume collection of pieces "from various sources," so any
+number of these might be older than others (See "Books Wanted," <em>Publisher's Weekly</em>, July 22, 1905. 138.). Further inspection is warranted here, of course.</p>
 <p>My favorite example is <em>Madame de Maintenon</em>, published in 1806, predicted at 1918, but with predictions all over the map
 (1998, 1796, etc.) if you look at the results data. Closer inspection of this document reveals that it is in French. The model
 assumes English language texts, so it's no wonder that this text is an outlier!</p>
