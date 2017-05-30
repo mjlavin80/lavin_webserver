@@ -289,7 +289,7 @@ distribution.&lt;/p&gt;
 &lt;p&gt;What we see here is something resembling normal distribution. The peak in the middle is higher than you would expect
 of a normal distribution (or more kurtotic in stat-speak), and there are some extreme outliers if you look at either tail.
 Since we're grabbing values from our database, the code to generate this plot is as simple as:&lt;/p&gt;
-&lt;p&gt;&lt;pre&gt;
+&lt;pre&gt;
 import seaborn as sns
 conn = sqlite3.connect('regression_scores.db')
 c = conn.cursor()
@@ -297,16 +297,14 @@ query = &quot;&quot;&quot; SELECT avg(predicted) as m, actual, doc_id FROM resul
 results_two_sided = c.execute(query).fetchall()
 results_two_sided_margins = [(i[0] - i[1]) for i in results_two_sided]
 pylab.rcParams['figure.figsize'] = (11, 6)
-sns.distplot(results_two_sided_margins)&lt;/p&gt;
-&lt;pre&gt;
-
-&lt;p&gt;We can now compute how far from the mean our outliers are. Anything more than 2.5 standard deviations from the mean should
+sns.distplot(results_two_sided_margins)
+&lt;/pre&gt;&lt;p&gt;We can now compute how far from the mean our outliers are. Anything more than 2.5 standard deviations from the mean should
 be immediately suspect. These would be good targets for additional scrutiny. (I've read that the MAD score or &quot;median absolute
 distance&quot; is a better way to detect fishy outliers but I'm sticking with standard deviation for the moment out of expediency).&lt;/p&gt;
 &lt;h3&gt;Visualizing Date Predictions&lt;/h3&gt;
 &lt;p&gt;At Keystone DH, I presented a static scatter plot of predicted dates vs. labeled dates based upon a far less successful date
 prediction model (based on neologism ratios instead of term frequencies).&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;lovecraft_machine_learn.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;'/static/images/lovecraft_machine_learn.png&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;People were interested in the visualization, but almost everyone I talked to wanted a way to look closer which texts were
 outliers. Scatter plots in matplotlib (which is how I made the plot) tend to be all or nothing in terms of labels, so I
 started thinking about how I could make an interactive web app to show the same kind of data. Here's what I came up with:&lt;/p&gt;
@@ -1019,7 +1017,7 @@ September 2005, National Science Foundation, NSB-05-40.
   <entry xml:base="http://thedatahumanist.website/apps/">
     <title type="text">Interactives and Web Apps</title>
     <id>urn:uuid:cc9faa1c-2bcb-3714-a3f8-57f43df5c851</id>
-    <updated>2017-05-30T19:47:37.106976Z</updated>
+    <updated>2017-05-30T19:53:41.446670Z</updated>
     <link href="http://thedatahumanist.website/apps/" />
     <author>
       <name></name>
