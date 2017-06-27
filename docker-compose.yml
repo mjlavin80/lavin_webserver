@@ -19,6 +19,12 @@ services:
     links:
       - flask_base
 
+  compvolution:
+    build: ./compvolution
+    container_name: compvolution
+    links:
+      - flask_base
+
   matthew-lavin:
     build: ./matthew-lavin
     container_name: matthew-lavin
