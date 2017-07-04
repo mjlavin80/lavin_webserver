@@ -86,21 +86,6 @@ class Reading(db.Model):
     def __repr__(self):
         return '<Reading %r %r >' % (self.last_name, self.article_title)
 
-class Basics(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    instructor = db.Column(db.String(128))
-    office = db.Column(db.String(128))
-    office_hours = db.Column(db.String(128))
-    email = db.Column(db.String(128))
-    zotero = db.Column(db.String(500))
-    github = db.Column(db.String(500))
-    hypoth = db.Column(db.String(500))
-    course_name = db.Column(db.String(512))
-    course_description = db.Column(db.String(9999))
-    semester_year = db.Column(db.String(128))
-    department = db.Column(db.String(128))
-    institution = db.Column(db.String(128))
-
 class Policy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(128))
@@ -115,3 +100,22 @@ class Activity(db.Model):
 
     def __repr__(self):
         return '<Activity %r %r >' % (self.link, self.description)
+
+class Collection(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+class Basics(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    instructor = db.Column(db.String(128))
+    office = db.Column(db.String(128))
+    office_hours = db.Column(db.String(128))
+    email = db.Column(db.String(128))
+    zotero = db.Column(db.String(500))
+    github = db.Column(db.String(500))
+    hypoth = db.Column(db.String(500))
+    course_name = db.Column(db.String(512))
+    course_description = db.Column(db.String(9999))
+    semester_year = db.Column(db.String(128))
+    department = db.Column(db.String(128))
+    institution = db.Column(db.String(128))

@@ -297,6 +297,8 @@ def authorized(access_token):
         user = User(access_token)
         db.session.add(user)
     user.github_access_token = access_token
+    c_u = github.get('user')
+    user.username = c_u['login']
     db.session.commit()
 
     session['user_id'] = user.id
@@ -317,7 +319,6 @@ def logout():
 
 @app.route('/status')
 def status(message=""):
-    """
     try:
         c_u = github.get('user')
         if str(c_u['login']) == str(GITHUB_ADMIN):
@@ -333,7 +334,6 @@ def status(message=""):
             message="in"
         else:
             message="out"
-    """
     user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
     user.authenticated = True
     db.session.add(user)
