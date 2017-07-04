@@ -55,7 +55,7 @@ class ModelViewUser(ModelView):
         form.password.data = '[current password hidden]'
     def on_model_change(self, form, User, is_created=False):
         a = b.hashpw(form.password.data.encode('utf8'), b.gensalt())
-        User.password = a
+        AdminUser.password = a
     def is_accessible(self):
         if current_user.is_authenticated and current_user.is_admin:
             return current_user.is_authenticated
@@ -293,7 +293,7 @@ def authorized(access_token):
         return redirect(next_url)
     user = GithubToken.query.filter_by(github_access_token=access_token).first()
     if user is None:
-        user = User(access_token)
+        user = GithubToken(access_token)
         db.session.add(user)
     user.github_access_token = access_token
     db.session.commit()
