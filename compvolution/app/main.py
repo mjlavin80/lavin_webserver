@@ -297,11 +297,10 @@ def authorized(access_token):
         user = User(access_token)
         db.session.add(user)
     user.github_access_token = access_token
-    try:
-        c_u = g.user
-        user.username = c_u['login']
-    except:
-        pass
+    db.session.commit()
+    c_u = github.get('user')
+    user_name = str(c_u['login'])
+    user.username = user_name
     db.session.commit()
     session['user_id'] = user.id
     return redirect(url_for('status'))
