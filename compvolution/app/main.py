@@ -298,7 +298,7 @@ def authorized(access_token):
     user.github_access_token = access_token
     db.session.commit()
     c_u = github.get('user')
-    print(str(c_u['login'])
+    print(str(c_u['login']))
     try:
         user_name = str(c_u['login'])
         user.username = user_name
