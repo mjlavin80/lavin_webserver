@@ -2,9 +2,13 @@ from application import db
 
 class User(db.Model):
     __tablename__ = 'users'
-
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(200))
+        
+class GithubToken(db.Model):
+    __tablename__ = 'tokens'
+
+    id = db.Column(db.Integer, primary_key=True)
     github_access_token = db.Column(db.String(200))
 
     def __init__(self, github_access_token):
