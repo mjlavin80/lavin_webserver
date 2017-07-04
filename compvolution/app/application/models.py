@@ -4,7 +4,7 @@ class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(200))
-        
+
 class GithubToken(db.Model):
     __tablename__ = 'tokens'
 
@@ -64,6 +64,8 @@ class Week(db.Model):
 
 class Assignment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    public = db.Column(db.String(128))
     title = db.Column(db.String(128))
     submit_instructions = db.Column(db.String(128))
     slug = db.Column(db.String(128))
@@ -76,6 +78,8 @@ class Assignment(db.Model):
 
 class Reading(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    public = db.Column(db.String(128))
     last_name = db.Column(db.String(50))
     first_name = db.Column(db.String(50))
     page_range = db.Column(db.String(50))
@@ -92,11 +96,13 @@ class Reading(db.Model):
 
 class Policy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     title = db.Column(db.String(128))
     description = db.Column(db.String(9999))
 
 class Activity(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     order = db.Column(db.String(100))
     link = db.Column(db.String(500))
     description = db.Column(db.String(9999))
@@ -108,9 +114,16 @@ class Activity(db.Model):
 class Collection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    public = db.Column(db.String(128))
+    target_table = db.Column(db.String(200))
+    target_id = db.Column(db.Integer)
+    order = db.Column(db.String(100))
+
 
 class Basics(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    public = db.Column(db.String(128))
     instructor = db.Column(db.String(128))
     office = db.Column(db.String(128))
     office_hours = db.Column(db.String(128))
