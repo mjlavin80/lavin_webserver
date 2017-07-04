@@ -272,7 +272,7 @@ def coming_soon():
 def before_request():
     g.user = None
     if 'user_id' in session:
-        g.user = User.query.get(session['user_id'])
+        g.user = GithubToken.query.get(session['user_id'])
 
 @app.after_request
 def after_request(response):
@@ -291,7 +291,7 @@ def authorized(access_token):
     next_url = request.args.get('next') or url_for('index')
     if access_token is None:
         return redirect(next_url)
-    user = User.query.filter_by(github_access_token=access_token).first()
+    user = GithubToken.query.filter_by(github_access_token=access_token).first()
     if user is None:
         user = User(access_token)
         db.session.add(user)
