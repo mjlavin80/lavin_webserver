@@ -311,6 +311,10 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('user_id', None)
+    try:
+        logout_user()
+    except:
+        pass
     return redirect(url_for('index'))
 
 @app.route('/status')
