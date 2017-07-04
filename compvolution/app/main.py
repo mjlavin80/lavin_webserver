@@ -121,7 +121,6 @@ def include_site_data(fn):
 @app.route("/")
 @include_site_data
 def index():
-    print(current_user)
     return render_template("index.html")
 
 @app.route("/policies")
@@ -299,6 +298,7 @@ def authorized(access_token):
     user.github_access_token = access_token
     db.session.commit()
     c_u = github.get('user')
+    print(str(c_u['login'])
     try:
         user_name = str(c_u['login'])
         user.username = user_name
@@ -362,6 +362,6 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 80))
     #for production
     #app.run(host='0.0.0.0', port=port)
-    app.run(port=443, ssl_context=('cert.pem', 'key.pem'))
+    #app.run(port=443, ssl_context=('cert.pem', 'key.pem'))
     #for dev
-    #app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
