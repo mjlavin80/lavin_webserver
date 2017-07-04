@@ -1,5 +1,6 @@
 .DS_Store
 *.pyc
+*.pem
 .env
 config.py
 user_create.py
