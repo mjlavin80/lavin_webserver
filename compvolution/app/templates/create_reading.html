@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+  <h3>Create Course Materials</h3>
+  <hr>
+<div class="row">
+
+  <div class="col-lg-12">
+
+    <form method="POST" action="{{url_for('processor', resource_type='reading')}}">
+        {{ createreadingform.hidden_tag()}}
+        <div class="col-lg-12"><h4>New {{resource_type.capitalize() }}</h4></div>
+        <div class="col-md-12 form_row">Privacy<span class="required"> *</span></div>
+        <div class="col-md-10 form_row">{{ createreadingform.public(class_="form-control") }}</div>
+
+        <div class="col-md-12 form_row">Last Name</div>
+        <div class="col-md-10 form_row">{{ createreadingform.last_name(class_="form-control") }}</div>
+
+        <div class="col-md-12 form_row">First Name</div>
+        <div class="col-md-6 form_row">{{ createreadingform.first_name(class_="form-control") }}</div>
+
+        <div class="col-md-12 form_row">Page Range</div>
+        <div class="col-md-10 form_row">{{ createreadingform.page_range(class_="form-control") }}</div>
+
+        <div class="col-md-12 form_row">Publisher</div>
+        <div class="col-md-10 form_row">{{ createreadingform.publisher(class_="form-control") }}</div>
+
+        <div class="col-md-12 form_row">Publication Date</div>
+        <div class="col-md-10 form_row">{{ createreadingform.pubdate(class_="form-control") }}</div>
+
+        <div class="col-md-12 form_row">Publication Place</div>
+        <div class="col-md-10 form_row">{{ createreadingform.pubplace(class_="form-control") }}</div>
+
+        <div class="col-md-12 form_row">Article Title (if applicable)</div>
+        <div class="col-md-10 form_row">{{ createreadingform.article_title(class_="form-control") }}</div>
+
+        <div class="col-md-12 form_row">Book or Periodical Title</div>
+        <div class="col-md-10 form_row">{{ createreadingform.book_title(class_="form-control") }}</div>
+
+        <div class="col-md-12 form_row">Reading Link</div>
+        <div class="col-md-10 form_row">{{ createreadingform.link(class_="form-control") }}</div>
+
+      <div id="submit" class="col-md-12 form_row"><input class="btn btn-primary" type="submit" value="Create"></div>
+  </form>
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}

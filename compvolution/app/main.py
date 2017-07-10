@@ -4,7 +4,8 @@ from flask_admin.contrib.sqla import ModelView
 import os
 from application.models import *
 from application import db
-from application.forms import LoginForm
+from application.forms import *
+from application.form_processors import *
 from flask_login import login_required
 from flask_login import LoginManager, login_user, logout_user, current_user
 from flask_migrate import Migrate
@@ -13,14 +14,8 @@ from flask.ext.admin.base import MenuLink
 from wtforms.fields import TextAreaField
 from flask.ext.github import GitHub
 from config import GITHUB_ADMIN
-
-def compile_errors(form):
-    errs = []
-    for field, errors in form.errors.items():
-        for error in errors:
-            text = u"Error in the %s field - %s" % (getattr(form, field).label.text, error)
-            errs.append(text)
-    return errs
+from sqlalchemy.sql import and_
+import json
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -179,7 +174,7 @@ def planner():
 
     last_due = find_assignment(days_before)
     next_due = find_assignment(days_after, mode='after')
-    print(next_due)
+
     try:
         _next_three = days_after[0:3]
     except:
@@ -250,11 +245,117 @@ def readings():
         readings = []
     return render_template("readings.html", readings=readings)
 
-@app.route("/bibliography")
+@app.route("/processor", methods=["GET", "POST"])
+@app.route("/processor/<resource_type>", methods=["GET", "POST"])
 @include_site_data
-def biblio():
-    #get items from Zotero
-    return render_template("bibliography.html")
+def processor(resource_type=None):
+    valid = False
+    if resource_type:
+        if resource_type=="activity":
+            createform = CreateActivity(request.form)
+            if createform.validate():
+                new = Activity()
+                valid=True
+        if resource_type=="reading":
+            createform = CreateReading(request.form)
+            if createform.validate():
+                new = Reading()
+                valid=True
+        if resource_type=="assignment":
+            createform = CreateAssignment(request.form)
+            if createform.validate():
+                new = Assignment()
+                valid=True
+        if resource_type=="collection":
+            createform = CreateCollection(request.form)
+            collection_items = request.form["coll_data"]
+            if createform.validate():
+                new = Collection()
+                valid=True
+
+
+        if valid==True:
+            createform.populate_obj(new)
+            #get current_user id
+            #make into a function
+            try:
+                u_id = get_current_user_id()
+            except:
+                #add user data to Activity
+                u_id = 11
+                new.user_id = u_id
+
+            db.session.add(new)
+            db.session.commit()
+            #ad hoc rules for collection
+            if resource_type=="collection":
+                #process extra form data
+                collection_items = json.loads(collection_items)
+                for h, i in enumerate(collection_items):
+
+                    _type, _id = i.split('-')
+                    type_dict = {"activity": Activity(), "assignment": Assignment(), "reading": Reading()}
+                    #get the object
+                    if new.public=="2":
+                        child_content = type_dict[_type].query.filter_by(id=_id).first()
+                        child_content.public = "2"
+                        db.session.add(child_content)
+                        db.session.commit()
+                    new_coll_item = CollectionItems()
+                    new_coll_item.collection_id = new.id
+                    new_coll_item.target_table = _type
+                    new_coll_item.target_id = _id
+                    new_coll_item.order = h
+                    db.session.add(new_coll_item)
+                    db.session.commit()
+            return render_template("processor.html", status="success")
+        else:
+            errors = compile_errors(createform)
+            return render_template("processor.html", status="error", errors=errors)
+
+@app.route("/create", methods=["GET", "POST"])
+@app.route("/create/<resource_type>", methods=["GET", "POST"])
+@include_site_data
+def create(resource_type=None):
+    #handle form selection
+    rtype=None
+    if request.method == "POST":
+        rtype=request.form["type"]
+    if rtype:
+        return redirect(url_for('create', resource_type=rtype))
+    if resource_type:
+        if resource_type=="activity":
+            createactivityform = CreateActivity(request.form)
+            return render_template("create_activity.html", resource_type=resource_type, createactivityform=createactivityform)
+        if resource_type=="reading":
+            createreadingform = CreateReading(request.form)
+            return render_template("create_reading.html", resource_type=resource_type, createreadingform=createreadingform)
+        if resource_type=="assignment":
+            createassignmentform = CreateAssignment(request.form)
+            return render_template("create_assignment.html", resource_type=resource_type, createassignmentform=createassignmentform)
+        if resource_type=="collection":
+            createcollectionform = CreateCollection(request.form)
+            try:
+                u_id = get_current_user_id()
+            except:
+                #add user data to Activity
+                u_id = 11
+            # my readings
+            readings = Reading.query.filter(Reading.user_id==u_id).all()
+            # my assignments
+            assignments = Assignment.query.filter(Assignment.user_id==u_id).all()
+            # my activities
+            activities = Activity.query.filter(Activity.user_id==u_id).all()
+            # public content
+            p_r = Reading.query.filter(and_(Reading.public==str(2), Reading.user_id != u_id)).all()
+            p_as = Assignment.query.filter(and_(Assignment.public==str(2), Assignment.user_id != u_id)).all()
+            p_act = Activity.query.filter(and_(Activity.public==str(2), Activity.user_id != u_id)).all()
+            public = {"readings":p_r, "assignments":p_as, "activities":p_act}
+            all_content = {"readings":readings, "assignments":assignments, "activities": activities, "public": public}
+
+            return render_template("create_collection.html", resource_type=resource_type, all_content=all_content, createcollectionform=createcollectionform)
+    else:
+        return render_template("create.html", resource_type=resource_type)
 
 @app.route('/protected/<path:filename>')
 @include_site_data

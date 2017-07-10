@@ -1,4 +1,15 @@
 from application import db
+from wtforms import fields, widgets
+
+# Define wtforms widget and field
+class CKTextAreaWidget(widgets.TextArea):
+    def __call__(self, field, **kwargs):
+        kwargs.setdefault('class_', 'ckeditor')
+        return super(CKTextAreaWidget, self).__call__(field, **kwargs)
+
+class CKTextAreaField(fields.TextAreaField):
+    widget = CKTextAreaWidget()
+
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -62,14 +73,21 @@ class Week(db.Model):
     def __repr__(self):
         return '<Week %r %r >' % (self.week_number, self.week_topic)
 
-class Assignment(db.Model):
+class Policy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     public = db.Column(db.String(128))
     title = db.Column(db.String(128))
-    submit_instructions = db.Column(db.String(128))
-    slug = db.Column(db.String(128))
     description = db.Column(db.String(9999))
+
+class Assignment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    public = db.Column(db.String(128))
+    title = db.Column(db.String(128), nullable=False)
+    submit_instructions = db.Column(db.String(128), nullable=False)
+    slug = db.Column(db.String(128))
+    description = db.Column(db.String(9999),info={'widget': CKTextAreaWidget()}, nullable=False)
     link_title = db.Column(db.String(128))
     day_id = db.Column(db.Integer, db.ForeignKey('day.id'))
     text_date = db.Column(db.String(128))
@@ -79,7 +97,7 @@ class Assignment(db.Model):
 class Reading(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    public = db.Column(db.String(128))
+    public = db.Column(db.String(128), nullable=False)
     last_name = db.Column(db.String(50))
     first_name = db.Column(db.String(50))
     page_range = db.Column(db.String(50))
@@ -94,18 +112,14 @@ class Reading(db.Model):
     def __repr__(self):
         return '<Reading %r %r >' % (self.last_name, self.article_title)
 
-class Policy(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    title = db.Column(db.String(128))
-    description = db.Column(db.String(9999))
-
 class Activity(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    public = db.Column(db.String(128), nullable=False)
+    title = db.Column(db.String(500), nullable=False)
+    description = db.Column(db.String(9999),info={'widget': CKTextAreaWidget()}, nullable=False)
     order = db.Column(db.String(100))
     link = db.Column(db.String(500))
-    description = db.Column(db.String(9999))
     day_id = db.Column(db.Integer, db.ForeignKey('day.id'))
 
     def __repr__(self):
@@ -114,16 +128,19 @@ class Activity(db.Model):
 class Collection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    public = db.Column(db.String(128))
-    target_table = db.Column(db.String(200))
-    target_id = db.Column(db.Integer)
-    order = db.Column(db.String(100))
+    title = db.Column(db.String(999), nullable=False)
+    public = db.Column(db.String(128), nullable=False)
 
+class CollectionItems(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    collection_id = db.Column(db.Integer, db.ForeignKey('collection.id'), nullable=False)
+    target_table = db.Column(db.String(200), nullable=False)
+    target_id = db.Column(db.Integer, nullable=False)
+    order = db.Column(db.String(100), nullable=False)
 
 class Basics(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    public = db.Column(db.String(128))
     instructor = db.Column(db.String(128))
     office = db.Column(db.String(128))
     office_hours = db.Column(db.String(128))
