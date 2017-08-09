@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+  <h3>Create Course Materials</h3>
+  <hr>
+<div class="row">
+  <div class="col-lg-12">
+
+    <form method="POST" action="{{url_for('processor', resource_type='activity')}}">
+        {{ createactivityform.hidden_tag()}}
+        <div class="col-lg-12"><h4>New {{resource_type.capitalize() }}</h4></div>
+        <div class="col-md-12 form_row">Privacy<span class="required"> *</span></div>
+        <div class="col-md-6 form_row">{{ createactivityform.public(class_="form-control") }}</div>
+
+        <div class="col-md-12 form_row">Activity Title<span class="required"> *</span></div>
+        <div class="col-md-10 form_row">{{ createactivityform.title(class_="form-control") }}</div>
+
+        <div class="col-md-12 form_row">Activity Description<span class="required"> *</span></div>
+        <div class="col-md-10 form_row">{{ createactivityform.description }}</div>
+
+        <div class="col-md-12 form_row">Activity Link</div>
+        <div class="col-md-10 form_row">{{ createactivityform.link(class_="form-control") }}</div>
+
+
+
+      <div id="submit" class="col-md-12 form_row"><input class="btn btn-primary" type="submit" value="Create"></div>
+</form>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}

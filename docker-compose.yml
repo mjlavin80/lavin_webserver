@@ -18,6 +18,9 @@ services:
       - nt_spring_2017
       - neo_web_app
       - faculty_activity
+      - mtb_fall_2017
+      - cdm_spring_2018
+      - nt_spring_2018
 
   flask_base:
     build: ./flaskbase
@@ -33,7 +36,7 @@ services:
   compvolution:
     build: ./compvolution
     container_name: compvolution
-    ports: 
+    ports:
       - "443:443"
     links:
       - flask_base
@@ -73,5 +76,23 @@ services:
   nt_spring_2017:
     build: ./courses/nt_spring_2017
     container_name: nt_spring_2017
+    links:
+      - flask_base
+
+  mtb_fall_2017:
+    build: ./courses/mtb_fall_2017
+    container_name: mtb_fall_2017
+    links:
+      - flask_base
+
+  cdm_spring_2018:
+    build: ./courses/cdm_spring_2018
+    container_name: cdm_spring_2018
+    links:
+      - flask_base
+
+  nt_spring_2018:
+    build: ./courses/nt_spring_2018
+    container_name: nt_spring_2018
     links:
       - flask_base

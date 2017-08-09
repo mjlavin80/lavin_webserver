@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+    <html>
+      <head>
+        <title>{{basics.course_name}}, {{basics.semester_year}}</title>
+        <meta charset="utf-8" />
+        <link type="text/css" rel="stylesheet" href="/static/dist/css/bootstrap.css" />
+        <link type="text/css" rel="stylesheet" href="/static/style.css" />
+        <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+        <script src="/static/js/jquery1.11.3/jquery.min.js"></script>
+        <script src="/static/js/ckeditor/ckeditor.js"></script>
+
+
+      </head>
+
+      <body>
+              {%block menu %} {% endblock %}
+              <!-- Begin page content -->
+              <div class="container">
+
+                {% block content %} {% endblock %}</div>
+
+
+              {%block footer%} {%endblock%}
+
+          <!-- JavaScript -->
+
+          <script src="/static/dist/js/bootstrap.js"></script>
+          {% block custom_script %} {% endblock %}
+      </body>
+    </html>

@@ -39,7 +39,7 @@ def handle_tags_on_edit(tag_list, ins):
             db.session.commit()
         except:
             db.session.rollback()
-            
+
     for a_tag in suggested_tags:
         #check for tag in db
         newtag = Tag.query.filter(Tag.tagname==a_tag).one_or_none()
