@@ -1,9 +1,9 @@
-from flask.ext.wtf import Form, RecaptchaField
+from flask_wtf import Form, RecaptchaField
 from wtforms import TextField, PasswordField, SubmitField, SelectField, BooleanField, HiddenField, validators
 #from wtforms.widgets import TextArea
 from application.models import *
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
-from flask.ext.wtf import Form
+from flask_wtf import Form
 from wtforms_alchemy import ModelFieldList, model_form_factory
 from wtforms.fields import FormField
 #from wtforms_alchemy import ModelForm

@@ -2,8 +2,8 @@ from flask_admin import AdminIndexView, BaseView, expose
 from application.forms import *
 from application.models import *
 from flask import Flask, render_template, request, redirect, url_for, flash
-from flask.ext.bcrypt import Bcrypt
-from flask.ext.login import LoginManager, login_user, logout_user, current_user
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager, login_user, logout_user, current_user
 from application import app, db
 from flask_admin.contrib.sqla import ModelView
 
