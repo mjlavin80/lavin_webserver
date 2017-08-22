@@ -12,7 +12,7 @@
 {% for week in weeks %}
 <h4>{{ week.week_number }}: {{ week.week_topic }}</h4>
 
-{% for day in week.days %}
+{% for day in week.days|sort(attribute='id') %}
 <div class="list-group">
 <div class="list-group-item active">
 {{ day.name }}</div>
