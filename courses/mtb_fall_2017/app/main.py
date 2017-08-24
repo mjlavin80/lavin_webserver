@@ -232,6 +232,22 @@ def assignments(this_assignment="all"):
         a = Assignment.query.all()
         return render_template("assignments.html", assignments=a, this_assignment="all")
 
+@app.route("/activities/<this_activity>")
+@app.route("/activities")
+@include_site_data
+def calendar(this_activity="all"):
+    if this_activity != "all"
+        #get activity from db
+        a = Activity.query.filter(Activity.id == this_activity).one_or_none()
+        if a:
+            return render_template("activities.html", activities=[], this_activity=a)
+        else:
+            a = Activity.query.order_by(Activity.day.id).all()
+            return render_template("activities.html", activities=a, this_activity="all")
+    else:
+        a = Activity.query.order_by(Activity.day.id).all()
+        return render_template("activities.html", activities=a, this_activity="all")
+
 @app.route("/readings")
 @include_site_data
 def readings():
