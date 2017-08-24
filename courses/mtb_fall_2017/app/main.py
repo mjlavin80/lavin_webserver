@@ -235,17 +235,19 @@ def assignments(this_assignment="all"):
 @app.route("/activities/<this_activity>")
 @app.route("/activities")
 @include_site_data
-def calendar(this_activity="all"):
-    if this_activity != "all"
+def activities(this_activity="all"):
+    if this_activity != "all":
         #get activity from db
         a = Activity.query.filter(Activity.id == this_activity).one_or_none()
         if a:
             return render_template("activities.html", activities=[], this_activity=a)
         else:
-            a = Activity.query.order_by(Activity.day.id).all()
+            a = Activity.query.all()
+            a.sort(key=lambda x: x.day.id)
             return render_template("activities.html", activities=a, this_activity="all")
     else:
-        a = Activity.query.order_by(Activity.day.id).all()
+        a = Activity.query.all()
+        a.sort(key=lambda x: x.day.id)
         return render_template("activities.html", activities=a, this_activity="all")
 
 @app.route("/readings")
@@ -478,6 +480,6 @@ def gateway_error(e):
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 80))
     #for production
-    app.run(host='0.0.0.0', port=port)
+    #app.run(host='0.0.0.0', port=port)
     #for dev
-    #app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
