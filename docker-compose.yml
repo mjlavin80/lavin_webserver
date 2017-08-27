@@ -11,7 +11,6 @@ services:
       - flask_base
       - humanitiesdata
       - matthew-lavin
-      - thedatahumanist
       - digiped_fall_2016
       - compvolution
       - acdm_spring_2017
@@ -21,6 +20,7 @@ services:
       - mtb_fall_2017
       - cdm_spring_2018
       - nt_spring_2018
+      - portfolio
 
   flask_base:
     build: ./flaskbase
@@ -44,10 +44,6 @@ services:
   matthew-lavin:
     build: ./matthew-lavin
     container_name: matthew-lavin
-
-  thedatahumanist:
-    build: ./thedatahumanist
-    container_name: thedatahumanist
 
   humanitiesdata:
     build: ./humanitiesdata
