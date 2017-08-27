@@ -1,55 +1,69 @@
-<!doctype html>
-<html>
-<head>
-  <title>Diagnosis: Neologophobia</title>
-<meta charset="utf-8">
-<link type="text/css" rel="stylesheet" href="/static/dist/css/bootstrap.css" />
-<link type="text/css" rel="stylesheet" href="/static/datahumanist.css" />
-<link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
-<link rel="icon" href="/static/favicon.ico" type="image/x-icon">
-<script async defer src="https://hypothes.is/embed.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
 
-</head>
-<body>
-  <header>
+    <title>Diagnosis: Neologophobia</title>
 
-      <div class="container header"><div class="row">
-        <span id="logo" class="glyphicon glyphicon-download-alt"></span>
-    <h1>The Data Humanist Website</h1>
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
-</div>
-</div>
+    <!-- Custom styles for this template -->
+    <link href="/static/style.css" rel="stylesheet">
+    <script async defer src="https://hypothes.is/embed.js"></script>
+  </head>
 
-<div class="container"><div class="row">
-    <nav>
-      <ul class="nav navbar-nav">
-        <li><a href="/">Home</a></li>
-        
-          <li><a href="/about/">About</a></li>
-        
-          <li><a href="/apps/">Web Apps</a></li>
-        
-          <li><a href="/feed.xml">Feed</a></li>
-        
-        <li>
-          <a href="https://github.com/mjlavin80/the-data-humanist-jupyter-notebooks">Jupyter Notebooks</a></li>
-        <li>
-          <a href="http://humanitiesdata.com">Humanities Data</a></li>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Matthew J. Lavin</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            
+              <li><a href="/teaching/">Teaching</a></li>
+            
+              <li><a href="/projects/">Projects</a></li>
+            
+              <li class="active"><a href="/blog/">Blog</a></li>
+            
+            <li><a href="http://portfolio.matthew-lavin.com">CV</a></li>
+            <li><a href="http://humanitiesdata.com">Humanities Data</a></li>
 
-      </ul>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
     </nav>
-</div>
-</div>
 
-  </header>
-  <div class="container">
-      <div class="row">
-    
+    <div class="page-header">
+      <div class="container">
+      <div><h1>Diagnosis: Neologophobia</h1></div>
+      </div>
+    </div>
+
+    <div class="container">
+
+  <div class="col-md-12 content">
+
+
+  
   
   <div class="blog-post">
     <div class="blog-body">
-  
-    <h2>Diagnosis: Neologophobia (Part 1 of ?)</h2>
   
   <p class="meta">
     Written By: 
@@ -59,8 +73,7 @@
     Published On: June 01, 2017
   </p>
 
-  <p><a href="http://neologophobia.thedatahumanist.website"><img src="/static/images/app_screen.png" /></a></p>
-<h3>A Provocation</h3>
+  <h3>A Provocation</h3>
 <p>With the spring semester over, I've been coming back to a project I haven't worked on in almost a year.
 It originated with my collaboration with Alex Gladwin and Dan Look on H.P. Lovecraft's role in revising C.M. Eddy's
 "The Loved Dead." Sometime during that collaboration, Dan mentioned to us that Lovecraft had said in a letter that
@@ -104,11 +117,11 @@ it's just become more prominent with the rise of machine learning methods.</p>
 <p>I should mention that I emailed with Ted Underwood about a year ago about date prediction, and he suggested that
 I look into machine learning, especially linear regression, as a text's publication date is considered continuous data,
 which is to say that the year 1785 is more related to 1786 than 1800 whereas, in a classification task like sentiment tagging,
-"happy", "sad", "afraid" and "angry" are all equally related to one another. <a href="/neologophobia/&#39;http://www.differencebetween.com/difference-between-classification-and-vs-regression/&#39;">This page</a> has a better summary.</p>
+"happy", "sad", "afraid" and "angry" are all equally related to one another. <a href="http://www.differencebetween.com/difference-between-classification-and-vs-regression">This page</a> has a better summary.</p>
 <p>I was very new to machine learning at the time, and I was grateful for the nudge in
 the right direction. I did a bit of classification for Keystone DH 2016, but I put it aside with everything else
 when school started last fall. My next big nudge was meeting David Bamman when he came to Pittsburgh to give a talk.
-I missed his talk (for a dissertation defense) but got to talk to him later that day. I later found his article, <a href="/neologophobia/&#39;http://people.ischool.berkeley.edu/~dbamman/pubs/pdf/jcdl2017.pdf&#39;">"Estimating the Date of First Publication in a Large-Scale Digital
+I missed his talk (for a dissertation defense) but got to talk to him later that day. I later found his article, <a href='http://people.ischool.berkeley.edu/~dbamman/pubs/pdf/jcdl2017.pdf'>"Estimating the Date of First Publication in a Large-Scale Digital
 Library"</a>, which is the best work on this topic I've found.</p>
 <p>Bamman et. al. ultimately conclude that "the best method for estimating the date of first publication for books in a
 large digital library is to leverage the depth of the collection, identifying duplicates and assigning the first date of
@@ -347,7 +360,7 @@ prediction model (based on neologism ratios instead of term frequencies).</p>
 <p>People were interested in the visualization, but almost everyone I talked to wanted a way to look closer which texts were
 outliers. Scatter plots in matplotlib (which is how I made the plot) tend to be all or nothing in terms of labels, so I
 started thinking about how I could make an interactive web app to show the same kind of data. Here's what I came up with:</p>
-<p><a href="http://neologophobia.thedatahumanist.website">Neologophobia Web Application</a></p>
+<p><a href="http://neo.matthew-lavin.com">Neologophobia Web Application</a></p>
 <p>To make this interactive scatter plot, I've hijacked the Mapbox visualization codebase to and replaced the base map with
 graph lines. Mapbox.js handles the panning, zooming, and marker clustering. If you click on any cluster, the map will
 automatically zoom in and unpack the data data points. Clicking on any data point will open a document popup, and clicking
@@ -377,27 +390,48 @@ or cultural significance.</p>
   </div>
 
 
-</div>
+
+        </div>
+
+
+<footer class="footer">
+    <div class="container">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#soc_media" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span>+/-</span>
+
+        </button>
+        <div class="social navbar-brand">Some Affiliations/Accounts:</div>
+      </div>
+      <div id="soc_media" class="collapse navbar-collapse">
+      <ul id="icon_nav" class="nav navbar-nav">
+      <li class="social"><a href="http://github.com/mjlavin80"><img src="/static/images/GitHub_Logo.png"/></a></li>
+      <li class="social"><a href="http://english.pitt.edu"><img src="/static/images/eng_logo_pitt.png"/></a></li>
+      <li class="social"><a href="http://dhrx.pitt.edu"><img src="/static/images/dhrx_logo.png"/></a></li>
+      <li class="social"><a href="http://twitter.com/mjlavin80"><img src="/static/images/twitter_logo.png"/></a></li>
+    </ul>
   </div>
-  <footer>
-      <div class="container"><div class="row">
-    <p>&copy; Copyright 2017 by Matthew J. Lavin</p>
+  </div>
+    <!-- /.container -->
 
-</div>
-</div>
-  </footer>
-  <!-- JavaScript -->
-  <script src="/static/js/jquery-3.1.0.min.js"></script>
-  <script src="/static/dist/js/bootstrap.js"></script>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-89330016-4', 'auto');
-    ga('send', 'pageview');
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-  </script>
-</body>
+    <script src="/js/bootstrap.min.js"</script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/ie10-viewport-bug-workaround.js"></script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89330016-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
 </html>

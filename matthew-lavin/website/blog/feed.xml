@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">Feed One</title>
-  <id>urn:uuid:8e3c61cd-9200-3a3f-ba0f-35f0edfb7e64</id>
-  <updated>2017-06-01T12:50:56.404903Z</updated>
-  <link href="http://thedatahumanist.website/" />
-  <link href="http://thedatahumanist.website/feed.xml" rel="self" />
+  <id>urn:uuid:2ae5ada5-f205-310d-9478-55041461783a</id>
+  <updated>2017-06-01T00:00:00Z</updated>
+  <link href="http://matthew-lavin.com/blog/" />
+  <link href="http://matthew-lavin.com/blog/feed.xml" rel="self" />
   <author>
     <name></name>
   </author>
   <generator uri="https://github.com/ajdavis/lektor-atom" version="0.2">Lektor Atom Plugin</generator>
-  <entry xml:base="http://thedatahumanist.website/neologophobia/">
+  <entry xml:base="http://matthew-lavin.com/blog/neologophobia/">
     <title type="text">Diagnosis: Neologophobia</title>
-    <id>urn:uuid:4c820e33-4c1b-3f50-992a-d7a05bc543a8</id>
+    <id>urn:uuid:f683ee93-e34a-394e-a62c-6f848991c5f8</id>
     <updated>2017-06-01T00:00:00Z</updated>
-    <link href="http://thedatahumanist.website/neologophobia/" />
+    <link href="http://matthew-lavin.com/blog/neologophobia/" />
     <author>
       <name>Matt Lavin</name>
     </author>
-    <content type="html">&lt;p&gt;&lt;a href=&quot;http://neologophobia.thedatahumanist.website&quot;&gt;&lt;img src=&quot;/static/images/app_screen.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h3&gt;A Provocation&lt;/h3&gt;
+    <content type="html">&lt;h3&gt;A Provocation&lt;/h3&gt;
 &lt;p&gt;With the spring semester over, I've been coming back to a project I haven't worked on in almost a year.
 It originated with my collaboration with Alex Gladwin and Dan Look on H.P. Lovecraft's role in revising C.M. Eddy's
 &quot;The Loved Dead.&quot; Sometime during that collaboration, Dan mentioned to us that Lovecraft had said in a letter that
@@ -62,11 +61,11 @@ it's just become more prominent with the rise of machine learning methods.&lt;/p
 &lt;p&gt;I should mention that I emailed with Ted Underwood about a year ago about date prediction, and he suggested that
 I look into machine learning, especially linear regression, as a text's publication date is considered continuous data,
 which is to say that the year 1785 is more related to 1786 than 1800 whereas, in a classification task like sentiment tagging,
-&quot;happy&quot;, &quot;sad&quot;, &quot;afraid&quot; and &quot;angry&quot; are all equally related to one another. &lt;a href=&quot;/neologophobia/&amp;#39;http://www.differencebetween.com/difference-between-classification-and-vs-regression/&amp;#39;&quot;&gt;This page&lt;/a&gt; has a better summary.&lt;/p&gt;
+&quot;happy&quot;, &quot;sad&quot;, &quot;afraid&quot; and &quot;angry&quot; are all equally related to one another. &lt;a href=&quot;http://www.differencebetween.com/difference-between-classification-and-vs-regression&quot;&gt;This page&lt;/a&gt; has a better summary.&lt;/p&gt;
 &lt;p&gt;I was very new to machine learning at the time, and I was grateful for the nudge in
 the right direction. I did a bit of classification for Keystone DH 2016, but I put it aside with everything else
 when school started last fall. My next big nudge was meeting David Bamman when he came to Pittsburgh to give a talk.
-I missed his talk (for a dissertation defense) but got to talk to him later that day. I later found his article, &lt;a href=&quot;/neologophobia/&amp;#39;http://people.ischool.berkeley.edu/~dbamman/pubs/pdf/jcdl2017.pdf&amp;#39;&quot;&gt;&quot;Estimating the Date of First Publication in a Large-Scale Digital
+I missed his talk (for a dissertation defense) but got to talk to him later that day. I later found his article, &lt;a href='http://people.ischool.berkeley.edu/~dbamman/pubs/pdf/jcdl2017.pdf'&gt;&quot;Estimating the Date of First Publication in a Large-Scale Digital
 Library&quot;&lt;/a&gt;, which is the best work on this topic I've found.&lt;/p&gt;
 &lt;p&gt;Bamman et. al. ultimately conclude that &quot;the best method for estimating the date of first publication for books in a
 large digital library is to leverage the depth of the collection, identifying duplicates and assigning the first date of
@@ -305,7 +304,7 @@ prediction model (based on neologism ratios instead of term frequencies).&lt;/p&
 &lt;p&gt;People were interested in the visualization, but almost everyone I talked to wanted a way to look closer which texts were
 outliers. Scatter plots in matplotlib (which is how I made the plot) tend to be all or nothing in terms of labels, so I
 started thinking about how I could make an interactive web app to show the same kind of data. Here's what I came up with:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://neologophobia.thedatahumanist.website&quot;&gt;Neologophobia Web Application&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://neo.matthew-lavin.com&quot;&gt;Neologophobia Web Application&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;To make this interactive scatter plot, I've hijacked the Mapbox visualization codebase to and replaced the base map with
 graph lines. Mapbox.js handles the panning, zooming, and marker clustering. If you click on any cluster, the map will
 automatically zoom in and unpack the data data points. Clicking on any data point will open a document popup, and clicking
@@ -332,11 +331,11 @@ accuracy seems stable, I'll start looking at the next set of outliers, whose sta
 or cultural significance.&lt;/p&gt;
 </content>
   </entry>
-  <entry xml:base="http://thedatahumanist.website/the-alice-problem/">
+  <entry xml:base="http://matthew-lavin.com/blog/the-alice-problem/">
     <title type="text">The Alice Problem</title>
-    <id>urn:uuid:ced982df-27c1-39dc-8403-d4292a4cc4bc</id>
+    <id>urn:uuid:ad784a86-d690-30a9-a1d9-cc8da4fb43eb</id>
     <updated>2016-12-15T00:00:00Z</updated>
-    <link href="http://thedatahumanist.website/the-alice-problem/" />
+    <link href="http://matthew-lavin.com/blog/the-alice-problem/" />
     <author>
       <name>Matt Lavin</name>
     </author>
@@ -974,11 +973,11 @@ The real challenge is taking the time to share one's results with others. This i
  &lt;em&gt;Children's Literature Association Quarterly&lt;/em&gt;, 35.3 (Fall 2010): 243-254.
 &lt;/div&gt;</content>
   </entry>
-  <entry xml:base="http://thedatahumanist.website/about/">
+  <entry xml:base="http://matthew-lavin.com/blog/about/">
     <title type="text">About this Blog-like Thing</title>
-    <id>urn:uuid:25a52a2b-f8da-3fd2-99a5-3b6e5aa7b904</id>
+    <id>urn:uuid:62583394-e8e7-31f2-b90f-062dfaaae20f</id>
     <updated>2016-09-01T00:00:00Z</updated>
-    <link href="http://thedatahumanist.website/about/" />
+    <link href="http://matthew-lavin.com/blog/about/" />
     <author>
       <name>Matt Lavin</name>
     </author>
@@ -1010,19 +1009,5 @@ September 2005, National Science Foundation, NSB-05-40.
 &lt;/div&gt;
 &lt;div class=&quot;note_entry&quot; name=&quot;note_3&quot;&gt;3. Davenport, Thomas H., and D.J. Patil. &lt;a href=&quot;https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century&quot;&gt;&quot;Data Scientist: The Sexiest Job of the 21st Century,&quot;&lt;/a&gt; &lt;em&gt;Harvard Business Review&lt;/em&gt; (October 2012).
 &lt;/div&gt;</content>
-  </entry>
-  <entry xml:base="http://thedatahumanist.website/apps/">
-    <title type="text">Interactives and Web Apps</title>
-    <id>urn:uuid:cc9faa1c-2bcb-3714-a3f8-57f43df5c851</id>
-    <updated>2017-06-01T12:50:56.404903Z</updated>
-    <link href="http://thedatahumanist.website/apps/" />
-    <author>
-      <name></name>
-    </author>
-    <content type="html">&lt;p&gt;Because I've elected to present my work as a blog with an RSS feed, I will from time to time use this space to publish more complex standalone web applications.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;http://neologophobia.thedatahumanist.website&quot;&gt;Neologophobia Browser&lt;/a&gt;
-&lt;/li&gt;
-&lt;/ol&gt;</content>
   </entry>
 </feed>
