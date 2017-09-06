@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Computational Methods in Authorship Studies</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/style.css" rel="stylesheet">
+    <script async defer src="https://hypothes.is/embed.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Matthew J. Lavin</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            
+              <li><a href="/teaching/">Teaching</a></li>
+            
+              <li><a href="/projects/">Projects</a></li>
+            
+              <li class="active"><a href="/blog/">Blog</a></li>
+            
+            <li><a href="http://portfolio.matthew-lavin.com">CV</a></li>
+            <li><a href="http://humanitiesdata.com">Humanities Data</a></li>
+
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="page-header">
+      <div class="container">
+      <div><h1>Computational Methods in Authorship Studies</h1></div>
+      </div>
+    </div>
+
+    <div class="container">
+
+  <div class="col-md-12 content">
+
+
+  
+  
+  <div class="blog-post">
+    <div class="blog-body">
+  
+  <p class="meta">
+    Written By: 
+      Matt Lavin
+    
+    <br/>
+    Published On: September 06, 2017
+  </p>
+
+  <p><em>What follows is a copy of my remarks from a talk at Duquesne University in February 2017. I wanted to share these now because
+I'm starting to think once again about the topic I discussed and I wanted to revisit past work before moving forward. Where
+necessary, I've added image from the accompanying slideshow.</em></p>
+<p>Good afternoon, and thank you for having me (and especially thanks to Linda Kinnahan, Elaine Parsons, Mary Parish for doing the
+work it takes to put this event together). I would like to begin today not with the digital humanities, but by situating myself
+in relation to two overlapping though often wholly disparate scholarly concepts: studies of a single author (in my case
+"Cather studies"), and the study of authorship or authorship history. Scholarship focused on a single author is perhaps less
+common in an English department than it was thirty years ago, but it is by no means a thing of the past. Its position or
+credibility, I believe, has greatly depreciated. Any number of factors might separate one single-author scholar from another,
+yet the idea of being too narrowly focused, or too invested in authorial intent, or too biographical are all potential points
+of criticism.</p>
+<p>Authorship history, in contrast, is perhaps best described as a subfield of the history of the book, also called book history or
+book studies. Book history generally focuses the inception, production, publication, circulation, and reception of any written and
+printed material, including but limited to books. Descriptive bibliography, which underpins the discipline, is concerned with the
+precise description of books as physical objects. These approaches differ from, say, biographical criticism or literary history in
+both topical focus and methodology, although all of the subfields I've mentioned have points of intersection. We move from the
+study of one author to the study of authorship when we take on topics like copyright, literary celebrity, or the origin of
+authorship as a profession, as do Martha Woodmansee, Loren Glass, and Leon Jackson respectively. Single-author case studies are
+common in this subfield; type "authorship" with Twain, Whitman, or Wharton, and you will see many results. The shared element in
+these studies is emphasis on the institution behind an author rather than the author as an individual.</p>
+<p>In contrast, you would have a harder time finding a computational analysis of the history of authorship. As Matthew Kirschenbaum
+and Sarah Werner argued in the 2014 "State of the Discipline" essay for <em>Book History</em>, the distant reading or big data
+trend "is not one that has spoken to book historians" (410). A search for that approach would likely lead you to authorship
+studies or authorship attribution, which differs significantly for historical approaches to authorship. Those interested in large
+scale computation have focused on formalistic questions like the meaning of genre or the verbal architecture of a plot, and book
+historians, by and large, have focused on other areas of digital humanities, such as scholarly editing, media archeology, or
+digital projects development. The analytics-driven subset I am talking about differs from these other clusters of practitioners
+in significant ways. However, I will save most of these kinds of distinctions for later in this presentation.</p>
+<p>In this talk, I will focus on some computational methods that seem particularly important to authorship studies and book history,
+and I will use Cather as a central frame. My aspiration is to do justice to Cather and yet make gesture to topics that might
+apply to many authors in many different contexts. I believe that many of these methods will also have implications for scholarship
+focused on a single author because large scale analytics can intervene in some of the classic problems that arise when scholars
+like me try to navigate the fuzzy periphery where studying a single author becomes the study of authorship, and vice versa.</p>
+<p>I will elaborate and (I hope) clarify what I mean with an example. In 2012, I defended a dissertation called "Collaborative
+Momentum: The Author and the Middle Man in U.S. Literature and Culture, 1890-1940," which traced the role of agents, editors,
+publishers, and other literary go-betweens in constructing modern authorial credibility. This dissertation, like so many others,
+was a collection of case studies, each focused on one particular author or text. My second chapter focused on Willa Cather's role
+in ghostwriting S.S. McClure's My Autobiography. In fall of 2012 or so, I excerpted and revised this chapter as an article for
+submission and was rejected several times, in part because my work was described as too narrowly focused on a single author. I
+revised the article substantially, and it appeared in <em>Auto|Biography Studies</em> last year.</p>
+<p>As I've mentioned, the single-author case study is a well-accepted unit of analysis in literary studies and book history. Loren
+Glass's <em>Authors, Inc.</em> has chapters like "Trademark Twain" and "Legitimating London." Meredith McGill's <em>American
+Literature and the Culture of Reprinting</em> has "Suspended Animation: Hawthorne and the Relocation of Narrative Authority."
+(Alliteration and puns are encouraged but not required.) The question for me is where a case study begins to lose its emphasis
+on representing a wider scope than the discrete subject at hand. It's easy to begin with a question like "how did Cather's
+collaboration with McClure exemplify and/or differ from emergent norms for ghostwriters and instead become preoccupied with
+the not-totally-unrelated question, "Did Cather respect and care about S.S. McClure?"</p>
+<p>I'm not the first to face this tension. Numerous scholars have written about Cather's role in the making of this book. Sharon
+O'Brien's biography of Cather emphasizes that the author's coming of age required outgrowing her role as "the deferential
+daughter to two fathers," Henry James, her aesthetic father, and McClure, her professional father (288), in order to move from
+McClure's editor to a novelist of national significance. Robert Thacker, responding to O'Brien, argues that Cather's "gift of
+sympathy" was the major force behind her participation—"That is, she wrote it as a favor and out of gratitude for all he had done
+for her since their first meeting in 1903" (126). O'Brien and Thacker have largely biographical emphases, though both make
+connections to Cather's emerging literary aesthetic.</p>
+<p>Deborah Lindsey Williams and Emmy Stark Zitter offer close readings of <em>My Autobiography</em> aimed at exposing Cather's
+subjectivity in its narrative voice. Williams identifies textual signs of Cather deploying the ghost as a kind of "open secret"
+paralleling her own queerness, and Zitter interprets traces of a writer empowering herself by taking on and eventually turning
+away from the voice of a male narrator.</p>
+<p>My goal with "Reciprocity and the Real Author" was to focus on Cather as a case study of "collaboration against the backdrop of
+ghostwriting as an emerging profession and against the strong historical connections between ghostwriting and autobiography."
+I felt the need to McClure's motives for planning an autobiography and Cather's motives for serving as ghostwriter, as well as
+the degree to which My Autobiography was initially produced as a serial narrative for McClure's Magazine. I argued that McClure
+and Cather's collaborative work consistently straddled distinctions between economic and symbolic capital; that a neither a
+strictly economic nor a strictly biographical analysis would demonstrate the complex ways in which economic capital and credibility
+ interacted with each other during a period when ghostwriting itself was transforming but not yet fully transformed into a
+ market-dominant set of norms. For me, the experience of working on McClure's autobiography demonstrated the concrete ways that
+ the study of one author and the study of authorship blur and mix but simultaneously urge a scholar in different directions.</p>
+<p>Sometime during my revisions for this article, Duquesne's Patrick Juola came to the University of Nebraska, where I was a
+postdoctoral fellow, and gave a talk about authorship attribution. Though it carries the keyword authorship, this field is
+significantly different from what I have described so far as authorship studies. Authorship attribution is perhaps best described
+as the statistical (and now, almost always computational) analysis of text to determine its most probable author. It can be
+regarded as a subcategory of stylometry (quantitative analysis of style) or digital humanities or humanities computing, but many
+of its best practitioners are in computer science departments rather than English or history departments.</p>
+<p>Using authorship attribution methods to think about Cather as a ghostwriter seemed immediately promising. O'Brien and Thacker
+take opposing positions about Cather's motivations but share the perspective that her voice in McClure's autobiography makes
+its way into her later fiction. Williams and Zitter argue that Cather was more successful making her narrator sound like McClure.
+The autobiography is most commonly associated with My Antonia (1918) and The Professor's House (1925) because both have strongly
+autobiographical structure and content.  All four see continuity between the autobiography and Cather's later fiction, where a
+generation of scholars before them regarded the autobiography as hack work, or a rush job, or something base that showed little
+signs of being written by Cather at all. Authorship attribution cannot settle this disagreement, but it can provide new
+information to evaluate how extensively Cather changed her writing style to take on McClure's identity for the project, and
+perhaps contribute to a larger conversation about how well any ghostwriter can fake another person's voice.</p>
+<p>Here I feel the need to articulate some self-awareness. I am white man speaking about the intersection of a woman's personal
+relationships with her emergent professional and authorial identity. To some, I might seem like a smart-aleck entering a
+humanistic debate by saying: "Actually, I've studied this issue with a computer program, and you're all wrong." Instead, what
+I'd like to do is use authorship attribution as one way (among many) to think about the ways of knowing that historicism,
+hermeneutics, and quantitative analysis can enable respectively and in tandem.</p>
+<p>To do this, I constructed a study to compare Cather's writing against McClure's writing and see which was a better fit for <em>My
+Autobiography</em>. Cather wrote lots of things—nonfiction and fiction—so it was easy to find comparison texts by her. A few years
+after the autobiography appeared in print, McClure wrote and published a work of nonfiction called <em>Obstacles to Peace</em>.
+Using head-to-head tests, I compared Obstacles to Peace to various works by Cather, in each case using <em>My Autobiography</em>
+as the point of comparison. Beyond this, I was curious to see which of Cather's writings would register as most similar to the
+autobiography. I also wanted to run analyses on the magazine version of the novel and the book version, which McClure is said to
+have revised for publication without Cather's assistance. For the magazine, I analyzed each installment separately to see if
+Cather was more visible in any particular segment, which is a way of investigating the possibility that Cather wrote some
+installments but not others. I used a method called "Burrow's Delta," (more on this in a moment) and hypothesized that the test
+would easily identify Cather as the author of the autobiography.</p>
+<p>In authorship attribution tests, especially in a "closed set" problem like this one—two candidates, one disputed text—the
+author's identity can be successfully determined with impressive accuracy, sometimes as high as 90-95%. Most authorship
+attribution methods look closely at how frequently a text uses high frequency function words, words that are so common
+to the English language that it's almost impossible for someone to modulate deliberately how often they appear. These are words
+like "the," "of," "as" and "in." They are not associated with any particular context or topic (unlike, say, "fish" or "tree" or
+"prayer" or "shovel") and they can be found in any text of sufficient length in the English language. Burrow's Delta is a little
+different in that it constructs a word list based on the most frequent words in common among the candidates and test text, but
+this almost always produces a comparison set of function words because they are the most frequently used words in English.
+My sense of how authorship attribution would perform in the face ghostwriting was that even a text that very successfully
+replicated the qualitative or affective experience of another person's manner of speaking would read, to a computer, as an
+obvious fake.</p>
+<p>My findings were consistent with the initial conjecture. On the surface, the results of this study are quite clear, yet they may
+also suggest some deeper implications. I ran several versions of Burrows Delta, with various small changes to the settings
+(changing the number of function words analyzed, and changing sample sizes, two different ways of controlling for text length)
+and found that my tests predicted Cather to be the more probable author of the autobiography. For book serial as a whole, Cather
+won 24 head-to-heads, McClure won zero. In one test for installment 8 and two tests for installments 2, 4 and 6, McClure surpasses
+Cather's "Three American Singers." These are McClure's only victories in the entire set, and can be viewed as statistical
+outliers. (I think it would be more suspicious if he didn't win any head-to-heads.) Further:</p>
+<ul>
+<li>Cather texts of various genres, dates, and lengths win over Obstacles to Peace</li>
+<li>Results hold true for serial and books version, using culling=0 and culling=100</li>
+<li>Mean margins of victory for book version are slightly smaller than magazine version, but not significant enough for me to link them to any specific edits.</li>
+<li>Any changes McClure made to the book version of the autobiography were not extensive enough to swing the results of these tests to him.</li>
+</ul>
+<p>The autobiography's authorial signal matching Cather's is consistent with biographical and archival sources, both of which suggest
+that McClure supplied subject matter for his autobiography, whereas Cather was the only person known to have put pen to paper for
+the serial version.</p>
+<p>The matter of Cather's probable authorship is rather uncontroversial, which is in itself a very substantive finding, as it provides
+something of an initial affirmation for scholars like me who were sure she wrote the thing. Perhaps more interesting, however,
+were my results for individual installments and individual head-to-heads. Since Cather was the more likely candidate in so many
+head-to-head comparisons, these images depict the margin of difference between Cather and McClure, a greater margin suggesting
+(simplistically) more similarity between the autobiography and a Cather text. The images below show that Cather's margins are
+highest for the first and second installments and lowest at the very end of the autobiography.</p>
+<p><img src='/static/images/serial_margins_cull_100_labels.png' /></p>
+<p>Figure 1: Authorial signal margins by installment for <em>My Autobiography</em> serialization,
+comparing most frequent words, but only when words are found in all compared texts.
+(The higher a line is along the Y axis, the more clearly that novel matches <em>My Autobiography</em>'s style)</p>
+<p><img src='/static/images/serial_margins_no_cull_labels.png' /></p>
+<p>Figure 2: Authorial signal margins by installment for <em>My Autobiography</em> serialization,
+comparing most frequent words, regardless of whether they are found in all compared texts.
+(The higher a line is along the Y axis, the more clearly that novel matches <em>My Autobiography</em>'s style)</p>
+<p>In terms of Cather texts most similar (by this measure) to <em>My Autobiography</em>, I have used histograms to show the top six
+margins of victory in all my various head-to-heads. I'm presenting four versions of this top six list:</p>
+<p><img src='/static/images/top_six_serial_cull_100_labels.png' /></p>
+<p>Figure 3: Top Six Margins. Serial Version. Function Words Not Present in All Three Texts Ignored (cull=100). Margins of Difference Scaled to Delta.</p>
+<p><img src='/static/images/top_6_serial_no_cull_labels.png' /></p>
+<p>Figure 4: Top Six Margins. Serial Version. No Function Words Ignored (cull=0). Margins of Difference Scaled to Delta.</p>
+<p><img src='/static/images/top_6_book_cull_100_labels.png' /></p>
+<p>Figure 5: Top Six Margins. Book Version. Culling.</p>
+<p><img src='/static/images/top_6_book_no_cull_labels.png' /></p>
+<p>Figure 6: Top Six Margins. Book Version. No Culling.</p>
+<p>Taking these results as a whole, we can see that Cather's "Training for the Ballet," <em>My Antonia</em>, <em>The Professor's
+House</em>, and <em>Obscure Destinies</em> are found in the top six margins of victory for all four versions of the test. <em>Lucy
+Gayheart</em> and "Plays of Real Life" both rank in the top six margins of victory in two our of four tests. <em>O Pioneers!M/em>,
+<em>Shadows on the Rock</em> and <em>Not Under Forty</em> each appear in one top six list, and other works like <em>Alexander's
+Bridge</em>, <em>Death Comes for the Archbishop</em>, <em>My Mortal Enemy</em>, and <em>A Lost Lady</em> do not ever appear in
+the top six margins of difference.</p>
+<p>Although it can be notoriously difficult to assign causality to the result of an authorship attribution test (or, in fact, to
+assign causality to any correlation), I find it suggestive that My Antonia and The Professor's House have strongly
+autobiographical structures. The strength of their margins over Obstacles to Peace could relate to their use of the first-person
+but, if that were the case, I would expect to see My Mortal Enemy (also first person) in the top tier.</p>
+<p>A logical next step here that I have yet to perform would be to run Burrows Delta on a setting that deliberately ignores personal
+pronouns like I, me, him, he, her, she and they. Additionally, I would like to cross-validate the results of the Burrows Delta
+test using two well-known authorship attribution techniques: logistical regression of high frequency function words and
+chi-squared testing. Each of these methods has pros and cons but, for my purposes, I'm most concerned with whether the results of
+these methods will be consistent with the Burrows Delta result, especially in terms of the higher margins of difference for
+particular texts by Cather. Additional next steps would include, foremost, expanding the McClure corpus to break the study's
+dependence on Obstacles to Peace. McClure authored very few texts, but some of his personal letters could be transcribed and
+analyzed using these methods. Cather's letters should be added to the comparison to create analytical parity.</p>
+<p>Perhaps more significant than any immediate next steps, however, would be some consideration of how a case study like this one can
+be built upon in a way that informs the humanistic study of authorship or cultures of letters. Immediate research questions
+related to what I've done so far might include a broader inquiry into how well ghostwriters throughout history imitated their
+subjects' authorial tendencies. If we can establish norms for ghostwriters, perhaps we can use anomalous results to isolate cases
+where an autobiographical subject has more of a co-authorship role. Going further, I would like to use these methods to think
+critically about anonymity in nineteenth-century periodicals, pseudonyms in pulp fiction, and various models of authorial
+collaboration.</p>
+<p><em>This is point marks the end of my remarks from the talk but there's a bit more to what I want to share. Everything below
+this block of italics I wrote this Fall.</em></p>
+<p>This piece, like so much of what I do, is unfinished work.</p>
+<p>Part of my task for that February day almost nine months ago was to queue up an interactive workshop, so the rest of the text
+pertains to that subject. I went on to try and show, by example, some of the computational methods that I think are best suited
+for building on a case study like mine in a way that puts pressure on the history of anonymity or ghostwriting or the
+humanistic study of authorship or a culture of letters.</p>
+<p>What I basically let hang was a more theoretical or generalized discussion of this same topic. The extent to which I moved away
+from such musing is very clear to me now as I re-read, but it was less clear at the time. I suppose I thought the question was
+provocative even without an  initial response.</p>
+<p>What I think I alluded consistently in the piece is the idea that authorship studies, like computational analysis, lives and dies by the
+finding of facts. Book historians and bibliographers, map-makers and chronologists and scholarly editors must believe to one
+extent or another in the primacy and relative autonomy of external phenomena. This is the basis for historical observation, as well as
+quantitative analysis. Observations can and must be complicated, situated, contextualized, and questioned. I am a lover of
+irreverence, and I instinctively mistrust an authority figure pressing Truth down upon me like a cover stamp. Nevertheless,
+the question of Cather's role in McClure's autobiography has a basis in the empirical, and some positions with regard to that
+question are simply more accurate than others. The book historian/bibliographer and the computational humanist share a love for
+observation and a need to complicate our observations, and this I think is the initial basis for computational
+book history/bibliography, which includes computational authorship studies.</p>
+<p>One problem with the fact people in literary studies is that so many of their observations have been superficial distortions
+of observable phenomena. In the author-centered literary studies of old, the Author always seems to work alone. The Author has read everything.
+The Author was always own course to writing her magnum opus. The Author did not lie in letters. The Author didn't get ideas from
+cheap paperbacks by Edward Bulwer-Lytton or Zane Grey. The Author won every fight and rerouted the river to clean the Augean
+Stables. Some fear a return to author-centered scholarship precisely because this specter looms in the distance. I believe that
+computational authorship studies can help us turn away from myths and bring us closer to discussions of norms and exceptions.</p>
+<p>Others fear something a colleague of mine called minutia. I think what he was meaning to say is that single author scholars
+often get so good at looking at a tree that they forget there's a forest. This worry has less to do with the study of authorship
+than the study of a single author, but both are capable of descending into minutia, as I probably did numerous times in my dissertation.
+In my February talk, I put this perhaps more delicately. I spoke of "where a case study begins to lose its emphasis on
+representing a wider scope than the discrete subject at hand." Either way, I believe computation can help with this tension.</p>
+<p>So far I'm imagining three "next steps" toward a more developed community of computational book history/bibliography.
+The first step, I think, is learning to write computational research questions. That's what interactive workshop after
+my February talk was about. We need to think in terms of questions that computing can answer, or at least help us address.</p>
+<p>Second, to write computational research questions (or computationally compatible research questions), we must reckon with
+big questions of empiricism and quantification. I doubt we will resolve our ambivalence about empirical phenomena any time soon,
+but I believe we must confront it openly.</p>
+<p>Third and finally, we must build a culture of open data. As book historians, we can talk about copies printed, list prices,
+title variations across editions, people named in various acknowledgments, or any number of areas of inquiry that require
+better data. Publishing web-based resources is not enough; we must enable computational access to the data we make.</p>
+<p>We must teach book historians to make data, to interrogate data, to make use of other scholars' data, and to share data.
+These practices need to become prerequisites for computational humanities, and they could be an effective rallying point for
+computational book history/bibliography.</p>
+
+</div>
+  </div>
+
+
+
+        </div>
+
+
+<footer class="footer">
+    <div class="container">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#soc_media" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span>+/-</span>
+
+        </button>
+        <div class="social navbar-brand">Some Affiliations/Accounts:</div>
+      </div>
+      <div id="soc_media" class="collapse navbar-collapse">
+      <ul id="icon_nav" class="nav navbar-nav">
+      <li class="social"><a href="http://github.com/mjlavin80"><img src="/static/images/GitHub_Logo.png"/></a></li>
+      <li class="social"><a href="http://english.pitt.edu"><img src="/static/images/eng_logo_pitt.png"/></a></li>
+      <li class="social"><a href="http://dhrx.pitt.edu"><img src="/static/images/dhrx_logo.png"/></a></li>
+      <li class="social"><a href="http://twitter.com/mjlavin80"><img src="/static/images/twitter_logo.png"/></a></li>
+    </ul>
+  </div>
+  </div>
+    <!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script src="/js/bootstrap.min.js"</script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/ie10-viewport-bug-workaround.js"></script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89330016-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
