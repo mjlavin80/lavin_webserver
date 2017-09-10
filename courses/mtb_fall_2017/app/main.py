@@ -131,6 +131,12 @@ def calendar():
     weeks = Week.query.order_by(Week.week_number).all()
     return render_template("calendar.html", weeks=weeks)
 
+@app.route("/timeline")
+@include_site_data
+def timeline():
+
+    return render_template("timeline.html")
+    
 @app.route("/planner")
 @include_site_data
 def planner():
