@@ -185,7 +185,7 @@ def timelinedata():
     }
     """
     timeline = timeline.replace("\"", "\\\"")
-    timeline = timeline.replace("\'", "\\\'")
+    timeline = timeline.replace("\'", "\\\"")
     timeline = timeline.replace("$$$$", "\"")
 
     return timeline
