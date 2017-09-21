@@ -160,9 +160,11 @@ def timelinedata():
     import urllib
     for j in df.iterrows():
         i = []
-        for k in j[1]:
-
-            value = urllib.quote_plus(str(k))
+        for a,k in j[1]:
+            if a == 0 or a == 1 or a == 4 or a == 5:
+                value = urllib.quote_plus(str(int(k)))
+            else:
+                value = urllib.quote_plus(str(k))
             if value =="nan":
                 value = ""
             i.append(value)
