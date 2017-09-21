@@ -166,7 +166,7 @@ def timelinedata():
             except:
                 pass
         for k in j[1]:
-            value = str(k)
+            value = urllib.quote(str(k))
             if value =="nan":
                 value = ""
             i.append(value)
