@@ -145,17 +145,17 @@ def timelinedata():
 
     timeline = """
     {
-        'title': {
-                'text': {
-                    'headline': 'Making the Book',
-                    'text':     'A Digital Timeline of Events Related to the History of the Book.'
+        $$$$title$$$$: {
+                $$$$text$$$$: {
+                    $$$$headline$$$$: $$$$Making the Book$$$$,
+                    $$$$text$$$$:     $$$$A Digital Timeline of Events Related to the History of the Book.$$$$
                 },
-                'media': {
-                    'url': 'https://upload.wikimedia.org/wikipedia/commons/d/de/Albion_Press%2C_1830s_woodcut_by_George_Baxter.jpg',
-                    'thumb': 'https://upload.wikimedia.org/wikipedia/commons/d/de/Albion_Press%2C_1830s_woodcut_by_George_Baxter.jpg'
+                $$$$media$$$$: {
+                    $$$$url$$$$: $$$$https://upload.wikimedia.org/wikipedia/commons/d/de/Albion_Press%2C_1830s_woodcut_by_George_Baxter.jpg$$$$,
+                    $$$$thumb$$$$: $$$$https://upload.wikimedia.org/wikipedia/commons/d/de/Albion_Press%2C_1830s_woodcut_by_George_Baxter.jpg$$$$
                 }
         },
-        'events': [
+        $$$$events$$$$: [
     """
     import urllib
     for j in df.iterrows():
