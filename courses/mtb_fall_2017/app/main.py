@@ -161,16 +161,16 @@ def timelinedata():
     for j in df.iterrows():
         i = []
         for m in [0,1,4,5]:
-            try: 
+            try:
                 j[1][m] = int(j[1][m])
             except:
                 pass
         for k in j[1]:
-            value = urllib.quote_plus(str(k))
+            value = str(k)
             if value =="nan":
                 value = ""
             i.append(value)
-        combo = i[10] + urllib.quote_plus("<a href='" +i[19]+"'>View Full Essay</a>")
+        combo = i[10] + "<a href='" +i[19]+"'>View Full Essay</a>"
         timeline += "{\n 'start_date': { \n 'year': '"+i[0]+"',\n 'month': '"+i[1]+"' },"
         timeline += "\n'end_date': { \n 'year': '"+i[4]+"',\n 'month': '"+i[5]+"' },"
         timeline += "\n'display_date': '"+ i[8]+"',"
