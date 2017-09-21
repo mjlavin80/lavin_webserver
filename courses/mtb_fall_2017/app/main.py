@@ -160,7 +160,7 @@ def timelinedata():
     import urllib
     for j in df.iterrows():
         i = []
-        for a,k in j[1]:
+        for a,k in enumerate(j[1]):
             if a == 0 or a == 1 or a == 4 or a == 5:
                 value = urllib.quote_plus(str(int(k)))
             else:
