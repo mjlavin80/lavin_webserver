@@ -145,14 +145,14 @@ def timelinedata():
 
     timeline = """
     {
-        "title": {
-                "text": {
-                    "headline": "Making the Book",
-                    "text":     "One of the unexpected byproducts of the proliferation of new media platforms is a renewed appreciation of the book as a richly complex medium for literary expression."
+        'title': {
+                'text': {
+                    'headline': 'Making the Book',
+                    'text':     'One of the unexpected byproducts of the proliferation of new media platforms is a renewed appreciation of the book as a richly complex medium for literary expression.''
                 },
-                "media": {
-                    "url": "https://upload.wikimedia.org/wikipedia/commons/d/de/Albion_Press%2C_1830s_woodcut_by_George_Baxter.jpg",
-                    "thumb": "https://upload.wikimedia.org/wikipedia/commons/d/de/Albion_Press%2C_1830s_woodcut_by_George_Baxter.jpg"
+                'media': {
+                    'url': 'https://upload.wikimedia.org/wikipedia/commons/d/de/Albion_Press%2C_1830s_woodcut_by_George_Baxter.jpg',
+                    'thumb': 'https://upload.wikimedia.org/wikipedia/commons/d/de/Albion_Press%2C_1830s_woodcut_by_George_Baxter.jpg'
                 }
         },
         "events": [
@@ -163,7 +163,7 @@ def timelinedata():
         for k in j[1]:
             value = str(k)
             if value =="nan":
-                value = "\'\'"
+                value = ""
             i.append(value)
         combo = i[10] + "<a href='" +i[19]+"'>View Full Essay</a>"
         timeline += "{\n 'start_date': { \n 'year:' '"+i[0]+"',\n 'month:' '"+i[1]+"' },"
