@@ -148,7 +148,7 @@ def timelinedata():
         'title': {
                 'text': {
                     'headline': 'Making the Book',
-                    'text':     'One of the unexpected byproducts of the proliferation of new media platforms is a renewed appreciation of the book as a richly complex medium for literary expression.'
+                    'text':     'A Digital Timeline of Events Related to the History of the Book.'
                 },
                 'media': {
                     'url': 'https://upload.wikimedia.org/wikipedia/commons/d/de/Albion_Press%2C_1830s_woodcut_by_George_Baxter.jpg',
