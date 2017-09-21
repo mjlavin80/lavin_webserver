@@ -12,3 +12,4 @@ flask-admin
 flask-bcrypt
 dictalchemy
 WTForms-Alchemy
+pandas
