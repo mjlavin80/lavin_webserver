@@ -172,7 +172,7 @@ def timelinedata():
             i.append(value)
         if i[20] == "":
             i[20] == "#"
-        combo = i[10] + "<a href=\"" +i[20]+"\">View Full Essay</a>"
+        combo = i[10] + " <a href=\"" +i[20]+"\">View Full Essay</a>"
         timeline += "{\n 'start_date': { \n 'year': '"+i[0]+"',\n 'month': '"+i[1]+"' },"
         timeline += "\n'end_date': { \n 'year': '"+i[4]+"',\n 'month': '"+i[5]+"' },"
         timeline += "\n'display_date': '"+ i[8]+"',"
