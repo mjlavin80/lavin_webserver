@@ -166,11 +166,11 @@ def timelinedata():
                 value = "\'\'"
             i.append(value)
         combo = i[10] + "<a href='" +i[19]+"'>View Full Essay</a>"
-        timeline += "{\n 'start_date': { \n 'year:' "+i[0]+",\n 'month:' "+i[1]+"},"
-        timeline += "\n'end_date': { \n 'year:' "+i[4]+",\n 'month:' "+i[5]+"},"
-        timeline += "\n'display_date':"+ i[8]+"},"
-        timeline += "\n'media': { \n 'url:' "+ i[11]+",\n 'credit:' "+ i[12]+",\n 'caption:' "+i[13]+",\n 'thumb:' "+i[14]+"},"
-        timeline += "\n'text': { \n 'headline:' "+ i[9]+",\n 'text:' "+ combo +"},"
+        timeline += "{\n 'start_date': { \n 'year:' '"+i[0]+"',\n 'month:' '"+i[1]+"' },"
+        timeline += "\n'end_date': { \n 'year:' '"+i[4]+"',\n 'month:' '"+i[5]+"' },"
+        timeline += "\n'display_date': '"+ i[8]+"' },"
+        timeline += "\n'media': { \n 'url:' '"+ i[11]+"' ,\n 'credit:' '"+ i[12]+"' ,\n 'caption:' '"+i[13]+"',\n 'thumb:' '"+i[14]+"' },"
+        timeline += "\n'text': { \n 'headline:' '"+ i[9]+"' ,\n 'text:' '" + combo +"' },"
         timeline += "\n'type': 'overview' \n },"
     timeline = timeline[:-1]
     timeline += """
