@@ -184,10 +184,10 @@ def timelinedata():
     ]
     }
     """
-    timeline.replace("\"", "\\\"")
-    timeline.replace("'", "\"")
+    timeline = timeline.replace("\"", "\\\"")
+    timeline = timeline.replace("'", "\"")
 
-    return timeline.replace("'", "\"")
+    return timeline
 
 @app.route("/planner")
 @include_site_data
