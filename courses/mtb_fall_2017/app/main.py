@@ -134,9 +134,51 @@ def calendar():
 @app.route("/timeline")
 @include_site_data
 def timeline():
-
     return render_template("timeline.html")
-    
+
+@app.route("/timelinedata")
+@include_site_data
+def timelinedata():
+    import pandas as pd
+
+    df = pd.DataFrame.from_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR0DuIL_n_8uewWsuZgxvAjgNHJPXK3H_uzBMhANZ6GTLZ_OKmLF09IPd05lMUP_W3NYcunnGF9UC1M/pub?output=csv')
+
+    timeline = """
+    {
+        "title": {
+                "text": {
+                    "headline": "Making the Book",
+                    "text":     "One of the unexpected byproducts of the proliferation of new media platforms is a renewed appreciation of the book as a richly complex medium for literary expression."
+                },
+                "media": {
+                    "url": "https://upload.wikimedia.org/wikipedia/commons/d/de/Albion_Press%2C_1830s_woodcut_by_George_Baxter.jpg",
+                    "thumb": "https://upload.wikimedia.org/wikipedia/commons/d/de/Albion_Press%2C_1830s_woodcut_by_George_Baxter.jpg"
+                }
+        },
+        "events": [
+    """
+
+    for j in df.iterrows():
+        i = []
+        for k in j[1]:
+            value = str(k)
+            if value =="nan":
+                value = "\'\'"
+            i.append(value)
+        combo = i[10] + "<a href='" +i[19]+"'>View Full Essay</a>"
+        timeline += "{\n 'start_date': { \n 'year:' "+i[0]+",\n 'month:' "+i[1]+"},"
+        timeline += "\n'end_date': { \n 'year:' "+i[4]+",\n 'month:' "+i[5]+"},"
+        timeline += "\n'display_date':"+ i[8]+"},"
+        timeline += "\n'media': { \n 'url:' "+ i[11]+",\n 'credit:' "+ i[12]+",\n 'caption:' "+i[13]+",\n 'thumb:' "+i[14]+"},"
+        timeline += "\n'text': { \n 'headline:' "+ i[9]+",\n 'text:' "+ combo +"},"
+        timeline += "\n'type': 'overview' \n },"
+    timeline = timeline[:-1]
+    timeline += """
+    ]
+    }
+    """
+    return timeline
+
 @app.route("/planner")
 @include_site_data
 def planner():
