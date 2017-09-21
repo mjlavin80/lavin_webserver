@@ -166,7 +166,7 @@ def timelinedata():
             except:
                 pass
         for k in j[1]:
-            value = urllib.quote(str(k))
+            value = str(k)
             if value =="nan":
                 value = ""
             i.append(value)
@@ -184,6 +184,9 @@ def timelinedata():
     ]
     }
     """
+    timeline.replace("\"", "\\\"")
+    timeline.replace("'", "\"")
+
     return timeline.replace("'", "\"")
 
 @app.route("/planner")
