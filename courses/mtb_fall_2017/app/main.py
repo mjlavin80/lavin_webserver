@@ -148,7 +148,7 @@ def timelinedata():
         'title': {
                 'text': {
                     'headline': 'Making the Book',
-                    'text':     'One of the unexpected byproducts of the proliferation of new media platforms is a renewed appreciation of the book as a richly complex medium for literary expression.''
+                    'text':     'One of the unexpected byproducts of the proliferation of new media platforms is a renewed appreciation of the book as a richly complex medium for literary expression.'
                 },
                 'media': {
                     'url': 'https://upload.wikimedia.org/wikipedia/commons/d/de/Albion_Press%2C_1830s_woodcut_by_George_Baxter.jpg',
@@ -166,11 +166,11 @@ def timelinedata():
                 value = ""
             i.append(value)
         combo = i[10] + "<a href='" +i[19]+"'>View Full Essay</a>"
-        timeline += "{\n 'start_date': { \n 'year:' '"+i[0]+"',\n 'month:' '"+i[1]+"' },"
-        timeline += "\n'end_date': { \n 'year:' '"+i[4]+"',\n 'month:' '"+i[5]+"' },"
+        timeline += "{\n 'start_date': { \n 'year': '"+i[0]+"',\n 'month': '"+i[1]+"' },"
+        timeline += "\n'end_date': { \n 'year': '"+i[4]+"',\n 'month': '"+i[5]+"' },"
         timeline += "\n'display_date': '"+ i[8]+"' },"
-        timeline += "\n'media': { \n 'url:' '"+ i[11]+"' ,\n 'credit:' '"+ i[12]+"' ,\n 'caption:' '"+i[13]+"',\n 'thumb:' '"+i[14]+"' },"
-        timeline += "\n'text': { \n 'headline:' '"+ i[9]+"' ,\n 'text:' '" + combo +"' },"
+        timeline += "\n'media': { \n 'url': '"+ i[11]+"' ,\n 'credit': '"+ i[12]+"' ,\n 'caption': '"+i[13]+"',\n 'thumb': '"+i[14]+"' },"
+        timeline += "\n'text': { \n 'headline': '"+ i[9]+"' ,\n 'text:' '" + combo +"' },"
         timeline += "\n'type': 'overview' \n },"
     timeline = timeline[:-1]
     timeline += """
