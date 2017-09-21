@@ -157,11 +157,12 @@ def timelinedata():
         },
         'events': [
     """
-
+    import urllib
     for j in df.iterrows():
         i = []
         for k in j[1]:
-            value = str(k)
+
+            value = urllib.quote_plus(str(k))
             if value =="nan":
                 value = ""
             i.append(value)
