@@ -1,7 +1,10 @@
 body {
   padding-top: 50px;
 }
-
+p, ul.blog>li, .note_entry {
+  font-size: 120%;
+  width: 75%;
+}
 .page-header {
     /*padding: 30px 0px;*/
     margin: 0 0 0 0 ;
@@ -50,6 +53,13 @@ li.social>a {
   color: white;
 
 }
+.slide {
+  width: 70%;
+  height: auto;
+  border: 1px solid black;
+  margin: 35px;
+}
+
 @media (min-width: 768px){
     #soc_media{
         float:none;
