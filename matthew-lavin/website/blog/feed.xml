@@ -34,8 +34,8 @@ from a statistics class. Instead, they range from 29 to 4,492 words long. A revi
 than 0 words, the median review length is 287 words, and the largest review length is much larger
 than most of the reviews. We therefore see what is called a distribution converging to log-normal.
 Using a log function, we can convert the values to a normal distribution, and then analyze each
-observation's relationship to the norms of the data.
-&lt;img class=&quot;slide&quot; src=&quot;/static/static/images/nytimes2.png&quot; /&gt;&lt;/p&gt;
+observation's relationship to the norms of the data.&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;slide&quot; src=&quot;/static/images/nytimes2.png&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;A quick way to compare a value to a group of values is to calculate its z-score. You may remember
 from statistics class that an observation's raw difference from the mean can be deceptive.
 Being an inch taller than the average could be a little, or it could be a lot, depending on how
