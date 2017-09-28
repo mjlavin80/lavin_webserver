@@ -166,7 +166,7 @@ def timelinedata():
             except:
                 pass
         for k in j[1]:
-            value = str(k).replace("\n", " ").replace{"\t", " "}
+            value = str(k).replace("\n", " ").replace("\t", " ")
             if value =="nan":
                 value = ""
             i.append(value)
