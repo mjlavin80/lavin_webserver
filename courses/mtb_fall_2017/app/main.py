@@ -174,7 +174,16 @@ def timelinedata():
             i[20] == "#"
         combo = i[10] + " <a href=\$$$$" +i[20]+"\$$$$>View Full Essay</a>"
         timeline += "{\n $$$$start_date$$$$: { \n $$$$year$$$$: $$$$"+i[0]+"$$$$,\n $$$$month$$$$: $$$$"+i[1]+"$$$$ },"
-        timeline += "\n$$$$end_date$$$$: { \n $$$$year$$$$: $$$$"+i[4]+"$$$$,\n $$$$month$$$$: $$$$"+i[5]+"$$$$ },"
+
+        if i[4] ! = "":
+            timeline += "\n$$$$end_date$$$$: { \n $$$$year$$$$: $$$$"+i[4]
+        else:
+            timeline += "\n$$$$end_date$$$$: { \n $$$$year$$$$: $$$$"+i[0]
+        if i[5] ! = "":
+            timeline += "$$$$,\n $$$$month$$$$: $$$$"+i[5]+"$$$$ },"
+        else:
+            timeline += "$$$$,\n $$$$month$$$$: $$$$"+i[1]+"$$$$ },"
+
         timeline += "\n$$$$display_date$$$$: $$$$"+ i[8]+"$$$$,"
         timeline += "\n$$$$media$$$$: { \n $$$$url$$$$: $$$$"+ i[11]+"$$$$ ,\n $$$$credit$$$$: $$$$"+ i[12]+"$$$$ ,\n $$$$caption$$$$: $$$$"+i[13]+"$$$$,\n $$$$thumb$$$$: $$$$"+i[14]+"$$$$ },"
         timeline += "\n$$$$text$$$$: { \n $$$$headline$$$$: $$$$"+ i[9]+"$$$$ ,\n $$$$text$$$$: $$$$" + combo +"$$$$ },"
