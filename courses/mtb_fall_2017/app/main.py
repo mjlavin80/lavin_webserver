@@ -175,11 +175,11 @@ def timelinedata():
         combo = i[10] + " <a href=\$$$$" +i[20]+"\$$$$>View Full Essay</a>"
         timeline += "{\n $$$$start_date$$$$: { \n $$$$year$$$$: $$$$"+i[0]+"$$$$,\n $$$$month$$$$: $$$$"+i[1]+"$$$$ },"
 
-        if i[4] ! = "":
+        if i[4] != "":
             timeline += "\n$$$$end_date$$$$: { \n $$$$year$$$$: $$$$"+i[4]
         else:
             timeline += "\n$$$$end_date$$$$: { \n $$$$year$$$$: $$$$"+i[0]
-        if i[5] ! = "":
+        if i[5] != "":
             timeline += "$$$$,\n $$$$month$$$$: $$$$"+i[5]+"$$$$ },"
         else:
             timeline += "$$$$,\n $$$$month$$$$: $$$$"+i[1]+"$$$$ },"
