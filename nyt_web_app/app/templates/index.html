@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+  <h2><big>Book Reviews</big>, <em>The New York Times</em></h2>
+{% if nyt_id %}
+<div id="image-gallery-3" class="cf">
+    <img src="/static/page_images/{{nyt_id}}/{{nyt_id}}-1.png" data-high-res-src="/static/page_images/{{nyt_id}}/{{nyt_id}}-1.png" alt="" class="pannable-image">
+</div>
+{% endif %}
+</div>
+{% endblock %}
+
+{% block footer %}
+{% if nyt_id %}
+
+{% endif %}
+{% endblock %}

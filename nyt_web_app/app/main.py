@@ -1,0 +1,208 @@
+from flask import Flask, render_template, redirect, url_for, send_from_directory, request, flash, g, session
+from flask_admin import Admin, AdminIndexView, BaseView, expose
+from flask_admin.contrib.sqla import ModelView
+import os
+from application.models import *
+from application import db
+from application.forms import *
+from application.form_processors import *
+from flask_login import login_required
+from flask_login import LoginManager, login_user, logout_user, current_user
+from flask_migrate import Migrate
+from flask.ext.bcrypt import Bcrypt
+from flask.ext.admin.base import MenuLink
+from wtforms.fields import TextAreaField
+from flask.ext.github import GitHub
+from config import GITHUB_ADMIN
+from sqlalchemy.sql import and_
+import json
+
+app = Flask(__name__)
+app.config.from_pyfile('config.py')
+bcrypt = Bcrypt(app)
+# setup github-flask
+github = GitHub(app)
+
+#ends session so there's no mysql timeout
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    db.session.remove()
+
+class MyAdminIndexView(AdminIndexView):
+    @expose('/')
+    def index(self):
+        try:
+            current_user.is_admin == True
+            return self.render('admin/index.html')
+        except:
+            return redirect(url_for('status', message="unauthorized"))
+
+# Create menu links classes with reloaded accessible
+class AuthenticatedMenuLink(MenuLink):
+    def is_accessible(self):
+        return current_user.is_authenticated
+
+# Create customized model view classes
+class ModelViewUser(ModelView):
+    column_exclude_list = ('password')
+    can_create = False
+    def on_form_prefill(self, form, id):
+        form.password.data = '[current password hidden]'
+    def on_model_change(self, form, User, is_created=False):
+        a = b.hashpw(form.password.data.encode('utf8'), b.gensalt())
+        AdminUser.password = a
+    def is_accessible(self):
+        if current_user.is_authenticated and current_user.is_admin:
+            return current_user.is_authenticated
+    def inaccessible_callback(self, name, **kwargs):
+        # redirect to login page if user doesn't have access
+        return redirect(url_for('login'))
+
+class ModelViewAdmin(ModelView):
+    column_formatters = dict(corrected_transcription=lambda v, c, m, p: m.corrected_transcription[:25]+ " ...", ocr_transcription=lambda v, c, m, p: m.ocr_transcription[:25]+ " ...")
+    #form_overrides = dict(corrected_transcription=TextAreaField, ocr_transcription=TextAreaField)
+    #form_widget_args = dict(corrected_transcription=dict(rows=10), ocr_transcription=dict(rows=10))
+
+    def is_accessible(self):
+        if current_user.is_authenticated and current_user.is_admin:
+            return current_user.is_authenticated
+    def inaccessible_callback(self, name, **kwargs):
+        # redirect to login page if user doesn't have access
+        return redirect(url_for('login'))
+
+from flask.ext.admin.form import rules
+
+class MetaViewAdmin(ModelViewAdmin):
+    column_filters = ('review_type',)
+    #column_list = ['nyt_id', 'review_type', 'headline', 'byline', 'pub_date', 'ocr_transcription', 'corrected_transcription', 'metadata_work']
+    column_exclude_list = ('month', 'year', 'document_type', 'page', 'word_count')
+    form_excluded_columns = ('month', 'year', 'document_type', 'page')
+
+admin = Admin(app, name='Dashboard', template_mode='bootstrap3', index_view=MyAdminIndexView())
+
+# Add administrative views here
+admin.add_view(ModelViewAdmin(User, db.session))
+admin.add_view(MetaViewAdmin(Metadata, db.session))
+admin.add_view(ModelViewAdmin(Work, db.session))
+admin.add_view(ModelViewAdmin(Author, db.session))
+
+#required user loader method
+login_manager = LoginManager()
+
+login_manager.init_app(app)
+login_manager.login_view = "login"
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    # do stuff
+    return redirect(url_for('login'))
+
+@login_manager.user_loader
+def load_user(user_id):
+    return AdminUser.query.get(user_id)
+
+#Begin route declarations
+@app.route("/")
+@app.route("/<nyt_id>")
+def index(nyt_id=None):
+    return render_template("index.html", nyt_id=nyt_id)
+
+@app.before_request
+def before_request():
+    g.user = None
+    if 'user_id' in session:
+        g.user = GithubToken.query.get(session['user_id'])
+
+@app.after_request
+def after_request(response):
+    db.session.remove()
+    return response
+
+@github.access_token_getter
+def token_getter():
+    user = g.user
+    if user is not None:
+        return user.github_access_token
+
+@app.route('/github-callback')
+@github.authorized_handler
+def authorized(access_token):
+    next_url = request.args.get('next') or url_for('index')
+    if access_token is None:
+        return redirect(next_url)
+    user = GithubToken.query.filter_by(github_access_token=access_token).first()
+    if user is None:
+        user = GithubToken(access_token)
+        db.session.add(user)
+    user.github_access_token = access_token
+    db.session.commit()
+    session['user_id'] = user.id
+    return redirect(url_for('status'))
+
+@app.route('/login')
+def login():
+    try:
+        c_u = github.get('user')
+        return "Already logged in."
+    except:
+        return github.authorize()
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    try:
+        logout_user()
+    except:
+        pass
+    return redirect(url_for('index'))
+
+@app.route('/status')
+def status(message=""):
+    try:
+        c_u = github.get('user')
+
+        if str(c_u['login']) == str(GITHUB_ADMIN):
+            user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
+            user.authenticated = True
+            db.session.add(user)
+            db.session.commit()
+            login_user(user, force=True)
+    except:
+        pass
+    if message=="":
+        if g.user:
+            message="in"
+        else:
+            message="out"
+
+    #for debugging locally
+
+    #user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
+    #user.authenticated = True
+    #db.session.add(user)
+    #db.session.commit()
+    #login_user(user, force=True)
+    #message="in"
+
+    #end local debug block
+
+    return render_template('status.html', message=message)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def server_error(e):
+    return render_template('500.html'), 500
+
+@app.errorhandler(502)
+def gateway_error(e):
+    return render_template('500.html'), 502
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 80))
+    #for production
+    app.run(host='0.0.0.0', port=port)
+    #for dev
+    #app.run(host='0.0.0.0', debug=True, port=5000)
