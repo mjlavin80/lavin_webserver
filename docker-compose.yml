@@ -57,7 +57,7 @@ services:
     links:
       - flask_base
 
-  neo_web_app:
+  nyt_web_app:
     build: ./nyt_web_app
     container_name: nyt_web_app
     links:
