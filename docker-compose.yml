@@ -19,7 +19,7 @@ services:
       - faculty_activity
       - mtb_fall_2017
       - cdm_spring_2018
-      - nt_spring_2018
+      - mtb_spring_2018
 
   flask_base:
     build: ./flaskbase
@@ -86,8 +86,8 @@ services:
     links:
       - flask_base
 
-  nt_spring_2018:
-    build: ./courses/nt_spring_2018
-    container_name: nt_spring_2018
+  mtb_spring_2018:
+    build: ./courses/mtb_spring_2018
+    container_name: mtb_spring_2018
     links:
       - flask_base
