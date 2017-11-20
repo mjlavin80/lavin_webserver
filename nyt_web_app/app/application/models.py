@@ -66,6 +66,7 @@ class Metadata(db.Model):
     page = db.Column(db.String(500))
     pub_date = db.Column(db.String(500))
     word_count = db.Column(db.String(99))
+    review_word_count = db.Column(db.Integer)
     ocr_transcription = db.Column(db.String(99999))
     corrected_transcription = db.Column(db.String(99999))
 
@@ -76,6 +77,7 @@ class Metadata(db.Model):
 
 class Work(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    viaf_uri = db.Column(db.String(500))
     title = db.Column(db.String(500))
     publisher = db.Column(db.String(99))
     price = db.Column(db.String(99))
@@ -88,15 +90,18 @@ class Work(db.Model):
     reviews = db.relationship('Metadata', backref='metadata_work', lazy='joined')
 
     def __repr__(self):
-        return 'Work %r' % (self.id,)
+        return 'Work %r %r' % (self.id, self.title)
 
 class Author(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    viaf = db.Column(db.String(500))
+    viaf_uri = db.Column(db.String(500))
+    last_name = db.Column(db.String(99))
+    first_name = db.Column(db.String(99))
+    common_name = db.Column(db.String(99))
     gender = db.Column(db.String(99))
     year_of_birth = db.Column(db.String(99))
     year_of_death = db.Column(db.String(99))
     works = db.relationship('Work', backref='author_works', lazy='joined')
 
     def __repr__(self):
-        return 'Author %r' % (self.id,)
+        return 'Author %r %r %r' % (self.id, self.last_name, self.first_name)
