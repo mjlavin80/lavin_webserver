@@ -545,7 +545,6 @@ def server_error(e):
 def gateway_error(e):
     return render_template('500.html'), 502
 
-
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 80))
     #for production
