@@ -13,7 +13,7 @@ from flask.ext.bcrypt import Bcrypt
 from flask.ext.admin.base import MenuLink
 from wtforms.fields import TextAreaField
 from flask.ext.github import GitHub
-from config import GITHUB_ADMIN
+from config import GITHUB_ADMIN, TIMELINE_URL
 from sqlalchemy.sql import and_
 import json
 
@@ -141,7 +141,7 @@ def timeline():
 def timelinedata():
     import pandas as pd
 
-    df = pd.DataFrame.from_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR0DuIL_n_8uewWsuZgxvAjgNHJPXK3H_uzBMhANZ6GTLZ_OKmLF09IPd05lMUP_W3NYcunnGF9UC1M/pub?output=csv')
+    df = pd.DataFrame.from_csv(TIMELINE_URL)
 
     timeline = """
     {
