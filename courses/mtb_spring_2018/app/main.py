@@ -23,6 +23,7 @@ bcrypt = Bcrypt(app)
 # setup github-flask
 github = GitHub(app)
 
+
 #ends session so there's no mysql timeout
 @app.teardown_appcontext
 def shutdown_session(exception=None):
