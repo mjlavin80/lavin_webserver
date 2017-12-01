@@ -131,6 +131,74 @@ def calendar():
     weeks = Week.query.order_by(Week.week_number).all()
     return render_template("calendar.html", weeks=weeks)
 
+@app.route("/timeline")
+@include_site_data
+def timeline():
+    return render_template("timeline.html")
+
+@app.route("/timelinedata")
+@include_site_data
+def timelinedata():
+    import pandas as pd
+
+    df = pd.DataFrame.from_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vR0DuIL_n_8uewWsuZgxvAjgNHJPXK3H_uzBMhANZ6GTLZ_OKmLF09IPd05lMUP_W3NYcunnGF9UC1M/pub?output=csv')
+
+    timeline = """
+    {
+        $$$$title$$$$: {
+                $$$$text$$$$: {
+                    $$$$headline$$$$: $$$$Making the Book$$$$,
+                    $$$$text$$$$:     $$$$A Digital Timeline of Events Related to the History of the Book.$$$$
+                },
+                $$$$media$$$$: {
+                    $$$$url$$$$: $$$$https://upload.wikimedia.org/wikipedia/commons/d/de/Albion_Press%2C_1830s_woodcut_by_George_Baxter.jpg$$$$,
+                    $$$$thumb$$$$: $$$$https://upload.wikimedia.org/wikipedia/commons/d/de/Albion_Press%2C_1830s_woodcut_by_George_Baxter.jpg$$$$
+                }
+        },
+        $$$$events$$$$: [
+    """
+    import urllib
+    for j in df.iterrows():
+        i = []
+        for m in [0,1,4,5]:
+            try:
+                j[1][m] = int(j[1][m])
+            except:
+                pass
+        for k in j[1]:
+            value = str(k).replace("\n", " ").replace("\t", " ")
+            if value =="nan":
+                value = ""
+            i.append(value)
+        if i[20] == "":
+            i[20] == "#"
+        combo = i[10] + " <a href=\$$$$" +i[20]+"\$$$$>View Full Essay</a>"
+        timeline += "{\n $$$$start_date$$$$: { \n $$$$year$$$$: $$$$"+i[0]+"$$$$,\n $$$$month$$$$: $$$$"+i[1]+"$$$$ },"
+
+        if i[4] != "":
+            timeline += "\n$$$$end_date$$$$: { \n $$$$year$$$$: $$$$"+i[4]
+        else:
+            timeline += "\n$$$$end_date$$$$: { \n $$$$year$$$$: $$$$"+i[0]
+        if i[5] != "":
+            timeline += "$$$$,\n $$$$month$$$$: $$$$"+i[5]+"$$$$ },"
+        else:
+            timeline += "$$$$,\n $$$$month$$$$: $$$$"+i[1]+"$$$$ },"
+
+        timeline += "\n$$$$display_date$$$$: $$$$"+ i[8]+"$$$$,"
+        timeline += "\n$$$$media$$$$: { \n $$$$url$$$$: $$$$"+ i[11]+"$$$$ ,\n $$$$credit$$$$: $$$$"+ i[12]+"$$$$ ,\n $$$$caption$$$$: $$$$"+i[13]+"$$$$,\n $$$$thumb$$$$: $$$$"+i[14]+"$$$$ },"
+        timeline += "\n$$$$text$$$$: { \n $$$$headline$$$$: $$$$"+ i[9]+"$$$$ ,\n $$$$text$$$$: $$$$" + combo +"$$$$ },"
+        timeline += "\n$$$$type$$$$: $$$$overview$$$$ \n },"
+    timeline = timeline[:-1]
+    timeline += """
+    ]
+    }
+    """
+    timeline = timeline.replace("\"", "&#34;")
+    timeline = timeline.replace("\'", "&#39;")
+    timeline = timeline.replace("$$$$", "\"")
+
+    return timeline
+
 @app.route("/planner")
 @include_site_data
 def planner():
@@ -231,6 +299,24 @@ def assignments(this_assignment="all"):
     else:
         a = Assignment.query.all()
         return render_template("assignments.html", assignments=a, this_assignment="all")
+
+@app.route("/activities/<this_activity>")
+@app.route("/activities")
+@include_site_data
+def activities(this_activity="all"):
+    if this_activity != "all":
+        #get activity from db
+        a = Activity.query.filter(Activity.id == this_activity).one_or_none()
+        if a:
+            return render_template("activities.html", activities=[], this_activity=a)
+        else:
+            a = Activity.query.all()
+            a.sort(key=lambda x: x.day.id)
+            return render_template("activities.html", activities=a, this_activity="all")
+    else:
+        a = Activity.query.all()
+        a.sort(key=lambda x: x.day.id)
+        return render_template("activities.html", activities=a, this_activity="all")
 
 @app.route("/readings")
 @include_site_data
