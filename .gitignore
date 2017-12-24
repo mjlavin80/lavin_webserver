@@ -4,3 +4,4 @@
 .env
 config.py
 user_create.py
+*.pickle
