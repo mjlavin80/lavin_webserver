@@ -159,24 +159,14 @@ def timeline(row=None):
 
         
         import urllib
-        from bs4 import BeautifulSoup
-
+        
         url = i[20]
         doc = urllib.urlopen(url)
-        soup = BeautifulSoup(doc.read(), "html.parser")
-
-        div = soup.find('div', {'id':'contents'})
-        divs = div.findAll(['p'])
-        newdivs = []
-        for i in divs:
-            a = " ".join(i.text.split())
-            newdivs.append(a) 
-        mytext = [i for i in newdivs if i != '']
         
-
-        #mytext.decode('utf8')
+        mytext = doc.read()
         
-        return render_template("timeline_row.html", essay=mytext)
+        
+        return render_template("timeline_row.html", essay=mytext.decode('utf8'))
     else:
         return render_template("timeline.html")
 
