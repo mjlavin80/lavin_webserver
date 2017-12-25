@@ -138,7 +138,7 @@ def calendar():
 def timeline(row=None):
     if row:
         import pandas as pd
-        count = 1
+        count = 0
         df = pd.DataFrame.from_csv(TIMELINE_URL)
         for j in df.iterrows():
             count +=1
