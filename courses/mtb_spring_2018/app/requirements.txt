@@ -14,4 +14,4 @@ dictalchemy
 WTForms-Alchemy
 requests[security]
 pandas
-beatifulsoup4
+beautifulsoup4
