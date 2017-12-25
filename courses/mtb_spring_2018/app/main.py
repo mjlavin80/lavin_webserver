@@ -157,19 +157,7 @@ def timeline(row=None):
                 if i[20] == "":
                     i[20] == "#"
 
-        
-        import urllib
-        from bs4 import BeautifulSoup
-        mytext = doc.read()
-        soup = BeautifulSoup(doc.text, "html.parser")
-        div = soup.find('div', {'id':'contents'})
-        divs = div.findAll(['p'])
-        newdivs = []
-        for i in divs:
-            a = " ".join(i.text.split())
-            newdivs.append(a) 
-        mytext = [i for i in newdivs if i != '']
-        return render_template("timeline_row.html", essay=mytext)
+        return render_template("timeline_row.html", essay=i[20])
     else:
         return render_template("timeline.html")
 
