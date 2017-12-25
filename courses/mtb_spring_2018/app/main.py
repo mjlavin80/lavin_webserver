@@ -157,10 +157,10 @@ def timeline(row=None):
                 if i[20] == "":
                     i[20] == "#"
 
-        import requests
         from bs4 import BeautifulSoup
+        import urllib
         url = i[20]
-        doc = requests.get(url)
+        doc = urllib.urlopen(url)
         soup = BeautifulSoup(doc.text, "html.parser")
         div = soup.find('div', {'id':'contents'})
         divs = div.findAll(['p'])
@@ -195,7 +195,6 @@ def timelinedata():
         },
         $$$$events$$$$: [
     """
-    import urllib
     count = 1
     for j in df.iterrows():
         i = []
