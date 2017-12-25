@@ -141,6 +141,7 @@ def timeline(row=None):
         count = 1
         df = pd.DataFrame.from_csv(TIMELINE_URL)
         for j in df.iterrows():
+            count +=1
             if int(row) == count:
                 i = []
                 for m in [0,1,4,5]:
@@ -155,13 +156,14 @@ def timeline(row=None):
                     i.append(value)
                 if i[20] == "":
                     i[20] == "#"
+
         import requests
         from bs4 import BeautifulSoup
         url = i[20]
         doc = requests.get(url)
         soup = BeautifulSoup(doc.text, "html.parser")
         div = soup.find('div', {'id':'contents'})
-        divs = div.findAll(['div', 'p'])
+        divs = div.findAll(['p'])
         newdivs = []
         for i in divs:
             a = " ".join(i.text.split())

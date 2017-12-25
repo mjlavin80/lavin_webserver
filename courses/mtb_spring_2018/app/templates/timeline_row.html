@@ -1,18 +1,20 @@
 {% extends "base.html" %}
 
 {% block menu %}
-{% include "menu.html" %}
+
 {% endblock %}
 
 {% block content %}
 
 <div class="col-md-12">
-<h3>Timeline Row</h3>
-<p>Essay here.</p>
+
+{% for e in essay %}
+<p>{{e}}</p>
+{% endfor %}
 </div>
 {% endblock %}
 
 {% block footer %}
-{% include "footer.html" %}
+
 
 {% endblock %}
