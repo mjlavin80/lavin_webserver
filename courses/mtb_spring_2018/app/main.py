@@ -161,9 +161,10 @@ def timeline(row=None):
         import urllib
         url = i[20]
         doc = urllib.urlopen(url)
+        mytext = doc.read()
+
         
-        
-        return render_template("timeline_row.html", essay=doc.read())
+        return render_template("timeline_row.html", essay=mytext.decode('utf8'))
     else:
         return render_template("timeline.html")
 
@@ -581,6 +582,6 @@ def gateway_error(e):
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 80))
     #for production
-    app.run(host='0.0.0.0', port=port)
+    #app.run(host='0.0.0.0', port=port)
     #for dev
-    #app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
