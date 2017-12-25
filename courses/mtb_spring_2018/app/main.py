@@ -133,9 +133,13 @@ def calendar():
     return render_template("calendar.html", weeks=weeks)
 
 @app.route("/timeline")
+@app.route("/timeline/<row>")
 @include_site_data
-def timeline():
-    return render_template("timeline.html")
+def timeline(row=None):
+    if row:
+        return render_template("timeline_row.html")
+    else:
+        return render_template("timeline.html")
 
 @app.route("/timelinedata")
 @include_site_data
@@ -159,6 +163,7 @@ def timelinedata():
         $$$$events$$$$: [
     """
     import urllib
+    count = 1
     for j in df.iterrows():
         i = []
         for m in [0,1,4,5]:
@@ -173,7 +178,8 @@ def timelinedata():
             i.append(value)
         if i[20] == "":
             i[20] == "#"
-        combo = i[10] + " <a href=\$$$$" +i[20]+"\$$$$>View Full Essay</a>"
+        #i[20]
+        combo = i[10] + " <a target=\$$$$blank\$$$$ href=\$$$$" + "timeline/" + str(count) +"\$$$$>View Full Essay</a>"
         timeline += "{\n $$$$start_date$$$$: { \n $$$$year$$$$: $$$$"+i[0]+"$$$$,\n $$$$month$$$$: $$$$"+i[1]+"$$$$ },"
 
         if i[4] != "":
