@@ -159,14 +159,34 @@ def timeline(row=None):
 
         
         import urllib
-        
+        from lxml import html
+
         url = i[20]
         doc = urllib.urlopen(url)
-        
         mytext = doc.read()
+        root = html.fromstring(mytext.decode('utf8'))
+        body = root.find("body")
+        article = body.find("div[@id='contents']")
+        _all = []
+        for ps in article:
+            el = []
+            for i in ps:
+                if i.tag == 'p':
+                    for j in i:
+                        if j.text:
+                            el.append(j.text)
+            _all.append(" ".join(el))
+            try:
+                a = ps.find("span").text
+                
+                if a:
+                    _all.append(a)
+            except:
+                pass
+                    
+        _all = [" ".join(i.split()) for i in _all]
         
-        
-        return render_template("timeline_row.html", essay=mytext.decode('utf8'))
+        return render_template("timeline_row.html", essay=_all)
     else:
         return render_template("timeline.html")
 
