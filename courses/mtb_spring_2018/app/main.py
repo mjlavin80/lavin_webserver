@@ -137,7 +137,38 @@ def calendar():
 @include_site_data
 def timeline(row=None):
     if row:
-        return render_template("timeline_row.html")
+        import pandas as pd
+        count = 1
+        df = pd.DataFrame.from_csv(TIMELINE_URL)
+        for j in df.iterrows():
+            if int(row) == count:
+                i = []
+                for m in [0,1,4,5]:
+                    try:
+                        j[1][m] = int(j[1][m])
+                    except:
+                        pass
+                for k in j[1]:
+                    value = str(k).replace("\n", " ").replace("\t", " ")
+                    if value =="nan":
+                        value = ""
+                    i.append(value)
+                if i[20] == "":
+                    i[20] == "#"
+        import requests
+        from bs4 import BeautifulSoup
+        url = i[20]
+        doc = requests.get(url)
+        soup = BeautifulSoup(doc.text, "html.parser")
+        div = soup.find('div', {'id':'contents'})
+        divs = div.findAll(['div', 'p'])
+        newdivs = []
+        for i in divs:
+            a = " ".join(i.text.split())
+            newdivs.append(a) 
+        mytext = [i for i in newdivs if i != '']
+        
+        return render_template("timeline_row.html", essay=mytext)
     else:
         return render_template("timeline.html")
 
@@ -195,6 +226,7 @@ def timelinedata():
         timeline += "\n$$$$media$$$$: { \n $$$$url$$$$: $$$$"+ i[11]+"$$$$ ,\n $$$$credit$$$$: $$$$"+ i[12]+"$$$$ ,\n $$$$caption$$$$: $$$$"+i[13]+"$$$$,\n $$$$thumb$$$$: $$$$"+i[14]+"$$$$ },"
         timeline += "\n$$$$text$$$$: { \n $$$$headline$$$$: $$$$"+ i[9]+"$$$$ ,\n $$$$text$$$$: $$$$" + combo +"$$$$ },"
         timeline += "\n$$$$type$$$$: $$$$overview$$$$ \n },"
+        count +=1
     timeline = timeline[:-1]
     timeline += """
     ]
