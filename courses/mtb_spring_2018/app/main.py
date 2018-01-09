@@ -233,7 +233,6 @@ def planner():
     import datetime
 
     t = datetime.date.today()
-    t = datetime.datetime.strptime("Thursday, January 5, 2017", "%A, %B %d, %Y").date()
 
     weeks = Week.query.order_by(Week.week_number).all()
     last_due = []
