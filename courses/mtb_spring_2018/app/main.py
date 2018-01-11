@@ -122,7 +122,7 @@ def index():
 @app.route("/policies")
 @include_site_data
 def policies():
-    policies = Policy.query.all()
+    policies = Policy.filter(public == "True").query.all()
     return render_template("policies.html", policies=policies)
 
 @app.route("/calendar")
@@ -229,86 +229,92 @@ def timelinedata():
 @app.route("/planner")
 @include_site_data
 def planner():
-    #move all this to application folder?
-    import datetime
+    try:
+        c_u = github.get('user')
 
-    t = datetime.date.today()
+        if str(c_u['login']) == str(GITHUB_ADMIN):
+            #move all this to application folder?
+            import datetime
+            t = datetime.date.today()
 
-    weeks = Week.query.order_by(Week.week_number).all()
-    last_due = []
-    next_due = []
-    days_before = []
-    days_after = []
-    for week in weeks:
-        for day in week.days:
+            weeks = Week.query.order_by(Week.week_number).all()
+            last_due = []
+            next_due = []
+            days_before = []
+            days_after = []
+            for week in weeks:
+                for day in week.days:
+                    try:
+                        dayname = datetime.datetime.strptime(day.name, "%A, %B %d, %Y").date()
+                    except:
+                        dayname = t
+                    if dayname >= t:
+                        days_after.append(day)
+                    if dayname < t:
+                        days_before.append(day)
+
+            def find_assignment(day_list, mode='before'):
+                assign = 0
+                due_days = []
+                for day in day_list:
+                    if mode == 'before' and assign == 0:
+                        if len(day.assignments) > 0:
+                            due_days.append(day)
+                            #if found, append and change assign var to a 1
+                            assign += 1
+                    elif mode != 'before':
+                        if len(day.assignments) > 0:
+                            due_days.append(day)
+                if mode == 'before':
+                    due_days = due_days[-1:]
+                return due_days
+
+            last_due = find_assignment(days_before)
+            next_due = find_assignment(days_after, mode='after')
+
             try:
-                dayname = datetime.datetime.strptime(day.name, "%A, %B %d, %Y").date()
+                _next_three = days_after[0:3]
             except:
-                dayname = t
-            if dayname >= t:
-                days_after.append(day)
-            if dayname < t:
-                days_before.append(day)
+                _next_three = []
+                fake = Day()
+                fake.name = "No data to display"
+                _next_three.append(fake)
+            try:
+                _last = days_before[-1]
+            except:
+                _last = Day()
+                _last.name = "No data to display"
+            try:
+                last_due_date = last_due[0]
+                days_passed = t - datetime.datetime.strptime(last_due_date.name, "%A, %B %d, %Y").date()
+                days_ago = days_passed.days
+            except:
+                last_due_date = Day()
+                last_due_date.name = "No data to display"
+                fake_assignment = Assignment()
+                fake_assignment.link_title = "all"
+                fake_assignment.title = "No data to display"
+                last_due_date.assignments.append(fake_assignment)
+                days_ago = 0
+            try:
+                next_due_date = next_due[0]
+                days_to = datetime.datetime.strptime(next_due_date.name, "%A, %B %d, %Y").date() - t
+                days_to_next = days_to.days
+            except:
+                next_due_date = Day()
+                next_due_date.name = "No data to display"
+                fake_assignment = Assignment()
+                fake_assignment.link_title = "all"
+                fake_assignment.title = "No data to display"
+                next_due_date.assignments.append(fake_assignment)
+                days_to_next = 0
 
-    def find_assignment(day_list, mode='before'):
-        assign = 0
-        due_days = []
-        for day in day_list:
-            if mode == 'before' and assign == 0:
-                if len(day.assignments) > 0:
-                    due_days.append(day)
-                    #if found, append and change assign var to a 1
-                    assign += 1
-            elif mode != 'before':
-                if len(day.assignments) > 0:
-                    due_days.append(day)
-        if mode == 'before':
-            due_days = due_days[-1:]
-        return due_days
-
-    last_due = find_assignment(days_before)
-    next_due = find_assignment(days_after, mode='after')
-
-    try:
-        _next_three = days_after[0:3]
+            today = t.strftime("%A, %B %d, %Y").replace(" 0", " ")
+            return render_template("planner.html", last=_last, next_three=_next_three, next_due_date=next_due_date, last_due_date=last_due_date, days_ago=days_ago, days_to_next=days_to_next, today=today)
+        else:
+            return redirect(url_for("login"))
     except:
-        _next_three = []
-        fake = Day()
-        fake.name = "No data to display"
-        _next_three.append(fake)
-    try:
-        _last = days_before[-1]
-    except:
-        _last = Day()
-        _last.name = "No data to display"
-    try:
-        last_due_date = last_due[0]
-        days_passed = t - datetime.datetime.strptime(last_due_date.name, "%A, %B %d, %Y").date()
-        days_ago = days_passed.days
-    except:
-        last_due_date = Day()
-        last_due_date.name = "No data to display"
-        fake_assignment = Assignment()
-        fake_assignment.link_title = "all"
-        fake_assignment.title = "No data to display"
-        last_due_date.assignments.append(fake_assignment)
-        days_ago = 0
-    try:
-        next_due_date = next_due[0]
-        days_to = datetime.datetime.strptime(next_due_date.name, "%A, %B %d, %Y").date() - t
-        days_to_next = days_to.days
-    except:
-        next_due_date = Day()
-        next_due_date.name = "No data to display"
-        fake_assignment = Assignment()
-        fake_assignment.link_title = "all"
-        fake_assignment.title = "No data to display"
-        next_due_date.assignments.append(fake_assignment)
-        days_to_next = 0
-
-    today = t.strftime("%A, %B %d, %Y").replace(" 0", " ")
-    return render_template("planner.html", last=_last, next_three=_next_three, next_due_date=next_due_date, last_due_date=last_due_date, days_ago=days_ago, days_to_next=days_to_next, today=today)
-
+        return redirect(url_for("login"))
 @app.route("/assignments/<this_assignment>")
 @app.route("/assignments")
 @include_site_data
@@ -316,7 +322,7 @@ def assignments(this_assignment="all"):
     if this_assignment != "all":
         #get assignment from db
         try:
-            a = Assignment.query.filter(Assignment.link_title == this_assignment).one_or_none()
+            a = Assignment.query.filter(Assignment.link_title == this_assignment and public == "True").one_or_none()
             if a == []:
                 return redirect(url_for("assignments", assignments=[], this_assignment="all"))
             return render_template("assignments.html", assignments=[], this_assignment=a)
@@ -336,11 +342,11 @@ def activities(this_activity="all"):
         if a:
             return render_template("activities.html", activities=[], this_activity=a)
         else:
-            a = Activity.query.all()
+            a = Activity.query.filter(public == "True").all()
             a.sort(key=lambda x: x.day.id)
             return render_template("activities.html", activities=a, this_activity="all")
     else:
-        a = Activity.query.all()
+        a = Activity.query.filter(public == "True").all()
         a.sort(key=lambda x: x.day.id)
         return render_template("activities.html", activities=a, this_activity="all")
 
@@ -408,9 +414,9 @@ def processor(resource_type=None):
                     _type, _id = i.split('-')
                     type_dict = {"activity": Activity(), "assignment": Assignment(), "reading": Reading()}
                     #get the object
-                    if new.public=="2":
+                    if new.public=="True":
                         child_content = type_dict[_type].query.filter_by(id=_id).first()
-                        child_content.public = "2"
+                        child_content.public = "True"
                         db.session.add(child_content)
                         db.session.commit()
                     new_coll_item = CollectionItems()
@@ -459,9 +465,9 @@ def create(resource_type=None):
             # my activities
             activities = Activity.query.filter(Activity.user_id==u_id).all()
             # public content
-            p_r = Reading.query.filter(and_(Reading.public==str(2), Reading.user_id != u_id)).all()
-            p_as = Assignment.query.filter(and_(Assignment.public==str(2), Assignment.user_id != u_id)).all()
-            p_act = Activity.query.filter(and_(Activity.public==str(2), Activity.user_id != u_id)).all()
+            p_r = Reading.query.filter(and_(Reading.public=="True", Reading.user_id != u_id)).all()
+            p_as = Assignment.query.filter(and_(Assignment.public=="True", Assignment.user_id != u_id)).all()
+            p_act = Activity.query.filter(and_(Activity.public=="True", Activity.user_id != u_id)).all()
             public = {"readings":p_r, "assignments":p_as, "activities":p_act}
             all_content = {"readings":readings, "assignments":assignments, "activities": activities, "public": public}
 
