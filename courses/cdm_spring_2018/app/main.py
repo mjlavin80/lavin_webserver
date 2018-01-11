@@ -230,91 +230,89 @@ def timelinedata():
 @include_site_data
 def planner():
     try:
-        c_u = github.get('user')
+        current_user.is_admin == True
+        #move all this to application folder?
+        import datetime
+        t = datetime.date.today()
 
-        if str(c_u['login']) == str(GITHUB_ADMIN):
-            #move all this to application folder?
-            import datetime
-            t = datetime.date.today()
+        weeks = Week.query.order_by(Week.week_number).all()
+        last_due = []
+        next_due = []
+        days_before = []
+        days_after = []
+        for week in weeks:
+            for day in week.days:
+                try:
+                    dayname = datetime.datetime.strptime(day.name, "%A, %B %d, %Y").date()
+                except:
+                    dayname = t
+                if dayname >= t:
+                    days_after.append(day)
+                if dayname < t:
+                    days_before.append(day)
 
-            weeks = Week.query.order_by(Week.week_number).all()
-            last_due = []
-            next_due = []
-            days_before = []
-            days_after = []
-            for week in weeks:
-                for day in week.days:
-                    try:
-                        dayname = datetime.datetime.strptime(day.name, "%A, %B %d, %Y").date()
-                    except:
-                        dayname = t
-                    if dayname >= t:
-                        days_after.append(day)
-                    if dayname < t:
-                        days_before.append(day)
+        def find_assignment(day_list, mode='before'):
+            assign = 0
+            due_days = []
+            for day in day_list:
+                if mode == 'before' and assign == 0:
+                    if len(day.assignments) > 0:
+                        due_days.append(day)
+                        #if found, append and change assign var to a 1
+                        assign += 1
+                elif mode != 'before':
+                    if len(day.assignments) > 0:
+                        due_days.append(day)
+            if mode == 'before':
+                due_days = due_days[-1:]
+            return due_days
 
-            def find_assignment(day_list, mode='before'):
-                assign = 0
-                due_days = []
-                for day in day_list:
-                    if mode == 'before' and assign == 0:
-                        if len(day.assignments) > 0:
-                            due_days.append(day)
-                            #if found, append and change assign var to a 1
-                            assign += 1
-                    elif mode != 'before':
-                        if len(day.assignments) > 0:
-                            due_days.append(day)
-                if mode == 'before':
-                    due_days = due_days[-1:]
-                return due_days
+        last_due = find_assignment(days_before)
+        next_due = find_assignment(days_after, mode='after')
 
-            last_due = find_assignment(days_before)
-            next_due = find_assignment(days_after, mode='after')
+        try:
+            _next_three = days_after[0:3]
+        except:
+            _next_three = []
+            fake = Day()
+            fake.name = "No data to display"
+            _next_three.append(fake)
+        try:
+            _last = days_before[-1]
+        except:
+            _last = Day()
+            _last.name = "No data to display"
+        try:
+            last_due_date = last_due[0]
+            days_passed = t - datetime.datetime.strptime(last_due_date.name, "%A, %B %d, %Y").date()
+            days_ago = days_passed.days
+        except:
+            last_due_date = Day()
+            last_due_date.name = "No data to display"
+            fake_assignment = Assignment()
+            fake_assignment.link_title = "all"
+            fake_assignment.title = "No data to display"
+            last_due_date.assignments.append(fake_assignment)
+            days_ago = 0
+        try:
+            next_due_date = next_due[0]
+            days_to = datetime.datetime.strptime(next_due_date.name, "%A, %B %d, %Y").date() - t
+            days_to_next = days_to.days
+        except:
+            next_due_date = Day()
+            next_due_date.name = "No data to display"
+            fake_assignment = Assignment()
+            fake_assignment.link_title = "all"
+            fake_assignment.title = "No data to display"
+            next_due_date.assignments.append(fake_assignment)
+            days_to_next = 0
 
-            try:
-                _next_three = days_after[0:3]
-            except:
-                _next_three = []
-                fake = Day()
-                fake.name = "No data to display"
-                _next_three.append(fake)
-            try:
-                _last = days_before[-1]
-            except:
-                _last = Day()
-                _last.name = "No data to display"
-            try:
-                last_due_date = last_due[0]
-                days_passed = t - datetime.datetime.strptime(last_due_date.name, "%A, %B %d, %Y").date()
-                days_ago = days_passed.days
-            except:
-                last_due_date = Day()
-                last_due_date.name = "No data to display"
-                fake_assignment = Assignment()
-                fake_assignment.link_title = "all"
-                fake_assignment.title = "No data to display"
-                last_due_date.assignments.append(fake_assignment)
-                days_ago = 0
-            try:
-                next_due_date = next_due[0]
-                days_to = datetime.datetime.strptime(next_due_date.name, "%A, %B %d, %Y").date() - t
-                days_to_next = days_to.days
-            except:
-                next_due_date = Day()
-                next_due_date.name = "No data to display"
-                fake_assignment = Assignment()
-                fake_assignment.link_title = "all"
-                fake_assignment.title = "No data to display"
-                next_due_date.assignments.append(fake_assignment)
-                days_to_next = 0
+        today = t.strftime("%A, %B %d, %Y").replace(" 0", " ")
+        return render_template("planner.html", last=_last, next_three=_next_three, next_due_date=next_due_date, last_due_date=last_due_date, days_ago=days_ago, days_to_next=days_to_next, today=today)
 
-            today = t.strftime("%A, %B %d, %Y").replace(" 0", " ")
-            return render_template("planner.html", last=_last, next_three=_next_three, next_due_date=next_due_date, last_due_date=last_due_date, days_ago=days_ago, days_to_next=days_to_next, today=today)
-        else:
-            return redirect(url_for("login"))
     except:
-        return redirect(url_for("login"))
+        return redirect(url_for('status', message="unauthorized"))
+
 @app.route("/assignments/<this_assignment>")
 @app.route("/assignments")
 @include_site_data
@@ -580,6 +578,6 @@ def gateway_error(e):
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 80))
     #for production
-    #app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port)
     #for dev
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    #app.run(host='0.0.0.0', debug=True, port=5000)
