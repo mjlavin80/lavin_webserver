@@ -239,7 +239,13 @@ def planner():
         for task in client.tasks.find_by_project(ASANA_PROJECT_ID):
             full_task = client.tasks.find_by_id(task['id'])
             project_tasks.append(full_task)
+        def sort_key(d):
+            if d['due_on']:
+                return d['due_on']
+            else:
+                return '9999-99-99'
 
+        project_tasks = sorted(project_tasks, key=sort_key, reverse=False)
         t = datetime.date.today()
 
         weeks = Week.query.order_by(Week.week_number).all()
