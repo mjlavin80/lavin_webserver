@@ -87,7 +87,7 @@
 <h4>Asana Project Tasks</h4>
 <ul>
     {% for task in project_tasks %}
-  <li>{{task['name']}}: <a href="https://app.asana.com/0/{{task['projects'][0]['id']}}/{{task['id']}}">View in Asana</a></li>
+  <li>{{task['name']}}: <a href="https://app.asana.com/0/{{task['projects'][0]['id']}}/{{task['id']}}" target="blank">View in Asana</a></li>
   {% endfor %}
 </ul>
 </div>

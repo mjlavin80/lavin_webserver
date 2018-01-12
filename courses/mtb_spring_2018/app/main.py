@@ -13,9 +13,11 @@ from flask.ext.bcrypt import Bcrypt
 from flask.ext.admin.base import MenuLink
 from wtforms.fields import TextAreaField
 from flask.ext.github import GitHub
-from config import GITHUB_ADMIN, TIMELINE_URL
+from config import GITHUB_ADMIN, TIMELINE_URL, ASANA_CODE, ASANA_PROJECT_ID
 from sqlalchemy.sql import and_
 import json
+import datetime, asana
+import pandas as pd
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -137,7 +139,6 @@ def calendar():
 @include_site_data
 def timeline(row=None):
     if row:
-        import pandas as pd
         count = 0
         df = pd.DataFrame.from_csv(TIMELINE_URL)
         for j in df.iterrows():
@@ -164,7 +165,6 @@ def timeline(row=None):
 @app.route("/timelinedata")
 @include_site_data
 def timelinedata():
-    import pandas as pd
 
     df = pd.DataFrame.from_csv(TIMELINE_URL)
 
@@ -232,7 +232,14 @@ def planner():
     try:
         current_user.is_admin == True
         #move all this to application folder?
-        import datetime
+
+        client = asana.Client.access_token(ASANA_CODE)
+
+        project_tasks = []
+        for task in client.tasks.find_by_project(ASANA_PROJECT_ID):
+            full_task = client.tasks.find_by_id(task['id'])
+            project_tasks.append(full_task)
+
         t = datetime.date.today()
 
         weeks = Week.query.order_by(Week.week_number).all()
@@ -308,7 +315,7 @@ def planner():
             days_to_next = 0
 
         today = t.strftime("%A, %B %d, %Y").replace(" 0", " ")
-        return render_template("planner.html", last=_last, next_three=_next_three, next_due_date=next_due_date, last_due_date=last_due_date, days_ago=days_ago, days_to_next=days_to_next, today=today)
+        return render_template("planner.html", project_tasks=project_tasks, last=_last, next_three=_next_three, next_due_date=next_due_date, last_due_date=last_due_date, days_ago=days_ago, days_to_next=days_to_next, today=today)
 
     except:
         return redirect(url_for('status', message="unauthorized"))
@@ -388,7 +395,6 @@ def processor(resource_type=None):
             if createform.validate():
                 new = Collection()
                 valid=True
-
 
         if valid==True:
             createform.populate_obj(new)
