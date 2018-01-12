@@ -122,7 +122,7 @@ def index():
 @app.route("/policies")
 @include_site_data
 def policies():
-    policies = Policy.filter(public == "True").query.all()
+    policies = Policy.query.filter(public == "True").all()
     return render_template("policies.html", policies=policies)
 
 @app.route("/calendar")
