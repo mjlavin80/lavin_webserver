@@ -14,3 +14,4 @@ dictalchemy
 WTForms-Alchemy
 requests[security]
 pandas
+asana
