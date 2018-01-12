@@ -122,7 +122,7 @@ def index():
 @app.route("/policies")
 @include_site_data
 def policies():
-    policies = Policy.query.filter(public == "True").all()
+    policies = Policy.query.filter(Policy.public == "True").all()
     return render_template("policies.html", policies=policies)
 
 @app.route("/calendar")
@@ -320,7 +320,7 @@ def assignments(this_assignment="all"):
     if this_assignment != "all":
         #get assignment from db
         try:
-            a = Assignment.query.filter(Assignment.link_title == this_assignment and public == "True").one_or_none()
+            a = Assignment.query.filter(and_(Assignment.link_title == this_assignment, Assignment.public == "True")).one_or_none()
             if a == []:
                 return redirect(url_for("assignments", assignments=[], this_assignment="all"))
             return render_template("assignments.html", assignments=[], this_assignment=a)
@@ -340,11 +340,11 @@ def activities(this_activity="all"):
         if a:
             return render_template("activities.html", activities=[], this_activity=a)
         else:
-            a = Activity.query.filter(public == "True").all()
+            a = Activity.query.filter(Activity.public == "True").all()
             a.sort(key=lambda x: x.day.id)
             return render_template("activities.html", activities=a, this_activity="all")
     else:
-        a = Activity.query.filter(public == "True").all()
+        a = Activity.query.filter(Activity.public == "True").all()
         a.sort(key=lambda x: x.day.id)
         return render_template("activities.html", activities=a, this_activity="all")
 
