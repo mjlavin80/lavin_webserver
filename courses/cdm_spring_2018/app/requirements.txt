@@ -13,5 +13,6 @@ flask-bcrypt
 dictalchemy
 WTForms-Alchemy
 requests[security]
+github-flask
 pandas
 asana
