@@ -47,7 +47,7 @@
 
 {% for activity in n.activities|sort(attribute='order') %}
 <div class="list-group-item">
-<p>{{activity.description|safe}} ... <a href="{{activity.link}}"><strong>Read More</strong></a></p>
+<p>{{activity.title|safe}} ... <a href="activities/{{activity.id}}"><strong>Read More</strong></a></p>
 </div>
 {% endfor %}
 </div>
