@@ -8,7 +8,7 @@ Flask-Migrate
 simplejson
 flask-login
 flask-security
-flask-admin==1.4.2
+flask-admin
 flask-bcrypt
 dictalchemy
 WTForms-Alchemy
