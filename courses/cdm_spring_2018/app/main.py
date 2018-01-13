@@ -234,11 +234,11 @@ def planner():
         current_user.is_admin == True
         #move all this to application folder?
 
-        client = asana.Client.access_token(ASANA_CODE)
+        asana_client = asana.Client.access_token(ASANA_CODE)
 
         project_tasks = []
-        for task in client.tasks.find_by_project(ASANA_PROJECT_ID):
-            full_task = client.tasks.find_by_id(task['id'])
+        for task in asana_client.tasks.find_by_project(ASANA_PROJECT_ID):
+            full_task = asana_client.tasks.find_by_id(task['id'])
             project_tasks.append(full_task)
         def sort_key(d):
             if d['due_on']:
