@@ -20,7 +20,6 @@ services:
       - mtb_fall_2017
       - cdm_spring_2018
       - mtb_spring_2018
-      - nyt_web_app
 
   flask_base:
     build: ./flaskbase
@@ -54,12 +53,6 @@ services:
   neo_web_app:
     build: ./neo_web_app
     container_name: neo_web_app
-    links:
-      - flask_base
-
-  nyt_web_app:
-    build: ./nyt_web_app
-    container_name: nyt_web_app
     links:
       - flask_base
 
