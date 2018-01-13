@@ -507,140 +507,129 @@ id,month,review_word_count,nyt_id,author_as_listed,assumed_gender,headline
 1690,6,539,4fc049a045c1498b0d227115,Richard T. Ely,m,"LABOR AND POLITICS.; THE LABOR MOVEMENT IN AMERICA. By Richard T. Ely. New edition, revised and enlarged. 12mo. Pp. Ivi. 399. New York: The Macmillan Company. $1.25."
 1692,6,943,4fc0520b45c1498b0d24be45,M. Saloman Reinach,m,THE STORY OF ART.
 1693,6,417,4fc0520b45c1498b0d24be5d,Gen. Charles King,m,The Drill Master.; THE MEDAL OF HONOR. A Story of Peace and War. By Gen. Charles King. Illustrations by George Gibbs and E.W. Deming. 12mo. Pp. 348. New York: The Hobart Company.
-1699,6,444,4fc0532b45c1498b0d25126b,,,Old English Glasses.
-1700,6,337,4fc0532b45c1498b0d251271,,,Napoleon's Young Manhood.
-1702,6,252,4fc045ff45c1498b0d21675e,,,"""The Cities of Umbria."""
-1704,6,280,4fc049a045c1498b0d22710c,,,England in 1729-1763.
-1706,6,625,4fc0520b45c1498b0d24be61,,,JIMMY BROWN.
-1708,6,357,4fc0520b45c1498b0d24be5a,Louis Becke,,Job of Australia.; TOM GERRARD. By Louis Becke. 12mo Pp. 292. Philadelphia: The J.B. Lippincott Company. $1.50.
+1700,6,337,4fc0532b45c1498b0d251271,Lord Rosebury,m,Napoleon's Young Manhood.
+1706,6,625,4fc0520b45c1498b0d24be61,W.L. Alden,m,JIMMY BROWN.
+1708,6,357,4fc0520b45c1498b0d24be5a,Louis Becke,none,Job of Australia.; TOM GERRARD. By Louis Becke. 12mo Pp. 292. Philadelphia: The J.B. Lippincott Company. $1.50.
 1711,6,1456,4fc049a045c1498b0d227102,Prof. Edward Alsworth Ross,m,"Prof. Edward Alsworth Ross's Book on the ""Foundations of Sociology.""*"
 1713,6,384,4fc0455345c1498b0d21300d,"George C. Williamson, Litt. D. ",m,"Bryan's Biographies; BRYAN'S DICTIONARY OF PAINTERS AND ENGRAVERS. New Edition, Revised and Enlarged, Under the Supervision of George C. Williamson, Litt. D. Numerous Illustrations. In Five Volumes. Cloth, 4to, New York: The Macmillan Company. $6 net per volume."
-1714,6,411,4fc0455345c1498b0d21301c,,,Ireland in Words and Pictures.
 1715,6,305,4fc0455345c1498b0d213022,"A. Guyot Cameron. M.A., Ph.D.",m,"Zola for Children.; SELECTIONS FROM EMILE ZOLA. Edited with Introduction, Notes, and Bibliography, by A. Guyot Cameron. M.A., Ph.D., Woodhull Professor of French in Princeton University. Authorized Edition. Portrait. Cloth, 8vo. Pp. 1xx.-288. New York: Henry Holt & Co. 8O cents."
-1718,6,301,4fc0455345c1498b0d21301b,,,First Across the Continent.
 1720,6,427,4fc049a045c1498b0d227100,Elisabeth W. Brooks,f,"The Star's Daughter.; AS THE WORLD GOES BY. By Elisabeth W. Brooks. 12mo. Pp. 375. Boston: Little, Brown & Co."
-1725,6,421,4fc0471345c1498b0d21b67b,Katharine.,f,"THE WILD WEST.; LETTERS FROM AN OREGON RANCH. By ""Katharine."" With twelve full-page illustrations from photographs. 8vo. Pp. 212. Chicago: A.C. McClurg & Co."
+1725,6,421,4fc0471345c1498b0d21b67b,"""Katharine""",f,"THE WILD WEST.; LETTERS FROM AN OREGON RANCH. By ""Katharine."" With twelve full-page illustrations from photographs. 8vo. Pp. 212. Chicago: A.C. McClurg & Co."
 1727,6,1783,4fc0532b45c1498b0d251269,Kosmo Wilkinson,m,Kosmo Wilkinson's Glowing Account of the British Upper Chamber.*
 1728,6,452,4fc0455345c1498b0d21309f,Joseph Hocking,m,"During the Restoration.; THE COMING OF THE KING. By Joseph Hocking. Illustrated. 12mo. Boston: Little, Brown & Co. $1.50."
-1729,6,262,4fc048a445c1498b0d2229ae,,,A Master of the Violin.
-1731,6,287,4fc03b9445c1498b0d1e8af0,,,"""Edward FitzGerald."""
-1736,6,356,4fc0455345c1498b0d21309d,,,Higher Criticism.
-1739,6,283,4fc0532b45c1498b0d2512a1,,,"""Memories."""
+1729,6,262,4fc048a445c1498b0d2229ae,Rosa Newmarch,f,A Master of the Violin.
 1741,6,1203,4fc0455345c1498b0d21308d,Ethel Puffer ,f,"BEAUTY IN ART.; A Suggestive Work by Ethel Puffer on Its ""Psychology,"" Involving a New Philosophical Theory.*"
 1743,6,273,4fc0455345c1498b0d21309c,"Henry J. Spooner, C.E.",m,"A Primer of Motoring.; MOTORS AND MOTORING. By Henry J. Spooner, C.E. Diagrams. One volume. Pp. xiii.-103. 8vo. New York: Dodd, Mead & Co. 50 cents."
-1746,6,361,4fc0520c45c1498b0d24bf01,,,FRA SALIMBENE.
+1746,6,361,4fc0520c45c1498b0d24bf01,Fra Salimbene de Adam,m,FRA SALIMBENE.
 1748,6,287,4fc0455345c1498b0d21308c,Henry Pettit,m,Ideals and Argument.; A TWENTIENTH CENTURY IDEALIST. By Henry Pettit. 12mo. Pp.303. New York: The Grafton Press.
-1749,6,852,4fc048a445c1498b0d2229a9,,,MOTHER OF CZARS.; An Attempt to Aggrandize the Cheerful Princess Who Was the Mother of Two Russian Emperors.*
+1749,6,852,4fc048a445c1498b0d2229a9,Mrs. Colquhoun Grant,f,MOTHER OF CZARS.; An Attempt to Aggrandize the Cheerful Princess Who Was the Mother of Two Russian Emperors.*
 1751,6,233,4fc0520c45c1498b0d24bf02,John Howard. Edited by Theodore Drury,m,VOCAL CULTURE.; EXPRESSION IN SINGING. Including Thirty-one Exercises for Voice Culture. By John Howard. Edited by Theodore Drury. 8vo. Pp. 189. New York. VOCALISM. Its Structure and Culture from an English Standpoint. By W.H. Breare. 12mo. Pp. vi.-147. New York: G.P. Putnam's Sons. $1.25.
 1754,6,790,4fc0532b45c1498b0d2512ac,Henry Wellington Wack,m,Hugo's Juliette.; THE ROMANCE OF VICTOR HUGO AND JULIETTE DROUET. By Henry Wellington Wack. Introduction by Francois Coppee. Crown 8vo. New York: G.P. Putnam's Sons. $1.50 net.
 1757,6,2858,4fc0520c45c1498b0d24bf03,Dr. Nordenskjold,m,NEAR THE SOUTH POLE; Dr. Nordenskjold's Story of the Thrilling Experiences of the Swedish Antarctic Expedition.*
 1760,6,736,4fc0532b45c1498b0d2512a5,John Heigh,m,GHOSTS AND ROSES.; THE HOUSE OF CARDS. A Record. By John Heigh. 12mo. New York: The Macmillan Company. $1.50.
-1762,6,1939,4fc048a445c1498b0d22299d,,,"A PERSIAN TOWN.; A Missionary's Description of a Residence in Yezd, Its People, and Their Customs.*"
+1762,6,1939,4fc048a445c1498b0d22299d,Rev. Napier Malcolm,m,"A PERSIAN TOWN.; A Missionary's Description of a Residence in Yezd, Its People, and Their Customs.*"
 1763,6,325,4fc0520c45c1498b0d24beea,Wilbur L. Cross,m,Study of the Novel.; DEVELOPMENT OF THE ENGLISH NOVEL. By Wilbur L. Cross. 12mo. Pp. xvii.-329. New York: The Macmillan Company. $1.50.
 1765,6,411,4fc0520c45c1498b0d24bf0e,William Dean Howells,m,MR. HOWELLS'S NEW BOOK.; MISS BELLARD'S INSPIRATION. By William Dean Howells. Pp. 224. 12mo. Cloth. New York: Harper & Brothers. $1.50.
-1773,6,617,4fc0520c45c1498b0d24bee3,,,A KENTUCKY IMBROGLIO.
+1773,6,617,4fc0520c45c1498b0d24bee3,Richard Fisguill,m,A KENTUCKY IMBROGLIO.
 1777,6,818,4fc0520c45c1498b0d24bef3,Roger Pocock,m,"In the Arizona Desert.; CURLY. A TALE OF THE ARIZONA DESERT. By Roger Pocock. With illustrations from drawings by Stanley L. Wood; One volume. Pp. 320. Boston: Little, Brown & Co. $1.50."
 1783,6,377,4fc045ff45c1498b0d216785,John R. Carling,m,"Influence of a Picture.; THE WEIRD PICTURE. By John R. Carling. Illustrated by Cyrus Cuneo. 12mo Pp. 283. Boston: Little, Brown & Co. $1.50."
-1784,6,306,4fc0520c45c1498b0d24beef,,,"""The Romance of Savoy."""
+1784,6,306,4fc0520c45c1498b0d24beef,Marchesa Vitelleschi,f,"""The Romance of Savoy."""
 1787,6,1036,4fc0455345c1498b0d213099,"Miss de Selincourt, Paul Sabatier",dual,"ST. FRANCIS.; Miss de Selincourt's Description of the Scenes of His life, with a Preface by Paul Sabatier.*"
 1788,6,297,4fc0532b45c1498b0d25129d,"John Pentland Mahaffy, C.V.O.D.D.D.C.L.",m,"Greek Influences.; THE PROGRESS OF HELLENISM IN ALEXANDER'S EMPIRE. By John Pentland Mahaffy, C.V.O.D.D.D.C.L., sometime Professor of Ancient History in the University of Dublin. 12mo. Pp. 154. Chicago: The University of Chicago Press. $1."
 1790,6,527,4fc048a445c1498b0d2229ab,James B. Connolly,m,THE GEORGIA COAST.; ON TYBEE KNOLL. A STORY OF THE GEORGIA COAST. By James B. Connolly. Illustrated by Ch. Weber-Ditzler. One volume. Pp. 285. New York: A.S. Barnes & Co. $1.25.
-1793,6,999,4fc0520c45c1498b0d24bef6,,,FOOLISH FINANCE.; A Mistaken Idea Prevails of the Origin of the New Book of Humor -- What It Is Like.
-1794,6,297,4fc0520c45c1498b0d24beff,,,Royal Academy Exhibitors.
+1794,6,297,4fc0520c45c1498b0d24beff,"Algernon Graves, F.S.A",m,Royal Academy Exhibitors.
 1795,6,528,4fc048a445c1498b0d2229a3,William Salter,m,"Iowa as a Territory.; IOWA. THE FIRST FREE STATE IN THE LOUISIANA PURCHASE. FROM ITS DISCOVERY TO THE ADMISSION OF THE STATE INTO THE UNION, 1673-1846. By William Salter. Illustrations and plans. One volume. Pp. 289. Chicago: A.C. McClurg & Co."
 1798,6,499,4fc048a445c1498b0d2229a4,Philip Verrill Mighels,m,The Snare of Politics.; THE ULTIMATE PASSION. By Philip Verrill Mighels. 12mo. New York: Harper & Brothers. $1.50.
 1802,7,384,4fc0451845c1498b0d212357,Marshall Saunders,m,The Self-Made Patriarch.; PRINCESS SUKEY. The Story of a Pigeon and Her Human Friends. By Marshall Saunders. 8vo. Pp. 336. New York: Eaton & Mains. $1.75.
-1804,7,578,4fc0478745c1498b0d21d9e7,,,"A ""BIOGRAPHICAL"" STEVENSON."
-1806,7,344,4fc0451845c1498b0d21235f,,,MR. CLAUDE BRUCE.
-1807,7,2748,4fc04ef545c1498b0d23eb1d,,,"POSITIVE MR. JEBB.; His Vigorously Written and Remarkably Readably "" Studies in Colonial Nationalism.""*"
-1809,7,795,4fc052b345c1498b0d24ed49,,,AMERICAN HISTORY.; The Second Volume of the ChancellorHewes Record of Three Centuries.*
+1804,7,578,4fc0478745c1498b0d21d9e7,"Robert Louis Stevenson, edited by his widow",dual,"A ""BIOGRAPHICAL"" STEVENSON."
+1806,7,344,4fc0451845c1498b0d21235f,"""Gordon Holmes""",m,MR. CLAUDE BRUCE.
+1807,7,2748,4fc04ef545c1498b0d23eb1d,Richard Jebb,m,"POSITIVE MR. JEBB.; His Vigorously Written and Remarkably Readably "" Studies in Colonial Nationalism.""*"
+1809,7,795,4fc052b345c1498b0d24ed49,William Estebrook Chancellor and Fletcher Willis Hewes,m,AMERICAN HISTORY.; The Second Volume of the ChancellorHewes Record of Three Centuries.*
 1810,7,340,4fc03a7d45c1498b0d1e2e9c,Gertrude Bacon,f,"Balloons and Airships.; BALLOONS, AIRSHIPS, AND FLYING MACHINES. By Gertrude Bacon. Portraits and Illustrations. 8vo. Pp. 124. New York: Dodd, Mead & Co. 50 cents."
 1811,7,511,4fc0451845c1498b0d212355,"Karl Lamprecht, Ph.D., LL.D.",m,"Lamprecht's Essays.; WHAT IS HISTORY? Five Lectures on the Modern Science of History. By Karl Lamprecht, Ph.D., LL.D. Translated from the German by E.A. Andrews. New York: The Macmillan Company. $1.25."
 1813,7,682,4fc0451845c1498b0d21235d,Joseph C. Lincoln,m,CAPE COD FOLK.; PARTNERS OF THE TIDE. By Joseph C. Lincoln. Illustrated by Charlotte Weber. Decorations by John Rae. One volume. Pp. 400. New York: A.S. Barnes & Co. $1.50.
 1815,7,303,4fc048a445c1498b0d2229f3,George Dyre Eldridge,m,The Murder of Theodore Wing.; THE MILLBANK CASE. A Maine Mystery of To-day. By George Dyre Eldridge. 12mo. New York: Henry Holt & Co. $1.50.
-1819,7,668,4fc043f245c1498b0d20d22a,,,AS HURET SEES US.
+1819,7,668,4fc043f245c1498b0d20d22a,M. Jules Huret,m,AS HURET SEES US.
 1825,7,615,4fc043f245c1498b0d20d22b,Frederick Upham Adams,m,"A GOLFER'S DIARY.; JOHN HENRY SMITH. A Humorous Romance of Outdoor Life. By Frederick Upham Adams. Illustrated by A.B. Frost. 12mo. New York: Doubleday, Page & Co. $1.50."
-1827,7,266,4fc04ef345c1498b0d23e7f2,,,TREES AND FLOWERS.
+1827,7,266,4fc04ef345c1498b0d23e7f2,Dr. H. Marshall Ward,m,TREES AND FLOWERS.
 1828,7,682,4fc052b945c1498b0d24f7d8,Frances Thomas Howard,m,THE OTHER SIDE.; IN AND OUT OF THE LINES. An Accurate Account of Incidents During the Occupation of Georgia by Federal Troops in 1864-5. By Frances Thomas Howard. 12mo. Pp. 238. New York and Washington: The Neale Publishing Company. $1.50.
 1834,7,471,4fc051cc45c1498b0d24a8a1,S.R. Crockett,m,"CROCKETT'S SCOTS.; MAY MARGARET, Called ""The Fair Maid of Galloway."" By S.R. Crockett. 12mo. Pp. 375. New York: Dodd, Mead & Co. $1.50."
-1849,7,306,4fc03a7d45c1498b0d1e2ebb,,,LAST QUEEN OF NAPLES.
-1855,7,1658,4fc052b945c1498b0d24f6b6,,,A KING'S CHAPLAIN; Letters from a Preacher to George II. to a Friend in the Country.*
+1849,7,306,4fc03a7d45c1498b0d1e2ebb,Clara Tschudi,f,LAST QUEEN OF NAPLES.
+1855,7,1658,4fc052b945c1498b0d24f6b6,"Edmund Pyle, D.D., Samuel Kerrich, D.D. Annotated and Edited by Albert Hartsborne",m,A KING'S CHAPLAIN; Letters from a Preacher to George II. to a Friend in the Country.*
 1858,7,347,4fc0478745c1498b0d21d9f1,Edited by Prof. George Burbank Shattuck,m,The Bahamas.; THE BAHAMA ISLANDS. Edited by Prof. George Burbank Shattuck. 4to. Pp. about 700. Illustrated. Cloth. New York: The Macmillan Company. $10 net.
-1860,7,820,4fc051cc45c1498b0d24a8b4,,,History and Myth Mingled -- Significance of Names.
-1865,7,353,4fc03a7d45c1498b0d1e2ebd,"Dr. W.A. Hampson, M.A",,"All About Radium.; RADIUM EXPLAINED. A Popular Account of the Relations of Radium to the Natural World, to Scientific Thought, and to Human Life. By Dr. W.A. Hampson, M.A. Illustrative diagrams. One volume. Pp. x.-122. 8vo. Cloth. New York: Dodd, Mead & Co. 50 cents net."
+1865,7,353,4fc03a7d45c1498b0d1e2ebd,"Dr. W.A. Hampson, M.A",m,"All About Radium.; RADIUM EXPLAINED. A Popular Account of the Relations of Radium to the Natural World, to Scientific Thought, and to Human Life. By Dr. W.A. Hampson, M.A. Illustrative diagrams. One volume. Pp. x.-122. 8vo. Cloth. New York: Dodd, Mead & Co. 50 cents net."
 1867,7,403,4fc051cc45c1498b0d24a8b5,Henry Cabot Lodge.,m,"NAHANT.; AN HISTORICAL ADDRESS. Delivered at the Celebration of the Fiftieth Anniversary of the Incorporation of the Town of Nahant July 14, 1853. By Henry Cabot Lodge. Map. Pp. 25. 8vo. Boards. Boston: W.A. Butterfield. $1.25 net:"
 1872,7,852,4fc0466a45c1498b0d2181d8,Helen Woljeska,f,"A SMART WOMAN.; Some of the Sayings of Helen Woljeska, Who May or May Not Have Really Existed."
-1876,7,1543,4fc043f645c1498b0d20d7bf,,,A Study of the Sociological Conditions Underlying Them in All Nations and Ages.*
+1876,7,1543,4fc043f645c1498b0d20d7bf,Frederick Morgan Davenport,m,A Study of the Sociological Conditions Underlying Them in All Nations and Ages.*
 1877,7,712,4fc043f645c1498b0d20d7c5,Ezra S. Brudno,m,"A JEWISH CARTON.; THE LITTLE CONSCRIPT. A Tale of the Reign of Nicholas I. By Ezra S. Brudno, Author of ""The Fugitive."" 12mo. Pp. 325. New York: Doubleday, Page & Co. $1.50."
 1879,7,625,4fc051cc45c1498b0d24a8a8,Thomas Coryate,m,"CORYATES ""CRUIDITIES.""; CORYATES CRUIDITIES. By Thomas Coryate. In two volumes. Cloth. Pp. about 1,000. Illustrations. New York: The Macmillan Company. $6.50 net."
 1880,7,654,4fc052b345c1498b0d24ed54,Lucy M. Mitchell,f,"ANCIENT SCULPTURE.; A HISTORY OF ANCIENT SCULPTURE. By Lucy M. Mitchell. New edition in one volume. Numerous illustrations. Svo. Cloth. Pp. 766. New York: Dodd, Mead & Co. $4 net. A GRAMMAR OF GREEK ART. By Percy Gardner. Litt. D. 12mo. Illustrated. Pp. 267. Cloth. New York: The Macmillan Company. $1.75."
-1883,7,573,4fc0466a45c1498b0d21822f,,,EARTHLY PARADISE.
-1887,7,1443,4fc03a8345c1498b0d1e39d2,,,THE JAMAICAN NEGRO.; Good Pictures and a Better Account of England's Largest West India Island.
-1890,7,1227,4fc052ba45c1498b0d24f815,,,PRINCE KROPOTKIN.; His Informing But Prejudiced Book on Russian Literature.*
-1892,7,1402,4fc03a8445c1498b0d1e3b63,F. Berkeley Smith,,"GAY PARISIANS.; F. Berkeley Smith's New Book About Their Life -- ""Out-Doors "" Means a Great Deal."
-1904,7,1242,4fc0451b45c1498b0d2128d4,,,SCHERER'S JAPAN.; A Popular History and Exposition of Nippon and Its People.
+1883,7,573,4fc0466a45c1498b0d21822f,Merejkoffsky,m,EARTHLY PARADISE.
+1887,7,1443,4fc03a8345c1498b0d1e39d2,A.S. Forrest and John Henderson,m,THE JAMAICAN NEGRO.; Good Pictures and a Better Account of England's Largest West India Island.
+1890,7,1227,4fc052ba45c1498b0d24f815,Peter Alexeivitch Kropotkin,m,PRINCE KROPOTKIN.; His Informing But Prejudiced Book on Russian Literature.*
+1892,7,1402,4fc03a8445c1498b0d1e3b63,F. Berkeley Smith,m,"GAY PARISIANS.; F. Berkeley Smith's New Book About Their Life -- ""Out-Doors "" Means a Great Deal."
+1904,7,1242,4fc0451b45c1498b0d2128d4,"James A.B. Scherer, Ph.D., LL.D.",m,SCHERER'S JAPAN.; A Popular History and Exposition of Nippon and Its People.
 1905,7,357,4fc0478745c1498b0d21da4e,"the Very Rev. Canon P.A. Sheehan, D.D.",m,"A STORY OF IRISH LIFE.; GLENANAAR. A Story of Irish Life. By the Very Rev. Canon P.A. Sheehan, D.D., author of ""My New Curato,"" &cc. Pp. 321. 12mo, cloth. Longmans, Green & Co. $1.50)."
-1907,7,1813,4fc048a845c1498b0d22312b,,,THE UKIYO-YE ARTISTS.; Dora Amsden's Study of Japanese Color Prints Before and After Hokusai.*
+1907,7,1813,4fc048a845c1498b0d22312b,Dora Amsden,f,THE UKIYO-YE ARTISTS.; Dora Amsden's Study of Japanese Color Prints Before and After Hokusai.*
 1913,7,1230,4fc03a8445c1498b0d1e3c03,Mrs. Hugh Fraser,f,NIPPON ROMANCE.; Mrs. Hugh Fraser's Exquisite Little Story of the Japan of Cherry Blossom and Kimono.*
 1915,7,703,4fc043f745c1498b0d20d883,"Emlin McClain, LL. D.",m,"THE CONSTITUTION.; CONSTITUTIONAL LAW IN THE UNITED STATES. By Emlin McClain, LL. D., Justice of the Supreme Court of Iowa. New York: Longmans, Green & Co."
-1917,7,656,4fc0451c45c1498b0d2129aa,J.H. Balfour Browne. K.C.,,"The Transvaal As It Is.; SOUTH AFRICA. A Glance at Current Conditions and Politics. By J.H. Balfour Browne. K.C. Pp. vi.-238. New York and London: Longmans, Green & Co. $2.50."
+1917,7,656,4fc0451c45c1498b0d2129aa,J.H. Balfour Browne. K.C.,m,"The Transvaal As It Is.; SOUTH AFRICA. A Glance at Current Conditions and Politics. By J.H. Balfour Browne. K.C. Pp. vi.-238. New York and London: Longmans, Green & Co. $2.50."
 1921,7,472,4fc0451845c1498b0d2123bb,Dorothea Gerard,f,"A CARPATHIAN TALE.; SAWDUST. A Romance of the Timberlands. By Dorothea Gerard, author of ""The Eternal Woman,"" ""Miss Providence,"" &c. Pp. 361. 12mo. Cloth. Philadelphia: The John C. Winston Company. $1.50."
 1922,7,416,4fc0451845c1498b0d2123c1,Mrs. Deborah Sampson Gannett,f,"FIRST WOMAN LECTURER; AN ADDRESS DELIVERED in 1802 in various towns in Massachusetts, Rhode Island, and New York. By Mrs. Deborah Sampson Gannett of Sharon, Mass., a soldier of the American Revolution. Reprinted by the Sharon Historical Society, with an introduction by Eugene Tappan. Corresponding Secretary of the Society. Portrait Pp. xi.-20. 8vo. Boards. Boston: W.A. Butterfield. 75 cents."
 1924,7,469,4fc0451845c1498b0d2123c0,Ridgwell Cullum,m,UNTAMED WILDERNESS.; IN THE BROODING WILD. By Ridgwell Cullum. Frontispiece illustration. 12mo. Boston: L.C. Page & Co. $ 1.50.
-1926,7,340,4fc048a445c1498b0d222a52,Headon Hill,,"A Plot Against the Prime Minister.; MILLIONS OF MISCHIEF. A Story of a Great Secret. By Headon Hill. 12mo. Illustrated. Akron, Ohio: The Saalfield Publishing Company. $1.50."
-1932,7,734,4fc051cc45c1498b0d24a922,,,IMMIGRATION.
+1926,7,340,4fc048a445c1498b0d222a52,Headon Hill,m,"A Plot Against the Prime Minister.; MILLIONS OF MISCHIEF. A Story of a Great Secret. By Headon Hill. 12mo. Illustrated. Akron, Ohio: The Saalfield Publishing Company. $1.50."
+1932,7,734,4fc051cc45c1498b0d24a922,Mr. James Davenport Whelpley,m,IMMIGRATION.
 1938,7,622,4fc052ba45c1498b0d24f858,Bernhard Berenson.,m,"BERENSON'S LOTTO.; LORENZO LOTTO. An Essay in Constructive Art Criticism. By Bernhard Berenson. Revised Edition, with 64 Illustrations. Crown 8vo. Cloth. Pp. 292. New York: The Macmillan Company. $2.50."
 1940,7,511,4fc043f245c1498b0d20d2b9,Joseph A. Altsheler,m,"A POLITICAL ROMANCE.; THE CANDIDATE: A POLITICAL, ROMANCE. By Joseph A. Altsheler. One volume. Pp. 429. New York: Harper & Brothers. $1.50."
-1947,7,683,4fc048a445c1498b0d222a47,C. Hanford Henderson,,"The Reasonable Morality.; THE CHILDREN OF GOOD FORTUNE. An Essay in Morals. By C. Hanford Henderson. 12mo. Pp. 405. Boston: Houghton, Mifflin & Co."
-1952,7,549,4fc03a7d45c1498b0d1e2fa6,Armistead C. GOrdon,,A WESTERN IDYLL.; THE GIFT OF THE MORNING STAR. A Story of Sherando. By Armistead C. GOrdon. Frontispiece by George Sensenery. 12mo. Pp. 373. New York: The Funk & Wagnalls Company. $1.50.
+1947,7,683,4fc048a445c1498b0d222a47,C. Hanford Henderson,m,"The Reasonable Morality.; THE CHILDREN OF GOOD FORTUNE. An Essay in Morals. By C. Hanford Henderson. 12mo. Pp. 405. Boston: Houghton, Mifflin & Co."
+1952,7,549,4fc03a7d45c1498b0d1e2fa6,Armistead C. Gordon,m,A WESTERN IDYLL.; THE GIFT OF THE MORNING STAR. A Story of Sherando. By Armistead C. GOrdon. Frontispiece by George Sensenery. 12mo. Pp. 373. New York: The Funk & Wagnalls Company. $1.50.
 1954,7,751,4fc048a845c1498b0d223119,Edward Atkinson,m,"ECONOMIC ESSAYS.; FACTS AND FIGURES, the Basis of Economic Science. By Edward Atkinson. One volume. Pp. 202. New York and Boston: Houghton, Mifflin & Co. 12mo. Cloth."
-1955,7,466,4fc04ef545c1498b0d23eb1f,Marian Keith,,"SCOTS TO THE SCOT.; DUNCAN POLITE, THE WATCHMAN OF GLENORO. By Marian Keith. 12mo. Pp. 306. New York: Fleming H. Reveil Company. $1.50."
+1955,7,466,4fc04ef545c1498b0d23eb1f,Marian Keith,none,"SCOTS TO THE SCOT.; DUNCAN POLITE, THE WATCHMAN OF GLENORO. By Marian Keith. 12mo. Pp. 306. New York: Fleming H. Reveil Company. $1.50."
 1956,7,1568,4fc04ef545c1498b0d23eb34,Mr. Wollaston,m,ISLAMISM TO-DAY.; Mr. Wollaston's Well-Made Patchwork of Items About the Followers of Muhammad.*
-1961,7,254,4fc052b445c1498b0d24ee3f,,,CHESS.
-1964,7,667,4fc052b445c1498b0d24ee35,CHARLES DUDLEY WARNER,m,"CHARLES DUDLEY WARNER.; BACKLOG EDITION OF CHARLES DUDLEY WARNER'S WORKS. In 15 vols. Vols. IX to XV., inclusive. 12mo. Silk Cloth. Paper label. Gilt top. Hartford: The American Publishing Company. $2 each: half morocco, marble paper sides and lining. $4 each."
+1961,7,254,4fc052b445c1498b0d24ee3f,F.J. Lee and G.H.D. Gossip,m,CHESS.
+1964,7,667,4fc052b445c1498b0d24ee35,Charles Dudley Warner,m,"CHARLES DUDLEY WARNER.; BACKLOG EDITION OF CHARLES DUDLEY WARNER'S WORKS. In 15 vols. Vols. IX to XV., inclusive. 12mo. Silk Cloth. Paper label. Gilt top. Hartford: The American Publishing Company. $2 each: half morocco, marble paper sides and lining. $4 each."
 1972,7,297,4fc03a7e45c1498b0d1e3082,"Paul Bercy, B.L., L.D., et. Georges Castegnier",m,"A New French Grammar.; SIMPLE GRAMMAIRE FRANCAISE. By Paul Bercy, B.L., L.D., et. Georges Castegnier. 12mo. Pp. 22o. New York: William R. Jenkins. $1."
 1974,7,785,4fc048a845c1498b0d2230d3,Horace G. Hutchinson,m,"REAL PEOPLE.; Such Are the Characters in Horace G. Hutchinson's First Novel, ""Two Moods of a Man."""
 1975,7,711,4fc048a845c1498b0d2230fa,"BYRON, W.A. Lewis Bettany",m,"THE REAL BYRON.*; CONFESSIONS OF LORD BYRON. A Col lection of His Private Opinions of Men and of Matters, taken from the new and enlarged Edition of his Letters and Journals. Arranged by W.A. Lewis Bettany."
-1980,7,2792,4fc043f745c1498b0d20d808,Dr. Brandes,,"BYRON GLORIFIED.; Dr. Brandes's Praise of His Naturalism in the Fourth Volume of His ""Main Currents of Nineteenth Century Literature."""
+1980,7,2792,4fc043f745c1498b0d20d808,Dr. Brandes,m,"BYRON GLORIFIED.; Dr. Brandes's Praise of His Naturalism in the Fourth Volume of His ""Main Currents of Nineteenth Century Literature."""
 1981,7,373,4fc0451845c1498b0d212407,"Samuel Purchas, B.D.",m,"""Purchas His Pilgrimes.""; HAKLUYTUS POSTHUMUS; or, PURCHAS HIS PILGRIMES. By Samuel Purchas, B.D. Vols. IV. and V. To be complete in 20 vols. 8vo. New York: The Macmillan Company. $3.25 each."
-1982,7,657,4fc051cd45c1498b0d24a9ad,,,LONDON UNCLOTHED.
+1982,7,657,4fc051cd45c1498b0d24a9ad,H. Dicksberry/Dickberry,m,LONDON UNCLOTHED.
 1983,7,444,4fc052b445c1498b0d24ee3b,Barbara,f,"TEA AND SENTIMENT.; AT THE SIGN OF THE FOX. A Romance. By Barbara, author of ""The Garden of a Commuter's Wife,"" ""People of the Whirlpool,"" and ""The Woman Errant."" 12mo. Pp. 372. New York: The Macmillan Company. $1.50."
-1988,7,349,4fc03a7e45c1498b0d1e3061,,,Another Detective Story.
+1988,7,349,4fc03a7e45c1498b0d1e3061,Mr. John Camden,m,Another Detective Story.
 1989,7,537,4fc0451845c1498b0d212405,"Alfred Maskell, F.S.A.",m,"IVORY CARVING.; IVORIES. By Alfred Maskell, F.S.A. In The Connoisseur's Library. 8vo. Pp. viii.- 443. Uncut, deckle edges. Cloth. Fully Illustrated. New York: G.P. Putnam's Sons. $6.75."
-1991,7,1231,4fc051d345c1498b0d24b3ca,,,The Story of the Fifty-fifth Ohio Regiment During the Civil War.*
-1996,7,324,4fc051cd45c1498b0d24a9a1,"J.L.W. Thudicum, M.D.",,"ART OF COOKING.; COOKERY, ITS ART AND PRACTICE. The History, Science, and Practical Import of the Art of Cookery, with a Dictionary of Culinary Terms. By J.L.W. Thudicum, M.D. Cloth, 8vo. Pp. xxiv.-701. London and New York: Frederick Warne & Co. $1.40."
-1997,7,1066,4fc03a8345c1498b0d1e3ad1,,,A Few Excerpts from the Dedication and the Story.
-1999,7,297,4fc0451845c1498b0d21240c,"Morgan Dix, S.T.D., D.C.L.",,"TRINITY PARISH.; A HISTORY OF THE PARISH OF TRINITY CHURCH IN THE CITY OF NEW YORK. Compiled by Order of the Corporation and Edited by Morgan Dix, S.T.D., D.C.L., Ninth Rector. Part III. -- The Rectorship of Dr. Hobart from February, 1816, to August, 1830. Portraits and Illustrations. One volume. Cloth, 8vo. Pp. xxiv.-538. New York: G.P. Putnam's Sons. $5."
-2003,7,286,4fc0478745c1498b0d21da9d,T.R. Way and G.R. Dennis,,"WHISTLER'S ART.; THE ART OF JAMES McNEILL WHISTLER. An Appreciation. By T.R. Way and G.R. Dennis. New Edition. Portraits and Illustrations. Cloth, 8vo. Pp. xviii.-128. New York: The Macmillan Company. $2."
-2004,7,381,4fc0478745c1498b0d21da9e,,,TUSKEGEE.
-2007,7,2064,4fc0466a45c1498b0d218267,,,THE CHINESE PEOPLE; An Interesting Account of Their Life by a Frenchman.
-2012,7,493,4fc052b445c1498b0d24ee39,,,LADY DILKE.
-2014,7,408,4fc051cd45c1498b0d24a99b,,,STAINED GLASS.
-2026,7,508,4fc03a7e45c1498b0d1e3086,Edited by Isidore Singer,,"DR. SINGER'S GREAT WORK.; THE JEWISH ENCYCLOPEDIA. A Descriptive Record of the History, Religion, Literature, and Customs of the Jewish People from the Earliest Times to the Present Day. Edited by Isidore Singer. Portraits, maps, and illustrations. In twelve volumes. Vol. X., Philipson to Samosez. Pp. xiv.-685. 8vo. New York: The Funk & Wagnalis Company."
-2029,7,396,4fc0466a45c1498b0d2182a7,,,"""AUSTEN-LAND."""
+1991,7,1231,4fc051d345c1498b0d24b3ca,Capt. Hartwell Osborn and others,m,The Story of the Fifty-fifth Ohio Regiment During the Civil War.*
+1996,7,324,4fc051cd45c1498b0d24a9a1,"J.L.W. Thudicum, M.D.",none,"ART OF COOKING.; COOKERY, ITS ART AND PRACTICE. The History, Science, and Practical Import of the Art of Cookery, with a Dictionary of Culinary Terms. By J.L.W. Thudicum, M.D. Cloth, 8vo. Pp. xxiv.-701. London and New York: Frederick Warne & Co. $1.40."
+1999,7,297,4fc0451845c1498b0d21240c,"Dr. Morgan Dix, S.T.D., D.C.L.",m,"TRINITY PARISH.; A HISTORY OF THE PARISH OF TRINITY CHURCH IN THE CITY OF NEW YORK. Compiled by Order of the Corporation and Edited by Morgan Dix, S.T.D., D.C.L., Ninth Rector. Part III. -- The Rectorship of Dr. Hobart from February, 1816, to August, 1830. Portraits and Illustrations. One volume. Cloth, 8vo. Pp. xxiv.-538. New York: G.P. Putnam's Sons. $5."
+2003,7,286,4fc0478745c1498b0d21da9d,T.R. Way and G.R. Dennis,none,"WHISTLER'S ART.; THE ART OF JAMES McNEILL WHISTLER. An Appreciation. By T.R. Way and G.R. Dennis. New Edition. Portraits and Illustrations. Cloth, 8vo. Pp. xviii.-128. New York: The Macmillan Company. $2."
+2004,7,381,4fc0478745c1498b0d21da9e,Principal Washington,m,TUSKEGEE.
+2007,7,2064,4fc0466a45c1498b0d218267,Emile Bard and H. Twichell,m,THE CHINESE PEOPLE; An Interesting Account of Their Life by a Frenchman.
+2012,7,493,4fc052b445c1498b0d24ee39,"Lady Dilke and Sir Charles W. Dilke, Bart. M.P.",dual,LADY DILKE.
+2014,7,408,4fc051cd45c1498b0d24a99b,C.W. Whall,m,STAINED GLASS.
+2026,7,508,4fc03a7e45c1498b0d1e3086,Edited by Isidore Singer,none,"DR. SINGER'S GREAT WORK.; THE JEWISH ENCYCLOPEDIA. A Descriptive Record of the History, Religion, Literature, and Customs of the Jewish People from the Earliest Times to the Present Day. Edited by Isidore Singer. Portraits, maps, and illustrations. In twelve volumes. Vol. X., Philipson to Samosez. Pp. xiv.-685. 8vo. New York: The Funk & Wagnalis Company."
+2029,7,396,4fc0466a45c1498b0d2182a7,Constance Hill,f,"""AUSTEN-LAND."""
 2035,7,422,4fc03a7e45c1498b0d1e3137,Charles Egbert Craddock,m,"IN TIME OF WAR.; THE STORM CENTRE. By Charles Egbert Craddock. Cloth, 12mo. Pp. 351. New York: The Macmillan Company. $1.50."
-2036,7,641,4fc043f345c1498b0d20d3c8,"Robert Herrick,",m,"THE AMERICAN.; THE MEMOIRS OF AN AMERICAN CITIZEN. By Robert Herrick, author of ""The Common Lot."" 12mo. Pp. 351. New York: The Macmillan Company. $1.50."
-2039,7,1213,4fc048a545c1498b0d222ae6,,,ORATIONES MEDICI.
-2040,7,329,4fc052b445c1498b0d24eeb5,,,A TOWN'S SCHOOLS.
+2036,7,641,4fc043f345c1498b0d20d3c8,Robert Herrick,m,"THE AMERICAN.; THE MEMOIRS OF AN AMERICAN CITIZEN. By Robert Herrick, author of ""The Common Lot."" 12mo. Pp. 351. New York: The Macmillan Company. $1.50."
+2039,7,1213,4fc048a545c1498b0d222ae6,William Riddle,m,ORATIONES MEDICI.
+2040,7,329,4fc052b445c1498b0d24eeb5,Dr. Wiliam Williams Keen,m,A TOWN'S SCHOOLS.
 2041,7,939,4fc052ba45c1498b0d24f8d2,Mr. E.F. Benson,m,AN EVIL SPIRIT.; The Occult Gravely and Ably Treated in Mr. E.F. Benson's New Novel.*
 2050,7,796,4fc052b445c1498b0d24eebc,an Englishwoman of Lucknow,f,GARDEN TALK.; A Book of Miscellaneous Chatter by an Englishwoman of Lucknow.
-2061,7,609,4fc03a7e45c1498b0d1e3124,GISSING,,GISSING'S LAST STORY.; WILL WARBURTON.
-2062,7,322,4fc03a7e45c1498b0d1e3133,,,Mogul Monuments.
+2061,7,609,4fc03a7e45c1498b0d1e3124,George Gissing,m,GISSING'S LAST STORY.; WILL WARBURTON.
+2062,7,322,4fc03a7e45c1498b0d1e3133,E.B. Havell A.R,none,Mogul Monuments.
 2073,7,256,4fc048a545c1498b0d222af0,Nancy Huston Banks,f,"A Terrible Mother-in-Law.; THE LITTLE HILLS. By Nancy Huston Banks. Cloth, 12mo. Pp. 325. New York: The Macmillan Company. $1.50."
-2083,7,312,4fc03a7e45c1498b0d1e3120,,,THE DOLOMITES.
+2083,7,312,4fc03a7e45c1498b0d1e3120,Amelia B. Edwards,f,THE DOLOMITES.
 2086,7,400,4fc051cd45c1498b0d24aa25,"Robert Fowler, R.I.; Edward Thomas; Alexander J. Finberg",m,"WALES IN PICTURES.; WALES. Painted by Robert Fowler, R.I.; described by Edward Thomas; with a note on Mr. Fowler's landscapes by Alexander J. Finberg. One volume. Pp. xi.-213. 8vo. Cloth. New York: The Macmillan Company. $6."
 2089,7,645,4fc051cd45c1498b0d24aa1e,"Montague Rhodes James, Litt. D.",m,"THE GHOST COLLECTOR.; GHOST STORIES OF AN ANTIQUARY. By Montague Rhodes James, Litt. D., Fellow of King's College, Cambridge. With Four Illustrations by the late James McBryde. 8vo. Pp. 270. New York: Longmans, Green & Co."
-2091,7,1745,4fc0451c45c1498b0d21293d,,,"WILD ORCHIDS.; A Book Identifying the Varieties Found in Eastern North America and Describing ""Their Social Relations and Lives."""
-2092,7,1060,4fc0451945c1498b0d212461,T.F. Dale,,POLO.; T.F. Dale's Interesting History of the Game from Earliest Times to the Present Day.*
-2096,7,459,4fc052b445c1498b0d24eeb9,,,"An Irish Adventurer.; TERENCE O'ROURKE, GENTLEMAN ADVENTURER."
-2100,7,418,4fc052b445c1498b0d24eea9,,,Natural History for the Young.; THE YOUNG FOLKS' CYCLOPAEDIA OF NATURAL HISTORY.
+2091,7,1745,4fc0451c45c1498b0d21293d,William Hamilton Gibson,m,"WILD ORCHIDS.; A Book Identifying the Varieties Found in Eastern North America and Describing ""Their Social Relations and Lives."""
+2092,7,1060,4fc0451945c1498b0d212461,T.F. Dale,m,POLO.; T.F. Dale's Interesting History of the Game from Earliest Times to the Present Day.*
+2096,7,459,4fc052b445c1498b0d24eeb9,Louis Joseph Vance,m,"An Irish Adventurer.; TERENCE O'ROURKE, GENTLEMAN ADVENTURER."
+2100,7,418,4fc052b445c1498b0d24eea9,"John Dealson Champlin, A.M.",m,Natural History for the Young.; THE YOUNG FOLKS' CYCLOPAEDIA OF NATURAL HISTORY.
 2105,7,961,4fc048a845c1498b0d2230e5,"Mr. Eugene P. Lyle, Jr.",m,"A NEW NOVELIST.; Mr. Eugene P. Lyle, Jr.'s, Brilliant Story of the Fall of the Mexican Empire.*"
 2106,7,895,4fc03a8345c1498b0d1e3a95,LEVASSEUR,m,"LEVASSEUR'S ERRORS.; The Translation of His ""Elements of Political Economy,"" a Somewhat Disappointing Book.*"
-2113,7,248,4fc0451945c1498b0d21249c,Berthe St. Luz,,PERHAPS A DREAM.; BLACK BUTTERFLIES. A Novel By Berthe St. Luz. 12mo. Pp. 337. New York: R.F. Fenno & Co. $1.50.
+2113,7,248,4fc0451945c1498b0d21249c,Berthe St. Luz,none,PERHAPS A DREAM.; BLACK BUTTERFLIES. A Novel By Berthe St. Luz. 12mo. Pp. 337. New York: R.F. Fenno & Co. $1.50.
 2117,7,483,4fc03a7e45c1498b0d1e31b7,"SAINT CATHERINE OF SIENA, Translated and Edited with Introduction by Vida D. Scudder",f,"A BUSY SAINT.; SAINT CATHERINE OF SIENA, as Seen in Her Letters. Translated and Edited with Introduction by Vida D. Scudder. 8vo. Pp. 352. New York: E.P. Dutton & Co. $2.50."
 2124,7,855,4fc052b945c1498b0d24f777,Paul Elmer More,m,SHELBURNE ESSAYS.; SHELBURNE ESSAYS. By Paul Elmer More. Second Series. One volume. Pp. vi-253. 8vo. Cloth. New York: G.P. Putnam's Sons. $1.25 net.
 2128,7,602,4fc052b445c1498b0d24ef0d,Luther S. Livingston,m,"PRICES OF BOOKS.; AUCTION PRICES OF BOOKS. A representative record arranged in alphabetical order from the commencement of the English Book Prices Current in 1886 and the American Book Prices Current in 1894 to 1904, and including some thousands of important auction quotations of earlier data. By Luther S. Livingston. Four volumes. Volume II. Pp. 580. Square 4to. New York: Dodd, Mead & Co. $10."
-2131,7,1299,4fc0466f45c1498b0d218c49,,,POE'S MAGAZINE.; A History of the Thirty Years of the Southern Literary Messenger by a Former Editor.*
+2131,7,1299,4fc0466f45c1498b0d218c49,"Benjamin Blake Minor, LL.D.",m,POE'S MAGAZINE.; A History of the Thirty Years of the Southern Literary Messenger by a Former Editor.*
 2135,7,490,4fc051cd45c1498b0d24aa7e,Major S.H. Long,m,"AN EXPLORER.; ACCOUNT OF AN EXPEDITION FROM PITTSBURGH TO THE ROCKY MOUNTAINS. Performed in the Years 1819 and 1820. By Major S.H. Long. Vols. XIV. and XV. in ""Early Western Travels, 1748-1846. Edited by Reuben Gold Thwaites. 8vo. Illustrated. Cleveland, Ohio: The Arthur H. Clark Company."
 2137,7,389,4fc043f345c1498b0d20d442,Leo Deutch. Translated by Helen Chisholm,dual,SIBERIA.; SIXTEEN YEARS IN SIBERIA. By Leo Deutch. Translated by Helen Chisholm. With Notes and a Brief Summary of the Revolutionary Movement in Russia. Cheap edition 8vo. Pp. 376. New York: E.P. Dutton & Co. $2.
 2138,7,679,4fc043f745c1498b0d20d864,Edwin M. Bacon,m,"NEW ENGLAND HISTORY.; HISTORY PILGRIMAGES IN NEW ENGLAND Among Landmarks of Pilgrim and Puritan Days, and of the Provincial and Revolutionary Periods. By Edwin M. Bacon. Portraits, maps, and illustrations. One volume. Pp. xiv.-475. 8vo. Cloth. Boston: Silver, Burdett & Co."
@@ -653,120 +642,115 @@ id,month,review_word_count,nyt_id,author_as_listed,assumed_gender,headline
 2177,8,404,4fc052b545c1498b0d24efaf,Arthur S. Hamlin,m,"COPYRIGHT DECISIONS; COPYRIGHT CASES. A Summary of Leading American Decisions on the Law of Copyright and on Literary Property, from 1891 to 1903, Together with the Text of the United States Copyright Statute and a Selection of Recent Copyright Decisions of the Courts of Great Britain and Canada. Complied by Arthur S. Hamlin. One volume. Pp. vii.-237. 8vo. Cloth New York. G.P. Putnam's Sons. $2."
 2184,8,2161,4fc0451c45c1498b0d21298e,Alvar Nunez Cabeza de Vaca,m,FIRST ACROSS AMERICA; Remarkable Wanderings of Alvar Nunez Cabeza de Vaca in the Sixteenth Century from Florida to the Pacific Coast of Mexico.*
 2187,8,385,4fc03a7f45c1498b0d1e3267,Mrs Henry de la Pasture ,f,"WOMEN'S RIGHTS.; PETER'S MOTHER. By Mrs Henry de la Pasture 12mo. Pp. 345, New York E.P Dutton & Co. $150"
-2188,8,1117,4fc0451c45c1498b0d212986,,,"THE NEW KNOWLEDGE.; What It Is, and What Students Think It Likely to Lead To.*"
+2188,8,1117,4fc0451c45c1498b0d212986,Prof. Robert Kennedy Duncan,m,"THE NEW KNOWLEDGE.; What It Is, and What Students Think It Likely to Lead To.*"
 2189,8,278,4fc048a545c1498b0d222b7b,William I. Fletcher,m,"POOLE'S MONUMENT.; POOLE'S INDEX TO PERIODICAL LITERATURE. The First Supplement to the Abridged Edition, Covering the Contents of Thirty-seven Important Periodicals for the Five year's 1900-1904. By William I. Fletcher, Librarian of Amherst College, and Mary Poole, One volume. Pp. v.-260. 4to. Cloth. Boston: Houghton, Mifflin & Co. $5 net."
-2199,8,260,4fc0455445c1498b0d21311c,,,EGYPT.
-2201,8,1725,4fc0466f45c1498b0d218b93,,,"THE BAYARD TAYLORS; Memoirs of the Poet's Widow -- Chronicle of a Rich, Varied, and Active Life.*"
-2208,8,287,4fc0455445c1498b0d21311e,,,RENASCENCE ANGELS.
+2199,8,260,4fc0455445c1498b0d21311c,"W. Flinders Petrie, LL.D., Ph.D., F.R.S., F.B.A",none,EGYPT.
+2201,8,1725,4fc0466f45c1498b0d218b93,Marie Hansen Taylor,f,"THE BAYARD TAYLORS; Memoirs of the Poet's Widow -- Chronicle of a Rich, Varied, and Active Life.*"
+2208,8,287,4fc0455445c1498b0d21311e,"Sir Wyke Baylis, K.B., F.S.A",m,RENASCENCE ANGELS.
 2214,8,1015,4fc052b945c1498b0d24f7dd,Clement Huart,m,ARAB LEGENDS.; Clement Huart's Condensed History of a Little Known Literature.
 2217,8,2517,4fc0466f45c1498b0d218b6c,Ailevne Ireland,m,"DEPENDENCIES IN THE FAR EAST.; Ailevne Ireland's Account of the Tropical Colonies of Various Nations in The Antipodes -- A Book Full of ""Points"" for Americans.*"
 2221,8,364,4fc052b445c1498b0d24ef95,Stephen Conrad,m,"PHILOSOPHY IN PETTICOATS.; MRS. JIM AND MRS. JIMMIE. By Stephen Conrad, author of ""The Second Mrs. Jim."" 8vo. Pp. vi 296. Cloth. Boston: L.C. Page & Co."
-2222,8,313,4fc052b545c1498b0d24efa0,,,American History Painted.
+2222,8,313,4fc052b545c1498b0d24efa0,Edward Moran,f,American History Painted.
 2223,8,1292,4fc03a8345c1498b0d1e3a35,Maurice Hewlett,m,A FOOL.; Maurice Hewlett's Strong Novel of Eighteenth Century Italy.*
 2230,8,355,4fc052b545c1498b0d24efaa,"HAWTHORNE, Complied by Nina E. Browne",dual,"HAWTHORNE.; A BIBLIOGRAPHY OF NATHANIEL HAWTHORNE. Complied by Nina E. Browne, Portrait One volume. Pp. ix. 215. 8vo. Cloth Boston: Houghton. Mifflin & Co. $5."
-2233,8,283,4fc0455445c1498b0d213127,,,Myers's History.
-2242,8,1739,4fc0451c45c1498b0d21296b,,,BISHOP STUBBS.; The Collected Letters of the Famous English Historian and Churchman.
-2251,8,587,4fc0451945c1498b0d2124d4,F.W. Brain,,"A HINDOO BOCCACCIO.; A DIGIT OF THE MOON AND OTHER LOVE STORIES FROM THE HINDOO, Translated from the Original Manuscripts. By F.W. Brain.12mo. Pp. 421. New York: G.P. Putnam's Sons. $1.50."
-2253,8,271,4fc0466a45c1498b0d218372,,,Unknown Ligneous Plants.
-2255,8,267,4fc0466a45c1498b0d218390,,,Man's Faithful Friend.
+2233,8,283,4fc0455445c1498b0d213127,Mr. Philip Van Ness Myers,m,Myers's History.
+2242,8,1739,4fc0451c45c1498b0d21296b,"William Stubbs, William Holden Hutton",m,BISHOP STUBBS.; The Collected Letters of the Famous English Historian and Churchman.
+2251,8,587,4fc0451945c1498b0d2124d4,F.W. Bain,m,"A HINDOO BOCCACCIO.; A DIGIT OF THE MOON AND OTHER LOVE STORIES FROM THE HINDOO, Translated from the Original Manuscripts. By F.W. Brain.12mo. Pp. 421. New York: G.P. Putnam's Sons. $1.50."
+2253,8,271,4fc0466a45c1498b0d218372,Charles Sprague Sargent ,m,Unknown Ligneous Plants.
+2255,8,267,4fc0466a45c1498b0d218390,James Watson,m,Man's Faithful Friend.
 2264,8,520,4fc0466b45c1498b0d21844b,"Frank N. Hagar, A.B., LL. D.",m,"MAN AND WOMAN.; THE AMERICAN FAMILY. A Sociological Problem. By Frank N. Hagar, A.B., LL. D., Cornell, Class of 1873. 8vo. New York: The University Publishing Society."
 2265,8,945,4fc051d445c1498b0d24b483,Ernest Daudet,m,THE FRENCH EMIGRE.; Ernest Daudet's History of the Flight of the Nobles During the Revolution.*
 2268,8,515,4fc0466b45c1498b0d218434,"Angelo Heilprin, F.R.G.S.",m,"MONT PELEE'S TOWER.; THE TOWER OF PELEE. New Studies of the Great Volcano of Martinique. By Angelo Heilprin, F.R.G.S., of the Sheffield Scientific School of Yale University. Illustrated. Narrow folio, half linen. Pp. 62. Philadelphia: The J.B. Lippincott Company."
-2270,8,444,4fc0466b45c1498b0d21843e,"R.T. Sloss, Introduction by Dave Hennen Morris",,"AUTOMOBILING.; THE BOOK OF THE AUTOMOBILE, A practical Volume Devoted to the History, Construction, Use, and Care of Motor Cars, and to the Subject of Motoring in America. By R.T. Sloss. Introduction by Dave Hennen Morris, President of the Automobile Club of America Illustrations. One volume. Pp. xxii-372 8vo, cloth. New York: D. Appleton & Co. $3."
+2270,8,444,4fc0466b45c1498b0d21843e,"R.T. Sloss, Introduction by Dave Hennen Morris",m,"AUTOMOBILING.; THE BOOK OF THE AUTOMOBILE, A practical Volume Devoted to the History, Construction, Use, and Care of Motor Cars, and to the Subject of Motoring in America. By R.T. Sloss. Introduction by Dave Hennen Morris, President of the Automobile Club of America Illustrations. One volume. Pp. xxii-372 8vo, cloth. New York: D. Appleton & Co. $3."
 2278,8,969,4fc03a8345c1498b0d1e3aaa,Capt. Glasfurd,m,CHIEFLY TIGERS.; Capt. Glasfurd's Collection of Facts and Fancies About Indian Wild Beasts.*
 2293,8,341,4fc052b545c1498b0d24f042,Compiled and edited by Andrew Loring. With an Introduction by George Saintsbury,m,RHYMES FOR RHYMERS.; THE RHYMERS' LEXICON. Compiled and edited by Andrew Loring. With an Introduction by George Saintsbury. Professor of Rhetoric in the University of Edinburgh. Pp. xlviii. 879. 8vo. New York: E.P. Dutton & Co. $2.50.
 2294,8,700,4fc052b945c1498b0d24f7e2,Theodore D. Jervey,m,"THE SOUTH.; THE ELDER BROTHER. By Theodore D. Jervey. 12mo. Pp., 522. New York and Washington: The Neale Publishing Company. $1.50."
 2300,8,558,4fc052b545c1498b0d24f043,"Compiled from the Notes of Major Long, Mr. T. Say, and other gentlemen of the party by Edwin James",m,"GOOD AND BAD EDITING.; ACCOUNT OF AN EXPEDITION FROM PITTSBURGH TO THE ROCKY MOUNTAINS. Performed in the years 1819-1820. Compiled from the Notes of Major Long, Mr. T. Say, and other gentlemen of the party by Edwin James, Botanist and Geologist to the Expedition. Edited by Reuben Gold Thwaites, LL. D. Four volumes. Vol. III. and IV. Vol. III., Pp. 29 Vol. IV., Pp. 308. 8vo, cloth. Cleveland: Arthur H. Cark Company. Per volume. $4."
-2302,8,988,4fc0466f45c1498b0d218bcd,,,HOUSE OF SAVOY.; Attempt to Make That Family's Success Due to a Marriage of One of Its Members with a Granddaughter of Charles I. of England.*
+2302,8,988,4fc0466f45c1498b0d218bcd,Victor Amadeus II and His Stuart Bride,dual,HOUSE OF SAVOY.; Attempt to Make That Family's Success Due to a Marriage of One of Its Members with a Granddaughter of Charles I. of England.*
 2310,8,752,4fc052ba45c1498b0d24f8c8,Jack London,m,"THE PRIZE RING.; Jack London's New Hero in ""The Game"" Is One of Its Ornaments, but He Seems Unreal.*"
 2320,8,720,4fc051d345c1498b0d24b3f8,George W. Rafter,m,"WATER SUPPLY.; George W. Rafter's ""Bulletin"" on the ""Hydrology of the State of New York.""*"
-2329,8,362,4fc052b645c1498b0d24f107,,,Art of the Camera.
 2330,8,647,4fc03a7f45c1498b0d1e3349,Justin Huntly McCarthy,m,RAINOUART AND ARGATHONA.; THE DRYAD. A Novel. By Justin Huntly McCarthy. Pp. 313. New York: Harper & Brothers. $1.50.
 2340,8,283,4fc051cf45c1498b0d24acb6,Mary Anderson Matthews,f,A New Portia.; LOVE VS. LAW. By Mary Anderson Matthews. 12mo. New York: Broadway Publishing Company.
 2341,8,1535,4fc051d545c1498b0d24b5b3,Mr. Villari,m,RUSSIA IN WAR TIME.; Mr. Villari's Careful Study of the Czar's Country and His Conclusions About Its Future.*
 2350,8,292,4fc0466b45c1498b0d2184ef,James J. Neville,m,An Executive Burlesque.; LETTERS OF A SELF-MADE PRESIDENT. By James J. Neville. 12mo. New York: J.S. Ogilvie Publishing Company. $1.
-2355,8,332,4fc048a545c1498b0d222bc1,L.C. Wood,,"THE FRIENDS.; FOR A FREE CONSCIENCE. By L.C. Wood, author of ""Haydock's Testimony."" 12mo. Pp. 414. New York: Fleming H. Revell Company. $1.50."
+2355,8,332,4fc048a545c1498b0d222bc1,L.C. Wood,none,"THE FRIENDS.; FOR A FREE CONSCIENCE. By L.C. Wood, author of ""Haydock's Testimony."" 12mo. Pp. 414. New York: Fleming H. Revell Company. $1.50."
 2358,8,1118,4fc052ba45c1498b0d24f879,Maud Wilder Goodwin,f,A LOVER'S DILEMMA.; Much Wit and Good Characterization in Maud Wilder Goodwin's New Novel.*
-2365,8,494,4fc0466b45c1498b0d2184f9,,,ENGLISH FURNITURE.
+2365,8,494,4fc0466b45c1498b0d2184f9,Percy Macquoid,m,ENGLISH FURNITURE.
 2366,8,406,4fc052b545c1498b0d24f0f0,Abigail Scott Duniway,f,AN EMIGRANT FAMILY.; FROM THE WEST TO THE WEST. Across the Plains to Oregon. By Abigail Scott Duniway. With Frontispiece in Color. 12mo. Pp. 309. Chicago: A.C. McClurg & Co.
-2368,8,923,4fc0466f45c1498b0d218ba7,,,"GOFFE AND WHALLEY.; Their Life in Hadley, Mass. -- The ""Angel of Hadley"" Story Disproved.*"
+2368,8,923,4fc0466f45c1498b0d218ba7,Sylvester Judd,m,"GOFFE AND WHALLEY.; Their Life in Hadley, Mass. -- The ""Angel of Hadley"" Story Disproved.*"
 2380,8,337,4fc0451945c1498b0d21251e,English Norman,m,The Children's Friend.; MELVINA DREW. By English Norman. 12mo. New York: Broadway Publishing Company. $1.50.
-2382,8,808,4fc0466f45c1498b0d218bb4,,,"LITTLE ARCADY.; An Interesting New Novel by the Author of ""The Spenders"" and ""The Seeker.""*"
+2382,8,808,4fc0466f45c1498b0d218bb4,Harry Leon Wilson,m,"LITTLE ARCADY.; An Interesting New Novel by the Author of ""The Spenders"" and ""The Seeker.""*"
 2388,8,574,4fc0466b45c1498b0d218511,Edited and arranged by James H. Hare,m,"WAR IN PICTURES.; A PHOTOGRAPHIC RECORD OF THE RUSSO-JAPANESE WAR. Edited and arranged by James H. Hare, war photographer. With photographs by V.K. Bulla, R.L. Dunn, J.F.J. Archibald, R. Barry, A. Bartlett, J. Ricalton. Together with an account of the battle of the Sea of Japan by Capt. A.T. Mahan, United States Navy, Retired. Long folio. Pp. 256. Paper boards. Linen back. New York: P.F. Collier & Son."
 2402,8,1658,4fc052ba45c1498b0d24f8ec,DANTE,m,DANTE.; Concordance to the Poet's Italian Prose Works and Minor Verses.*
-2404,8,832,4fc051cf45c1498b0d24ad56,,,THE NATION'S LIBRARY.
 2407,8,469,4fc0466b45c1498b0d2185c3,the Hon. F. Leveson Gower,m,SUMMER READING.; BYGONE YEARS: Recollections. By the Hon. F. Leveson Gower. Portrait. One volume. Pp. ix.-339. 8vo. Cloth. New York: E.P. Dutton & Co. $3.50.
 2412,8,1252,4fc051d545c1498b0d24b5b6,Mrs. Louise Wigfall Wright,f,WAR-TIME MEMORIES.; Mrs. Louise Wigfall Wright's Charming and Pathetic Reminiscences of the Confederacy.*
 2416,8,463,4fc0451945c1498b0d212548,Henry A. Shute,m,"BOYS.; REAL BOYS. Being the Doings of Plupy, Beany, Pent, Puzzy, Whack, Bug, Skinny, Chick, Pop, Pile, and Some of the Girls. By Henry A. Shute, author of ""The Real Diary of a Real Boy."" &c. Illustrations by F.R. Gruger. 12mo. Pp. 257. New York: G.W. Dillingham Company. $1.25."
-2423,8,379,4fc051cf45c1498b0d24ad54,M.E. Braddon,,"POETIC LICENSE.; THE ROSE OF LIFE. By M.E. Braddon, author of ""Lady Audley's Secret,"" ""A Lost Eden,"" &c. 12mo. Pp. 352. New York: Brentano's."
+2423,8,379,4fc051cf45c1498b0d24ad54,M.E. Braddon,none,"POETIC LICENSE.; THE ROSE OF LIFE. By M.E. Braddon, author of ""Lady Audley's Secret,"" ""A Lost Eden,"" &c. 12mo. Pp. 352. New York: Brentano's."
 2424,8,255,4fc052b645c1498b0d24f1af,Bert Leston Taylor,m,"A Dumas Burlesque.; MONSIEUR D'EN BROCHETTE Being an Historical Account of Some of the Adventures of Huevos Pasada Par Agua, Marquls of Pollio Grille. Count of Pate de Fois Gras, and Much Else Besides. By Bert Leston Taylor, Arthur Hamilton Folwell and John Kendrick Bangs. Illustrated by Frank A. Nankivell. New York: Keppler & Schwarzmann."
 2425,8,316,4fc052b645c1498b0d24f1c4,George Cary Eggleston,m,The Cotton Trader.; A DAUGHTER OF THE SOUTH. A War's-End Romance. By George Cary Eggleston. Illustrated by E. Pollak. 12mo. Pp. 403. Boston: Lothrop Publishing Company. $1.50.
 2427,8,2840,4fc048a845c1498b0d2230db,Dr. David Jayne Hill,m,DIPLOMACY.; The First Volume of Dr. David Jayne Hill's History of Its Development from the Downfall of the Roman Empire.
 2430,8,461,4fc052b645c1498b0d24f1d2,Stanley Waterloo,m,"PREHISTORIC SOCIETY.; THE STORY OF AB. A Tale of the Time of the Cave Man. By Stanley Waterloo, author of ""A Man and a Woman,"" ""An Odd Situation."" &c. 12mo. Pp. 351. New York: Doubleday, Page & Co. $1.50."
-2432,8,405,4fc0466b45c1498b0d2185c6,,,PURCHAS HIS PILGRIMES.
-2433,8,291,4fc051cf45c1498b0d24ad61,Ople Read,,"The Widow and the Colonel.; AN AMERICAN IN NEW YORK. A Novel of To-day. By Ople Read, author of ""A Kentucky Colonel,"" ""The Starbucks,"" &c. Illustrated by Emlen McConnell and Howard Heath. 12mo. Pp. 356. Chicago: Thompson & Thomas. $1.25."
+2432,8,405,4fc0466b45c1498b0d2185c6,Samuel Purchas,m,PURCHAS HIS PILGRIMES.
+2433,8,291,4fc051cf45c1498b0d24ad61,Ople Read,m,"The Widow and the Colonel.; AN AMERICAN IN NEW YORK. A Novel of To-day. By Ople Read, author of ""A Kentucky Colonel,"" ""The Starbucks,"" &c. Illustrated by Emlen McConnell and Howard Heath. 12mo. Pp. 356. Chicago: Thompson & Thomas. $1.25."
 2438,8,286,4fc051cf45c1498b0d24ad60,Mary E. Stone Bassett,f,"THE KING'S GARDEN.; THE LITTLE GREEN DOOR. A novel. By Mary E. Stone Bassett, author of ""Judith's Garden."" Illustrations by Louise Clark. Decorations by Ethel Pearce Clements. 12mo. Pp. 341. Boston: Lothrop Publishing Company. $1.50."
-2439,8,3454,4fc052b645c1498b0d24f1ac,,,CURRENT COMMENT ON LITERARY TOPICS
-2449,8,1451,4fc03a7f45c1498b0d1e33b2,,,"IMMUTABLE RUSSIA.; But It Does Move, and Its History Indicates Approaching Changes."
-2451,8,366,4fc03a7f45c1498b0d1e33a4,,,THE SHAKESPEARE QUARTOS.
-2458,8,1667,4fc0467045c1498b0d218d03,,,R.L.S.; Some Literary Fancies of Stevenson Taken from a Recent Book of Extracts from His Work.*
-2469,8,988,4fc052b945c1498b0d24f7aa,,,"THE ""PERFECT GENT.""; How to Be One Explained at Length by an Expert."
+2449,8,1451,4fc03a7f45c1498b0d1e33b2,Prof. Milyoukov,m,"IMMUTABLE RUSSIA.; But It Does Move, and Its History Indicates Approaching Changes."
+2469,8,988,4fc052b945c1498b0d24f7aa,Charles Harcourt,m,"THE ""PERFECT GENT.""; How to Be One Explained at Length by an Expert."
 2471,9,973,4fc043f745c1498b0d20d81c,Marcus Whitman,m,SAVING OREGON.; Marcus Whitman's Efforts to Win the Columbia Valley for the United States.*
 2473,9,476,4fc052b645c1498b0d24f290,"Oscar Browning, M.A.",m,"NAPOLEON, THE WORST PHASE.; NAPOLEON. The First Phase. Some Chapters on the Boyhood and Youth of Bonaparte. By Oscar Browning, M.A. Portraits, illustrations, and map. Pp. 316. Svo. New York: John Lane, the Bodley Head."
-2477,9,718,4fc051d645c1498b0d24b66c,Sarath Kumar Ghosh,,THE ORIENT.; Sarath Kumar Ghosh's Lively Tale of Love and Adventure in the East.
-2482,9,647,4fc0451c45c1498b0d21297f,,,"THE WORLD'S HISTORY.; Four More Volumes of the ""Weltgeschichte"" in the American Edition.*"
+2477,9,718,4fc051d645c1498b0d24b66c,Sarath Kumar Ghosh,m,THE ORIENT.; Sarath Kumar Ghosh's Lively Tale of Love and Adventure in the East.
+2482,9,647,4fc0451c45c1498b0d21297f,"Edited by John Henry Wright, LL.D.",m,"THE WORLD'S HISTORY.; Four More Volumes of the ""Weltgeschichte"" in the American Edition.*"
 2485,9,478,4fc0451945c1498b0d212585,John M. Ellicott,m,"ADMIRAL WINSLOW.; THE LIFE OF JOHN ANCRUM WINSLO, REAR ADMIRAL UNITED STATES NAVY. By John M. Ellicott, Lieutenant United States Navy. New York: G.P. Putnam's Sons. </article>"
 2497,9,585,4fc043f445c1498b0d20d4ba,"Charles H. Gray, Ph. D.",m,"A FORGOTTEN DRAMATIST; LODOWICK CARLIELL. His Life, a Discussion of His Plays, and ""The Deserving Favourite,"" a Tragi-Comedy Reprinted from the Original Edition of 1629, with Introduction and Notes. By Charles H. Gray, Ph. D., (Chicago,) Assistant Professor of English in the University of Kansas. Fac similes. Pp. 177. 8vo. Chicago: University of Chicago Press."
 2498,9,981,4fc043f745c1498b0d20d866,H. Irving Hancock,m,JIU-JITSU.; H. Irving Hancock's Informing Book on the Japanese Science.
-2501,9,587,4fc052b645c1498b0d24f289,L.H. Bailey,,A NATURE BOOK.; THE OUTLOOK TO NATURE. By L.H. Bailey. 12mo. Pp. 296. New York: The Macmillan Company. $1.25.
+2501,9,587,4fc052b645c1498b0d24f289,L.H. Bailey,none,A NATURE BOOK.; THE OUTLOOK TO NATURE. By L.H. Bailey. 12mo. Pp. 296. New York: The Macmillan Company. $1.25.
 2503,9,280,4fc051d045c1498b0d24ae25,Albertus T. Dudley,m,"Boston Schoolboys.; IN THE LINE. By Albertus T. Dudley, author of ""Following the Ball"" and ""Making the Nine."" Illustrated by Charles Copeland. (Phillips Exeter series,) 12mo. Pp. 309. Boston: Lee & Shepard. $1.25."
-2514,9,1015,4fc03a8045c1498b0d1e3435,,,ROMANTIC EDINBURGH.
-2518,9,1173,4fc0451c45c1498b0d212933,"J.B. Devins, D.D.",,"THE FILIPINOS.; And Conditions of the American Administration, Civil, Military, and Religious by J.B. Devins, D.D.*"
-2519,9,604,4fc0478945c1498b0d21dd46,Middleton Fox,,A CORNISH TALE.; A CHILD OF THE SHORE. By Middleton Fox. One volume. Pp. 307. New York: John Lane. The Bodley Head. $1.
-2522,9,390,4fc03a8045c1498b0d1e3436,Ople Read,,"THAT CENTURION.; THE SON OF THE SWORDMAKER. A Romance. By Ople Read. Illustrated in color, 12mo. Pp. 333. Chicago: Laird & Lee."
+2514,9,1015,4fc03a8045c1498b0d1e3435,Mr. John Geddie,m,ROMANTIC EDINBURGH.
+2518,9,1173,4fc0451c45c1498b0d212933,"John Brancroft Devins, D.D.",m,"THE FILIPINOS.; And Conditions of the American Administration, Civil, Military, and Religious by J.B. Devins, D.D.*"
+2519,9,604,4fc0478945c1498b0d21dd46,Middleton Fox,m,A CORNISH TALE.; A CHILD OF THE SHORE. By Middleton Fox. One volume. Pp. 307. New York: John Lane. The Bodley Head. $1.
+2522,9,390,4fc03a8045c1498b0d1e3436,Ople Read,m,"THAT CENTURION.; THE SON OF THE SWORDMAKER. A Romance. By Ople Read. Illustrated in color, 12mo. Pp. 333. Chicago: Laird & Lee."
 2533,9,300,4fc03a8045c1498b0d1e3464,Charles W. Pafflow,m,A RUSSIAN STORY.; THE MYSTERIES OF THE ZIMNIY DVORETZ. A Russian Historical Novel. By Charles W. Pafflow. 12mo. Pp. 292. New York and Washington: The Neale Publishing Company. $1.50.
-2535,9,816,4fc0451c45c1498b0d2129a7,,,"NEW FRANCE.; The Seventh Volume of The American Nation, Treating of French Possessions in America."
+2535,9,816,4fc0451c45c1498b0d2129a7,"Reuben Gold Thwaites, LL. D.",m,"NEW FRANCE.; The Seventh Volume of The American Nation, Treating of French Possessions in America."
 2541,9,579,4fc03a8045c1498b0d1e3447,"Capt. C.E.K. Macquoid, D.S.O.",m,"ELEMENTARY STRATEGY.; STRATEGY ILLUSTRATED BY BRITISH CAMPAIGNS. By Capt. C.E.K. Macquoid, D.S.O., 20th Deccan Horse. With an introduction by Field Marshal Earl Roberts, K.P., V.C. Maps and plates. One volume. Pp. xiii.-252. 8vo. Cloth: New York: Cassell & CO., Limited."
-2545,9,253,4fc04ef445c1498b0d23e8b1,,,Baltimore Court House Decorations.
-2546,9,720,4fc051d045c1498b0d24ae1a,,,A STATESMAN OF HAITI.
+2545,9,253,4fc04ef445c1498b0d23e8b1,"Theodore Marburg, E. Clay Timanus, Edwin Warfield, Ira Remsen, and Elizabeth King Elliott",dual,Baltimore Court House Decorations.
+2546,9,720,4fc051d045c1498b0d24ae1a,A. Firmin,m,A STATESMAN OF HAITI.
 2547,9,686,4fc052b645c1498b0d24f283,"the Rev. Henry Otis Dwight, D.D.; the Rev. H. Allen Tupper, Jr., D.D., and the Rev. Edwin Munsell Bliss, D.D.",m,"A SURVEY OF MISSIONS.; THE ENCYCLOPAEDIA OF MISSIONS. Descriptive, Historical, Biographical, Statistical, Second edition. Edited under the auspices of the Bureau of Minions by the Rev. Henry Otis Dwight, D.D.; the Rev. H. Allen Tupper, Jr., D.D., and the Rev. Edwin Munsell Bliss, D.D. Pp. xiv -- 851. 4to. New York: Funk & Wagnalls."
 2551,9,285,4fc052b645c1498b0d24f27c,Henry C. Vedder,m,"SOME AMERICAN WRITERS.; AMERICAN WRITERS OF T0-DAY. By Henry C. Vedder. 12mo. Pp. 326. New York: Silver, Burdett & Co."
 2552,9,579,4fc03a8045c1498b0d1e3539,Helena Swan,f,"GIRLS' NAMES.; GIRLS' CHRISTIAN NAMES; Their History, Meaning, and Association. By Helena Swan. Pp. xv.-516. Small 8vo. New York; E.P. Dutton & Co. $1.50."
-2553,9,406,4fc03a8045c1498b0d1e3548,,,DUTCH PICTURES.
-2556,9,1015,4fc0451c45c1498b0d212929,,,"THE CONSTITUTION.; Its Formation and Development Treated Of in the Seventh Volume of ""The History of North America.""*"
+2553,9,406,4fc03a8045c1498b0d1e3548,Sir Walter Armstrong,m,DUTCH PICTURES.
+2556,9,1015,4fc0451c45c1498b0d212929,"Thomas Francis Moran, Ph.D.",m,"THE CONSTITUTION.; Its Formation and Development Treated Of in the Seventh Volume of ""The History of North America.""*"
 2562,9,248,4fc052b745c1498b0d24f33c,Fergus Hume,m,"THE COINERS.; THE SECRET PASSAGE. By Fergus Hume, author of ""The Mystery of a Hansom Cab,"" ""The Red Window,"" &c. 12mo. Pp. 320. New York: The G.W. Dillingham Company."
 2563,9,260,4fc03a8045c1498b0d1e3559,"Georg Steindorff, Ph. D.",m,"EGYPTIAN RELIGION.; THE RELIGION OF THE ANCIENT EGYPTIANS. By Georg Steindorff, Ph. D., Professor of Egyptology in the University of Leipsic. 8vo. New York: G.P. Putnam's Sons. $1.50."
-2567,9,429,4fc0478845c1498b0d21db9f,Lee S. Smith,,"FROM EAST TO WEST.; ROUND THE WORLD TOWARD THE WESTERING SUN. By Lee S. Smith, author Of ""Through Egypt to Palestine."" 12mo. Pp. 286. New York: Fleming H. J Revell. 1.25."
-2568,9,1055,4fc04ef445c1498b0d23e8e9,,,SPANISH INFLUENCE.; A Contribution to the Study of Comparative Literature.*
+2567,9,429,4fc0478845c1498b0d21db9f,Lee S. Smith,none,"FROM EAST TO WEST.; ROUND THE WORLD TOWARD THE WESTERING SUN. By Lee S. Smith, author Of ""Through Egypt to Palestine."" 12mo. Pp. 286. New York: Fleming H. J Revell. 1.25."
+2568,9,1055,4fc04ef445c1498b0d23e8e9,Martin Hume,m,SPANISH INFLUENCE.; A Contribution to the Study of Comparative Literature.*
 2569,9,346,4fc051d045c1498b0d24ae7f,Col. Nicholas Smith,m,STAYING IN HARNESS.; MASTERS OF OLD AGE. The Value of Longevity. Illustrated by Practical Examples. By Col. Nicholas Smith. 12mo. Pp. 280. Milwaukee: The Young-Churchman Company. $1.25.
 2578,9,263,4fc052b745c1498b0d24f320,Robert Richardson,m,A TANGLE.; THE GREATER WATERLOO. A Love Story. By Robert Richardson. 12mo. Pp. 271. New York: G.W. Dillingham Company. $1.50.
 2583,9,544,4fc03a8045c1498b0d1e3540,Hughes Oliphant Gibbons,m,"OLD PINE STREET CHURCH.; A HISTORY OF OLD PINE STREET. Being the Record of an Hundred and Forty Years in the Life of a Colonial Church. By Hughes Oliphant Gibbons, Eighth Pastor. Portraits and illustrations. One volume. Pp. 366. 8vo. cloth. Philadelphia: John O. Winston Company."
 2585,9,851,4fc03a8445c1498b0d1e3c1a,James Pattie,m,IN FRONTIER DAYS.; James Pattie's Story of His Adventures in Old and New Mexico Mighty Years Ago.
-2586,9,735,4fc043f645c1498b0d20d79e,,,A RUSSO-AMERICAN.; The Story of the Son of an American Plowmaker and a Russian Princess.*
+2586,9,735,4fc043f645c1498b0d20d79e,Octave Thanet,f,A RUSSO-AMERICAN.; The Story of the Son of an American Plowmaker and a Russian Princess.*
 2592,9,308,4fc03a8045c1498b0d1e354c,Frank Marsland,m,CHOOSING A PROFESSION.; OCCUPATIONS IN LIFE. A Fund of Practical Information and Business Advice for Boys and Young Men. By Frank Marsland. New York: Chas. E. Fitchett.
 2596,9,2587,4fc051d345c1498b0d24b3ed,Samuel Edward Dawson,m,PIONEERS IN CANADA.; Samuel Edward Dawson's Story of Exploration and Romantic Adventure in the St. Lawrence Basin.*
 2599,9,2608,4fc043f745c1498b0d20d879,Ms. Wharton,f,ITALIAN BACKGROUNDS AND VIEWS.; Ms. Wharton's Epics of the Incognita -- Thayer's Venice -- Improvement of Lucrezia Borgia's Reputation.*
-2610,9,473,4fc0478845c1498b0d21dba3,,,"AN EARLY HIGHER CRITIC.; PAPERS AND PROCEEDINGS OF THE CONNECTICUT VALLEY HISTORICAL SOCIETY, 1882-1903. Portraits and illustration, Volume II. Pp. xxiv.-309. 8vo. Springfield, Mass.: Connecticut Valley Historical Society."
+2610,9,473,4fc0478845c1498b0d21dba3,anonymous,none,"AN EARLY HIGHER CRITIC.; PAPERS AND PROCEEDINGS OF THE CONNECTICUT VALLEY HISTORICAL SOCIETY, 1882-1903. Portraits and illustration, Volume II. Pp. xxiv.-309. 8vo. Springfield, Mass.: Connecticut Valley Historical Society."
 2612,9,2135,4fc052ba45c1498b0d24f891,AUSTIN DOBSON,m,AUSTIN DOBSON'S VERSE.; A Graceful Poet and Man of the World Who Is Not Worldly.*
 2622,9,276,4fc052b745c1498b0d24f3c3,Earl Underwood,m,"Drummers' Tales.; REPRESENTING JOHN MARSHALL & CO. Being the Confessions of Edward R. Ward, a Drummer. By Earl Underwood. Illustrated by Gordon H. Grant. New York: G.W. Dillingham. $1."
 2626,9,385,4fc043f545c1498b0d20d5fe,Charles W. Chesnutt,m,"A SHATTERED ARCADIA.; THE COLONEL'S DREAM. By Charles W. Chesnutt. 12mo. Pp. 204. New York: Doubleday, Page & Co. $1.50."
-2629,9,1179,4fc0451b45c1498b0d2128f4,,,"RUSSIA.; An Enlarged, Rewritten Edition of and Authoritative and Informing English Work."
+2629,9,1179,4fc0451b45c1498b0d2128f4,"Sir Donald Mackenzie Wallace, K.C.I.E, K.C.V.D.",m,"RUSSIA.; An Enlarged, Rewritten Edition of and Authoritative and Informing English Work."
 2645,9,401,4fc03a8145c1498b0d1e3631,Louise Imogene Guiney,f,FROUDE'S BROTHER.; HURRELL FROUDE. Memoranda and Comments. By Louise Imogene Guiney. With Illustrations. 8vo. Pp. xix.-439. New York: E.P. Dutton & Co.
 2646,9,851,4fc0478845c1498b0d21dd19,Anthony Hope,m,"ORA PINSENT.; The Actress Who Is Heroine of Anthony Hope's New Novel Considered as ""A Man's Woman."""
 2647,9,985,4fc04ef445c1498b0d23e919,MR. CAWEIN,m,MR. CAWEIN'S POETRY.; A New Volume by One of the American Poets Who Have Been Praised by President Roosevelt.
 2650,9,478,4fc03a8145c1498b0d1e362a,Eden Phillpotts,f,"PHILLPOTTS'S STORIES.; KNOCK AT A VENTURE. By Eden Phillpotts, author of ""The Secret Woman, ""The American Prisoner,"" &c. 12mo. Pp. 353. New York: The Macmillan Company. $1.50."
-2653,9,1363,4fc043f745c1498b0d20d876,,,THE JORDAN VALLEY.; A Journey Along Its Eastern Side to Petra in the Land of Edom.*
-2655,9,1521,4fc0478845c1498b0d21dd07,,,"ANTE-BELLUM JAPAN.; An Interesting Account of Life in Japan by s Russian, Who Enjoyed It."
+2653,9,1363,4fc043f745c1498b0d20d876,"William Libby, Sc.D.",m,THE JORDAN VALLEY.; A Journey Along Its Eastern Side to Petra in the Land of Edom.*
+2655,9,1521,4fc0478845c1498b0d21dd07,Gregoire de Wollant,m,"ANTE-BELLUM JAPAN.; An Interesting Account of Life in Japan by s Russian, Who Enjoyed It."
 2661,9,539,4fc052b745c1498b0d24f3d9,"James Bryce, D.C.L.",m,"LECTURES BY BRYCE.; CONSTITUTIONS. By James Bryce, D.C.L. New York: Oxford University Press, Henry Frowde."
 2663,9,613,4fc0451a45c1498b0d21266e,Edited by Catharine B. Johnson,f,A MAN OF THE WORLD.; WILLIAM BODHAM DONNE AND HIS FRIENDS. Edited by Catharine B. Johnson. With Illustrations. 8vo. Pp. xvi.-362. New York: E.P. Dutton & Co. $3.
-2667,9,1349,4fc03a8345c1498b0d1e3b3f,Prof. Dill,,"ROMAN SOCIAL LIFE; Prof. Dill's Fascinating Study of Manners and Customs, Fashions and Beliefs, from Nero to the Antonines.*"
+2667,9,1349,4fc03a8345c1498b0d1e3b3f,Prof. Dill,m,"ROMAN SOCIAL LIFE; Prof. Dill's Fascinating Study of Manners and Customs, Fashions and Beliefs, from Nero to the Antonines.*"
 2670,9,307,4fc043f545c1498b0d20d606,Matt. Stan. Kemp,m,"The Heir of Traitors.; ANDE TREMBATH. A Tale of Old Cornwall, England. By Matt. Stan. Kemp, author of ""Boss Tom."" 12mo. Boston: C.M. Clark Publishing Company, Inc."
 2680,9,2286,4fc051d545c1498b0d24b53d,Mrs. Russell Barrington,f,"GEORGE FRED'K WATTS; Mrs. Russell Barrington's Intimate Study of Him as Painter, Sculptor, and Man.*"
 2687,9,307,4fc04ef445c1498b0d23e947,Thomas McKean,m,A WICKED PRIEST.; THE VORTEX. A Novel. By Thomas McKean. 12mo. Pp. 324. Philadelphia: The J.B. Lippincott Company. $1.50.
 2688,9,240,4fc051d045c1498b0d24af28,Charles S. Coom,m,BIGAMY.; THE BARONET RAGPICKER. A Story of Love and Adventure. By Charles S. Coom. 12mo. Boston: The C.M. Clark Publishing Company.
 2694,9,717,4fc051d045c1498b0d24af27,Ruth Kimball Gardiner,f,THE MODERN GIRL.; THE HEART OF A GIRL. By Ruth Kimball Gardiner. Illustrated by Charles Louis Hinton. Pp. 386. 12mo. Cloth. New York: A.S. Barnes & Co. $1.50.
 2696,9,472,4fc051d045c1498b0d24af26,Lady Jephson,f,ADVICE TO DEBUTANTES.; LETTERS TO A DEBUTANTE. By Lady Jephson. 12mo. Philadelphia: The J.B. Lippincott Company. $1.25
-2702,9,519,4fc0451a45c1498b0d2126f3,"T.F. Husband, M.A., and M.F.A. Husband, B.A.",,"HOW TO PUNCTUATE.; PUNCTUATION: ITS PRINCIPLES AND PRACTICE. By T.F. Husband, M.A., and M.F.A. Husband, B.A. One volume. Pp. 1.-140. 8vo. cloth. New York: E.P. Dutton & Co. 75 cents."
+2702,9,519,4fc0451a45c1498b0d2126f3,"T.F. Husband, M.A., and M.F.A. Husband, B.A.",m,"HOW TO PUNCTUATE.; PUNCTUATION: ITS PRINCIPLES AND PRACTICE. By T.F. Husband, M.A., and M.F.A. Husband, B.A. One volume. Pp. 1.-140. 8vo. cloth. New York: E.P. Dutton & Co. 75 cents."
 2705,9,355,4fc04ef445c1498b0d23e94b,Silas K. Hocking,m,"A LADY WITH NERVES.; THE CONQUERING WILL. By Silas K. Hocking, author of ""When Life Is Young,"" ""His Father,"" &c. With original illustrations by Harold Piffard. 12mo, Pp. 324. New York: Frederick Warne & Co."
 2707,9,986,4fc0451c45c1498b0d212934,,,CANTERBURY PILGRIMS; The Murder of Becket and the Sacred Traditions That Clustered Around His Shrine.
 2715,9,810,4fc03a8145c1498b0d1e374f,BYRON,m,"LORD BYRON.; Selected Passages from His Journals and Letters Grouped Together as His ""Confessions."""
