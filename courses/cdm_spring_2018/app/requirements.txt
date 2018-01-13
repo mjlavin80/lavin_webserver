@@ -14,5 +14,5 @@ dictalchemy
 WTForms-Alchemy
 requests[security]
 github-flask
-pandas
+pandas==0.20.3
 asana
