@@ -9,10 +9,10 @@ from application.form_processors import *
 from flask_login import login_required
 from flask_login import LoginManager, login_user, logout_user, current_user
 from flask_migrate import Migrate
-from flask_bcrypt import Bcrypt
-from flask_admin.base import MenuLink
+from flask.ext.bcrypt import Bcrypt
+from flask.ext.admin.base import MenuLink
 from wtforms.fields import TextAreaField
-from flask_github import GitHub
+from flask.ext.github import GitHub
 from config import GITHUB_ADMIN, TIMELINE_URL, ASANA_CODE, ASANA_PROJECT_ID
 from sqlalchemy.sql import and_
 import json
@@ -574,7 +574,6 @@ def status(message=""):
     login_user(user, force=True)
     message="in"
     """
-    
     return render_template('status.html', message=message)
 
 @app.errorhandler(404)
