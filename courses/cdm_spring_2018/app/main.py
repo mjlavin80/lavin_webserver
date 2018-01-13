@@ -16,7 +16,7 @@ from flask.ext.github import GitHub
 from config import GITHUB_ADMIN, TIMELINE_URL, ASANA_CODE, ASANA_PROJECT_ID
 from sqlalchemy.sql import and_
 import json
-import datetime #, asana
+import datetime, asana
 import pandas as pd
 
 app = Flask(__name__)
