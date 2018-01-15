@@ -239,8 +239,9 @@ def planner():
         project_tasks = []
         for task in asana_client.tasks.find_by_project(ASANA_PROJECT_ID):
             full_task = asana_client.tasks.find_by_id(task['id'])
-            if full_task['complete'] == False:
+            if full_task['completed'] == False:
                 project_tasks.append(full_task)
+        
         def sort_key(d):
             if d['due_on']:
                 return d['due_on']
