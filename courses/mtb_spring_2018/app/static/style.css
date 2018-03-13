@@ -40,6 +40,9 @@ body {
 .book-title {
     font-style: italic;
 }
+.bibl-canceled {
+    text-decoration: line-through
+}
 a.assignment {
     color: white;
     text-decoration: underline;
