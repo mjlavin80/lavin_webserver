@@ -25,7 +25,7 @@ def dictionaries_without_features(list_of_dictionaries, feature_list):
     and other model processing"""
     reduced_dictionaries = []
     for d in list_of_dictionaries:
-        processing_dictionary = d
+        processing_dictionary = dict(d)
         for feature in feature_list:
             # Here we just try to find the term in the source dictionary and skip if there's an exception,
             # which can only happen if the term is not in the source dictionary

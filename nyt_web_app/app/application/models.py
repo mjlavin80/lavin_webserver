@@ -69,7 +69,10 @@ class Metadata(db.Model):
     review_word_count = db.Column(db.Integer)
     ocr_transcription = db.Column(db.String(99999))
     corrected_transcription = db.Column(db.String(99999))
-
+    perceived_author_name = db.Column(db.String(99))
+    perceived_author_gender = db.Column(db.String(99))
+    reviewed_work_title = db.Column(db.String(500))
+    nyt_pdf_endpoint = db.Column(db.String(500))
     reviewed_work = db.Column(db.Integer, db.ForeignKey('work.id'))
 
     def __repr__(self):

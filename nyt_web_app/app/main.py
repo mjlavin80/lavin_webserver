@@ -9,13 +9,15 @@ from application.form_processors import *
 from flask_login import login_required
 from flask_login import LoginManager, login_user, logout_user, current_user
 from flask_migrate import Migrate
-from flask.ext.bcrypt import Bcrypt
-from flask.ext.admin.base import MenuLink
+from flask_bcrypt import Bcrypt
+from flask_admin.base import MenuLink
 from wtforms.fields import TextAreaField
-from flask.ext.github import GitHub
+from flask_github import GitHub
 from config import GITHUB_ADMIN
 from sqlalchemy.sql import and_
+from flask_admin.form import rules
 import json
+from flask import Markup
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -70,13 +72,16 @@ class ModelViewAdmin(ModelView):
         # redirect to login page if user doesn't have access
         return redirect(url_for('login'))
 
-from flask.ext.admin.form import rules
-
 class MetaViewAdmin(ModelViewAdmin):
+    def _url_formatter(view, context, model, name):
+        return Markup(
+            u"<a href='%s' target='blank'>NYT Link</a>" % model.nyt_pdf_endpoint if model.nyt_pdf_endpoint else u"")
+    column_formatters = dict(corrected_transcription=lambda v, c, m, p: m.corrected_transcription[:25]+ " ...", ocr_transcription=lambda v, c, m, p: m.ocr_transcription[:25]+ " ...")
+    column_formatters['nyt_pdf_endpoint'] = _url_formatter
     column_filters = ('review_type',)
     #column_list = ['nyt_id', 'review_type', 'headline', 'byline', 'pub_date', 'ocr_transcription', 'corrected_transcription', 'metadata_work']
-    column_exclude_list = ('month', 'year', 'document_type', 'page', 'word_count')
-    form_excluded_columns = ('month', 'year', 'document_type', 'page')
+    column_exclude_list = ('month', 'year', 'byline', 'corrected_transcription','document_type', 'page', 'word_count')
+    form_excluded_columns = ('month', 'year', 'byline', 'corrected_transcription','document_type', 'page')
 
 admin = Admin(app, name='Dashboard', template_mode='bootstrap3', index_view=MyAdminIndexView())
 
@@ -105,7 +110,15 @@ def load_user(user_id):
 @app.route("/")
 @app.route("/<nyt_id>")
 def index(nyt_id=None):
-    return render_template("index.html", nyt_id=nyt_id)
+    if nyt_id != None:
+        row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
+        try:
+            endpoint = row.nyt_pdf_endpoint
+        except:
+            endpoint = None
+        return render_template("index.html", nyt_id=nyt_id, endpoint=endpoint)
+    else:
+        return render_template("index.html", nyt_id=None, endpoint=None)
 
 @app.before_request
 def before_request():
@@ -177,12 +190,12 @@ def status(message=""):
 
     #for debugging locally
 
-    # user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
-    # user.authenticated = True
-    # db.session.add(user)
-    # db.session.commit()
-    # login_user(user, force=True)
-    # message="in"
+    user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
+    user.authenticated = True
+    db.session.add(user)
+    db.session.commit()
+    login_user(user, force=True)
+    message="in"
 
     #end local debug block
 
