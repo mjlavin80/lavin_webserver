@@ -190,12 +190,12 @@ def status(message=""):
 
     #for debugging locally
 
-    user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
-    user.authenticated = True
-    db.session.add(user)
-    db.session.commit()
-    login_user(user, force=True)
-    message="in"
+    #user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
+    #user.authenticated = True
+    #db.session.add(user)
+    #db.session.commit()
+    #login_user(user, force=True)
+    #message="in"
 
     #end local debug block
 
