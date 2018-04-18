@@ -5,17 +5,20 @@ services:
     container_name: proxy
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - /root/apps/proxy/nginx.conf:/etc/nginx/conf.d/matthew-lavin.conf
+
     links:
       - flask_base
       - humanitiesdata
       - matthew-lavin
       - digiped_fall_2016
-      - compvolution
       - acdm_spring_2017
       - nt_spring_2017
       - neo_web_app
+      - nyt_web_app
+      - compvolution
       - faculty_activity
       - mtb_fall_2017
       - cdm_spring_2018
@@ -35,8 +38,6 @@ services:
   compvolution:
     build: ./compvolution
     container_name: compvolution
-    ports:
-      - "443:443"
     links:
       - flask_base
 
@@ -53,6 +54,12 @@ services:
   neo_web_app:
     build: ./neo_web_app
     container_name: neo_web_app
+    links:
+      - flask_base
+
+  nyt_web_app:
+    build: ./nyt_web_app
+    container_name: nyt_web_app
     links:
       - flask_base
 
