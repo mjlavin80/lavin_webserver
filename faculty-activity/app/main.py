@@ -112,6 +112,8 @@ def server_error(e):
 def gateway_error(e):
     return render_template('500.html'), 502
 
+db.init_app(app)
+
 if __name__ == "__main__":
     #for local dev
     #app.run(host='0.0.0.0', debug=True, port=5000)
