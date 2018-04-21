@@ -9,5 +9,6 @@ COPY certs/hum/fullchain.pem /etc/nginx/hum/fullchain.pem
 COPY certs/comp/privkey.pem /etc/nginx/comp/privkey.pem
 COPY certs/comp/fullchain.pem /etc/nginx/comp/fullchain.pem
 
-
+COPY certs/bh/privkey.pem /etc/nginx/bh/privkey.pem
+COPY certs/bh/fullchain.pem /etc/nginx/bh/fullchain.pem
 
