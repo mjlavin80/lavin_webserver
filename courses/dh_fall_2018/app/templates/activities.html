@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+
+  {% if this_activity == "all" %}
+  <h3>Activities</h3>
+  <hr>
+  {% for this_activity in activities %}
+  <h4>{{this_activity.title}}</h4>
+  {% if this_activity.day %}<p><strong>{{ this_activity.day.name }}</strong></p>{% endif %}
+  <p><strong><a href="/activities/{{ this_activity.id }}">Read More</a></strong></p>
+
+  <hr>
+  {% endfor %}
+
+  {% else %}
+  <h3>{{this_activity.title|safe}}</h3>
+  <p>{{this_activity.description|safe}}</p>
+  {% if this_activity.link %}<p><strong><a href="{{ this_activity.link }}">Link to Content</a></strong></p>{% endif %}
+
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}

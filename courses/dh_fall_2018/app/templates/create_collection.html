@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+  <h3>Create Course Materials</h3>
+  <hr>
+<div class="row">
+
+  <div class="col-lg-12">
+
+    <form id="new_collection" method="POST" action="{{url_for('processor', resource_type='collection')}}">
+        {{ createcollectionform.hidden_tag()}}
+        <div class="col-lg-12"><h4>New {{resource_type.capitalize() }}</h4></div>
+        <div class="col-md-12 form_row">Privacy<span class="required"> *</span></div>
+
+        <div class="col-md-6 form_row">{{ createcollectionform.public(class_="form-control") }}</div>
+        <div class="col-md-12">
+          NOTICE: Adding private source materials to a public collection will make those materials public. Proceed with caution.
+        </div>
+        
+        <div class="col-md-12 form_row">Collection Title<span class="required"> *</span></div>
+        <div class="col-md-10 form_row">{{ createcollectionform.title(class_="form-control") }}</div>
+        <div class="col-md-12"><div id="show_more" class="btn btn-primary btn-lg" type="submit">Add Course Materials</div></div>
+        </div>
+        </div>
+
+        <div id="collection_builder">
+        <div class="col-md-12">
+          <h4>Available course content</h4>
+        </div>
+
+        <div class="col-md-3">
+
+        <div class="drag_drop activities">
+          <h5>My Activities</h5>
+        <ul class="collection" id="contentbank">
+          {% for act in all_content['activities'] %}
+          <li class="collection_content activity" data-id="activity-{{act.id}}">{{ act.title }} <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" trigger="focus" title="{{act.title}}" data-content="{{act.description|striptags}}">Preview</button></li>
+          {% endfor %}
+        </ul>
+        </div>
+        </div>
+
+        <div class="col-md-3">
+        <div class="drag_drop assignments">
+          <h5>My Assignments</h5>
+        <ul class="collection" id="contentbank">
+          {% for ass in all_content['assignments'] %}
+          <li class="collection_content assignment" data-id="assignment-{{ass.id}}">{{ ass.title }} <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" trigger="focus" title="{{ass.title}}" data-content="{{ass.description|striptags}}">Preview</button></li>
+          {% endfor %}
+        </ul>
+        </div>
+        </div>
+
+        <div class="col-md-3">
+        <div class="drag_drop readings">
+          <h5>My Readings</h5>
+        <ul class="collection" id="contentbank">
+          {% for r in all_content['readings'] %}
+          <li class="collection_content reading" data-id="reading-{{r.id}}">{{ r.last_name }},
+            {% if r.article_title %}
+            &quot;{{r.article_title}},&quot;
+            {% else %}
+            <em>{{r.book_title}}</em>{% endif %} <button type="button" class="btn btn-primary btn-xs" data-toggle="popover"
+            trigger="focus" title="{{ r.last_name }}, {% if r.article_title %}
+            &quot;{{r.article_title}},&quot;
+            {% else %}
+            <em>{{r.book_title}}</em>{% endif %}" data-content="{{ r.last_name }}, {{ r.first_name }}. '{{r.article_title}}', {{r.book_title}} ">Preview</button></li>
+          {% endfor %}
+
+        </ul>
+        </div>
+        </div>
+        <div class="col-md-3">
+        <div class="drag_drop readings">
+        <h5>Public Course Materials</h5>
+
+        <ul class="collection" id="contentbank">
+          {%if all_content['public']['activities'] %}
+          <p><strong>Activities</strong></p>
+          {% for act in all_content['public']['activities'] %}
+          <li class="collection_content activity" data-id="activity-{{act.id}}">{{ act.title }} <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" trigger="focus" title="{{act.title}}" data-content="{{act.description|striptags}}">Preview</button></li>
+          {% endfor %}
+          {% endif %}
+          {%if all_content['public']['assignments'] %}
+          <p><strong>Assignments</strong></p>
+          {% for ass in all_content['public']['assignments'] %}
+          <li class="collection_content assignment" data-id="assignment-{{ass.id}}">{{ ass.title }} <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" trigger="focus" title="{{ass.title}}" data-content="{{ass.description|striptags}}">Preview</button></li>
+          {% endfor %}
+          {% endif %}
+          {%if all_content['public']['readings'] %}
+          <p><strong>Readings</strong></p>
+          {% for r in all_content['public']['readings'] %}
+          <li class="collection_content reading" data-id="reading-{{r.id}}">{{ r.last_name }},
+            {% if r.article_title %}
+            &quot;{{r.article_title}},&quot;
+            {% else %}
+            <em>{{r.book_title}}</em>{% endif %} <button type="button" class="btn btn-primary btn-xs" data-toggle="popover"
+            trigger="focus" title="{{ r.last_name }}, {% if r.article_title %}
+            &quot;{{r.article_title}},&quot;
+            {% else %}
+            <em>{{r.book_title}}</em>{% endif %}" data-content="{{ r.last_name }}, {{ r.first_name }}. '{{r.article_title}}', {{r.book_title}} ">Preview</button></li>
+          {% endfor %}
+          {% endif %}
+        </ul>
+        </div>
+        </div>
+
+        <div class="col-md-12">
+          <h4>Drag here to add (drag to reorder)</h4>
+        <div class="drag_drop">
+          <ul class="collection droppable" id="newcontent">
+          </ul>
+        </div>
+        </div>
+
+        <div id="submit" class="col-md-12 form_row"><input class="btn btn-lg btn-primary" type="submit" value="Create"></div>
+        </div>
+  </form>
+  </div>
+
+
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}
+
+{% block custom_script %}
+<script src="/static/js/jquery-ui.min.js"></script>
+<script>
+
+$('.droppable').sortable({
+    stop: function (event, ui) {
+        ui.item.addClass('dropped');
+        ui.item.children().remove();
+        ui.item.append("<div class='remover btn btn-primary btn-xs'>Remove</div>");
+        $('.remover').click( function () {
+          $(this).parent().remove();
+        });
+    }
+});
+
+$(".collection_content").draggable({
+    connectToSortable: '.droppable',
+    helper: 'clone'
+});
+
+$('#trash').droppable({
+    hoverClass: "highlight",
+    drop: function (event, ui) {
+        if(!ui.draggable.hasClass('dropped')) return false;
+        ui.draggable.remove();
+    }
+});
+$('#submit').click( function () {
+ var data = $('#newcontent').children();
+ var d = data.map(function(){ return $(this).attr('data-id') });
+ var results = JSON.stringify(d.get());
+ var input = $("<input>")
+               .attr("type", "hidden")
+               .attr("name", "coll_data").val(results);
+ $('#new_collection').append($(input));
+
+});
+$('#show_more').click( function() {
+  $('#collection_builder').css("overflow", "visible");
+  //$(window).scrollTop($('#collection_builder').offset().top);
+  $('html, body').animate({
+    'scrollTop': $('#collection_builder').position().top
+  });
+  $('#collection_builder').animate({height:800}, 300).focus();
+
+});
+$(function () {
+ $('[data-toggle="popover"]').popover()
+})
+</script>
+<script>
+ CKEDITOR.replace( 'ckeditor' );
+</script>
+{% endblock %}

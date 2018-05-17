@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+  <h3>Create Course Materials</h3>
+  <hr>
+<div class="row">
+  {% if resource_type %}
+  <h4>You selected {{resource_type}}</h4>
+  {% else %}
+  <form name="type" action="/create" method='POST'>
+    <div class="form-group">
+    <label for="type"><h4>Select a Content Type and Press "Next"</h4></label>
+      <select class="form-control" name="type" id="type">
+          <option value="collection">Collection</option>
+          <option value="activity">Activity</option>
+          <option value="reading">Reading</option>
+          <option value="assignment">Assignment</option>
+      </select>
+    </div>
+
+    <button type="next" class="btn">Next</button>
+
+  </form>
+{% endif %}
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}
