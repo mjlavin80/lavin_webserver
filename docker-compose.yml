@@ -23,6 +23,8 @@ services:
       - mtb_fall_2017
       - cdm_spring_2018
       - mtb_spring_2018
+      - mtb_fall_2018
+      - dh_fall_2018
 
   flask_base:
     build: ./flaskbase
@@ -96,5 +98,17 @@ services:
   mtb_spring_2018:
     build: ./courses/mtb_spring_2018
     container_name: mtb_spring_2018
+    links:
+      - flask_base
+ 
+  mtb_fall_2018:
+    build: ./courses/mtb_fall_2018
+    container_name: mtb_fall_2018
+    links:
+      - flask_base
+
+  dh_fall_2018:
+    build: ./courses/dh_fall_2018
+    container_name: dh_fall_2018
     links:
       - flask_base
