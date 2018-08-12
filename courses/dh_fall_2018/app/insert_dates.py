@@ -2,24 +2,25 @@ from datetime import date, timedelta
 from application import *
 from application.models import Week, Day
 
-start = date(2018, 1, 8)
-end = date(2018, 4, 20)
+start = date(2018, 8, 26)
+end = date(2018, 12, 14)
 topics = [
-"Fundamentals of Narrative and Storytelling",
-"Fundamentals of Narrative and Storytelling",
-"Fundamentals of Narrative and Storytelling",
-"Fundamentals of Narrative and Storytelling",
-"Fundamentals of Narrative and Storytelling",
-"Narrative and Video Games",
-"Narrative and Video Games",
-"Narrative and Video Games",
-"Narrative and Video Games",
-"Narrative and Video Games",
-"Other Digital Narratives",
-"Other Digital Narratives",
-"Other Digital Narratives",
-"Other Digital Narratives",
-"Other Digital Narratives"
+"Are Close and Distant Reading Equivalent?",
+"Is Computational Analysis a Subset of Logical Positivism?",
+"What is an Author?",
+"Are Topic Models Unobtrusive Measures?",
+"Is Style the Answer to Everything?",
+"Do Computational Methods Find Stereotypes or Make Them?",
+"Research Design",
+"Data and Corpora",
+"Text Processing and its Implications",
+"TF-IDF and Clustering",
+"Collocations and Word2Vec",
+"Logistic and Linear Regression",
+"NER and Place Name Recognition",
+"Textual Networks",
+"Visualizing Textual Material",
+"Text Data and the Visual Page"
 ]
 
 delta = start - end
@@ -31,7 +32,7 @@ for i in range(abs(delta.days + 1)):
     z = a.strftime('%A, %B %d, %Y')
 
 
-    if "Tuesday" in z or "Thursday" in z:
+    if "Thursday" in z:
         week.append(z)
     if "Sunday" in z:
         classdays.append(week)

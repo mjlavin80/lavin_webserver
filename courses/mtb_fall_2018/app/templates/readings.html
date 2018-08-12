@@ -10,9 +10,9 @@
 <p>This page is a quick reference for all course readings, some hosted locally, most linked externally. If you discover a broken link, please notify me immediately.</p>
 
 
-{% for reading in readings %}
+{% for reading in readings|sort(attribute='last_name') %}
 <div class="list-group-item">
-<p class="bibl">{{reading.last_name}}, {{reading.first_name}}. <a class="article-title" href="{{reading.link}}">{{reading.article_title}}</a>, {% if reading.book_title %}<span class="book-title">{{reading.book_title}}. {% endif %}</span> {{reading.pubplace}}: {{reading.publisher}}, {{reading.pubdate}}</p>
+<p class="bibl">{{reading.last_name}}, <a class="article-title" href="{{reading.link}}">{{reading.article_title}}</a>, {% if reading.book_title %}<span class="book-title">{{reading.book_title}}. {% endif %}</span> {{reading.pubplace}}: {{reading.publisher}}, {{reading.pubdate}}</p>
 </div>
 {% endfor %}
 </div>
