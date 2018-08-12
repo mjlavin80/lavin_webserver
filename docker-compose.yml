@@ -110,5 +110,8 @@ services:
   dh_fall_2018:
     build: ./courses/dh_fall_2018
     container_name: dh_fall_2018
+    volumes:
+      - ./courses/dh_fall_2018/app/templates:/app/templates
+      - ./courses/dh_fall_2018/app/static:/app/static
     links:
       - flask_base

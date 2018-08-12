@@ -25,13 +25,16 @@ body {
   border: 1px solid #fff;
   color: gray;
 }
-
-.list-group-item.activity {
-    background-color: #5cb85c;
-    border: 1px solid #5cb85c;
-    color: white;
+.list-group-item.active
+{
+font-size: 115%;
 }
-
+.list-group-item.reading {
+    background-color: #E6F7FE;
+}
+.list-group-item.activity {
+    background-color: #FFFAF0;
+}
 .list-group-item.assignment {
     background-color: #e38d13;
     border: 1px solid #e38d13;
@@ -40,6 +43,7 @@ body {
 .book-title {
     font-style: italic;
 }
+.bibl { margin-left: 10px;}
 .bibl-canceled {
     text-decoration: line-through
 }
@@ -80,9 +84,9 @@ a.assignment:active {
 #newcontent {
   background-image: linear-gradient(#FFFFFF, lightblue);
   }
-  .highlight {
-      background-color:yellow;
-      opacity: .66;
+.highlight {
+  background-color:yellow;
+  opacity: .66;
   }
 .btn.btn-primary.btn-xs {
   margin-bottom: 3px;
