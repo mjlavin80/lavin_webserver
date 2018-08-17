@@ -104,6 +104,9 @@ services:
   mtb_fall_2018:
     build: ./courses/mtb_fall_2018
     container_name: mtb_fall_2018
+    volumes:
+      - ./courses/mtb_fall_2018/app/templates:/app/templates
+      - ./courses/mtb_fall_2018/app/static:/app/static
     links:
       - flask_base
 
