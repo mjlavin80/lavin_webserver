@@ -132,6 +132,12 @@ def policies():
     policies = Policy.query.filter(Policy.public == "True").all()
     return render_template("policies.html", policies=policies)
 
+@app.route("/required_book")
+@include_site_data
+def required_book():
+    book_policy = Policy.query.filter(and_(Policy.public == "True", Policy.title =="Required Texts")).all()
+    return render_template("required_book.html", book_policy=book_policy)
+
 @app.route("/calendar")
 @include_site_data
 def calendar():

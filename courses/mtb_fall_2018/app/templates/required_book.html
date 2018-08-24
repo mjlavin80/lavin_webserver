@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+<h3>Required Purchase</h3>
+<p>You must purchase a textbook to do this reading; it is not available online. Below is a list of required textbooks. They are available at the university bookstore or can be purchased online. (NOTE: Please make sure you allow sufficient time for an online item to ship. Missing a reading because an item has not arrived in the mail is not acceptable.) If purchasing an item online, please make sure the ISBN number of your purchase matches the ISBN listed below.</p>
+
+
+{% for policy in policies %}
+<div class="policy">
+    <h4>{{ policy.title }}</h4>
+    <p>{{ policy.description|safe }}</p>
+
+</div>
+{% endfor %}
+
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}
