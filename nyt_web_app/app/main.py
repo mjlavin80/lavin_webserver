@@ -15,6 +15,7 @@ from wtforms.fields import TextAreaField
 from flask_github import GitHub
 from config import GITHUB_ADMIN
 from sqlalchemy.sql import and_
+from  sqlalchemy.sql.expression import func
 from flask_admin.form import rules
 import json
 from flask import Markup
@@ -110,14 +111,18 @@ def load_user(user_id):
 @app.route("/")
 @app.route("/<nyt_id>")
 def index(nyt_id=None):
-    if nyt_id != None:
-        row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
-        try:
-            endpoint = row.nyt_pdf_endpoint
-        except:
-            endpoint = None
-        return render_template("index.html", nyt_id=nyt_id, endpoint=endpoint)
-    else:
+    try:
+        c_u = github.get('user')
+        if str(c_u['login']) == str(GITHUB_ADMIN):
+            if nyt_id != None:
+                row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
+                endpoint = row.nyt_pdf_endpoint
+                return render_template("index.html", nyt_id=nyt_id, endpoint=endpoint)
+            else:
+                row = Metadata().query.order_by(func.rand()).first()
+                endpoint = row.nyt_pdf_endpoint
+                return render_template("index.html", nyt_id=row.nyt_id, endpoint=endpoint) 
+    except:
         return render_template("index.html", nyt_id=None, endpoint=None)
 
 @app.before_request
