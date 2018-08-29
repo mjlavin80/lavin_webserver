@@ -111,17 +111,16 @@ def load_user(user_id):
 @app.route("/")
 @app.route("/<nyt_id>")
 def index(nyt_id=None):
-    try:
-        if current_user.is_authenticated and current_user.is_admin:
-            if nyt_id != None:
-                row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
-                endpoint = row.nyt_pdf_endpoint
-                return render_template("index.html", nyt_id=nyt_id, endpoint=endpoint)
-            else:
-                row = Metadata().query.order_by(func.rand()).first()
-                endpoint = row.nyt_pdf_endpoint
-                return render_template("index.html", nyt_id=row.nyt_id, endpoint=endpoint) 
-    except:
+    if current_user.is_authenticated and current_user.is_admin:
+        if nyt_id != None:
+            row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
+            endpoint = row.nyt_pdf_endpoint
+            return render_template("index.html", nyt_id=nyt_id, endpoint=endpoint)
+        else:
+            row = Metadata().query.order_by(func.rand()).first()
+            endpoint = row.nyt_pdf_endpoint
+            return render_template("index.html", nyt_id=row.nyt_id, endpoint=endpoint) 
+    else:
         return render_template("index.html", nyt_id=None, endpoint=None)
 
 @app.before_request
