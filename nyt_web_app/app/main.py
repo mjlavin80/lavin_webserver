@@ -112,8 +112,7 @@ def load_user(user_id):
 @app.route("/<nyt_id>")
 def index(nyt_id=None):
     try:
-        c_u = github.get('user')
-        if str(c_u['login']) == str(GITHUB_ADMIN):
+        if current_user.is_authenticated and current_user.is_admin:
             if nyt_id != None:
                 row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
                 endpoint = row.nyt_pdf_endpoint
