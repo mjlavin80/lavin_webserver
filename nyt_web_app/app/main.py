@@ -123,6 +123,19 @@ def index(nyt_id=None):
     else:
         return render_template("index.html", nyt_id=None, endpoint=None)
 
+@app.route("/update_meta", methods=["GET", "POST"])
+@app.route("/update_meta/<nyt_id>", methods=["GET", "POST"])
+def update_meta(nyt_id=None):
+    if request.method == 'POST':
+        meta = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
+        meta.review_type = request.form['review_type_data']
+        if request.form['gender_label_data'] != 'na':
+            meta.perceived_author_gender = request.form['gender_label_data']
+        db.session.commit()
+        return render_template("success.html", nyt_id=nyt_id) 
+    else:
+        return(redirect(url_for('index')))
+
 @app.before_request
 def before_request():
     g.user = None

@@ -16,51 +16,58 @@
 <div id="type_accordion">
 <hr>
 <div>
-	<button type="button" id="review" class="btn btn-success btn-lg">Single Work Review</button>
+	<button type="button" id="review" class="review_type btn btn-success btn-lg">Single Work Review</button>
 </div>
 <hr>
 <div>
-	<button type="button" id="not_review" class="btn btn-danger btn-lg">Not Single Work Review</button>
+	<button type="button" id="not_review" class="review_type  btn btn-danger btn-lg">Not Single Work Review</button>
 </div>
 <hr>
-<div>
-	<button type="button" id="next" class="btn btn-primary btn-lg">Next</button>
-</div>
 </div>
 
 <div id="gender_accordion">
 <hr>
 <div>
-	<button type="button" id="previous" class="btn btn-primary btn-lg">Previous</button>
+	<button type="button" id="previous" class="p_s btn btn-primary btn-lg">Go Back</button>
 </div>
 <hr>
 <div>
-<button type="button" id="labeled_female" class="btn btn-warning btn-lg">Presumed Gender(s) Female</button>
+<button type="button" id="labeled_female" class="gender_data btn btn-warning btn-lg">Presumed Gender(s) Female</button>
 </div>
 <hr>
 <div>
-	<button type="button" id="labeled_male" class="btn btn-info btn-lg">Presumed Gender(s) Male</button>
+	<button type="button" id="labeled_male" class="gender_data btn btn-info btn-lg">Presumed Gender(s) Male</button>
 </div>
 
 <hr>
 <div>
-<button type="button" id="labeled_multi" class="btn btn-danger btn-lg">Presumed Genders Male and Female</button>
+<button type="button" id="labeled_multi" class="gender_data btn btn-danger btn-lg">Presumed Genders Multi</button>
 </div>
 <hr>
 <div>	
-	<button type="button" id="labeled_unknown" class="btn btn-success btn-lg">Gender Unknown or Not Used</button>
+	<button type="button" id="labeled_unknown" class="gender_data btn btn-success btn-lg">Gender Unknown or Not Used</button>
 </div>	
 <hr>
+</div>
 
-<form name="update_meta" method="POST" action="/update_meta">
+<div id="summary_accordion">
+<hr>
+<div>
+	<button type="button" id="start_over" class="p_s btn btn-primary btn-lg">Start Over</button>
+</div>
+<hr>
+<div id="review_type">
+</div>
+<hr>
+<div id="gender_label"></div>
+<form name="update_meta" method="POST" action="/update_meta/{{ nyt_id }}">
 	<input id="review_type_data" name="review_type_data" type="hidden" value="">
 	<input id="gender_label_data" name="gender_label_data" type="hidden" value="">
+	<hr>
 	<div><input id="submit" class="btn btn-primary btn-lg" type="submit" value="Submit"> 
+	<hr>
 </div>
 </form>
-
-</div>
-
 <!-- <div id="image-gallery-3" class="cf">
     <img src="/static/page_images/{{nyt_id}}/{{nyt_id}}-1.png" data-high-res-src="/static/page_images/{{nyt_id}}/{{nyt_id}}-1.png" alt="" class="pannable-image">
 </div>
@@ -73,47 +80,59 @@
 {% if nyt_id %}
 <script>
 $("#gender_accordion").hide();
-$("#next").click(function(){
-    $("#gender_accordion").show();
-    $("#type_accordion").hide();
-    $("#previous").show();
-});
-$("#previous").click(function(){
-    $("#gender_accordion").hide();
+$("#summary_accordion").hide();
+
+$(".p_s").click(function(){
+    $("#summary_accordion").hide();
     $("#type_accordion").show();
-    $("#next").show();
 });
 
-$( "#review" ).click(function() {
-	var review = "Review";
+
+$("#review").click(function() {
+	var review = "single_focus";
 	$('input[name="review_type_data"]').val(review);
-	console.log(review);
+    $("#type_accordion").hide();
+    $("#summary_accordion").hide();
+    $("#gender_accordion").show();
+    $("#review_type").html(review);
+
 });
 $( "#not_review" ).click(function() {
-	var review = "Not Review";
+	$('input[name="gender_label_data"]').val("na");
+	var review = "other";
 	$('input[name="review_type_data"]').val(review);
-	console.log(review);
+	$("#type_accordion").hide();
+	$("#gender_accordion").hide();
+    $("#summary_accordion").show();
+    $("#review_type").html(review);
+    $("#gender_label").html("not applicable")
+
 });
 $( "#labeled_male" ).click(function() {
-	var gender_label = "male";
+	var gender_label = "m";
 	$('input[name="gender_label_data"]').val(gender_label);
-	console.log(gender_label);
+	$("#gender_label").html(gender_label)
 });	
 $( "#labeled_female" ).click(function() {
-	var gender_label = "female";
+	var gender_label = "f";
 	$('input[name="gender_label_data"]').val(gender_label);
-	console.log(gender_label);
+	$("#gender_label").html(gender_label)
 });	
 $( "#labeled_multi" ).click(function() {
-	var gender_label = "multi";
+	var gender_label = "dual";
 	$('input[name="gender_label_data"]').val(gender_label);
-	console.log(gender_label);
+	$("#gender_label").html(gender_label)
 });	
 $( "#labeled_unknown" ).click(function() {
-	var gender_label = "unknown";
+	var gender_label = "none";
 	$('input[name="gender_label_data"]').val(gender_label);
-	console.log(gender_label);
+	$("#gender_label").html(gender_label)
 });	
+$(".gender_data").click(function(){
+    $("#gender_accordion").hide();
+    $("#type_accordion").hide();
+    $("#summary_accordion").show();
+});
 </script>
 {% endif %}
 {% endblock %}
