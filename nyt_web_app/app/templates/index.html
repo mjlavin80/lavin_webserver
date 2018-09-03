@@ -11,7 +11,7 @@
 <div>Headline: {{row.headline}}</div>
 <div>Word Count: {{row.word_count}}</div>
 <div>ID: {{ nyt_id }}
-<div>External Link: <a href="{{endpoint}}" target="blank">open in new tab)</a></div>
+<div>External Link: <a href="{{endpoint}}" target="blank">open in new tab</a></div>
 
 <div id="type_accordion">
 <hr>
@@ -27,7 +27,12 @@
 	<button type="button" id="next" class="btn btn-primary btn-lg">Next</button>
 </div>
 </div>
+
 <div id="gender_accordion">
+<hr>
+<div>
+	<button type="button" id="previous" class="btn btn-primary btn-lg">Previous</button>
+</div>
 <hr>
 <div>
 <button type="button" id="labeled_female" class="btn btn-warning btn-lg">Presumed Gender(s) Female</button>
@@ -46,13 +51,16 @@
 	<button type="button" id="labeled_unknown" class="btn btn-success btn-lg">Gender Unknown or Not Used</button>
 </div>	
 <hr>
-<div>
-	<button type="button" id="previous" class="btn btn-primary btn-lg">Previous</button>
+
+<form name="update_meta" method="POST" action="/update_meta">
+	<input id="review_type_data" name="review_type_data" type="hidden" value="">
+	<input id="gender_label_data" name="gender_label_data" type="hidden" value="">
+	<div><input id="submit" class="btn btn-primary btn-lg" type="submit" value="Submit"> 
 </div>
-<hr>
-<div><button type="button" id="submit" class="btn btn-primary btn-lg">Submit</button>
+</form>
+
 </div>
-</div>
+
 <!-- <div id="image-gallery-3" class="cf">
     <img src="/static/page_images/{{nyt_id}}/{{nyt_id}}-1.png" data-high-res-src="/static/page_images/{{nyt_id}}/{{nyt_id}}-1.png" alt="" class="pannable-image">
 </div>
@@ -78,26 +86,32 @@ $("#previous").click(function(){
 
 $( "#review" ).click(function() {
 	var review = "Review";
+	$('input[name="review_type_data"]').val(review);
 	console.log(review);
 });
 $( "#not_review" ).click(function() {
 	var review = "Not Review";
+	$('input[name="review_type_data"]').val(review);
 	console.log(review);
 });
 $( "#labeled_male" ).click(function() {
 	var gender_label = "male";
+	$('input[name="gender_label_data"]').val(gender_label);
 	console.log(gender_label);
 });	
 $( "#labeled_female" ).click(function() {
 	var gender_label = "female";
+	$('input[name="gender_label_data"]').val(gender_label);
 	console.log(gender_label);
 });	
 $( "#labeled_multi" ).click(function() {
 	var gender_label = "multi";
+	$('input[name="gender_label_data"]').val(gender_label);
 	console.log(gender_label);
 });	
 $( "#labeled_unknown" ).click(function() {
 	var gender_label = "unknown";
+	$('input[name="gender_label_data"]').val(gender_label);
 	console.log(gender_label);
 });	
 </script>
