@@ -8,8 +8,15 @@
 <div class="col-md-12">
   <h2><big>Book Reviews</big>, <em>The New York Times</em></h2>
 {% if nyt_id %}
+<div>Headline: {{row.headline}}</div>
+<div>Word County: {{row.word_count}}</div>
+<div>ID: {{ nyt_id }}
+<div>External Link: <a href="{{endpoint}}" target="blank">open in new tab)</a></div>
 
-<div>{{ nyt_id }}: <a href="{{endpoint}}" target="blank">External Link (opens new tab)</a></div>
+<div>
+	<button type="button" class="btn btn-success btn-lg">Review</button>
+	<button type="button" class="btn btn-danger btn-lg">Not Review</button>
+</div>
 <!-- <div id="image-gallery-3" class="cf">
     <img src="/static/page_images/{{nyt_id}}/{{nyt_id}}-1.png" data-high-res-src="/static/page_images/{{nyt_id}}/{{nyt_id}}-1.png" alt="" class="pannable-image">
 </div>

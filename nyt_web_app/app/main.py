@@ -115,11 +115,11 @@ def index(nyt_id=None):
         if nyt_id != None:
             row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
             endpoint = row.nyt_pdf_endpoint
-            return render_template("index.html", nyt_id=nyt_id, endpoint=endpoint)
+            return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint)
         else:
             row = Metadata().query.order_by(func.rand()).first()
             endpoint = row.nyt_pdf_endpoint
-            return render_template("index.html", nyt_id=row.nyt_id, endpoint=endpoint) 
+            return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint) 
     else:
         return render_template("index.html", nyt_id=None, endpoint=None)
 
