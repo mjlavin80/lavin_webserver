@@ -9,12 +9,17 @@
   <h2><big>Book Reviews</big>, <em>The New York Times</em></h2>
 {% if nyt_id %}
 <div>Headline: {{row.headline}}</div>
-<div>Word County: {{row.word_count}}</div>
+<div>Word Count: {{row.word_count}}</div>
 <div>ID: {{ nyt_id }}
 <div>External Link: <a href="{{endpoint}}" target="blank">open in new tab)</a></div>
 
+<hr>
+
 <div>
 	<button type="button" class="btn btn-success btn-lg">Review</button>
+</div>
+<hr>
+<div>
 	<button type="button" class="btn btn-danger btn-lg">Not Review</button>
 </div>
 <!-- <div id="image-gallery-3" class="cf">
