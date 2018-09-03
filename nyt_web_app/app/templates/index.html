@@ -13,8 +13,8 @@
 <div>ID: {{ nyt_id }}
 <div>External Link: <a href="{{endpoint}}" target="blank">open in new tab)</a></div>
 
+<div id="type_accordion">
 <hr>
-
 <div>
 	<button type="button" id="review" class="btn btn-success btn-lg">Single Work Review</button>
 </div>
@@ -26,24 +26,33 @@
 <div>
 	<button type="button" id="next" class="btn btn-primary btn-lg">Next</button>
 </div>
+</div>
+<div id="gender_accordion">
 <hr>
 <div>
-	<button type="button" id="labeled_male" class="btn btn-danger btn-lg">Male Label</button>
+<button type="button" id="labeled_female" class="btn btn-warning btn-lg">Presumed Gender(s) Female</button>
 </div>
 <hr>
 <div>
-<button type="button" id="labeled_female" class="btn btn-warning btn-lg">Female Label</button>
+	<button type="button" id="labeled_male" class="btn btn-info btn-lg">Presumed Gender(s) Male</button>
 </div>
+
 <hr>
 <div>
-<button type="button" id="labeled_multi" class="btn btn-info btn-lg">Multi Label</button>
+<button type="button" id="labeled_multi" class="btn btn-danger btn-lg">Presumed Genders Male and Female</button>
 </div>
 <hr>
 <div>	
-	<button type="button" id="labeled_unknown" class="btn btn-success btn-lg">Multi Label</button>
+	<button type="button" id="labeled_unknown" class="btn btn-success btn-lg">Gender Unknown or Not Used</button>
 </div>	
-<div><input class="btn btn-primary btn-lg" type="submit" value="Submit"></div>
-
+<hr>
+<div>
+	<button type="button" id="previous" class="btn btn-primary btn-lg">Previous</button>
+</div>
+<hr>
+<div><button type="button" id="submit" class="btn btn-primary btn-lg">Submit</button>
+</div>
+</div>
 <!-- <div id="image-gallery-3" class="cf">
     <img src="/static/page_images/{{nyt_id}}/{{nyt_id}}-1.png" data-high-res-src="/static/page_images/{{nyt_id}}/{{nyt_id}}-1.png" alt="" class="pannable-image">
 </div>
@@ -55,6 +64,17 @@
 {% block footer %}
 {% if nyt_id %}
 <script>
+$("#gender_accordion").hide();
+$("#next").click(function(){
+    $("#gender_accordion").show();
+    $("#type_accordion").hide();
+    $("#previous").show();
+});
+$("#previous").click(function(){
+    $("#gender_accordion").hide();
+    $("#type_accordion").show();
+    $("#next").show();
+});
 
 $( "#review" ).click(function() {
 	var review = "Review";
