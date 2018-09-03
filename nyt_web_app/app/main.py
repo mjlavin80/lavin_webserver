@@ -117,7 +117,7 @@ def index(nyt_id=None):
             endpoint = row.nyt_pdf_endpoint
             return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint)
         else:
-            row = Metadata().query.filter(review_type == "needs_audit").order_by(func.rand()).first()
+            row = Metadata().query.filter(Metadata.review_type == "needs_audit").order_by(func.rand()).first()
             endpoint = row.nyt_pdf_endpoint
             return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint) 
     else:
@@ -193,12 +193,12 @@ def status(message=""):
 
     #for debugging locally
 
-    #user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
-    #user.authenticated = True
-    #db.session.add(user)
-    #db.session.commit()
-    #login_user(user, force=True)
-    #message="in"
+    # user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
+    # user.authenticated = True
+    # db.session.add(user)
+    # db.session.commit()
+    # login_user(user, force=True)
+    # message="in"
 
     #end local debug block
 
