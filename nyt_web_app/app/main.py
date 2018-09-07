@@ -123,6 +123,36 @@ def index(nyt_id=None):
     else:
         return render_template("index.html", nyt_id=None, endpoint=None)
 
+@app.route("/f")
+@app.route("/f/<nyt_id>")
+def fem(nyt_id=None):
+    if current_user.is_authenticated and current_user.is_admin:
+        if nyt_id != None:
+            row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
+            endpoint = row.nyt_pdf_endpoint
+            return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint)
+        else:
+            row = Metadata().query.filter(Metadata.review_type == "needs_audit_probably_female").filter(Metadata.headline.like("%$%")).order_by(func.rand()).first()
+            endpoint = row.nyt_pdf_endpoint
+            return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint) 
+    else:
+        return render_template("index.html", nyt_id=None, endpoint=None)
+
+@app.route("/m")
+@app.route("/m/<nyt_id>")
+def fem(nyt_id=None):
+    if current_user.is_authenticated and current_user.is_admin:
+        if nyt_id != None:
+            row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
+            endpoint = row.nyt_pdf_endpoint
+            return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint)
+        else:
+            row = Metadata().query.filter(Metadata.review_type == "needs_audit_probably_male").filter(Metadata.headline.like("%$%")).order_by(func.rand()).first()
+            endpoint = row.nyt_pdf_endpoint
+            return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint) 
+    else:
+        return render_template("index.html", nyt_id=None, endpoint=None)
+
 @app.route("/update_meta", methods=["GET", "POST"])
 @app.route("/update_meta/<nyt_id>", methods=["GET", "POST"])
 def update_meta(nyt_id=None):
