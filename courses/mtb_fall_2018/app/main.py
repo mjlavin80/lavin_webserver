@@ -156,7 +156,7 @@ def timeline(row=None):
             count +=1
             if int(row) == count:
                 i = []
-                for m in [0,1,4,5]:
+                for m in range(7):
                     try:
                         j[1][m] = int(j[1][m])
                     except:
@@ -166,10 +166,10 @@ def timeline(row=None):
                     if value =="nan":
                         value = ""
                     i.append(value)
-                if i[20] == "":
-                    i[20] == "#"
+                if i[13] == "":
+                    i[13] == "#"
 
-        return render_template("timeline_row.html", essay=i[20])
+        return render_template("timeline_row.html", essay=i[13])
     else:
         return render_template("timeline.html")
 
@@ -196,7 +196,7 @@ def timelinedata():
     count = 1
     for j in df.iterrows():
         i = []
-        for m in [0,1,4,5]:
+        for m in range(7):
             try:
                 j[1][m] = int(j[1][m])
             except:
@@ -206,24 +206,24 @@ def timelinedata():
             if value =="nan":
                 value = ""
             i.append(value)
-        if i[20] == "":
-            i[20] == "#"
+        if i[13] == "":
+            i[13] == "#"
         #i[20]
-        combo = i[10] + " <a target=\$$$$blank\$$$$ href=\$$$$" + "timeline/" + str(count) +"\$$$$>View Full Essay</a>"
-        timeline += "{\n $$$$start_date$$$$: { \n $$$$year$$$$: $$$$"+i[0]+"$$$$,\n $$$$month$$$$: $$$$"+i[1]+"$$$$ },"
+        combo = i[11] + " <a target=\$$$$blank\$$$$ href=\$$$$" + "timeline/" + str(count) +"\$$$$>View Full Essay</a>"
+        timeline += "{\n $$$$start_date$$$$: { \n $$$$year$$$$: $$$$"+i[1]+"$$$$,\n $$$$month$$$$: $$$$"+i[1]+"$$$$ },"
 
-        if i[4] != "":
-            timeline += "\n$$$$end_date$$$$: { \n $$$$year$$$$: $$$$"+i[4]
-        else:
-            timeline += "\n$$$$end_date$$$$: { \n $$$$year$$$$: $$$$"+i[0]
         if i[5] != "":
-            timeline += "$$$$,\n $$$$month$$$$: $$$$"+i[5]+"$$$$ },"
+            timeline += "\n$$$$end_date$$$$: { \n $$$$year$$$$: $$$$"+i[5]
         else:
-            timeline += "$$$$,\n $$$$month$$$$: $$$$"+i[1]+"$$$$ },"
+            timeline += "\n$$$$end_date$$$$: { \n $$$$year$$$$: $$$$"+i[1]
+        if i[6] != "":
+            timeline += "$$$$,\n $$$$month$$$$: $$$$"+i[6]+"$$$$ },"
+        else:
+            timeline += "$$$$,\n $$$$month$$$$: $$$$"+i[2]+"$$$$ },"
 
-        timeline += "\n$$$$display_date$$$$: $$$$"+ i[8]+"$$$$,"
-        timeline += "\n$$$$media$$$$: { \n $$$$url$$$$: $$$$"+ i[11]+"$$$$ ,\n $$$$credit$$$$: $$$$"+ i[12]+"$$$$ ,\n $$$$caption$$$$: $$$$"+i[13]+"$$$$,\n $$$$thumb$$$$: $$$$"+i[14]+"$$$$ },"
-        timeline += "\n$$$$text$$$$: { \n $$$$headline$$$$: $$$$"+ i[9]+"$$$$ ,\n $$$$text$$$$: $$$$" + combo +"$$$$ },"
+        timeline += "\n$$$$display_date$$$$: $$$$"+ i[9]+"$$$$,"
+        timeline += "\n$$$$media$$$$: { \n $$$$url$$$$: $$$$"+ i[14]+"$$$$ ,\n $$$$credit$$$$: $$$$"+ i[15]+"$$$$ ,\n $$$$caption$$$$: $$$$"+i[16]+"$$$$,\n $$$$thumb$$$$: $$$$"+i[14]+"$$$$ },"
+        timeline += "\n$$$$text$$$$: { \n $$$$headline$$$$: $$$$"+ i[10]+"$$$$ ,\n $$$$text$$$$: $$$$" + combo +"$$$$ },"
         timeline += "\n$$$$type$$$$: $$$$overview$$$$ \n },"
         count +=1
     timeline = timeline[:-1]
