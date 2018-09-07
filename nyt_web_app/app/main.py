@@ -125,7 +125,7 @@ def index(nyt_id=None):
 
 @app.route("/f")
 @app.route("/f/<nyt_id>")
-def fem(nyt_id=None):
+def female(nyt_id=None):
     if current_user.is_authenticated and current_user.is_admin:
         if nyt_id != None:
             row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
@@ -140,7 +140,7 @@ def fem(nyt_id=None):
 
 @app.route("/m")
 @app.route("/m/<nyt_id>")
-def fem(nyt_id=None):
+def male(nyt_id=None):
     if current_user.is_authenticated and current_user.is_admin:
         if nyt_id != None:
             row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
