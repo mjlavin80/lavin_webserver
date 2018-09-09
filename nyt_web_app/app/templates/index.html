@@ -41,7 +41,7 @@
 
 <hr>
 <div>
-<button type="button" id="labeled_multi" class="gender_data btn btn-danger btn-lg">Presumed Genders Multi</button>
+<button type="button" id="labeled_dual" class="gender_data btn btn-danger btn-lg">Presumed Genders Mixed</button>
 </div>
 <hr>
 <div>	
@@ -50,14 +50,36 @@
 <hr>
 </div>
 
+<div id="sub_accordion">
+<hr>
+<div>
+	<button type="button" id="previous" class="p_s btn btn-primary btn-lg">Go Back</button>
+</div>
+<hr>
+<div>
+<button type="button" id="labeled_multi" class="sub_data btn btn-warning btn-lg">Multi-work Review</button>
+</div>
+<hr>
+<div>
+	<button type="button" id="labeled_brief" class="sub_data btn btn-info btn-lg">Brief or Mostly Quotes Review</button>
+</div>
+
+<hr>
+<div>
+<button type="button" id="labeled_not_review" class="sub_data btn btn-danger btn-lg">Non-Review Content</button>
+</div>
+	
+<hr>
+</div>
+
+
 <div id="summary_accordion">
 <hr>
 <div>
 	<button type="button" id="start_over" class="p_s btn btn-primary btn-lg">Start Over</button>
 </div>
 <hr>
-<div id="review_type">
-</div>
+<div id="review_type"></div>
 <hr>
 <div id="gender_label"></div>
 <form name="update_meta" method="POST" action="/update_meta/{{ nyt_id }}">
@@ -79,17 +101,16 @@
 {% block footer %}
 {% if nyt_id %}
 <script>
+$("#sub_accordion").hide()
 $("#gender_accordion").hide();
 $("#summary_accordion").hide();
 
 $(".p_s").click(function(){
     $("#summary_accordion").hide();
     $("#gender_accordion").hide();
+    $("#sub_accordion").hide();
     $("#type_accordion").show();
-
 });
-
-
 $("#review").click(function() {
 	var review = "single_focus";
 	$('input[name="review_type_data"]').val(review);
@@ -101,35 +122,59 @@ $("#review").click(function() {
 });
 $( "#not_review" ).click(function() {
 	$('input[name="gender_label_data"]').val("na");
-	var review = "other";
-	$('input[name="review_type_data"]').val(review);
 	$("#type_accordion").hide();
 	$("#gender_accordion").hide();
-    $("#summary_accordion").show();
-    $("#review_type").html(review);
-    $("#gender_label").html("not applicable")
-
+    $("#sub_accordion").show();
+    $("#gender_label").html("na")
 });
+
+
+$("#labeled_not_review").click(function() {
+	var sub = "not_review";
+	$('input[name="review_type_data"]').val(sub);
+	$("#review_type").html(sub);
+});	
+
+
+$("#labeled_multi").click(function() {
+	var sub = "multi";
+	$('input[name="review_type_data"]').val(sub);
+	$("#review_type").html(sub);
+});	
+
+$("#labeled_brief").click(function() {
+	var sub = "brief";
+	$('input[name="review_type_data"]').val(sub);
+	$("#review_type").html(sub);
+});	
+
 $( "#labeled_male" ).click(function() {
 	var gender_label = "m";
 	$('input[name="gender_label_data"]').val(gender_label);
-	$("#gender_label").html(gender_label)
+	$("#gender_label").html(gender_label);
 });	
 $( "#labeled_female" ).click(function() {
 	var gender_label = "f";
 	$('input[name="gender_label_data"]').val(gender_label);
-	$("#gender_label").html(gender_label)
+	$("#gender_label").html(gender_label);
 });	
-$( "#labeled_multi" ).click(function() {
+$( "#labeled_dual" ).click(function() {
 	var gender_label = "dual";
 	$('input[name="gender_label_data"]').val(gender_label);
-	$("#gender_label").html(gender_label)
+	$("#gender_label").html(gender_label);
 });	
 $( "#labeled_unknown" ).click(function() {
 	var gender_label = "none";
 	$('input[name="gender_label_data"]').val(gender_label);
-	$("#gender_label").html(gender_label)
+	$("#gender_label").html(gender_label);
 });	
+
+$(".sub_data").click(function(){
+	$("#sub_accordion").hide()
+	$("#type_accordion").hide();
+    $("#summary_accordion").show();
+});
+
 $(".gender_data").click(function(){
     $("#gender_accordion").hide();
     $("#type_accordion").hide();
