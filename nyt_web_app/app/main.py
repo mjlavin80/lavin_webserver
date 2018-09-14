@@ -117,7 +117,7 @@ def index(nyt_id=None):
             endpoint = row.nyt_pdf_endpoint
             return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint)
         else:
-            row = Metadata().query.filter(Metadata.review_type == "needs_audit").filter(Metadata.headline.like("%$%")).order_by(func.rand()).first()
+            row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit", Metadata.year > 1894, Metadata.year < 1926)).filter(Metadata.headline.like("%$%")).order_by(func.rand()).first()
             endpoint = row.nyt_pdf_endpoint
             return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint) 
     else:
@@ -132,7 +132,7 @@ def female(nyt_id=None):
             endpoint = row.nyt_pdf_endpoint
             return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint)
         else:
-            row = Metadata().query.filter(Metadata.review_type == "needs_audit_probably_female").filter(Metadata.headline.like("%$%")).order_by(func.rand()).first()
+            row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit_probably_female", Metadata.year > 1905, Metadata.year < 1926)).filter(Metadata.headline.like("%$%")).order_by(func.rand()).first()
             endpoint = row.nyt_pdf_endpoint
             return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint) 
     else:
@@ -147,7 +147,7 @@ def male(nyt_id=None):
             endpoint = row.nyt_pdf_endpoint
             return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint)
         else:
-            row = Metadata().query.filter(Metadata.review_type == "needs_audit_probably_male").filter(Metadata.headline.like("%$%")).order_by(func.rand()).first()
+            row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit_probably_male", Metadata.year > 1905, Metadata.year < 1926)).filter(Metadata.headline.like("%$%")).order_by(func.rand()).first()
             endpoint = row.nyt_pdf_endpoint
             return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint) 
     else:
