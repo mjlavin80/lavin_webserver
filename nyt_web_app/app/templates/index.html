@@ -55,6 +55,7 @@
 <div>
 	<button type="button" id="previous" class="p_s btn btn-primary btn-lg">Go Back</button>
 </div>
+
 <hr>
 <div>
 <button type="button" id="labeled_multi" class="sub_data btn btn-warning btn-lg">Multi-work Review</button>
@@ -68,7 +69,14 @@
 <div>
 <button type="button" id="labeled_not_review" class="sub_data btn btn-danger btn-lg">Non-Review Content</button>
 </div>
-	
+<hr>
+<div>
+<button type="button" id="labeled_cluster" class="sub_data btn btn-warning btn-lg">Cluster of Reviews</button>
+</div>
+<hr>
+<div>
+	<button type="button" id="labeled_brief" class="sub_data btn btn-info btn-lg">Brief or Mostly Quotes Review</button>
+</div>	
 <hr>
 </div>
 
@@ -135,9 +143,14 @@ $("#labeled_not_review").click(function() {
 	$("#review_type").html(sub);
 });	
 
+$("#labeled_cluster").click(function() {
+	var sub = "cluster";
+	$('input[name="review_type_data"]').val(sub);
+	$("#review_type").html(sub);
+});	
 
 $("#labeled_multi").click(function() {
-	var sub = "multi";
+	var sub = "really_multi";
 	$('input[name="review_type_data"]').val(sub);
 	$("#review_type").html(sub);
 });	
