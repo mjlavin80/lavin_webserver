@@ -5,3 +5,4 @@
 config.py
 user_create.py
 *.pickle
+.ipynb_checkpoints
