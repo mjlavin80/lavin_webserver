@@ -11,7 +11,11 @@
 <div>Headline: {{row.headline}}</div>
 <div>Word Count: {{row.word_count}}</div>
 <div>ID: {{ nyt_id }}
-<div>External Link: <a href="{{endpoint}}" target="blank">open in new tab</a></div>
+<div>External Link:</div> 
+<hr>
+<div>
+<a href="{{endpoint}}" target="blank"><button type="button" class="btn btn-primary btn-lg">Open in New Tab</button></a>
+</div>
 
 <div id="type_accordion">
 <hr>
@@ -28,24 +32,24 @@
 <div id="gender_accordion">
 <hr>
 <div>
-	<button type="button" id="previous" class="p_s btn btn-primary btn-lg">Go Back</button>
+	<button type="button" id="previous" class="p_s btn btn-warning btn-lg">Go Back</button>
 </div>
 <hr>
 <div>
-<button type="button" id="labeled_female" class="gender_data btn btn-warning btn-lg">Presumed Gender(s) Female</button>
+<button type="button" id="labeled_female" class="gender_data btn btn-success btn-lg">Presumed Gender(s) Female</button>
 </div>
 <hr>
 <div>
-	<button type="button" id="labeled_male" class="gender_data btn btn-info btn-lg">Presumed Gender(s) Male</button>
+	<button type="button" id="labeled_male" class="gender_data btn btn-danger btn-lg">Presumed Gender(s) Male</button>
 </div>
 
 <hr>
 <div>
-<button type="button" id="labeled_dual" class="gender_data btn btn-danger btn-lg">Presumed Genders Mixed</button>
+<button type="button" id="labeled_dual" class="gender_data btn btn-info btn-lg">Presumed Genders Mixed</button>
 </div>
 <hr>
 <div>	
-	<button type="button" id="labeled_unknown" class="gender_data btn btn-success btn-lg">Gender Unknown or Not Used</button>
+	<button type="button" id="labeled_unknown" class="gender_data btn btn-warning btn-lg">Gender Unknown or Not Used</button>
 </div>	
 <hr>
 </div>
@@ -53,21 +57,21 @@
 <div id="sub_accordion">
 <hr>
 <div>
-	<button type="button" id="previous" class="p_s btn btn-primary btn-lg">Go Back</button>
+	<button type="button" id="previous" class="p_s btn btn-warning btn-lg">Go Back</button>
 </div>
 
 <hr>
 <div>
-<button type="button" id="labeled_multi" class="sub_data btn btn-warning btn-lg">Multi-work Review</button>
+<button type="button" id="labeled_multi" class="sub_data btn btn-success btn-lg">Multi-work Review</button>
 </div>
 <hr>
 <div>
-	<button type="button" id="labeled_brief" class="sub_data btn btn-info btn-lg">Brief or Mostly Quotes Review</button>
+	<button type="button" id="labeled_brief" class="sub_data btn btn-danger btn-lg">Brief or Mostly Quotes Review</button>
 </div>
 
 <hr>
 <div>
-<button type="button" id="labeled_not_review" class="sub_data btn btn-danger btn-lg">Non-Review Content</button>
+<button type="button" id="labeled_not_review" class="sub_data btn btn-info btn-lg">Non-Review Content</button>
 </div>
 <hr>
 <div>
@@ -80,7 +84,7 @@
 <div id="summary_accordion">
 <hr>
 <div>
-	<button type="button" id="start_over" class="p_s btn btn-primary btn-lg">Start Over</button>
+	<button type="button" id="start_over" class="p_s btn btn-warning btn-lg">Start Over</button>
 </div>
 <hr>
 <div id="review_type"></div>
