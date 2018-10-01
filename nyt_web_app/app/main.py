@@ -14,7 +14,7 @@ from flask_admin.base import MenuLink
 from wtforms.fields import TextAreaField
 from flask_github import GitHub
 from config import GITHUB_ADMIN
-from sqlalchemy.sql import and_
+from sqlalchemy.sql import and_, in_
 from  sqlalchemy.sql.expression import func
 from flask_admin.form import rules
 import json
