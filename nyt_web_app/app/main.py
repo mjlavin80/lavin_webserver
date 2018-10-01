@@ -117,7 +117,7 @@ def index(nyt_id=None):
             endpoint = row.nyt_pdf_endpoint
             return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint)
         else:
-            row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit", Metadata.year > 1905, Metadata.year < 1925)).order_by(func.rand()).first()
+            row = Metadata().query.filter(and_(Metadata.review_type.like("needs_audit%").filter(Metadata.year > 1905, Metadata.year < 1925)).filter(Metadata.page.in_('BR1', 'BR2', 'BR3', 'BR4', 'BR5', 'BR6', 'BR7', 'BR8', 'BR9', 'BR10')).order_by(func.rand()).first()
             endpoint = row.nyt_pdf_endpoint
             return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint) 
     else:
