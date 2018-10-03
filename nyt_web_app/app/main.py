@@ -20,7 +20,7 @@ from flask_admin.form import rules
 import json
 from flask import Markup
 import requests
-from beautifulsoup4 import BeautifulSoup
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
