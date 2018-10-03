@@ -118,7 +118,7 @@ def index(nyt_id=None):
             row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
             endpoint = row.nyt_pdf_endpoint
             r = requests.get(endpoint)
-            html = BeautifulSoup(r.text)
+            html = BeautifulSoup(r.text, features="html.parser")
             link = html.find("a", {"class":"user-action archive-user-action"})
             pdf_link = link['href'].replace('.html', '.pdf')
 
@@ -128,7 +128,7 @@ def index(nyt_id=None):
             #, 'BR2', 'BR3', 'BR4', 'BR5', 'BR6', 'BR7', 'BR8', 'BR9', 'BR10'
             endpoint = row.nyt_pdf_endpoint
             r = requests.get(endpoint)
-            html = BeautifulSoup(r.text)
+            html = BeautifulSoup(r.text, features="html.parser")
             link = html.find("a", {"class":"user-action archive-user-action"})
             pdf_link = link['href'].replace('.html', '.pdf')
 
@@ -144,7 +144,7 @@ def female(nyt_id=None):
             row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
             endpoint = row.nyt_pdf_endpoint
             r = requests.get(endpoint)
-            html = BeautifulSoup(r.text)
+            html = BeautifulSoup(r.text, features="html.parser")
             link = html.find("a", {"class":"user-action archive-user-action"})
             pdf_link = link['href'].replace('.html', '.pdf')
 
@@ -153,7 +153,7 @@ def female(nyt_id=None):
             row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit_probably_female", Metadata.year > 1905, Metadata.year < 1925)).order_by(func.rand()).first()
             endpoint = row.nyt_pdf_endpoint
             r = requests.get(endpoint)
-            html = BeautifulSoup(r.text)
+            html = BeautifulSoup(r.text, features="html.parser")
             link = html.find("a", {"class":"user-action archive-user-action"})
             pdf_link = link['href'].replace('.html', '.pdf')
 
@@ -169,7 +169,7 @@ def male(nyt_id=None):
             row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
             endpoint = row.nyt_pdf_endpoint
             r = requests.get(endpoint)
-            html = BeautifulSoup(r.text)
+            html = BeautifulSoup(r.text, features="html.parser")
             link = html.find("a", {"class":"user-action archive-user-action"})
             pdf_link = link['href'].replace('.html', '.pdf')
 
@@ -178,7 +178,7 @@ def male(nyt_id=None):
             row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit_probably_male", Metadata.year > 1905, Metadata.year < 1925)).filter(Metadata.headline.like("%$%")).order_by(func.rand()).first()
             endpoint = row.nyt_pdf_endpoint
             r = requests.get(endpoint)
-            html = BeautifulSoup(r.text)
+            html = BeautifulSoup(r.text, features="html.parser")
             link = html.find("a", {"class":"user-action archive-user-action"})
             pdf_link = link['href'].replace('.html', '.pdf')
             
