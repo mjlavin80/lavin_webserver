@@ -19,6 +19,8 @@ from  sqlalchemy.sql.expression import func
 from flask_admin.form import rules
 import json
 from flask import Markup
+import requests
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -115,11 +117,21 @@ def index(nyt_id=None):
         if nyt_id != None:
             row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
             endpoint = row.nyt_pdf_endpoint
+            r = requests.get(endpoint)
+            html = BeautifulSoup(r.text)
+            link = html.find("a", {"class":"user-action archive-user-action"})
+            pdf_link = link['href'].replace('.html', '.pdf')
+
             return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint)
         else:
             row = Metadata().query.filter(and_(Metadata.year > 1905, Metadata.year < 1925)).filter(Metadata.review_type.like("needs_audit%")).filter(Metadata.page == 'BR1').order_by(func.rand()).first()
             #, 'BR2', 'BR3', 'BR4', 'BR5', 'BR6', 'BR7', 'BR8', 'BR9', 'BR10'
             endpoint = row.nyt_pdf_endpoint
+            r = requests.get(endpoint)
+            html = BeautifulSoup(r.text)
+            link = html.find("a", {"class":"user-action archive-user-action"})
+            pdf_link = link['href'].replace('.html', '.pdf')
+
             return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint) 
     else:
         return render_template("index.html", nyt_id=None, endpoint=None)
@@ -131,13 +143,23 @@ def female(nyt_id=None):
         if nyt_id != None:
             row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
             endpoint = row.nyt_pdf_endpoint
-            return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint)
+            r = requests.get(endpoint)
+            html = BeautifulSoup(r.text)
+            link = html.find("a", {"class":"user-action archive-user-action"})
+            pdf_link = link['href'].replace('.html', '.pdf')
+
+            return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint, pdf_link=pdf_link)
         else:
             row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit_probably_female", Metadata.year > 1905, Metadata.year < 1925)).order_by(func.rand()).first()
             endpoint = row.nyt_pdf_endpoint
-            return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint) 
+            r = requests.get(endpoint)
+            html = BeautifulSoup(r.text)
+            link = html.find("a", {"class":"user-action archive-user-action"})
+            pdf_link = link['href'].replace('.html', '.pdf')
+
+            return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint, pdf_link=pdf_link) 
     else:
-        return render_template("index.html", nyt_id=None, endpoint=None)
+        return render_template("index.html", nyt_id=None, endpoint=None, pdf_link=None)
 
 @app.route("/m")
 @app.route("/m/<nyt_id>")
@@ -146,13 +168,23 @@ def male(nyt_id=None):
         if nyt_id != None:
             row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
             endpoint = row.nyt_pdf_endpoint
-            return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint)
+            r = requests.get(endpoint)
+            html = BeautifulSoup(r.text)
+            link = html.find("a", {"class":"user-action archive-user-action"})
+            pdf_link = link['href'].replace('.html', '.pdf')
+
+            return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint, pdf_link=pdf_link)
         else:
             row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit_probably_male", Metadata.year > 1905, Metadata.year < 1925)).filter(Metadata.headline.like("%$%")).order_by(func.rand()).first()
             endpoint = row.nyt_pdf_endpoint
-            return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint) 
+            r = requests.get(endpoint)
+            html = BeautifulSoup(r.text)
+            link = html.find("a", {"class":"user-action archive-user-action"})
+            pdf_link = link['href'].replace('.html', '.pdf')
+            
+            return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint, pdf_link=pdf_link) 
     else:
-        return render_template("index.html", nyt_id=None, endpoint=None)
+        return render_template("index.html", nyt_id=None, endpoint=None, pdf_link=None)
 
 @app.route("/update_meta", methods=["GET", "POST"])
 @app.route("/update_meta/<nyt_id>", methods=["GET", "POST"])
