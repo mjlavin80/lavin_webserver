@@ -124,8 +124,8 @@ def index(nyt_id=None):
 
             return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint, pdf_link=pdf_link)
         else:
-            row = Metadata().query.filter(and_(Metadata.year > 1905, Metadata.year < 1925, Metadata.year != 1923)).filter(Metadata.review_type.like("needs_audit%")).filter(Metadata.page == 'BR1').order_by(func.rand()).first()
-            #, 'BR2', 'BR3', 'BR4', 'BR5', 'BR6', 'BR7', 'BR8', 'BR9', 'BR10'
+            row = Metadata().query.filter(and_(Metadata.year > 1905, Metadata.year < 1923)).filter(Metadata.review_type.like("needs_audit%")).filter(Metadata.page == 'BR2').order_by(func.rand()).first()
+            # BR1, 'BR2', 'BR3', 'BR4', 'BR5', 'BR6', 'BR7', 'BR8', 'BR9', 'BR10'
             endpoint = row.nyt_pdf_endpoint
             r = requests.get(endpoint)
             html = BeautifulSoup(r.text, features="html.parser")
