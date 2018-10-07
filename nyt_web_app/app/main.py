@@ -153,7 +153,7 @@ def female(nyt_id=None):
 
             return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint, pdf_link=pdf_link)
         else:
-            row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit_probably_female", Metadata.year > 1905, Metadata.year < 1925)).order_by(func.rand()).one_or_none()
+            row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit_probably_female", Metadata.year > 1905, Metadata.year < 1925)).order_by(func.rand()).first()
             endpoint = row.nyt_pdf_endpoint
             r = requests.get(endpoint)
             html = BeautifulSoup(r.text, features="html.parser")
