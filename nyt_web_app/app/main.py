@@ -153,7 +153,10 @@ def female(nyt_id=None):
 
             return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint, pdf_link=pdf_link)
         else:
-            row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit_probably_female", Metadata.year > 1905, Metadata.year < 1925)).order_by(func.rand()).first()
+            row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit_probably_female", Metadata.year > 1905, Metadata.year < 1925)).order_by(func.rand()).all()
+            pages = ['BR1', 'BR2', 'BR3', 'BR4', 'BR5', 'BR6', 'BR7', 'BR8', 'BR9', 'BR10']
+            row = [i for i in row if i.page in pages]
+            row = row[0]
             endpoint = row.nyt_pdf_endpoint
             r = requests.get(endpoint)
             html = BeautifulSoup(r.text, features="html.parser")
