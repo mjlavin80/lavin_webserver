@@ -1,4 +1,4 @@
-from flask.ext.wtf import Form
+from flask_wtf import Form
 from wtforms import TextField, PasswordField, SelectField, TextAreaField, SubmitField, validators, widgets
 from application.models import *
 from wtforms_alchemy import ModelFieldList, model_form_factory
