@@ -25,6 +25,7 @@ services:
       - mtb_spring_2018
       - mtb_fall_2018
       - dh_fall_2018
+      - pdc_spring_2019
 
   flask_base:
     build: ./flaskbase
