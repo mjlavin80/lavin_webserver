@@ -1,5 +1,5 @@
 mysql-python
-sqlalchemy==1.2.0b3
+sqlalchemy
 Flask
 Flask-SQLAlchemy
 Flask-WTF
