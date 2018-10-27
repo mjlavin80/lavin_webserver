@@ -31,6 +31,11 @@ services:
     container_name: flask_empty
     image: lavinflaskbase
 
+  flask_base_2019:
+    build: ./flaskbase-2019
+    container_name: flask_empty_2019
+    image: lavinflaskbase_2019
+
   faculty_activity:
     build: ./faculty-activity
     container_name: faculty_activity
@@ -118,3 +123,12 @@ services:
       - ./courses/dh_fall_2018/app/static:/app/static
     links:
       - flask_base
+
+  pdc_spring_2019:
+    build: ./courses/pdc_spring_2019
+    container_name: pdc_spring_2019
+    volumes:
+      - ./courses/pdc_spring_2019/app/templates:/app/templates
+      - ./courses/pdc_spring_2019/app/static:/app/static
+    links:
+      - flask_base_2019
