@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+<h3>Required Purchase</h3>
+<p>You must purchase a textbook to do this reading; it is not available online. Below is a list of required textbooks.</p>
+
+
+{% for policy in book_policy %}
+<div class="policy">
+    <h4>{{ policy.title }}</h4>
+    <p>{{ policy.description|safe }}</p>
+
+</div>
+{% endfor %}
+
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}
