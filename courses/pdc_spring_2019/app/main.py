@@ -9,7 +9,7 @@ from application.form_processors import *
 from flask_login import login_required
 from flask_login import LoginManager, login_user, logout_user, current_user
 from flask_migrate import Migrate
-from flask.ext.bcrypt import Bcrypt
+from flask_bcrypt import Bcrypt
 from flask_admin.base import MenuLink
 from wtforms.fields import TextAreaField
 from flask_github import GitHub
