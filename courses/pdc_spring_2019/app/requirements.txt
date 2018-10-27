@@ -1,8 +1,8 @@
-mysql-python
-Flask==0.10.1
+pymysql
 sqlalchemy
-Flask-SQLAlchemy==1.0
-Flask-WTF==0.9.3
+Flask
+Flask-SQLAlchemy
+Flask-WTF
 Flask-Script
 Flask-Migrate
 simplejson
