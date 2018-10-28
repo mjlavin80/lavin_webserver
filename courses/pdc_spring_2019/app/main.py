@@ -1,8 +1,8 @@
-from flask import Flask, render_template, redirect, url_for, send_from_directory, request, flash, g, session
-from flask_admin import Admin, AdminIndexView, BaseView, expose
-from flask_admin.contrib.sqla import ModelView
 import os
+from flask import Flask, render_template, redirect, url_for, send_from_directory, request, flash, g, session
+from flask_admin import Admin
 from application.models import *
+from application.user_controls import *
 from application import db
 from application.forms import *
 from application.form_processors import *
@@ -10,8 +10,6 @@ from flask_login import login_required
 from flask_login import LoginManager, login_user, logout_user, current_user
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
-from flask_admin.base import MenuLink
-from wtforms.fields import TextAreaField
 from flask_github import GitHub
 from config import GITHUB_ADMIN, TIMELINE_URL, ASANA_CODE, ASANA_PROJECT_ID
 from sqlalchemy.sql import and_
@@ -25,62 +23,15 @@ bcrypt = Bcrypt(app)
 # setup github-flask
 github = GitHub(app)
 
-
 #ends session so there's no mysql timeout
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     db.session.remove()
 
-class MyAdminIndexView(AdminIndexView):
-    @expose('/')
-    def index(self):
-        try:
-            current_user.is_admin == True
-            return self.render('admin/index.html')
-        except:
-            return redirect(url_for('status', message="unauthorized"))
-
-# Create menu links classes with reloaded accessible
-class AuthenticatedMenuLink(MenuLink):
-    def is_accessible(self):
-        return current_user.is_authenticated
-
-# Create customized model view classes
-class ModelViewUser(ModelView):
-    column_exclude_list = ('password')
-    can_create = False
-    def on_form_prefill(self, form, id):
-        form.password.data = '[current password hidden]'
-    def on_model_change(self, form, User, is_created=False):
-        a = b.hashpw(form.password.data.encode('utf8'), b.gensalt())
-        AdminUser.password = a
-    def is_accessible(self):
-        if current_user.is_authenticated and current_user.is_admin:
-            return current_user.is_authenticated
-    def inaccessible_callback(self, name, **kwargs):
-        # redirect to login page if user doesn't have access
-        return redirect(url_for('login'))
-
-class ModelViewAdmin(ModelView):
-    column_formatters = dict(course_description=lambda v, c, m, p: m.course_description[:25]+ " ...", description=lambda v, c, m, p: m.description[:25]+ " ...")
-    form_overrides = dict(description=TextAreaField, course_description=TextAreaField)
-
-    form_widget_args = dict(description=dict(rows=10), course_description=dict(rows=10))
-    def is_accessible(self):
-        if current_user.is_authenticated and current_user.is_admin:
-            return current_user.is_authenticated
-    def inaccessible_callback(self, name, **kwargs):
-        # redirect to login page if user doesn't have access
-        return redirect(url_for('login'))
-
 admin = Admin(app, name='Dashboard', template_mode='bootstrap3', index_view=MyAdminIndexView())
 
-# custom view for readings
-class ReadingViewAdmin(ModelViewAdmin):
-    column_filters = ('last_name', 'public', 'link')
-
 # Add administrative views here
-admin.add_view(ModelViewAdmin(User, db.session))
+admin.add_view(ModelViewAdmin(UserProfile, db.session))
 admin.add_view(ReadingViewAdmin(Reading, db.session))
 admin.add_view(ModelViewAdmin(Assignment, db.session))
 admin.add_view(ModelViewAdmin(Activity, db.session))
@@ -88,6 +39,8 @@ admin.add_view(ModelViewAdmin(Day, db.session))
 admin.add_view(ModelViewAdmin(Week, db.session))
 admin.add_view(ModelViewAdmin(Basics, db.session))
 admin.add_view(ModelViewAdmin(Policy, db.session))
+admin.add_view(ModelViewUser(Dataset, db.session))
+
 
 #required user loader method
 login_manager = LoginManager()
@@ -102,7 +55,7 @@ def unauthorized():
 
 @login_manager.user_loader
 def load_user(user_id):
-    return AdminUser.query.get(user_id)
+    return UserProfile.query.get(user_id)
 
 #helper function for decorator to pass global info to templates
 def generate_site_data():
@@ -367,31 +320,34 @@ def logout():
 
 @app.route('/status')
 def status(message=""):
+    #need to check if github username is in user_profile
+    user = False
     try:
         c_u = github.get('user')
-
-        if str(c_u['login']) == str(GITHUB_ADMIN):
-            user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
-            user.authenticated = True
-            db.session.add(user)
-            db.session.commit()
-            login_user(user, force=True)
+        user = UserProfile.query.filter(UserProfile.username==c_u['login']).one_or_none()
     except:
-        pass
-    if message=="":
-        if g.user:
-            message="in"
-        else:
-            message="out"
+        message="out"
+        return render_template('status.html', message=message)
+    if user: 
+        user.authenticated = True
+        db.session.add(user)
+        db.session.commit()
+        login_user(user, force=True)
+        message="in"
+    else:
+        message="unauthorized"
+    
     #for debugging locally
-    """
-    user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
-    user.authenticated = True
-    db.session.add(user)
-    db.session.commit()
-    login_user(user, force=True)
-    message="in"
-    """
+    
+    # user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
+    # user.authenticated = True
+    # db.session.add(user)
+    # db.session.commit()
+    # login_user(user, force=True)
+    # message="in"
+
+    # end local debugging block
+    
     return render_template('status.html', message=message)
 
 @app.errorhandler(404)
@@ -411,6 +367,6 @@ db.init_app(app)
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 80))
     #for production
-    #app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port)
     #for dev
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    #app.run(host='0.0.0.0', debug=True, port=5000)

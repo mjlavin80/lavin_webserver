@@ -10,12 +10,6 @@ class CKTextAreaWidget(widgets.TextArea):
 class CKTextAreaField(fields.TextAreaField):
     widget = CKTextAreaWidget()
 
-
-class User(db.Model):
-    __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(200))
-
 class GithubToken(db.Model):
     __tablename__ = 'tokens'
 
@@ -25,14 +19,13 @@ class GithubToken(db.Model):
     def __init__(self, github_access_token):
         self.github_access_token = github_access_token
 
-class AdminUser(db.Model):
+class UserProfile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(250), index=True, unique=True)
     is_admin = db.Column(db.Boolean, default=True)
     profile_image = db.Column(db.String(250), index=True, unique=False)
     display_name = db.Column(db.String(250), index=True, unique=True)
     email = db.Column(db.String(250), index=True, unique=True)
-    password = db.Column(db.String(500))
     authenticated = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
@@ -75,14 +68,14 @@ class Week(db.Model):
 
 class Policy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
     public = db.Column(db.String(128))
     title = db.Column(db.String(128))
     description = db.Column(db.String(9999))
 
 class Assignment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
     public = db.Column(db.String(128))
     title = db.Column(db.String(128), nullable=False)
     submit_instructions = db.Column(db.String(128), nullable=False)
@@ -96,7 +89,7 @@ class Assignment(db.Model):
 
 class Reading(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
     public = db.Column(db.String(128), nullable=False)
     last_name = db.Column(db.String(50))
     first_name = db.Column(db.String(50))
@@ -114,7 +107,7 @@ class Reading(db.Model):
 
 class Activity(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
     public = db.Column(db.String(128), nullable=False)
     title = db.Column(db.String(500), nullable=False)
     description = db.Column(db.String(9999),info={'widget': CKTextAreaWidget()}, nullable=False)
@@ -125,9 +118,20 @@ class Activity(db.Model):
     def __repr__(self):
         return '<Activity %r %r >' % (self.link, self.description)
 
+class Dataset(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
+    lib_id = db.Column(db.String(128))
+    public = db.Column(db.String(128), nullable=False)
+    title = db.Column(db.String(500), nullable=False)
+    
+
+    def __repr__(self):
+        return '<Dataset %r %r >' % (self.link, self.title)
+
 class Collection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
     title = db.Column(db.String(999), nullable=False)
     public = db.Column(db.String(128), nullable=False)
 
@@ -140,7 +144,7 @@ class CollectionItems(db.Model):
 
 class Basics(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
     instructor = db.Column(db.String(128))
     office = db.Column(db.String(128))
     office_hours = db.Column(db.String(128))
