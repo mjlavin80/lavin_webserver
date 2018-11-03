@@ -16,3 +16,4 @@ requests[security]
 github-flask
 pandas
 asana
+requests
