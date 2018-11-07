@@ -3,17 +3,17 @@
   <title type="text">Feed One</title>
   <id>urn:uuid:2ae5ada5-f205-310d-9478-55041461783a</id>
   <updated>2017-12-27T00:00:00Z</updated>
-  <link href="http://matthew-lavin.com/blog/" />
-  <link href="http://matthew-lavin.com/blog/feed.xml" rel="self" />
+  <link href="https://matthew-lavin.com/blog/" />
+  <link href="https://matthew-lavin.com/blog/feed.xml" rel="self" />
   <author>
     <name></name>
   </author>
   <generator uri="https://github.com/ajdavis/lektor-atom" version="0.2">Lektor Atom Plugin</generator>
-  <entry xml:base="http://matthew-lavin.com/blog/terms-and-conditions/">
+  <entry xml:base="https://matthew-lavin.com/blog/terms-and-conditions/">
     <title type="text">Terms and Conditions for a Culture of Open Data</title>
     <id>urn:uuid:63ca0ecb-dfca-35be-b5d6-af085d365f85</id>
     <updated>2017-12-27T00:00:00Z</updated>
-    <link href="http://matthew-lavin.com/blog/terms-and-conditions/" />
+    <link href="https://matthew-lavin.com/blog/terms-and-conditions/" />
     <author>
       <name>Matt Lavin</name>
     </author>
@@ -43,14 +43,13 @@
 &lt;/ul&gt;
 &lt;p&gt;Answers to some or all of these questions may be online somewhere. I looked on the MLA's website and didn't find them. I would have hoped to see them articulated or linked in the FAQ section of the MLA International Bibliography.&lt;/p&gt;
 &lt;p&gt;Finally, I would raise the question of how we can best engage with these questions non-adversarially, or at least less adverserially. Past mistakes aside, I believe that most of us want the same thing: a shared asset that benefits MLA members and facilitates a better understanding of our field(s) of study. I can't speak to what has gone on behind the scenes, and I wish to express only respect for anyone who feels that my call for more openness is an attack of any kind. So many people have put so much effort into making the MLA International Bibliography what it is today, and Andrew's eagerness to use the database for his scholarship can be regarded as a testament to that fact.&lt;/p&gt;
-&lt;p&gt;&lt;script async src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;&lt;/p&gt;
-</content>
+&lt;script async src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;</content>
   </entry>
-  <entry xml:base="http://matthew-lavin.com/blog/book-reviews-as-data/">
+  <entry xml:base="https://matthew-lavin.com/blog/book-reviews-as-data/">
     <title type="text">Book Reviews as Data</title>
     <id>urn:uuid:0d758219-d966-31e7-8b02-e72edd720594</id>
     <updated>2017-10-03T00:00:00Z</updated>
-    <link href="http://matthew-lavin.com/blog/book-reviews-as-data/" />
+    <link href="https://matthew-lavin.com/blog/book-reviews-as-data/" />
     <author>
       <name>Matt Lavin</name>
     </author>
@@ -321,11 +320,11 @@ might in turn prevent someone from taking a measurement or consulting an outside
 &lt;div class=&quot;note_entry&quot; name=&quot;note_9&quot;&gt;9. Drucker, &quot;Humanistic Theory and Digital Scholarship,&quot; 86.&lt;/div&gt;
 &lt;div class=&quot;note_entry&quot; name=&quot;note_10&quot;&gt;10. &quot;Overview,&quot; press materials for &quot;Raw Data Is an Oxymoron.&quot;&lt;/div&gt;</content>
   </entry>
-  <entry xml:base="http://matthew-lavin.com/blog/computational-cather/">
+  <entry xml:base="https://matthew-lavin.com/blog/computational-cather/">
     <title type="text">Computational Methods in Authorship Studies</title>
     <id>urn:uuid:d8c0ff25-c5cd-3599-b2a0-4f5ab0508d55</id>
     <updated>2017-09-06T00:00:00Z</updated>
-    <link href="http://matthew-lavin.com/blog/computational-cather/" />
+    <link href="https://matthew-lavin.com/blog/computational-cather/" />
     <author>
       <name>Matt Lavin</name>
     </author>
@@ -548,11 +547,11 @@ share data. These practices need to become prerequisites for computational human
 effective rallying point for computational book history/bibliography.&lt;/p&gt;
 </content>
   </entry>
-  <entry xml:base="http://matthew-lavin.com/blog/neologophobia/">
+  <entry xml:base="https://matthew-lavin.com/blog/neologophobia/">
     <title type="text">Diagnosis: Neologophobia</title>
     <id>urn:uuid:f683ee93-e34a-394e-a62c-6f848991c5f8</id>
     <updated>2017-06-01T00:00:00Z</updated>
-    <link href="http://matthew-lavin.com/blog/neologophobia/" />
+    <link href="https://matthew-lavin.com/blog/neologophobia/" />
     <author>
       <name>Matt Lavin</name>
     </author>
@@ -870,11 +869,11 @@ accuracy seems stable, I'll start looking at the next set of outliers, whose sta
 or cultural significance.&lt;/p&gt;
 </content>
   </entry>
-  <entry xml:base="http://matthew-lavin.com/blog/the-alice-problem/">
+  <entry xml:base="https://matthew-lavin.com/blog/the-alice-problem/">
     <title type="text">The Alice Problem</title>
     <id>urn:uuid:ad784a86-d690-30a9-a1d9-cc8da4fb43eb</id>
     <updated>2016-12-15T00:00:00Z</updated>
-    <link href="http://matthew-lavin.com/blog/the-alice-problem/" />
+    <link href="https://matthew-lavin.com/blog/the-alice-problem/" />
     <author>
       <name>Matt Lavin</name>
     </author>
@@ -1512,11 +1511,11 @@ The real challenge is taking the time to share one's results with others. This i
  &lt;em&gt;Children's Literature Association Quarterly&lt;/em&gt;, 35.3 (Fall 2010): 243-254.
 &lt;/div&gt;</content>
   </entry>
-  <entry xml:base="http://matthew-lavin.com/blog/about/">
+  <entry xml:base="https://matthew-lavin.com/blog/about/">
     <title type="text">About this Blog-like Thing</title>
     <id>urn:uuid:62583394-e8e7-31f2-b90f-062dfaaae20f</id>
     <updated>2016-09-01T00:00:00Z</updated>
-    <link href="http://matthew-lavin.com/blog/about/" />
+    <link href="https://matthew-lavin.com/blog/about/" />
     <author>
       <name>Matt Lavin</name>
     </author>
