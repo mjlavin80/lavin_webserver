@@ -10,6 +10,11 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 70px;
+  background-image: linear-gradient(to right, #0D0D0D, #353535);
+
+}
+div.row>div.col-md-8 {
+  background-color: #FEFEFE;
 }
 
 .footer {
