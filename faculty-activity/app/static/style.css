@@ -17,6 +17,9 @@ body {
 #contentholder{
 
   background-color: #FEFEFE;
+  min-height: 70vh;
+  padding: 25px;
+  border-radius: 9px;
 
 }
 
