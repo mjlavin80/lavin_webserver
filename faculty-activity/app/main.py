@@ -70,6 +70,8 @@ def cv():
 @app.route("/activity/<year>", methods=["GET", "POST"])
 def activity(year):
     form = LoginForm()
+    if year == 'renewal':
+        year = '2018'
     #get data and pass along
     data = Portfolio.query.filter(Portfolio.date == year).order_by(Portfolio.sort_order).all()
     return render_template("portfolio.html", data=data, year=year, form=form)
