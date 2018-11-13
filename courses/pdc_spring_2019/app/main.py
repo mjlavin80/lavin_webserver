@@ -98,6 +98,97 @@ def calendar():
     weeks = Week.query.order_by(Week.week_number).all()
     return render_template("calendar.html", weeks=weeks)
 
+@app.route("/timeline")
+@app.route("/timeline/<row>")
+@include_site_data
+def timeline(row=None):
+    if row:
+        count = 0
+        df = pd.DataFrame.from_csv(TIMELINE_URL)
+        for j in df.iterrows():
+            count +=1
+            if int(row) == count:
+                i = []
+                for m in range(7):
+                    try:
+                        j[1][m] = int(j[1][m])
+                    except:
+                        pass
+                for k in j[1]:
+                    value = str(k).replace("\n", " ").replace("\t", " ")
+                    if value =="nan":
+                        value = ""
+                    i.append(value)
+                if i[13] == "":
+                    i[13] == "#"
+
+        return render_template("timeline_row.html", essay=i[13])
+    else:
+        return render_template("timeline.html")
+
+@app.route("/timelinedata")
+@include_site_data
+def timelinedata():
+
+    df = pd.DataFrame.from_csv(TIMELINE_URL)
+
+    timeline = """
+    {
+        $$$$title$$$$: {
+                $$$$text$$$$: {
+                    $$$$headline$$$$: $$$$Making the Book$$$$,
+                    $$$$text$$$$:     $$$$A Digital Timeline of Events Related to the History of the Book.$$$$
+                },
+                $$$$media$$$$: {
+                    $$$$url$$$$: $$$$https://upload.wikimedia.org/wikipedia/commons/d/de/Albion_Press%2C_1830s_woodcut_by_George_Baxter.jpg$$$$,
+                    $$$$thumb$$$$: $$$$https://upload.wikimedia.org/wikipedia/commons/d/de/Albion_Press%2C_1830s_woodcut_by_George_Baxter.jpg$$$$
+                }
+        },
+        $$$$events$$$$: [
+    """
+    count = 1
+    for j in df.iterrows():
+        i = []
+        for m in range(7):
+            try:
+                j[1][m] = int(j[1][m])
+            except:
+                pass
+        for k in j[1]:
+            value = str(k).replace("\n", " ").replace("\t", " ")
+            if value =="nan":
+                value = ""
+            i.append(value)
+        if i[13] == "":
+            i[13] == "#"
+        #i[20]
+        combo = i[11] + " <a target=\$$$$blank\$$$$ href=\$$$$" + "timeline/" + str(count) +"\$$$$>View Full Essay</a>"
+        timeline += "{\n $$$$start_date$$$$: { \n $$$$year$$$$: $$$$"+i[1]+"$$$$,\n $$$$month$$$$: $$$$"+i[1]+"$$$$ },"
+
+        if i[5] != "":
+            timeline += "\n$$$$end_date$$$$: { \n $$$$year$$$$: $$$$"+i[5]
+        else:
+            timeline += "\n$$$$end_date$$$$: { \n $$$$year$$$$: $$$$"+i[1]
+        if i[6] != "":
+            timeline += "$$$$,\n $$$$month$$$$: $$$$"+i[6]+"$$$$ },"
+        else:
+            timeline += "$$$$,\n $$$$month$$$$: $$$$"+i[2]+"$$$$ },"
+
+        timeline += "\n$$$$display_date$$$$: $$$$"+ i[9]+"$$$$,"
+        timeline += "\n$$$$media$$$$: { \n $$$$url$$$$: $$$$"+ i[14]+"$$$$ ,\n $$$$credit$$$$: $$$$"+ i[15]+"$$$$ ,\n $$$$caption$$$$: $$$$"+i[16]+"$$$$,\n $$$$thumb$$$$: $$$$"+i[14]+"$$$$ },"
+        timeline += "\n$$$$text$$$$: { \n $$$$headline$$$$: $$$$"+ i[10]+"$$$$ ,\n $$$$text$$$$: $$$$" + combo +"$$$$ },"
+        timeline += "\n$$$$type$$$$: $$$$overview$$$$ \n },"
+        count +=1
+    timeline = timeline[:-1]
+    timeline += """
+    ]
+    }
+    """
+    timeline = timeline.replace("\"", "&#34;")
+    timeline = timeline.replace("\'", "&#39;")
+    timeline = timeline.replace("$$$$", "\"")
+
+    return timeline
 
 @app.route("/planner")
 @include_site_data
@@ -447,12 +538,12 @@ def status(message=""):
     
     #for debugging locally
     
-    # user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
-    # user.authenticated = True
-    # db.session.add(user)
-    # db.session.commit()
-    # login_user(user, force=True)
-    # message="in"
+    user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
+    user.authenticated = True
+    db.session.add(user)
+    db.session.commit()
+    login_user(user, force=True)
+    message="in"
 
     # end local debugging block
     
@@ -475,6 +566,6 @@ db.init_app(app)
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 80))
     #for production
-    app.run(host='0.0.0.0', port=port)
+    #app.run(host='0.0.0.0', port=port)
     #for dev
-    #app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)

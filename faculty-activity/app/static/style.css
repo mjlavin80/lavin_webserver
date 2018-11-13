@@ -13,8 +13,11 @@ body {
   background-image: linear-gradient(to right, #0D0D0D, #353535);
 
 }
-.row {
+
+#contentholder{
+
   background-color: #FEFEFE;
+
 }
 
 .footer {
