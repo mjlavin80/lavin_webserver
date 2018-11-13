@@ -15,9 +15,11 @@ import json
 app = Flask(__name__)
 
 app.secret_key = 'gskkrkemensbagakdoeksmss'
-app.config['RECAPTCHA_USE_SSL'] = False
-app.config['RECAPTCHA_PUBLIC_KEY'] = RECAPTCHA_PUBLIC_KEY
-app.config['RECAPTCHA_PRIVATE_KEY'] = RECAPTCHA_PRIVATE_KEY
+app.config.from_pyfile('config.py')
+
+#app.config['RECAPTCHA_USE_SSL'] = False
+#app.config['RECAPTCHA_PUBLIC_KEY'] = RECAPTCHA_PUBLIC_KEY
+#app.config['RECAPTCHA_PRIVATE_KEY'] = RECAPTCHA_PRIVATE_KEY
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
@@ -115,7 +117,7 @@ db.init_app(app)
 
 if __name__ == "__main__":
     #for local dev
-    #app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
 
     #for production
-    app.run(host='0.0.0.0', debug=True, port=80)
+    #app.run(host='0.0.0.0', debug=True, port=80)
