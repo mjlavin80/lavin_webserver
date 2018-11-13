@@ -78,7 +78,6 @@ def login():
     if form.validate_on_submit():
         u = form.data['username']
         user = User().query.filter(User.username==u).one_or_none()
-        print(user)
         if user:
             #check password
             next = request.args.get('next')

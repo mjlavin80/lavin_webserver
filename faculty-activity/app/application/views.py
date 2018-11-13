@@ -44,12 +44,11 @@ class CustomBaseView(AdminIndexView):
                     db.session.commit()
                     login_user(user, remember=True, force=True)
                     next = request.args.get('next')
-                    print("You have successfully logged in")
                     return redirect(next or url_for('admin.admin_index'))
                 else:
-                    print "bad password"
+                    pass
             else:
-                print "user mismatch"
+                pass
         return self.render('admin/index.html', form=form)
     @expose('/logout')
     def logout(self):
