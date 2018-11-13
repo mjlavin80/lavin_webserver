@@ -14,7 +14,7 @@
   <h2>You are logged in</h2>
   <p><big><a href="{{url_for('logout')}}">Log out</a></big></p>
   {% else %}
-  <div class="col-sm-6">
+  <div id="contentholder" class="col-sm-6">
     <h2>You are logged out</h2>
     <p><big>Fill in the following information to log in</big></p>
   <form action="{{ url_for('login') }}" method=post>
