@@ -2,25 +2,24 @@ from datetime import date, timedelta
 from application import *
 from application.models import Week, Day
 
-start = date(2018, 8, 26)
-end = date(2018, 12, 14)
+start = date(2019, 1, 6)
+end = date(2019, 4, 19)
 topics = [
-"Are Close and Distant Reading Equivalent?",
-"Is Computational Analysis a Subset of Logical Positivism?",
-"What is an Author?",
-"Are Topic Models Unobtrusive Measures?",
-"Is Style the Answer to Everything?",
-"Do Computational Methods Find Stereotypes or Make Them?",
-"Research Design",
-"Data and Corpora",
-"Text Processing and its Implications",
-"TF-IDF and Clustering",
-"Collocations and Word2Vec",
-"Logistic and Linear Regression",
-"NER and Place Name Recognition",
-"Textual Networks",
-"Visualizing Textual Material",
-"Text Data and the Visual Page"
+"Web Design Principles",
+"Web Design Principles",
+"Web Design Principles",
+"Web Design Principles",
+"Web Design Principles",
+"Data-Driven Design Principles",
+"Data-Driven Design Principles",
+"Data-Driven Design Principles",
+"Spring Break",
+"Data-Driven Design Principles",
+"Data-Driven Design Principles",
+"Visualization Case Studies",
+"Visualization Case Studies",
+"Visualization Case Studies",
+"Visualization Case Studies",
 ]
 
 delta = start - end
