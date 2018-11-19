@@ -2,7 +2,7 @@ from datetime import date, timedelta
 from application import *
 from application.models import Week, Day
 
-start = date(2019, 1, 6)
+start = date(2019, 1, 7)
 end = date(2019, 4, 19)
 topics = [
 "Web Design Principles",
@@ -31,7 +31,9 @@ for i in range(abs(delta.days + 1)):
     z = a.strftime('%A, %B %d, %Y')
 
 
-    if "Thursday" in z:
+    if "Monday" in z:
+        week.append(z)
+    if "Wednesday" in z:
         week.append(z)
     if "Sunday" in z:
         classdays.append(week)
