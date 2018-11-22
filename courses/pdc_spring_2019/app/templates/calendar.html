@@ -10,15 +10,16 @@
   <hr>
 
 
+<!-- for week (1)-->
 {% for week in weeks|sort(attribute='week_number') %}
 <h4>{{ week.week_number }}: {{ week.week_topic }}</h4>
 
+<!-- for day (2) -->
 {% for day in week.days|sort(attribute='name') %}
 <div class="list-group">
-<div class="list-group-item active">
-{{ day.name }}</div>
+<div class="list-group-item active">{{ day.name }}</div>
 
-{% if day.readings|length != 0 %}
+{% if day.assignments|length != 0 %}
 {% for ass in day.assignments|sort(attribute='id') %}
 <div class="list-group-item assignment">Due by the start of class: <a class="assignment" href="/assignments/{{ass.link_title}}">{{ass.title}}</a></div>
 {% endfor %}
@@ -42,9 +43,8 @@
 
 {% if day.activities|length != 0 %}
 
-<div class="list-group-item"><h4 class="list-group-item-heading">Classwork and Reminders:</h4></div></div>
+<div class="list-group-item"><h4 class="list-group-item-heading">Classwork and Reminders:</h4></div>
 <div class="list-group-item activity">
-
 {% for activity in day.activities|sort(attribute='order') %}
 {% if activity.public == "True" %}
 <p class="bibl">{{activity.title|safe}} ... <a href="activities/{{activity.id}}"><strong>Read More</strong></a></p>
@@ -53,9 +53,12 @@
 {% endfor %}
 </div>
 {% endif %}
+
 </div>
+<!-- end 2 -->
 {% endfor %}
 
+<!-- end 1 -->
 {% endfor %}
 </div>
 
