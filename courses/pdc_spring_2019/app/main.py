@@ -526,6 +526,18 @@ def status(message=""):
         user = UserProfile.query.filter(UserProfile.username==c_u['login']).one_or_none()
     except:
         message="out"
+
+        #for debugging locally
+    
+        user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
+        user.authenticated = True
+        db.session.add(user)
+        db.session.commit()
+        login_user(user, force=True)
+        message="in"
+
+        # end local debugging block
+
         return render_template('status.html', message=message)
     if user: 
         user.authenticated = True
@@ -536,16 +548,7 @@ def status(message=""):
     else:
         message="unauthorized"
     
-    #for debugging locally
-    
-    user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
-    user.authenticated = True
-    db.session.add(user)
-    db.session.commit()
-    login_user(user, force=True)
-    message="in"
 
-    # end local debugging block
     
     return render_template('status.html', message=message)
 
