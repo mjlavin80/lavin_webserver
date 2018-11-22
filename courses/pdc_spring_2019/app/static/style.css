@@ -7,9 +7,20 @@ html {
   position: relative;
   min-height: 100%;
 }
+
 body {
-  /* Margin bottom by footer height */
-  /* margin-bottom: 70px; */
+  
+  background-image: linear-gradient(to right, #0D0D0D, #353535);
+
+}
+
+#contentholder{
+
+  background-color: #FEFEFE;
+  min-height: 70vh;
+  padding: 25px;
+  border-radius: 9px;
+
 }
 
 .footer {
