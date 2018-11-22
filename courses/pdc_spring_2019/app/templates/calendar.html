@@ -44,13 +44,16 @@
 {% for activity in day.activities|sort(attribute='order') %}
 {% if activity.public == "True" %}
 <p class="bibl">{{activity.title|safe}} ... <a href="activities/{{activity.id}}"><strong>Read More</strong></a></p>
+
 {% endif %}
+</div>
 {% endfor %}
 </div>
+
 {% endif %}
 
 {% endfor %}
-</div>
+
 {% endfor %}
 </div>
 {% endblock %}
