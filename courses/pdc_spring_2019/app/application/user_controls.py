@@ -3,7 +3,7 @@ from flask_login import current_user
 from flask_admin.base import MenuLink
 from flask_admin import AdminIndexView, expose
 from flask_admin.contrib.sqla import ModelView
-from wtforms.fields import TextAreaField
+from wtforms.fields import TextAreaField, CKTextAreaField
 from application import db
 
 # AdminView
