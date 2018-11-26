@@ -24,7 +24,8 @@ class AuthenticatedMenuLink(MenuLink):
 class ModelViewUser(ModelView):
     column_exclude_list = ('lib_id', 'public')
     form_excluded_columns = ('lib_id', 'public')
-    
+    form_overrides = dict(entry_blurb=CKTextAreaField, entry_essay=CKTextAreaField)
+
     #display only user's own content
     def is_owned(self, _id):
         model = db.session.query(self.model).filter(self.model.id == _id).one_or_none()
@@ -69,6 +70,7 @@ class ModelViewUser(ModelView):
     def is_accessible(self):
         if current_user.is_authenticated():
             return current_user.is_authenticated()
+
     def inaccessible_callback(self, name, **kwargs):
         # redirect to login page if user doesn't have access
         return redirect(url_for('status'))
