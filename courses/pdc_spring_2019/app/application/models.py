@@ -116,7 +116,7 @@ class Activity(db.Model):
     day_id = db.Column(db.Integer, db.ForeignKey('day.id'))
 
     def __repr__(self):
-        return '<Activity %r %r >' % (self.link, self.description)
+        return '<Activity %r %r >' % (self.link, self.title)
 
 class Dataset(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -125,9 +125,8 @@ class Dataset(db.Model):
     public = db.Column(db.String(128), nullable=False)
     title = db.Column(db.String(500), nullable=False)
     
-
     def __repr__(self):
-        return '<Dataset %r %r >' % (self.link, self.title)
+        return '<Dataset %r >' % self.title
 
 class Collection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -141,6 +140,31 @@ class CollectionItems(db.Model):
     target_table = db.Column(db.String(200), nullable=False)
     target_id = db.Column(db.Integer, nullable=False)
     order = db.Column(db.String(100), nullable=False)
+
+class TimelineEntry(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
+    public = db.Column(db.String(128), nullable=False)
+    headline = db.Column(db.String(500), nullable=False)
+    year = db.Column(db.Integer, nullable=False)
+    month = db.Column(db.Integer)
+    day = db.Column(db.Integer)
+    end_year = db.Column(db.Integer)
+    end_month = db.Column(db.Integer)
+    end_day = db.Column(db.Integer)
+    display_date = db.Column(db.String(128))
+    media = db.Column(db.String(500))
+    media_credit = db.Column(db.String(128))   
+    media_caption = db.Column(db.String(500))
+    media_thumbnail = db.Column(db.String(500))
+    entry_type = db.Column(db.String(128))
+    entry_group = db.Column(db.String(128))
+    background = db.Column(db.String(128))
+    entry_blurb = db.Column(db.String(9999),info={'widget': CKTextAreaWidget()}, nullable=False)
+    entry_essay = db.Column(db.String(9999),info={'widget': CKTextAreaWidget()}, nullable=False)
+
+    def __repr__(self):
+        return '<Timeline Entry %r >' % self.headline
 
 class Basics(db.Model):
     id = db.Column(db.Integer, primary_key=True)
