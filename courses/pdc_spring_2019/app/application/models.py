@@ -160,8 +160,8 @@ class TimelineEntry(db.Model):
     entry_type = db.Column(db.String(128))
     entry_group = db.Column(db.String(128))
     background = db.Column(db.String(128))
-    entry_blurb = db.Column(db.String(9999),info={'widget': CKTextAreaWidget()}, nullable=False)
-    entry_essay = db.Column(db.String(9999),info={'widget': CKTextAreaWidget()}, nullable=False)
+    entry_blurb = db.Column(db.String(4999),info={'widget': CKTextAreaWidget()}, nullable=False)
+    entry_essay = db.Column(db.String(4999),info={'widget': CKTextAreaWidget()}, nullable=False)
 
     def __repr__(self):
         return '<Timeline Entry %r >' % self.headline
