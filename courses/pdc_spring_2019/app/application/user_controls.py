@@ -3,7 +3,7 @@ from flask_login import current_user
 from flask_admin.base import MenuLink
 from flask_admin import AdminIndexView, expose
 from flask_admin.contrib.sqla import ModelView
-from wtforms.fields import TextAreaField, CKTextAreaField
+from wtforms.fields import TextAreaField
 from application import db
 
 # AdminView
@@ -24,7 +24,7 @@ class AuthenticatedMenuLink(MenuLink):
 class ModelViewUser(ModelView):
     column_exclude_list = ('lib_id', 'public')
     form_excluded_columns = ('lib_id', 'public')
-    form_overrides = dict(entry_blurb=CKTextAreaField, entry_essay=CKTextAreaField)
+    form_overrides = dict(entry_blurb=TextAreaField, entry_essay=TextAreaField)
 
     #display only user's own content
     def is_owned(self, _id):
