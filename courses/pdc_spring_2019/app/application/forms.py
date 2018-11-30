@@ -3,6 +3,8 @@ from wtforms import TextField, PasswordField, SelectField, TextAreaField, Submit
 from application.models import *
 from wtforms_alchemy import ModelFieldList, model_form_factory
 from wtforms.fields import FormField
+from wtforms.widgets import TextArea
+
 
 ModelForm = model_form_factory(Form)
 
@@ -28,3 +30,12 @@ class CreateCollection(ModelForm):
     class Meta:
         model = Collection
     public =  SelectField('Privacy', choices = [(1,"Private"), (2, "Public")], coerce=int)
+
+class CKEditor(TextArea):
+    def __call__(self, field, **kwargs):
+        c = kwargs.pop('class', '') or kwargs.pop('class_', '')
+        kwargs['class'] = u'%s %s' % ('ckeditor', c)
+        return super(CKEditor, self).__call__(field, **kwargs)
+
+class CKEditorField(TextAreaField):
+    widget = CKEditor()

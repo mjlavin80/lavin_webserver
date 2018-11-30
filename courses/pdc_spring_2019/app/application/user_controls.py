@@ -4,6 +4,7 @@ from flask_admin.base import MenuLink
 from flask_admin import AdminIndexView, expose
 from flask_admin.contrib.sqla import ModelView
 from wtforms.fields import TextAreaField
+from application.forms import CKEditor, CKEditorField
 from application import db
 
 # AdminView
@@ -24,8 +25,9 @@ class AuthenticatedMenuLink(MenuLink):
 class ModelViewUser(ModelView):
     column_exclude_list = ('lib_id', 'public')
     form_excluded_columns = ('lib_id', 'public')
-    form_overrides = dict(entry_blurb=TextAreaField, entry_essay=TextAreaField)
-
+    form_overrides = dict(entry_blurb=TextAreaField, entry_essay=CKEditorField)
+    edit_template = 'admin/model/custom_edit.html'
+    create_template = 'admin/model/custom_create.html'
     #display only user's own content
     def is_owned(self, _id):
         model = db.session.query(self.model).filter(self.model.id == _id).one_or_none()
