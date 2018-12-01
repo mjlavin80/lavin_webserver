@@ -56,7 +56,7 @@ class ModelViewUser(ModelView):
         except:
             pass
         try:
-            if model.custom_blog_path == "":
+            if model.custom_blog_path == "" or model.custom_blog_path == None:
                 if model.custom_blog_title != "":
                     model.custom_blog_path = quote(model.custom_blog_title.lower().replace(" ", "-"))
                 else:
@@ -126,7 +126,7 @@ class ModelViewAdmin(ModelView):
         except:
             pass
         try:
-            if model.custom_blog_path == "":
+            if model.custom_blog_path == "" or model.custom_blog_path == None:
                 if model.custom_blog_title != "":
                     model.custom_blog_path = quote(model.custom_blog_title.lower().replace(" ", "-"))
                 else:
