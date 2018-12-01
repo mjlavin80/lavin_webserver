@@ -81,6 +81,7 @@ class ModelViewBlog(ModelViewUser):
     column_hide_backrefs = False
     column_list = ('title', 'body', 'tags')
     form_overrides = dict(body=CKEditorField)
+    form_columns = ('title', 'pub_date', 'body', 'tags')
 
 class ModelViewAdmin(ModelView):
     column_formatters = dict(course_description=lambda v, c, m, p: m.course_description[:25]+ " ...", description=lambda v, c, m, p: m.description[:25]+ " ...")
