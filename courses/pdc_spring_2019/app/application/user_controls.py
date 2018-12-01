@@ -100,9 +100,9 @@ class ModelViewAdmin(ModelView):
     form_widget_args = dict(description=dict(rows=10), course_description=dict(rows=10))
     
     def on_model_change(self, form, model, is_created):
-        if not model.user_id:
+        if model.user_id == None:
             model.user_id = current_user.id
-        if not model.custom_blog_path:
+        if model.custom_blog_path == None:
             if model.custom_blog_title:
                 model.custom_blog_path = quote(custom_blog_title.lower().replace(" ", "-"))
             else:
