@@ -60,7 +60,7 @@ class ModelViewUser(ModelView):
                 if model.custom_blog_title != "":
                     model.custom_blog_path = quote(model.custom_blog_title.lower().replace(" ", "-"))
                 else:
-                    model.custom_blog_path = model.id
+                    model.custom_blog_path = model.username
         except:
             pass
         try:
@@ -121,6 +121,11 @@ class ModelViewAdmin(ModelView):
     
     def on_model_change(self, form, model, is_created):
         try:
+            if not model.custom_blog_title:
+                model.custom_blog_title = ""
+        except:
+            pass
+        try:
             if model.user_id == "":
                 model.user_id = current_user.id
         except:
@@ -130,7 +135,7 @@ class ModelViewAdmin(ModelView):
                 if model.custom_blog_title != "":
                     model.custom_blog_path = quote(model.custom_blog_title.lower().replace(" ", "-"))
                 else:
-                    model.custom_blog_path = model.id
+                    model.custom_blog_path = model.username
         except:
             pass
         try:
@@ -138,11 +143,7 @@ class ModelViewAdmin(ModelView):
                model.post_path = quote(model.title.lower().replace(" ", "-")) 
         except:
             pass
-        try:
-            if not model.custom_blog_title:
-                model.custom_blog_title = ""
-        except:
-            pass
+        
 
     def is_accessible(self):
         if current_user.is_authenticated() and current_user.is_admin:
