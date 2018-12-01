@@ -29,6 +29,7 @@ class UserProfile(db.Model):
     email = db.Column(db.String(250), index=True, unique=True)
     authenticated = db.Column(db.Boolean, default=False)
     custom_blog_title = db.Column(db.Text())
+    custom_blog_path = db.Column(db.String(512), nullable=False)
     approved = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
@@ -164,7 +165,7 @@ class TimelineEntry(db.Model):
     entry_type = db.Column(db.String(128))
     entry_group = db.Column(db.String(128))
     background = db.Column(db.String(128))
-    entry_blurb = db.Column(db.Text(), info={'widget': CKTextAreaWidget()}, nullable=False)
+    entry_teaser = db.Column(db.Text(), info={'widget': CKTextAreaWidget()}, nullable=False)
     entry_essay = db.Column(db.Text(), info={'widget': CKTextAreaWidget()}, nullable=False)
 
     def __repr__(self):
@@ -175,7 +176,9 @@ class BlogPost(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
     public = db.Column(db.String(128), nullable=False)
     title = db.Column(db.String(500), nullable=False)
+    post_path = db.Column(db.String(512), nullable=False)
     pub_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    teaser = path = db.Column(db.String(512))
     body = db.Column(db.Text(),info={'widget': CKTextAreaWidget()}, nullable=False)
     tags = db.relationship('Tag', secondary="tags_posts", backref=db.backref('tags', 
         lazy='dynamic'))

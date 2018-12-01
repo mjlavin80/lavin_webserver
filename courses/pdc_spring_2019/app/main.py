@@ -12,7 +12,8 @@ from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_github import GitHub
 from config import GITHUB_ADMIN, ASANA_CODE, ASANA_PROJECT_ID
-from sqlalchemy.sql import and_
+from sqlalchemy.sql import and_, or_
+from urllib.parse import quote
 import json, requests
 import datetime
 import pandas as pd
@@ -108,7 +109,6 @@ def timeline(entry_id=None):
         timeline_entry= TimelineEntry.query.filter(TimelineEntry.id == entry_id).one_or_none()
         return render_template("timeline_row.html", timeline_entry=timeline_entry)
     else:
-
         return render_template("timeline.html")
 
 @app.route("/timelinedata")
@@ -117,6 +117,46 @@ def timelinedata():
 
     timeline_rows = TimelineEntry.query.all()
     return render_template("timelinedata.json", timeline_rows=timeline_rows)
+
+@app.route("/blogs")
+@app.route("/blogs/")
+@app.route("/blogs/<blog_id>")
+@app.route("/blogs/<blog_id>/posts")
+@app.route("/blogs/<blog_id>/posts/")
+@app.route("/blogs/<blog_id>/posts/<post_id>")
+@include_site_data
+def blogs(blog_id=None, post_id=None):
+    # assume custom title, try to translate to user_id, if it fails treat blog id as a user id
+    if blog_id:
+        users = UserProfile.query.all()
+        custom_titles = []
+        #edit this to look for a path, not a title
+        for i in users:
+            try: 
+                url = quote(i.custom_blog_title.lower().replace(" ", "-"))
+                custom_titles.append((i.id, url))
+            except:
+                pass
+        custom_id = [i[0] for i in custom_titles if i[1] == blog_id]
+        if len(custom_id) > 0:
+            if post_id:
+                # look up by path or id
+
+                result = "custom blog, one post"
+            else:
+                all_posts = BlogPost.query.filter(BlogPost.user_id == custom_id[0]).all()
+                result = "custom blog, no post"
+        else:
+            if post_id:
+                # look up by path or id
+                result= "blog id, one post"
+            else:
+                all_posts = BlogPost.query.filter(BlogPost.user_id == blog_id).all()
+                result= "blog id, no post"
+
+        return result
+    else:
+        return "no blog selected"
 
 @app.route("/planner")
 @include_site_data
@@ -272,13 +312,6 @@ def readings():
     except:
         readings = []
     return render_template("readings.html", readings=readings)
-
-@app.route('/protected/<path:filename>')
-@include_site_data
-#login_required
-def protected(filename):
-    path = os.path.join(app.instance_path, 'protected')
-    return send_from_directory(path, filename)
 
 @app.route('/coming_soon')
 @include_site_data
