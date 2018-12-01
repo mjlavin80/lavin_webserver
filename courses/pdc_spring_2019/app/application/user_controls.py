@@ -68,6 +68,11 @@ class ModelViewUser(ModelView):
                 model.post_path = quote(model.title.lower().replace(" ", "-")) 
         except:
             pass
+        try:
+            if not model.custom_blog_title:
+                model.custom_blog_title = ""
+        except:
+            pass
 
     def on_form_prefill(self, form, id):
         if not self.is_owned(id):
@@ -131,6 +136,11 @@ class ModelViewAdmin(ModelView):
         try:
             if model.post_path == "":
                model.post_path = quote(model.title.lower().replace(" ", "-")) 
+        except:
+            pass
+        try:
+            if not model.custom_blog_title:
+                model.custom_blog_title = ""
         except:
             pass
 
