@@ -28,6 +28,8 @@ class UserProfile(db.Model):
     display_name = db.Column(db.String(250), index=True, unique=True)
     email = db.Column(db.String(250), index=True, unique=True)
     authenticated = db.Column(db.Boolean, default=False)
+    custom_blog_title = db.Column(db.String(500), index=True, unique=True)
+    approved = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return '<User %r>' % self.username
@@ -72,7 +74,7 @@ class Policy(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
     public = db.Column(db.String(128))
     title = db.Column(db.String(128))
-    description = db.Column(db.String(9999))
+    description = db.Column(db.Text(),info={'widget': CKTextAreaWidget()}, nullable=False)
 
 class Assignment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -81,7 +83,7 @@ class Assignment(db.Model):
     title = db.Column(db.String(128), nullable=False)
     submit_instructions = db.Column(db.String(128), nullable=False)
     slug = db.Column(db.String(128))
-    description = db.Column(db.String(9999),info={'widget': CKTextAreaWidget()}, nullable=False)
+    description = db.Column(db.Text(),info={'widget': CKTextAreaWidget()}, nullable=False)
     link_title = db.Column(db.String(128))
     day_id = db.Column(db.Integer, db.ForeignKey('day.id'))
     text_date = db.Column(db.String(128))
@@ -111,7 +113,7 @@ class Activity(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
     public = db.Column(db.String(128), nullable=False)
     title = db.Column(db.String(500), nullable=False)
-    description = db.Column(db.String(9999),info={'widget': CKTextAreaWidget()}, nullable=False)
+    description = db.Column(db.Text(),info={'widget': CKTextAreaWidget()}, nullable=False)
     order = db.Column(db.String(100))
     link = db.Column(db.String(500))
     day_id = db.Column(db.Integer, db.ForeignKey('day.id'))
@@ -125,6 +127,7 @@ class Dataset(db.Model):
     lib_id = db.Column(db.String(128))
     public = db.Column(db.String(128), nullable=False)
     title = db.Column(db.String(500), nullable=False)
+    field_notes = db.Column(db.Text(),info={'widget': CKTextAreaWidget()}, nullable=False)
     
     def __repr__(self):
         return '<Dataset %r >' % self.title
@@ -132,7 +135,7 @@ class Dataset(db.Model):
 class Collection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
-    title = db.Column(db.String(999), nullable=False)
+    title = db.Column(db.Text(), nullable=False)
     public = db.Column(db.String(128), nullable=False)
 
 class CollectionItems(db.Model):
@@ -161,8 +164,8 @@ class TimelineEntry(db.Model):
     entry_type = db.Column(db.String(128))
     entry_group = db.Column(db.String(128))
     background = db.Column(db.String(128))
-    entry_blurb = db.Column(db.Text, info={'widget': CKTextAreaWidget()}, nullable=False)
-    entry_essay = db.Column(db.Text, info={'widget': CKTextAreaWidget()}, nullable=False)
+    entry_blurb = db.Column(db.Text(), info={'widget': CKTextAreaWidget()}, nullable=False)
+    entry_essay = db.Column(db.Text(), info={'widget': CKTextAreaWidget()}, nullable=False)
 
     def __repr__(self):
         return '<Timeline Entry %r >' % self.headline
@@ -173,7 +176,7 @@ class BlogPost(db.Model):
     public = db.Column(db.String(128), nullable=False)
     title = db.Column(db.String(500), nullable=False)
     pub_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    body = db.Column(db.Text, nullable=False)
+    body = db.Column(db.Text(),info={'widget': CKTextAreaWidget()}, nullable=False)
     tags = db.relationship('Tag', secondary="tags_posts", backref=db.backref('tags', 
         lazy='dynamic'))
     def __repr__(self):
@@ -183,7 +186,7 @@ class Tag(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     tag_name = db.Column(db.String(500), nullable=False)
     public = db.Column(db.String(128), nullable=False)
-    
+
     def __repr__(self):
         return '<Tag %r >' % self.tag_name
 
@@ -203,8 +206,8 @@ class Basics(db.Model):
     zotero = db.Column(db.String(500))
     github = db.Column(db.String(500))
     hypoth = db.Column(db.String(500))
-    course_name = db.Column(db.String(512))
-    course_description = db.Column(db.Text)
+    course_name = db.Column(db.String(500))
+    course_description = db.Column(db.Text(),info={'widget': CKTextAreaWidget()}, nullable=False)
     semester_year = db.Column(db.String(128))
     department = db.Column(db.String(128))
     institution = db.Column(db.String(128))

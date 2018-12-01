@@ -364,9 +364,7 @@ def status(message=""):
         message="in"
     else:
         message="unauthorized"
-    
-
-    
+      
     return render_template('status.html', message=message)
 
 @app.errorhandler(404)
