@@ -28,7 +28,7 @@ class UserProfile(db.Model):
     display_name = db.Column(db.String(250), index=True, unique=True)
     email = db.Column(db.String(250), index=True, unique=True)
     authenticated = db.Column(db.Boolean, default=False)
-    custom_blog_title = db.Column(db.String(1224), default="", nullable=True)
+    custom_blog_title = db.Column(db.String(1224), default="", nullable=False)
     custom_blog_path = db.Column(db.String(512), nullable=False)
     approved = db.Column(db.Boolean, default=False)
 
