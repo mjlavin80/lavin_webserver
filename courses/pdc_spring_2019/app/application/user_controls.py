@@ -23,8 +23,8 @@ class AuthenticatedMenuLink(MenuLink):
         return current_user.is_authenticated()
 
 class ModelViewUser(ModelView):
-    column_exclude_list = ('lib_id', 'public')
-    form_excluded_columns = ('lib_id', 'public')
+    column_exclude_list = ('lib_id', 'public', 'custom_blog_path')
+    form_excluded_columns = ('lib_id', 'public', 'custom_blog_path')
     form_overrides = dict(entry_blurb=TextAreaField, entry_essay=CKEditorField)
     edit_template = 'admin/model/custom_edit.html'
     create_template = 'admin/model/custom_create.html'
@@ -47,7 +47,7 @@ class ModelViewUser(ModelView):
             if model.custom_blog_title:
                 model.custom_blog_path = quote(custom_blog_title.lower().replace(" ", "-"))
             else:
-                model.custom_blog_path = model.user_id
+                model.custom_blog_path = model.id
 
     def on_form_prefill(self, form, id):
         if not self.is_owned(id):
@@ -94,6 +94,7 @@ class ModelViewTag(ModelViewUser):
     form_columns = ('tag_name',)
 
 class ModelViewAdmin(ModelView):
+    form_excluded_columns = ('custom_blog_path')
     column_formatters = dict(course_description=lambda v, c, m, p: m.course_description[:25]+ " ...", description=lambda v, c, m, p: m.description[:25]+ " ...")
     form_overrides = dict(description=TextAreaField, course_description=TextAreaField)
     form_widget_args = dict(description=dict(rows=10), course_description=dict(rows=10))
@@ -105,8 +106,7 @@ class ModelViewAdmin(ModelView):
             if model.custom_blog_title:
                 model.custom_blog_path = quote(custom_blog_title.lower().replace(" ", "-"))
             else:
-                model.custom_blog_path = model.user_id
-
+                model.custom_blog_path = model.id
 
     def is_accessible(self):
         if current_user.is_authenticated() and current_user.is_admin:
