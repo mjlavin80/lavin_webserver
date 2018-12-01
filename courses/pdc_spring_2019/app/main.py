@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, url_for, send_from_directory, request, flash, g, session
+from flask import abort, Flask, render_template, redirect, url_for, send_from_directory, request, flash, g, session
 from flask_admin import Admin
 from application.models import *
 from application.user_controls import *
@@ -128,24 +128,43 @@ def blogs(blog_id=None, post_id=None):
     # assume custom title, try to translate to user_id, if it fails treat blog id as a user id
     if blog_id:
         source_user = UserProfile.query.filter(or_(UserProfile.id == blog_id, UserProfile.custom_blog_path==blog_id)).one_or_none()
+        if not source_user:
+            abort(404)
         if post_id:
             # look up by path or id
             this_post = BlogPost.query.filter(or_(BlogPost.id == post_id, BlogPost.post_path == post_id )).one_or_none()
-            result = "one post"
+            if not this_post:
+                abort(404)
+            return render_template("blog_post.html", this_post=this_post, source_user=source_user)
+            
         else:
-            result = "no post"
             all_posts = BlogPost.query.filter(BlogPost.user_id == source_user.id).all()
-        return result
+            if not all_posts:
+                # return template
+                return render_template("blog_main.html", all_posts=[], source_user=source_user)
+            else:
+                #return template
+                return render_template("blog_main.html", all_posts=all_posts, source_user=source_user)
+        
     else:
-        return "no blog"
+        #get titles and urls of all user blogs 
+        bloggers = UserProfile.query.all()
+        
+        #count blog posts for each user/blog
+        blog_counts = []
+        for blogger in bloggers:
+            post_count = len(BlogPost.query.filter(BlogPost.user_id == blogger.id).all())
+            blog_counts.append(post_count)
+
+        #return template
+        return render_template("all_blogs.html", bloggers=bloggers, blog_counts=blog_counts)
+        
 
 @app.route("/planner")
 @include_site_data
 def planner():
     try:
         current_user.is_admin == True
-    
-
         ASANA_BASE_URL = 'https://app.asana.com/api/1.0/'
         
         h = {"Authorization": "Bearer "+ ASANA_CODE}
@@ -360,12 +379,12 @@ def status(message=""):
 
         #for debugging locally
     
-        user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
-        user.authenticated = True
-        db.session.add(user)
-        db.session.commit()
-        login_user(user, force=True)
-        message="in"
+        # user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
+        # user.authenticated = True
+        # db.session.add(user)
+        # db.session.commit()
+        # login_user(user, force=True)
+        # message="in"
 
         # end local debugging block
 
@@ -381,6 +400,10 @@ def status(message=""):
         message="unauthorized"
       
     return render_template('status.html', message=message)
+
+@app.errorhandler(403)
+def page_not_found(e):
+    return render_template('403.html'), 403
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -399,6 +422,6 @@ db.init_app(app)
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 80))
     #for production
-    #app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port)
     #for dev
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    #app.run(host='0.0.0.0', debug=True, port=5000)
