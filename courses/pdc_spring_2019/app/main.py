@@ -41,6 +41,7 @@ admin.add_view(ModelViewAdmin(Basics, db.session))
 admin.add_view(ModelViewAdmin(Policy, db.session))
 admin.add_view(ModelViewUser(Dataset, db.session))
 admin.add_view(ModelViewUser(TimelineEntry, db.session))
+admin.add_view(ModelViewBlog(BlogPost, db.session))
 
 #required user loader method
 login_manager = LoginManager()

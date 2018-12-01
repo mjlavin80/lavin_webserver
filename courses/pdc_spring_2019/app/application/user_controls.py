@@ -77,6 +77,11 @@ class ModelViewUser(ModelView):
         # redirect to login page if user doesn't have access
         return redirect(url_for('status'))
 
+class ModelViewBlog(ModelViewUser):
+    column_hide_backrefs = False
+    column_list = ('title', 'body', 'tags')
+    form_overrides = dict(body=CKEditorField)
+
 class ModelViewAdmin(ModelView):
     column_formatters = dict(course_description=lambda v, c, m, p: m.course_description[:25]+ " ...", description=lambda v, c, m, p: m.description[:25]+ " ...")
     form_overrides = dict(description=TextAreaField, course_description=TextAreaField)
@@ -94,10 +99,3 @@ class ModelViewAdmin(ModelView):
 # custom view for readings
 class ReadingViewAdmin(ModelViewAdmin):
     column_filters = ('last_name', 'public', 'link')
-
-# UserView
-
-# display only your own content
-# fail edit view if not creator of content
-# fail model_change and delete if not creator of content
-# 
