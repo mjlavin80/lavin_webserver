@@ -178,7 +178,7 @@ class BlogPost(db.Model):
     title = db.Column(db.String(500), nullable=False)
     post_path = db.Column(db.String(512), nullable=False)
     pub_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    teaser = path = db.Column(db.String(512))
+    teaser = db.Column(db.String(512))
     body = db.Column(db.Text(),info={'widget': CKTextAreaWidget()}, nullable=False)
     tags = db.relationship('Tag', secondary="tags_posts", backref=db.backref('tags', 
         lazy='dynamic'))

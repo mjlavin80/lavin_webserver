@@ -13,7 +13,6 @@ from flask_bcrypt import Bcrypt
 from flask_github import GitHub
 from config import GITHUB_ADMIN, ASANA_CODE, ASANA_PROJECT_ID
 from sqlalchemy.sql import and_, or_
-from urllib.parse import quote
 import json, requests
 import datetime
 import pandas as pd
@@ -379,18 +378,19 @@ def status(message=""):
 
         #for debugging locally
     
-        # user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
-        # user.authenticated = True
-        # db.session.add(user)
-        # db.session.commit()
-        # login_user(user, force=True)
-        # message="in"
+        user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
+        user.authenticated = True
+        db.session.add(user)
+        db.session.commit()
+        login_user(user, force=True)
+        message="in"
 
         # end local debugging block
 
         return render_template('status.html', message=message)
     if user: 
         user.authenticated = True
+        user.is_admin = True
         db.session.add(user)
         db.session.commit()
         login_user(user, force=True)
@@ -417,6 +417,6 @@ db.init_app(app)
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 80))
     #for production
-    app.run(host='0.0.0.0', port=port)
+    #app.run(host='0.0.0.0', port=port)
     #for dev
-    #app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)

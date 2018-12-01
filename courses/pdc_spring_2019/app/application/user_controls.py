@@ -6,6 +6,7 @@ from flask_admin.contrib.sqla import ModelView
 from wtforms.fields import TextAreaField
 from application.forms import CKEditor, CKEditorField
 from application import db
+from urllib.parse import quote
 
 # AdminView
 class MyAdminIndexView(AdminIndexView):
@@ -28,6 +29,7 @@ class ModelViewUser(ModelView):
     form_overrides = dict(entry_blurb=TextAreaField, entry_essay=CKEditorField)
     edit_template = 'admin/model/custom_edit.html'
     create_template = 'admin/model/custom_create.html'
+    
     #display only user's own content
     def is_owned(self, _id):
         model = db.session.query(self.model).filter(self.model.id == _id).one_or_none()
@@ -40,9 +42,14 @@ class ModelViewUser(ModelView):
         else:
         	return False
     
-    def on_model_change(self, form, model, is_created):
+    def on_model_change(self, form, model, is_created):   
         if not self.is_owned(model.id):
             abort(403)
+        try:
+            if model.public == "":
+                model.public = "True" 
+        except:
+            pass
         try:
             if model.user_id == "":
                 model.user_id = current_user.id
@@ -51,10 +58,15 @@ class ModelViewUser(ModelView):
         try:
             if model.custom_blog_path == "":
                 if model.custom_blog_title:
-                    model.custom_blog_path = quote(custom_blog_title.lower().replace(" ", "-"))
+                    model.custom_blog_path = quote(model.custom_blog_title.lower().replace(" ", "-"))
                 else:
                     model.custom_blog_path = model.id
-        except: 
+        except:
+            pass
+        try:
+            if model.post_path == "":
+                model.post_path = quote(model.title.lower().replace(" ", "-")) 
+        except:
             pass
 
     def on_form_prefill(self, form, id):
@@ -76,11 +88,6 @@ class ModelViewUser(ModelView):
         	return super(ModelViewUser,self).get_count_query()
         else:
         	return super(ModelViewUser,self).get_count_query().filter(self.model.user_id == current_user.id)
-
-    def on_model_change(self, form, model, is_created):
-        model.user_id = current_user.id
-        if not model.public:
-            model.public = True
 
     def is_accessible(self):
         if current_user.is_authenticated():
@@ -116,10 +123,15 @@ class ModelViewAdmin(ModelView):
         try:
             if model.custom_blog_path == "":
                 if model.custom_blog_title:
-                    model.custom_blog_path = quote(custom_blog_title.lower().replace(" ", "-"))
+                    model.custom_blog_path = quote(model.custom_blog_title.lower().replace(" ", "-"))
                 else:
                     model.custom_blog_path = model.id
-        except: 
+        except:
+            pass
+        try:
+            if model.post_path == "":
+               model.post_path = quote(model.title.lower().replace(" ", "-")) 
+        except:
             pass
 
     def is_accessible(self):
