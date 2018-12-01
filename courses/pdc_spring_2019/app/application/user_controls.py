@@ -44,12 +44,12 @@ class ModelViewUser(ModelView):
         if not self.is_owned(model.id):
             abort(403)
         try:
-            if model.user_id == None:
+            if model.user_id == "":
                 model.user_id = current_user.id
         except:
             pass
         try:
-            if model.custom_blog_path == None:
+            if model.custom_blog_path == "":
                 if model.custom_blog_title:
                     model.custom_blog_path = quote(custom_blog_title.lower().replace(" ", "-"))
                 else:
@@ -109,12 +109,12 @@ class ModelViewAdmin(ModelView):
     
     def on_model_change(self, form, model, is_created):
         try:
-            if model.user_id == None:
+            if model.user_id == "":
                 model.user_id = current_user.id
         except:
             pass
         try:
-            if model.custom_blog_path == None:
+            if model.custom_blog_path == "":
                 if model.custom_blog_title:
                     model.custom_blog_path = quote(custom_blog_title.lower().replace(" ", "-"))
                 else:
