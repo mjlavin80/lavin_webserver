@@ -144,8 +144,7 @@ def blogs(blog_id=None, post_id=None):
                 return render_template("blog_main.html", all_posts=[], source_user=source_user)
             else:
                 #return template
-                return render_template("blog_main.html", all_posts=all_posts, source_user=source_user)
-        
+                return render_template("blog_main.html", all_posts=all_posts, source_user=source_user) 
     else:
         #get titles and urls of all user blogs 
         bloggers = UserProfile.query.all()
@@ -155,11 +154,9 @@ def blogs(blog_id=None, post_id=None):
         for blogger in bloggers:
             post_count = len(BlogPost.query.filter(BlogPost.user_id == blogger.id).all())
             blog_counts.append(post_count)
-
         #return template
         return render_template("all_blogs.html", bloggers=bloggers, blog_counts=blog_counts)
         
-
 @app.route("/planner")
 @include_site_data
 def planner():

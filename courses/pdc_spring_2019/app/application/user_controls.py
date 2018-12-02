@@ -73,6 +73,11 @@ class ModelViewUser(ModelView):
                 model.custom_blog_title = ""
         except:
             pass
+        try:
+            if model.tag_path == "" or model.tag_path == None:
+               model.tag_path = quote(model.tag_name.lower().replace(" ", "-"))
+        except:
+            pass 
 
     def on_form_prefill(self, form, id):
         if not self.is_owned(id):
@@ -104,9 +109,9 @@ class ModelViewUser(ModelView):
 
 class ModelViewBlog(ModelViewUser):
     column_hide_backrefs = False
-    column_list = ('title', 'body', 'tags')
+    column_list = ('title', 'body', 'teaser','tags')
     form_overrides = dict(body=CKEditorField)
-    form_columns = ('title', 'pub_date', 'body', 'tags')
+    form_columns = ('title', 'pub_date', 'teaser', 'body', 'tags')
 
 class ModelViewTag(ModelViewUser):
     column_hide_backrefs = False

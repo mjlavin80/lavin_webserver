@@ -188,6 +188,7 @@ class BlogPost(db.Model):
 class Tag(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     tag_name = db.Column(db.String(500), nullable=False)
+    tag_path = db.Column(db.String(500), nullable=False)
     public = db.Column(db.String(128), nullable=False)
 
     def __repr__(self):
