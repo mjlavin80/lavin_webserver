@@ -16,6 +16,7 @@ from sqlalchemy.sql import and_, or_
 import json, requests
 import datetime
 import pandas as pd
+from urllib.parse import quote
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -127,12 +128,13 @@ def timelinedata():
 def blogs(blog_id=None, post_id=None):
     # assume custom title, try to translate to user_id, if it fails treat blog id as a user id
     if blog_id:
-        source_user = UserProfile.query.filter(or_(UserProfile.id == blog_id, UserProfile.custom_blog_path==blog_id)).one_or_none()
+        source_user = UserProfile.query.filter(or_(UserProfile.id == blog_id, UserProfile.custom_blog_path==quote(blog_id))).one_or_none()
+        blog_id
         if not source_user:
             abort(404)
         if post_id:
             # look up by path or id
-            this_post = BlogPost.query.filter(or_(BlogPost.id == post_id, BlogPost.post_path == post_id )).one_or_none()
+            this_post = BlogPost.query.filter(or_(BlogPost.id == post_id, BlogPost.post_path == quote(post_id))).one_or_none()
             if not this_post:
                 abort(404)
             return render_template("blog_post.html", this_post=this_post, source_user=source_user)
