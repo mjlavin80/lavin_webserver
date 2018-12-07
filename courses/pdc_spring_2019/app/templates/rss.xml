@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+
+<channel>
+  <title>% if source_user.custom_blog_title %} {{ source_user.custom_blog_title }}
+    {% else %}{{ source_user.username }}'s Blog{% endif %}</title>
+  <link>/blogs/{{source_user.custom_blog_path}}</link>
+  <description>{% if source_user.display_name %} Posts by {{ source_user.display_name }}
+    {% else %}
+    Posts by {{ source_user.username }}
+    {% endif %}. {% for word in keywords %}{{word}} {% endfor %}</description>
+  
+  {% for post in all_posts %}
+  <item>
+    <title>{{ post.title }}</title>
+    <link>/blogs/{{source_user.custom_blog_path}}/posts/{{post.post_path}}</link>
+    <pubDate>{{ post.pub_date.strftime('%B %d, %Y') }}</pubDate>
+    <description>
+      {% if post.teaser %}
+      {{ post.teaser }}
+      {% else %}
+      {{ post.body[:200]|safe }} ... 
+    </description>
+    {% for tag in post.tags %}
+    <category>{{ tag.tag_name }}</category>
+  </item>
+  
+</channel>
+
+</rss>
