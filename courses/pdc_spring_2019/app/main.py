@@ -118,6 +118,23 @@ def timelinedata():
     timeline_rows = TimelineEntry.query.all()
     return render_template("timelinedata.json", timeline_rows=timeline_rows)
 
+@app.route("/feeds/<blog_id>")
+@include_site_data
+def feeds(blog_id=None):
+    if blog_id:
+        source_user = UserProfile.query.filter(or_(UserProfile.id == blog_id, UserProfile.custom_blog_path==quote(blog_id))).one_or_none()
+        if not source_user:
+            abort(404)
+        all_posts = BlogPost.query.filter(BlogPost.user_id == source_user.id).all()
+        if not all_posts:
+            # return template
+            return render_template("rss.xml", all_posts=[], source_user=source_user)
+        else:
+            #return template
+            return render_template("rss.xml", all_posts=all_posts, source_user=source_user)
+    else:
+        redirect(url_for('blogs'))
+
 @app.route("/blogs")
 @app.route("/blogs/")
 @app.route("/blogs/<blog_id>")
@@ -129,7 +146,7 @@ def blogs(blog_id=None, post_id=None):
     # assume custom title, try to translate to user_id, if it fails treat blog id as a user id
     if blog_id:
         source_user = UserProfile.query.filter(or_(UserProfile.id == blog_id, UserProfile.custom_blog_path==quote(blog_id))).one_or_none()
-        blog_id
+        
         if not source_user:
             abort(404)
         if post_id:
