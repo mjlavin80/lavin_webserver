@@ -1,5 +1,5 @@
 import os
-from flask import abort, Flask, render_template, redirect, url_for, send_from_directory, request, flash, g, session
+from flask import abort, Flask, render_template, make_response, redirect, url_for, send_from_directory, request, flash, g, session
 from flask_admin import Admin
 from application.models import *
 from application.user_controls import *
@@ -127,11 +127,12 @@ def feeds(blog_id=None):
             abort(404)
         all_posts = BlogPost.query.filter(BlogPost.user_id == source_user.id).all()
         if not all_posts:
-            # return template
-            return render_template("rss.xml", all_posts=[], source_user=source_user)
-        else:
-            #return template
-            return render_template("rss.xml", all_posts=all_posts, source_user=source_user)
+            all_posts = []
+        template = render_template('rss.xml', all_posts=all_posts, source_user=source_user)
+        response = make_response(template)
+        response.headers['Content-Type'] = 'application/xml'
+        return response
+            
     else:
         redirect(url_for('blogs'))
 

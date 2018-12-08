@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 
 <channel>
   <title>{% if source_user.custom_blog_title %} 
@@ -7,7 +7,7 @@
     {% else %}
     {{ source_user.username }}'s Blog
     {% endif %}</title>
-  <link>/blogs/{{source_user.custom_blog_path}}</link>
+  <link>{{request.url_root}}blogs/{{source_user.custom_blog_path}}</link>
   <description>{% if source_user.display_name %} Posts by {{ source_user.display_name }}
     {% else %}
     Posts by {{ source_user.username }}
@@ -16,8 +16,9 @@
   {% for post in all_posts %}
   <item>
     <title>{{ post.title }}</title>
-    <link>/blogs/{{source_user.custom_blog_path}}/posts/{{post.post_path}}</link>
-    <pubDate>{{ post.pub_date.strftime('%B %d, %Y') }}</pubDate>
+    <link>{{request.url_root}}blogs/{{source_user.custom_blog_path}}/posts/{{post.post_path}}</link>
+    <guid>{{request.url_root}}blogs/{{source_user.custom_blog_path}}/posts/{{post.post_path}}</guid>
+    <pubDate>{{ post.pub_date.strftime("%a, %d %b %Y %H:%M:%S %z") }}</pubDate>
     <description>
       {% if post.teaser %}
       {{ post.teaser }}
@@ -30,6 +31,8 @@
     {% endfor %}
   </item>
   {% endfor %}
+  <atom:link href="{{request.url}}" rel="self" type="application/rss+xml" />
+
 </channel>
 
 </rss>
