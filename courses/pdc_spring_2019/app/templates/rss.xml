@@ -2,8 +2,11 @@
 <rss version="2.0">
 
 <channel>
-  <title>% if source_user.custom_blog_title %} {{ source_user.custom_blog_title }}
-    {% else %}{{ source_user.username }}'s Blog{% endif %}</title>
+  <title>{% if source_user.custom_blog_title %} 
+    {{ source_user.custom_blog_title }}
+    {% else %}
+    {{ source_user.username }}'s Blog
+    {% endif %}</title>
   <link>/blogs/{{source_user.custom_blog_path}}</link>
   <description>{% if source_user.display_name %} Posts by {{ source_user.display_name }}
     {% else %}
@@ -19,12 +22,14 @@
       {% if post.teaser %}
       {{ post.teaser }}
       {% else %}
-      {{ post.body[:200]|safe }} ... 
+      {{ post.body[:200] }} ... 
+      {% endif %}
     </description>
     {% for tag in post.tags %}
     <category>{{ tag.tag_name }}</category>
+    {% endfor %}
   </item>
-  
+  {% endfor %}
 </channel>
 
 </rss>
