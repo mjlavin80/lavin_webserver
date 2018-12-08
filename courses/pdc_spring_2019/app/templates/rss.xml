@@ -17,7 +17,7 @@
     <title>{{ post.title }}</title>
     <link>https://pdc-spring-2019.matthew-lavin.com/blogs/{{source_user.custom_blog_path}}/posts/{{post.post_path}}</link>
     <guid>https://pdc-spring-2019.matthew-lavin.com/blogs/{{source_user.custom_blog_path}}/posts/{{post.post_path}}</guid>
-    <pubDate>{{post.pub_date.strftime("%a, %d %b %Y %H:%M:%S %z")}} EST</pubDate>
+    <pubDate>{{post.pub_date.strftime("%a, %d %b %Y %H:%M:%S %z")}}EST</pubDate>
     <description>
       {% if post.teaser %}
       {{ post.teaser }}
