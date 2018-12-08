@@ -12,13 +12,12 @@
     {% else %}
     Posts by {{ source_user.username }}
     {% endif %}. {% for word in keywords %}{{word}} {% endfor %}</description>
-  
   {% for post in all_posts %}
   <item>
     <title>{{ post.title }}</title>
     <link>{{request.url_root}}blogs/{{source_user.custom_blog_path}}/posts/{{post.post_path}}</link>
     <guid>{{request.url_root}}blogs/{{source_user.custom_blog_path}}/posts/{{post.post_path}}</guid>
-    <pubDate>{{ post.pub_date.strftime("%a, %d %b %Y %H:%M:%S %z") }}</pubDate>
+    <pubDate>{{ post.pub_date.strftime("%a, %d %b %Y %H:%M:%S %z")}}</pubDate>
     <description>
       {% if post.teaser %}
       {{ post.teaser }}
@@ -31,7 +30,7 @@
     {% endfor %}
   </item>
   {% endfor %}
-  <atom:link href="{{request.url}}" rel="self" type="application/rss+xml" />
+  <atom:link href="{{request.url}}|replace("http:", "https:")" rel="self" type="application/rss+xml" />
 
 </channel>
 
