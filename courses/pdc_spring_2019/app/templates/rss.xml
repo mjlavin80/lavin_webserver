@@ -30,7 +30,7 @@
     {% endfor %}
   </item>
   {% endfor %}
-  <atom:link href="{{request.url}}|replace("http:", "https:")" rel="self" type="application/rss+xml" />
+  <atom:link href="{{request.url|replace("http:", "https:")}}" rel="self" type="application/rss+xml" />
 
 </channel>
 
