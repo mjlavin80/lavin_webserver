@@ -71,7 +71,7 @@ class ModelViewUserProfile(ModelView):
         if current_user.is_admin:
             return super(ModelViewUser, self).get_query()
         else:
-            return super(ModelViewUser, self).get_query().filter(self.model.id == current_user.id)
+            return super(ModelViewUser, self).get_query().filter(self.model.username == current_user.username)
 
     def get_count_query(self):
         if current_user.is_admin:
@@ -173,7 +173,7 @@ class ModelViewBlog(ModelViewUser):
     form_overrides = dict(body=CKEditorField)
     form_columns = ('title', 'pub_date', 'teaser', 'body', 'tags')
 
-class ModelViewTag(ModelViewUser):
+class ModelViewTag(ModelView):
     column_hide_backrefs = False
     column_list = ('tag_name',)
     form_columns = ('tag_name',)
