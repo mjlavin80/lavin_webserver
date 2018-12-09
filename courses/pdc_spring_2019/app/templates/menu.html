@@ -17,12 +17,12 @@
             <li><a href="/calendar">Weekly Calendar</a></li>
             <li><a href="/assignments">Assignments</a></li>
             <li><a href="/readings">Readings</a></li>
-            {% if current_user.is_authenticated() %}
+            {% if current_user.is_authenticated %}
             <li><a href="/logout">Logout</a></li>
             {% else %}
             <li><a href="/login">Login</a></li>
             {% endif %}
-            {% if current_user.is_approved() %}
+            {% if current_user.is_approved %}
             <ul class="nav navbar-nav">
               <li><a href="/admin">Admin Dashboard</a>
 
