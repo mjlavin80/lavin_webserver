@@ -26,9 +26,71 @@ class AuthenticatedMenuLink(MenuLink):
         if current_user.is_authenticated() and current_user.is_approved():
             return current_user.is_authenticated()
 
+class ModelViewUserProfile(ModelView):
+    column_exclude_list = ('custom_blog_path')
+    form_excluded_columns = ('custom_blog_path')
+    edit_template = 'admin/model/custom_edit.html'
+    create_template = 'admin/model/custom_create.html'
+
+    #display only user's own content
+    def is_owned(self, _id):
+        model = db.session.query(self.model).filter(self.model.id == _id).one_or_none()
+        if current_user.is_admin:
+            return True
+        if not model:
+            return False
+        try: 
+            if model.username == current_user.username:
+                return True
+            else:
+                return False
+        except:
+            return False
+    
+    def on_model_change(self, form, model, is_created):   
+        if not self.is_owned(model.id):
+            abort(403)
+        try:
+            if model.custom_blog_path == "" or model.custom_blog_path == None:
+                if model.custom_blog_title != "":
+                    model.custom_blog_path = quote(model.custom_blog_title.lower().replace(" ", "-"))
+                else:
+                    model.custom_blog_path = model.username
+        except:
+            pass
+
+    def on_form_prefill(self, form, id):
+        if not self.is_owned(id):
+            abort(403)
+
+    def on_model_delete(self, model):
+        if not self.is_owned(model.id):
+            abort(403)
+
+    def get_query(self):
+        if current_user.is_admin:
+            return super(ModelViewUser, self).get_query()
+        else:
+            return super(ModelViewUser, self).get_query().filter(self.model.id == current_user.id)
+
+    def get_count_query(self):
+        if current_user.is_admin:
+            return super(ModelViewUser,self).get_count_query()
+        else:
+            return super(ModelViewUser,self).get_count_query().filter(self.model.id == current_user.id)
+
+    def is_accessible(self):
+        if current_user.is_authenticated() and current_user.is_approved():
+            return current_user.is_authenticated()
+
+    def inaccessible_callback(self, name, **kwargs):
+        # redirect to login page if user doesn't have access
+        return redirect(url_for('status'))
+
 class ModelViewUser(ModelView):
-    column_exclude_list = ('lib_id', 'public', 'custom_blog_path')
-    form_excluded_columns = ('lib_id', 'public', 'custom_blog_path')
+    column_exclude_list = ('lib_id', 'public')
+    form_excluded_columns = ('lib_id', 'public')
+
     form_overrides = dict(entry_blurb=TextAreaField, entry_essay=CKEditorField)
     edit_template = 'admin/model/custom_edit.html'
     create_template = 'admin/model/custom_create.html'
@@ -46,11 +108,7 @@ class ModelViewUser(ModelView):
             else:
                 return False
         except:
-            try:
-                if model.username == current_user.username:
-                    return True
-            except:
-                return False
+            return False
 
     def on_model_change(self, form, model, is_created):   
         if not self.is_owned(model.id):
@@ -63,14 +121,6 @@ class ModelViewUser(ModelView):
         try:
             if model.user_id == "":
                 model.user_id = current_user.id
-        except:
-            pass
-        try:
-            if model.custom_blog_path == "" or model.custom_blog_path == None:
-                if model.custom_blog_title != "":
-                    model.custom_blog_path = quote(model.custom_blog_title.lower().replace(" ", "-"))
-                else:
-                    model.custom_blog_path = model.username
         except:
             pass
         try:
