@@ -12,7 +12,26 @@
           {% if message=="in" %} You are logged in. <a href="/logout">Log out</a> {% endif %}
           {% if message=="out" %} You are logged out. <a href="/login">Log in</a> {% endif %}
           {% if message=="required" %} You must be logged in to do that. <a href="/login">Log in</a> {% endif %}
-          {% if message=="unregistered" %} You have logged in using Github, but you must register and receive approval to create or edit content.{% endif %}
+          {% if message=="unregistered" %} You have logged in using Github, but you must register and receive approval to create or edit content.
+
+          <form name="register" method="POST" action="/signup">
+				<h4>Display Name</h4>
+				<input type='text' id="display_name" name="display_name" value="" required>
+				<hr>
+				<h4>Email</h4>
+				<input type='text' id="email" name="email" value="" required>
+				<hr>
+				<h4>Custom Blog Title</h4>
+				<input type='text' id="custom_blog_title" name="custom_blog_title" value="">
+				<hr>
+			<div>
+				<input id="submit" class="btn btn-primary btn-lg" type="submit" value="Submit"> 
+			<hr>
+		    </div>
+		 </form>
+
+
+          {% endif %}
           {% if message=="unapproved" %} You have logged in using Github and registered, but you must receive approval to create or edit content. {% endif %}
           
         </h3>

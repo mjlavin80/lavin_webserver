@@ -426,6 +426,40 @@ def status(message=""):
       
     return render_template('status.html', message=message)
 
+@app.route('/signup', methods=["GET", "POST"])
+def signup():
+    if request.method == 'POST':
+        try: 
+            c_u = github.get('user')
+            user = UserProfile()
+            user.username = c_u['login']
+            user.is_admin = 0
+            user.display_name = request.form['display_name']
+            user.email = request.form['email']
+            user.authenticated = 1
+            user.custom_blog_title = request.form['custom_blog_title']
+            if request.form['custom_blog_title'] != "":
+                user.custom_blog_path = quote(request.form['custom_blog_title'].lower().replace(" ", "-"))
+            else:
+                user.custom_blog_path = c_u['login']
+            user.approved = 0
+            return redirect(url_for('status')) 
+        except:
+            return redirect(url_for('status'))  
+    else: 
+        return redirect(url_for('status'))
+
+
+    
+        
+        meta.review_type = request.form['review_type_data']
+        if request.form['gender_label_data'] != 'na':
+            meta.perceived_author_gender = request.form['gender_label_data']
+        db.session.commit()
+        return render_template("success.html", nyt_id=nyt_id) 
+    else:
+        return(redirect(url_for('index')))
+
 @app.errorhandler(403)
 def page_not_found(e):
     return render_template('403.html'), 403
