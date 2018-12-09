@@ -408,12 +408,12 @@ def status(message=""):
 
         #for debugging locally
     
-        user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
-        db.session.add(user)
-        db.session.commit()
-        login_user(user, force=True)
+        # user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
+        # db.session.add(user)
+        # db.session.commit()
+        # login_user(user, force=True)
         
-        message="in"
+        # message="in"
 
         # end local debugging block
 
@@ -442,6 +442,6 @@ db.init_app(app)
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 80))
     #for production
-    app.run(host='0.0.0.0', port=port)
+    #app.run(host='0.0.0.0', port=port)
     #for dev
-    #app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
