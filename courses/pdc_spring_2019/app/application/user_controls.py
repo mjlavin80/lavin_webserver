@@ -37,21 +37,21 @@ class ModelViewUser(ModelView):
     def is_owned(self, _id):
         model = db.session.query(self.model).filter(self.model.id == _id).one_or_none()
         if current_user.is_admin:
-        	return True
+            return True
         if not model:
             return False
         try: 
             if model.user_id == current_user.id:
                 return True
             else:
-        	   return False
+                return False
         except:
             try:
                 if model.username == current_user.username:
                     return True
             except:
                 return False
-                
+
     def on_model_change(self, form, model, is_created):   
         if not self.is_owned(model.id):
             abort(403)
