@@ -32,7 +32,7 @@ def shutdown_session(exception=None):
 admin = Admin(app, name='Dashboard', template_mode='bootstrap3', index_view=MyAdminIndexView())
 
 # Add administrative and user views here
-admin.add_view(ModelViewAdmin(UserProfile, db.session))
+
 admin.add_view(ReadingViewAdmin(Reading, db.session))
 admin.add_view(ModelViewAdmin(Assignment, db.session))
 admin.add_view(ModelViewAdmin(Activity, db.session))
@@ -40,6 +40,7 @@ admin.add_view(ModelViewAdmin(Day, db.session))
 admin.add_view(ModelViewAdmin(Week, db.session))
 admin.add_view(ModelViewAdmin(Basics, db.session))
 admin.add_view(ModelViewAdmin(Policy, db.session))
+admin.add_view(ModelViewUser(UserProfile, db.session))
 admin.add_view(ModelViewUser(Dataset, db.session))
 admin.add_view(ModelViewUser(TimelineEntry, db.session))
 admin.add_view(ModelViewBlog(BlogPost, db.session))
