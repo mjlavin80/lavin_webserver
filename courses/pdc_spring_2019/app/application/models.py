@@ -47,6 +47,10 @@ class UserProfile(db.Model):
         """Return True if the user is authenticated."""
         return self.authenticated
 
+    def is_approved(self):
+        """Return True if the user is authenticated."""
+        return self.approved
+
     def is_anonymous(self):
         """False, as anonymous users aren't supported."""
         return False

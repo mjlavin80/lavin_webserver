@@ -13,15 +13,18 @@ class MyAdminIndexView(AdminIndexView):
     @expose('/')
     def index(self):
         try:
-            current_user.is_authenticated() == True
-            return self.render('admin/index.html')
+            if current_user.is_authenticated() and current_user.is_approved():
+                return self.render('admin/index.html')
+            else: 
+                return redirect(url_for('status'))
         except:
             return redirect(url_for('status'))
 
 # Create menu links classes with reloaded accessible
 class AuthenticatedMenuLink(MenuLink):
     def is_accessible(self):
-        return current_user.is_authenticated()
+        if current_user.is_authenticated() and current_user.is_approved():
+            return current_user.is_authenticated()
 
 class ModelViewUser(ModelView):
     column_exclude_list = ('lib_id', 'public', 'custom_blog_path')
@@ -100,7 +103,7 @@ class ModelViewUser(ModelView):
         	return super(ModelViewUser,self).get_count_query().filter(self.model.user_id == current_user.id)
 
     def is_accessible(self):
-        if current_user.is_authenticated():
+        if current_user.is_authenticated() and current_user.is_approved():
             return current_user.is_authenticated()
 
     def inaccessible_callback(self, name, **kwargs):
