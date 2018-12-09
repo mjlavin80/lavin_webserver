@@ -280,7 +280,7 @@ def planner():
         return render_template("planner.html", project_tasks=project_tasks, last=_last, next_three=_next_three, next_due_date=next_due_date, last_due_date=last_due_date, days_ago=days_ago, days_to_next=days_to_next, today=today)
 
     except:
-        return redirect(url_for('status', message="unauthorized"))
+        return redirect(url_for('status'))
 
 @app.route("/assignments/<this_assignment>")
 @app.route("/assignments")
@@ -391,30 +391,33 @@ def status(message=""):
     try:
         c_u = github.get('user')
         user = UserProfile.query.filter(UserProfile.username==c_u['login']).one_or_none()
+        
+        if user: 
+            #check for approval 
+            user.authenticated = True
+            db.session.add(user)
+            db.session.commit()
+            login_user(user, force=True)
+            message="in"
+            # if not approved 
+        else:
+            # code for logged in but not registered
+            message="unauthorized"
     except:
         message="out"
 
         #for debugging locally
     
-        # user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
-        # user.authenticated = True
-        # db.session.add(user)
-        # db.session.commit()
-        # login_user(user, force=True)
-        # message="in"
+        user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
+        db.session.add(user)
+        db.session.commit()
+        login_user(user, force=True)
+        
+        message="in"
 
         # end local debugging block
 
         return render_template('status.html', message=message)
-    if user: 
-        user.authenticated = True
-        user.is_admin = True
-        db.session.add(user)
-        db.session.commit()
-        login_user(user, force=True)
-        message="in"
-    else:
-        message="unauthorized"
       
     return render_template('status.html', message=message)
 

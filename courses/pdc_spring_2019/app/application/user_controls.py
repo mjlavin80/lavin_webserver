@@ -16,7 +16,7 @@ class MyAdminIndexView(AdminIndexView):
             current_user.is_authenticated() == True
             return self.render('admin/index.html')
         except:
-            return redirect(url_for('status', message="unauthorized"))
+            return redirect(url_for('status'))
 
 # Create menu links classes with reloaded accessible
 class AuthenticatedMenuLink(MenuLink):
