@@ -27,8 +27,8 @@ class AuthenticatedMenuLink(MenuLink):
             return current_user.is_authenticated()
 
 class ModelViewUserProfile(ModelView):
-    column_exclude_list = ('custom_blog_path')
-    form_excluded_columns = ('custom_blog_path')
+    column_exclude_list = ('custom_blog_path', 'is_admin', 'profile_image', 'approved', 'authenticated')
+    form_excluded_columns = ('custom_blog_path', 'is_admin', 'profile_image', 'approved', 'authenticated')
     edit_template = 'admin/model/custom_edit.html'
     create_template = 'admin/model/custom_create.html'
 
