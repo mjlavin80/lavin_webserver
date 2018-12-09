@@ -401,6 +401,10 @@ def status(message=""):
                 message="in"
             # else not approved 
             else: 
+                user.authenticated = True
+                db.session.add(user)
+                db.session.commit()
+                login_user(user, force=True)
                 message="unapproved"
         else:
             # code for logged in but not registered
