@@ -34,7 +34,7 @@ class ModelViewUserProfile(ModelView):
 
     can_delete = False
     can_create = False
-    
+
     form_widget_args = {
         'username': {
             'readonly': True
@@ -186,6 +186,8 @@ class ModelViewTag(ModelView):
     column_hide_backrefs = False
     column_list = ('tag_name',)
     form_columns = ('tag_name',)
+    if not current_user.is_admin:
+        can_delete = False
 
 class ModelViewAdmin(ModelView):
     form_excluded_columns = ('custom_blog_path')
