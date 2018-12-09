@@ -443,22 +443,13 @@ def signup():
             else:
                 user.custom_blog_path = c_u['login']
             user.approved = 0
+            db.session.add(user)
+            db.session.commit()
             return redirect(url_for('status')) 
         except:
             return redirect(url_for('status'))  
     else: 
         return redirect(url_for('status'))
-
-
-    
-        
-        meta.review_type = request.form['review_type_data']
-        if request.form['gender_label_data'] != 'na':
-            meta.perceived_author_gender = request.form['gender_label_data']
-        db.session.commit()
-        return render_template("success.html", nyt_id=nyt_id) 
-    else:
-        return(redirect(url_for('index')))
 
 @app.errorhandler(403)
 def page_not_found(e):
