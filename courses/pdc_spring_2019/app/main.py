@@ -357,7 +357,7 @@ def token_getter():
 def authorized(access_token):
     next_url = request.args.get('next') or url_for('index')
     if access_token is None:
-        return redirect(next_url)
+        return redirect(url_for('status'))
     user = GithubToken.query.filter_by(github_access_token=access_token).first()
     if user is None:
         user = GithubToken(access_token)
@@ -386,7 +386,6 @@ def logout():
 
 @app.route('/status')
 def status(message=""):
-    #need to check if github username is in user_profile
     user = False
     try:
         c_u = github.get('user')
@@ -394,25 +393,27 @@ def status(message=""):
         
         if user: 
             #check for approval 
-            user.authenticated = True
-            db.session.add(user)
-            db.session.commit()
-            login_user(user, force=True)
-            message="in"
-            # if not approved 
+            if user.approved:
+                user.authenticated = True
+                db.session.add(user)
+                db.session.commit()
+                login_user(user, force=True)
+                message="in"
+            # else not approved 
+            else: 
+                message="unapproved"
         else:
             # code for logged in but not registered
-            message="unauthorized"
+            message="unregistered"
     except:
         message="out"
 
         #for debugging locally
     
-        # user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
+        # user = UserProfile.query.filter(UserProfile.id==3).one_or_none()
         # db.session.add(user)
         # db.session.commit()
         # login_user(user, force=True)
-        
         # message="in"
 
         # end local debugging block
@@ -442,6 +443,6 @@ db.init_app(app)
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 80))
     #for production
-    #app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port)
     #for dev
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    #app.run(host='0.0.0.0', debug=True, port=5000)
