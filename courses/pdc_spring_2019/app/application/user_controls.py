@@ -33,6 +33,7 @@ class ModelViewUserProfile(ModelView):
     create_template = 'admin/model/custom_create.html'
 
     can_delete = False
+    can_create = False
     
     form_widget_args = {
         'username': {
