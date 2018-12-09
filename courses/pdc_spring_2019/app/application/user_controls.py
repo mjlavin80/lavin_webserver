@@ -187,6 +187,7 @@ class ModelViewTag(ModelView):
     column_list = ('tag_name',)
     form_columns = ('tag_name',)
     can_delete = False
+    can_edit = False
 
 class ModelViewAdmin(ModelView):
     form_excluded_columns = ('custom_blog_path')
