@@ -32,6 +32,14 @@ class ModelViewUserProfile(ModelView):
     edit_template = 'admin/model/custom_edit.html'
     create_template = 'admin/model/custom_create.html'
 
+    can_delete = False
+    
+    form_widget_args = {
+        'username': {
+            'readonly': True
+        },
+    }
+
     #display only user's own content
     def is_owned(self, _id):
         model = db.session.query(self.model).filter(self.model.id == _id).one_or_none()
