@@ -69,15 +69,15 @@ class ModelViewUserProfile(ModelView):
 
     def get_query(self):
         if current_user.is_admin:
-            return super(ModelViewUser, self).get_query()
+            return super(ModelViewUserProfile, self).get_query()
         else:
-            return super(ModelViewUser, self).get_query().filter(self.model.username == current_user.username)
+            return super(ModelViewUserProfile, self).get_query().filter(self.model.id == current_user.id)
 
     def get_count_query(self):
         if current_user.is_admin:
-            return super(ModelViewUser,self).get_count_query()
+            return super(ModelViewUserProfile,self).get_count_query()
         else:
-            return super(ModelViewUser,self).get_count_query().filter(self.model.id == current_user.id)
+            return super(ModelViewUserProfile,self).get_count_query().filter(self.model.id == current_user.id)
 
     def is_accessible(self):
         if current_user.is_authenticated() and current_user.is_approved():
