@@ -1,6 +1,7 @@
 {% extends 'admin/master.html' %}
 
 {% block body %}
+{% if current_user.is_admin %}
 {% include 'admin/links.html' %}
-
+{% endif %}
 {% endblock %}
