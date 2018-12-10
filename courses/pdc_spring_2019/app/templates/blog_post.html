@@ -31,6 +31,17 @@
 
 <div class="comments">
 <div id="disqus_thread"></div>
+
+</div>
+
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}
+
+{% block customjs %}
 <script>
   var disqus_config = function() { this.page.identifier = "/blogs/{{source_user.custom_blog_path}}/posts/{{ this_post.post_path }}"; this.page.url = "/blogs/{{source_user.custom_blog_path}}/posts/{{this_post.post_path}}"; };
   (function() {
@@ -44,11 +55,5 @@
   Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
     rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-</div>
+{%endblock%}
 
-</div>
-{% endblock %}
-
-{% block footer %}
-{% include "footer.html" %}
-{% endblock %}
