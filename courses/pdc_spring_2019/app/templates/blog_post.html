@@ -32,10 +32,10 @@
 <div class="comments">
 <div id="disqus_thread"></div>
 <script>
-  var disqus_config = function() { this.page.identifier = "/blog/{{ this_post.post_path }}"; this.page.url = "/blog/{{ this_post.post_path }}"; };
+  var disqus_config = function() { this.page.identifier = "/blogs/{{source_user.custom_blog_path}}/posts/{{ this_post.post_path }}"; this.page.url = "/blogs/{{source_user.custom_blog_path}}/posts/{{this_post.post_path}}"; };
   (function() {
     var d = document, s = d.createElement('script');
-    s.src = '//mjlavin80.disqus.com/embed.js';
+    s.src = '//pdc-spring-2019.disqus.com/embed.js';
     s.setAttribute('data-timestamp', +new Date());
     (d.head || d.body).appendChild(s);
   })();
