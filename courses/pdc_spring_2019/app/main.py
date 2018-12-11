@@ -137,6 +137,47 @@ def feeds(blog_id=None):
     else:
         redirect(url_for('blogs'))
 
+
+@app.route("/tags")
+@app.route("/tags/")
+@app.route("/tags/<tag_id>")
+@include_site_data
+def tags(tag_path=None):
+    # assume custom title, try to translate to user_id, if it fails treat blog id as a user id
+    if tag_path:
+        source_tag = Tag.query.filter(Tag.tag_path == tag_path).one_or_none()
+        if not source_tag:
+            abort(404)
+        #get all posts with the tag
+        all_posts = BlogPost.query.all()
+        if all_posts: 
+            with_tag = [p for p in all_posts if source_tag in p.tags]
+            if with_tag:
+                # return template
+                return render_template("tag_main.html", with_tag=with_tag, source_tag=source_tag)
+            else:
+                #return template
+                return render_template("tag_main.html", with_tag=[], source_tag=source_tag)
+        else:
+            #return template
+            return render_template("tag_main.html", with_tag=[], source_tag=source_tag)      
+    else:    
+        #get all tags 
+        all_tags = Tag.query.all()
+        all_posts = BlogPost.query.all()
+        #count blog posts for each user/blog and get 
+        post_counts = []
+        for tag in all_tags:
+            post_count = len([i for i in all_posts if tag in i.tags])
+            post_counts.append(post_count)
+        blog_paths = []
+        for post in all_posts:
+            source_user = UserProfile.query.filter(UserProfile.id == post.user_id).one_or_none()
+            blog_path = source_user.custom_blog_path
+            blog_paths.append(blog_path)
+        #return template
+        return render_template("all_tags.html", all_tags=all_tags, tag_counts=tag_counts, blog_paths=blog_paths)
+
 @app.route("/blogs")
 @app.route("/blogs/")
 @app.route("/blogs/<blog_id>")
