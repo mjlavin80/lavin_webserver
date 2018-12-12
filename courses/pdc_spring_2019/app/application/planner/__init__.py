@@ -29,11 +29,11 @@ def include_site_data(fn):
 def planner(baseday=None):
     #for debugging locally
     
-    # user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
-    # db.session.add(user)
-    # db.session.commit()
-    # login_user(user, force=True)
-    # message="in"
+    user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
+    db.session.add(user)
+    db.session.commit()
+    login_user(user, force=True)
+    message="in"
 
     #end local debugging block
     try:
@@ -60,7 +60,7 @@ def planner(baseday=None):
             project_tasks = sorted(project_tasks, key=sort_key, reverse=False)
             
             if baseday:
-                t = datetime.datetime.strptime(baseday, "%Y-%m-%d").date()
+                t = datetime.strptime(baseday, "%Y-%m-%d").date()
             else: 
                 t = datetime.today().date()
 
@@ -73,7 +73,7 @@ def planner(baseday=None):
             for week in weeks:
                 for day in week.days:
                     try:
-                        dayname = datetime.datetime.strptime(day.name, "%A, %B %d, %Y").date()
+                        dayname = datetime.strptime(day.name, "%A, %B %d, %Y").date()
                     except:
                         dayname = t
                     if dayname >= t:
