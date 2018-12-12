@@ -23,8 +23,10 @@ def include_site_data(fn):
     return fn
 
 @planner_blueprint.route("/planner")
+@planner_blueprint.route("/planner/")
+@planner_blueprint.route("/planner/<baseday>")
 @include_site_data
-def planner():
+def planner(baseday=None):
     #for debugging locally
     
     # user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
@@ -56,8 +58,11 @@ def planner():
                     return '9999-99-99'
 
             project_tasks = sorted(project_tasks, key=sort_key, reverse=False)
-            #t = datetime.date.today()
-            t = datetime.today().date()
+            
+            if baseday:
+                t = datetime.datetime.strptime(baseday, "%Y-%m-%d").date()
+            else: 
+                t = datetime.today().date()
 
             weeks = Week.query.order_by(Week.week_number).all()
             last_due = []
