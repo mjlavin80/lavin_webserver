@@ -18,12 +18,16 @@ import datetime
 import pandas as pd
 from urllib.parse import quote
 from application.planner import planner_blueprint
+from application.timeline import timeline_blueprint
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 app.register_blueprint(planner_blueprint)
+app.register_blueprint(timeline_blueprint)
 
+#bcrypt instance for password hashing
 bcrypt = Bcrypt(app)
+
 # setup github-flask
 github = GitHub(app)
 
@@ -75,7 +79,6 @@ def include_site_data(fn):
     def additional_context():
         #site_basics
         basics = generate_site_data()
-        #user_authorization
 
         return {"basics":basics}
     return fn
@@ -104,23 +107,6 @@ def calendar():
     #get weeks from db
     weeks = Week.query.order_by(Week.week_number).all()
     return render_template("calendar.html", weeks=weeks)
-
-@app.route("/timeline")
-@app.route("/timeline/<entry_id>")
-@include_site_data
-def timeline(entry_id=None):
-    if entry_id:
-        timeline_entry= TimelineEntry.query.filter(TimelineEntry.id == entry_id).one_or_none()
-        return render_template("timeline_row.html", timeline_entry=timeline_entry)
-    else:
-        return render_template("timeline.html")
-
-@app.route("/timelinedata")
-@include_site_data
-def timelinedata():
-
-    timeline_rows = TimelineEntry.query.all()
-    return render_template("timelinedata.json", timeline_rows=timeline_rows)
 
 @app.route("/feeds/<blog_id>")
 @include_site_data

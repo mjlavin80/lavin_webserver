@@ -5,7 +5,7 @@ import requests, json, datetime
 from application.models import *
 from application import db
 
-planner_blueprint = Blueprint('planner', __name__)
+planner_blueprint = Blueprint('planner', __name__, template_folder='templates')
 
 #helper function for decorator to pass global info to templates
 def generate_site_data():
@@ -18,7 +18,6 @@ def include_site_data(fn):
     def additional_context():
         #site_basics
         basics = generate_site_data()
-        #user_authorization
 
         return {"basics":basics}
     return fn
