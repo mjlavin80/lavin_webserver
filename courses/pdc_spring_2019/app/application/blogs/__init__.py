@@ -6,25 +6,9 @@ from urllib.parse import quote
 
 blogs_blueprint = Blueprint('blogs', __name__, template_folder='templates')
 
-#helper function for decorator to pass global info to templates
-def generate_site_data():
-    basics = Basics.query.first()
-    return basics
-
-#app context processor for sitewide data. Use as a decorator @include_site_data after @app.route to include a variable called basics in rendered template
-def include_site_data(fn):
-    @blogs_blueprint.context_processor
-    def additional_context():
-        #site_basics
-        basics = generate_site_data()
-
-        return {"basics":basics}
-    return fn
-
 @blogs_blueprint.route("/tags")
 @blogs_blueprint.route("/tags/")
 @blogs_blueprint.route("/tags/<tag_path>")
-@include_site_data
 def tags(tag_path=None):
     # assume custom title, try to translate to user_id, if it fails treat blog id as a user id
     if tag_path:
@@ -69,7 +53,6 @@ def tags(tag_path=None):
 @blogs_blueprint.route("/blogs/<blog_id>/posts")
 @blogs_blueprint.route("/blogs/<blog_id>/posts/")
 @blogs_blueprint.route("/blogs/<blog_id>/posts/<post_id>")
-@include_site_data
 def blogs(blog_id=None, post_id=None):
     # assume custom title, try to translate to user_id, if it fails treat blog id as a user id
     if blog_id:
@@ -107,7 +90,6 @@ def blogs(blog_id=None, post_id=None):
 @blogs_blueprint.route("/feeds")
 @blogs_blueprint.route("/feeds/")
 @blogs_blueprint.route("/feeds/<blog_id>")
-@include_site_data
 def feeds(blog_id=None):
     if blog_id:
         source_user = UserProfile.query.filter(or_(UserProfile.id == blog_id, UserProfile.custom_blog_path==quote(blog_id))).one_or_none()

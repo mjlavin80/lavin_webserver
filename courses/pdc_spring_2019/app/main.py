@@ -20,12 +20,14 @@ from urllib.parse import quote
 from application.planner import planner_blueprint
 from application.timeline import timeline_blueprint
 from application.blogs import blogs_blueprint
+from application.syllabus import syllabus_blueprint
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 app.register_blueprint(planner_blueprint)
 app.register_blueprint(timeline_blueprint)
 app.register_blueprint(blogs_blueprint)
+app.register_blueprint(syllabus_blueprint)
 
 #bcrypt instance for password hashing
 bcrypt = Bcrypt(app)
@@ -37,6 +39,11 @@ github = GitHub(app)
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     db.session.remove()
+
+@app.context_processor
+def additional_context():
+    basics = Basics.query.first()
+    return {"basics":basics}
 
 admin = Admin(app, name='Dashboard', template_mode='bootstrap3', index_view=MyAdminIndexView())
 
@@ -70,98 +77,11 @@ def unauthorized():
 def load_user(user_id):
     return UserProfile.query.get(user_id)
 
-#helper function for decorator to pass global info to templates
-def generate_site_data():
-    basics = Basics.query.first()
-    return basics
-
-#app context processor for sitewide data. Use as a decorator @include_site_data after @app.route to include a variable called basics in rendered template
-def include_site_data(fn):
-    @app.context_processor
-    def additional_context():
-        #site_basics
-        basics = generate_site_data()
-
-        return {"basics":basics}
-    return fn
 
 #Begin route declarations
 @app.route("/")
-@include_site_data
 def index():
     return render_template("index.html")
-
-@app.route("/policies")
-@include_site_data
-def policies():
-    policies = Policy.query.filter(Policy.public == "True").all()
-    return render_template("policies.html", policies=policies)
-
-@app.route("/required_book")
-@include_site_data
-def required_book():
-    book_policy = Policy.query.filter(and_(Policy.public == "True", Policy.title =="Required Texts")).all()
-    return render_template("required_book.html", book_policy=book_policy)
-
-@app.route("/calendar")
-@include_site_data
-def calendar():
-    #get weeks from db
-    weeks = Week.query.order_by(Week.week_number).all()
-    return render_template("calendar.html", weeks=weeks)
-
-@app.route("/assignments/<this_assignment>")
-@app.route("/assignments")
-@include_site_data
-def assignments(this_assignment="all"):
-    if this_assignment != "all":
-        #get assignment from db
-        try:
-            a = Assignment.query.filter(and_(Assignment.link_title == this_assignment, Assignment.public == "True")).one_or_none()
-            if a == []:
-                return redirect(url_for("assignments", assignments=[], this_assignment="all"))
-            return render_template("assignments.html", assignments=[], this_assignment=a)
-        except:
-            return redirect(url_for("assignments", assignments=[], this_assignment="all"))
-    else:
-        a = Assignment.query.all()
-        return render_template("assignments.html", assignments=a, this_assignment="all")
-
-@app.route("/activities/<this_activity>")
-@app.route("/activities")
-@include_site_data
-def activities(this_activity="all"):
-    if this_activity != "all":
-        #get activity from db
-        a = Activity.query.filter(Activity.id == this_activity).one_or_none()
-        if a:
-            return render_template("activities.html", activities=[], this_activity=a)
-        else:
-            a = Activity.query.filter(Activity.public == "True").all()
-            a.sort(key=lambda x: x.day.id)
-            return render_template("activities.html", activities=a, this_activity="all")
-    else:
-        a = Activity.query.filter(Activity.public == "True").all()
-        a.sort(key=lambda x: x.day.id)
-        return render_template("activities.html", activities=a, this_activity="all")
-
-@app.route("/readings")
-@include_site_data
-def readings():
-    try:
-        days = Day.query.all()
-        readings = []
-        for d in days:
-            for r in d.readings:
-                readings.append(r)
-    except:
-        readings = []
-    return render_template("readings.html", readings=readings)
-
-@app.route('/coming_soon')
-@include_site_data
-def coming_soon():
-    return render_template("soon.html")
 
 @app.before_request
 def before_request():
@@ -280,7 +200,7 @@ def signup():
         return redirect(url_for('status'))
 
 @app.errorhandler(403)
-def page_not_found(e):
+def page_not_allowed(e):
     return render_template('403.html'), 403
 
 @app.errorhandler(404)
