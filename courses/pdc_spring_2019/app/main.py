@@ -64,7 +64,6 @@ admin.add_view(ModelViewTag(Tag, db.session))
 
 #required user loader method
 login_manager = LoginManager()
-
 login_manager.init_app(app)
 login_manager.login_view = "login"
 
@@ -77,8 +76,7 @@ def unauthorized():
 def load_user(user_id):
     return UserProfile.query.get(user_id)
 
-
-#Begin route declarations
+# Begin route declarations
 @app.route("/")
 def index():
     return render_template("index.html")
