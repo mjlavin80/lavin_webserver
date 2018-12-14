@@ -77,14 +77,14 @@ class Week(db.Model):
 class Policy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
-    public = db.Column(db.String(128))
+    public = db.Column(db.String(128), default="True")
     title = db.Column(db.String(128))
     description = db.Column(db.Text(),info={'widget': CKTextAreaWidget()}, nullable=False)
 
 class Assignment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
-    public = db.Column(db.String(128))
+    public = db.Column(db.String(128), default="True")
     title = db.Column(db.String(128), nullable=False)
     submit_instructions = db.Column(db.String(128), nullable=False)
     slug = db.Column(db.String(128))
@@ -98,7 +98,7 @@ class Assignment(db.Model):
 class Reading(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
-    public = db.Column(db.String(128), nullable=False)
+    public = db.Column(db.String(128), nullable=False, default="True")
     last_name = db.Column(db.String(50))
     first_name = db.Column(db.String(50))
     page_range = db.Column(db.String(50))
@@ -116,7 +116,7 @@ class Reading(db.Model):
 class Activity(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
-    public = db.Column(db.String(128), nullable=False)
+    public = db.Column(db.String(128), nullable=False, default="True")
     title = db.Column(db.String(500), nullable=False)
     description = db.Column(db.Text(),info={'widget': CKTextAreaWidget()}, nullable=False)
     order = db.Column(db.String(100))
@@ -130,30 +130,17 @@ class Dataset(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
     lib_id = db.Column(db.String(128))
-    public = db.Column(db.String(128), nullable=False)
+    public = db.Column(db.String(128), nullable=False, default="True")
     title = db.Column(db.String(500), nullable=False)
     field_notes = db.Column(db.Text(),info={'widget': CKTextAreaWidget()}, nullable=False)
     
     def __repr__(self):
         return '<Dataset %r >' % self.title
 
-class Collection(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
-    title = db.Column(db.Text(), nullable=False)
-    public = db.Column(db.String(128), nullable=False)
-
-class CollectionItems(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    collection_id = db.Column(db.Integer, db.ForeignKey('collection.id'), nullable=False)
-    target_table = db.Column(db.String(200), nullable=False)
-    target_id = db.Column(db.Integer, nullable=False)
-    order = db.Column(db.String(100), nullable=False)
-
 class TimelineEntry(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
-    public = db.Column(db.String(128), nullable=False)
+    public = db.Column(db.String(128), nullable=False, default="True")
     headline = db.Column(db.String(500), nullable=False)
     year = db.Column(db.Integer, nullable=False)
     month = db.Column(db.Integer)
@@ -176,9 +163,12 @@ class TimelineEntry(db.Model):
         return '<Timeline Entry %r >' % self.headline
 
 class BlogPost(db.Model):
+
+    'title', 'pub_date', 'teaser', 'body', 'tags'
+
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
-    public = db.Column(db.String(128), nullable=False)
+    public = db.Column(db.String(128), nullable=False, default="True")
     title = db.Column(db.String(500), nullable=False)
     post_path = db.Column(db.String(512), nullable=False)
     pub_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
@@ -193,7 +183,7 @@ class Tag(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     tag_name = db.Column(db.String(500), nullable=False)
     tag_path = db.Column(db.String(500), nullable=False)
-    public = db.Column(db.String(128), nullable=False)
+    public = db.Column(db.String(128), nullable=False, default="True")
 
     def __repr__(self):
         return '<Tag %r >' % self.tag_name
