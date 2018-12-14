@@ -140,11 +140,11 @@ def status(message=""):
 
         #for debugging locally
     
-        user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
-        db.session.add(user)
-        db.session.commit()
-        login_user(user, force=True)
-        message="in"
+        # user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
+        # db.session.add(user)
+        # db.session.commit()
+        # login_user(user, force=True)
+        # message="in"
 
         # end local debugging block
 
