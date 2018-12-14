@@ -49,18 +49,19 @@ admin = Admin(app, name='Dashboard', template_mode='bootstrap3', index_view=MyAd
 
 # Add administrative and user views here
 
-admin.add_view(ReadingViewAdmin(Reading, db.session))
-admin.add_view(ModelViewAdmin(Assignment, db.session))
-admin.add_view(ModelViewAdmin(Activity, db.session))
-admin.add_view(ModelViewAdmin(Day, db.session))
-admin.add_view(ModelViewAdmin(Week, db.session))
-admin.add_view(ModelViewAdmin(Basics, db.session))
-admin.add_view(ModelViewAdmin(Policy, db.session))
-admin.add_view(ModelViewUserProfile(UserProfile, db.session))
-admin.add_view(ModelViewUser(Dataset, db.session))
-admin.add_view(ModelViewUser(TimelineEntry, db.session))
-admin.add_view(ModelViewBlog(BlogPost, db.session))
-admin.add_view(ModelViewTag(Tag, db.session))
+admin.add_view(ReadingViewAdmin(Reading, db.session, category="Admin Content"))
+admin.add_view(ModelViewAdmin(Assignment, db.session, category="Admin Content"))
+admin.add_view(ModelViewAdmin(Activity, db.session, category="Admin Content"))
+admin.add_view(ModelViewAdmin(Day, db.session, category="Admin Content"))
+admin.add_view(ModelViewAdmin(Week, db.session, category="Admin Content"))
+admin.add_view(ModelViewAdmin(Basics, db.session, category="Admin Content"))
+admin.add_view(ModelViewAdmin(Policy, db.session, category="Admin Content"))
+admin.add_view(ModelViewUserProfile(UserProfile, db.session, category="Student Content"))
+admin.add_view(ModelViewDataset(Dataset, db.session, category="Student Content"))
+admin.add_view(ModelViewUser(TimelineEntry, db.session, category="Student Content"))
+admin.add_view(ModelViewBlog(BlogPost, db.session, category="Student Content"))
+admin.add_view(ModelViewUserTag(Tag, db.session, category="Student Content"))
+admin.add_view(ModelViewAdminTag(Tag, db.session, name="Administer Tags", endpoint="admin_tag", category="Admin Content"))
 
 #required user loader method
 login_manager = LoginManager()
@@ -160,11 +161,11 @@ def status(message=""):
 
         #for debugging locally
     
-        # user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
-        # db.session.add(user)
-        # db.session.commit()
-        # login_user(user, force=True)
-        # message="in"
+        user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
+        db.session.add(user)
+        db.session.commit()
+        login_user(user, force=True)
+        message="in"
 
         # end local debugging block
 
