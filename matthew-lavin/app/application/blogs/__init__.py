@@ -50,6 +50,7 @@ def tags(tag_path=None):
 @blogs_blueprint.route("/blogs")
 @blogs_blueprint.route("/blogs/")
 @blogs_blueprint.route("/blogs/<blog_id>")
+@blogs_blueprint.route("/blogs/<blog_id>/")
 @blogs_blueprint.route("/blogs/<blog_id>/posts")
 @blogs_blueprint.route("/blogs/<blog_id>/posts/")
 @blogs_blueprint.route("/blogs/<blog_id>/posts/<post_id>")
