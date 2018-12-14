@@ -181,6 +181,7 @@ class ModelViewBlog(ModelViewUser):
     column_list = ('title', 'body', 'teaser','tags')
     form_overrides = dict(body=CKEditorField)
     form_columns = ('title', 'pub_date', 'teaser', 'body', 'tags')
+    column_formatters = dict(body=lambda v, c, m, p: m.body[:100]+ " ...", teaser=lambda v, c, m, p: m.teaser[:25] if m.teaser else m.teaser)
 
 class ModelViewTag(ModelView):
     column_hide_backrefs = False
