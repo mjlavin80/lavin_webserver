@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+<div class="page-header">
+      <div><h1><a href="/blogs/{{source_user.custom_blog_path}}">
+    {% if source_user.custom_blog_title %} {{ source_user.custom_blog_title }}
+    {% else %}{{ source_user.username }}'s Blog{% endif %}</a></h1></div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="contentholder" class="col-md-9">
+<h2 class="title">{{ this_post.title }}</h2>
+
+  <div class="author">  
+  <h4>
+    {% if source_user.display_name %} By {{ source_user.display_name }}
+    {% else %}
+    By {{ source_user.username }}
+    {% endif %}
+  </h4>
+  </div>
+  <div class="date">{{ this_post.pub_date.strftime('%B %d, %Y') }}</div>
+  <hr>
+    <div class="body">
+    {{ this_post.body|safe }}
+    </div>
+  <div class="tags"><h4>Tags: </h4>{% for tag in this_post.tags %}<a href="/tags/{{tag.tag_path}}" class="tag btn btn-success" role="button">{{tag.tag_name}}</a> {% endfor %}</div>
+  <hr>
+
+<div class="comments">
+<div id="disqus_thread"></div>
+
+</div>
+
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}
+
+{% block customjs %}
+<script>
+  var disqus_config = function() { this.page.identifier = "{{this_post.post_path}}"; this.page.url = "https://matthew-lavin.com/blogs/{{source_user.custom_blog_path}}/posts/{{this_post.post_path}}"; };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = '//mjlavin80.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>
+  Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+    rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+{%endblock%}
+
