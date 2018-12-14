@@ -29,7 +29,7 @@ class UserProfile(db.Model):
     email = db.Column(db.String(250), index=True, unique=True)
     authenticated = db.Column(db.Boolean, default=False)
     custom_blog_title = db.Column(db.String(1224), nullable=True)
-    custom_blog_path = db.Column(db.String(512), nullable=False)
+    custom_blog_path = db.Column(db.String(512), default="")
     approved = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
@@ -98,7 +98,7 @@ class Assignment(db.Model):
 class Reading(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
-    public = db.Column(db.String(128), nullable=False, default="True")
+    public = db.Column(db.String(128), default="True")
     last_name = db.Column(db.String(50))
     first_name = db.Column(db.String(50))
     page_range = db.Column(db.String(50))
@@ -116,7 +116,7 @@ class Reading(db.Model):
 class Activity(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
-    public = db.Column(db.String(128), nullable=False, default="True")
+    public = db.Column(db.String(128), default="True")
     title = db.Column(db.String(500), nullable=False)
     description = db.Column(db.Text(),info={'widget': CKTextAreaWidget()}, nullable=False)
     order = db.Column(db.String(100))
@@ -130,9 +130,9 @@ class Dataset(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
     lib_id = db.Column(db.String(128))
-    public = db.Column(db.String(128), nullable=False, default="True")
+    public = db.Column(db.String(128), default="True")
     title = db.Column(db.String(500), nullable=False)
-    field_notes = db.Column(db.Text(),info={'widget': CKTextAreaWidget()}, nullable=False)
+    field_notes = db.Column(db.Text(),info={'widget': CKTextAreaWidget()})
     
     def __repr__(self):
         return '<Dataset %r >' % self.title
@@ -140,7 +140,7 @@ class Dataset(db.Model):
 class TimelineEntry(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
-    public = db.Column(db.String(128), nullable=False, default="True")
+    public = db.Column(db.String(128), default="True")
     headline = db.Column(db.String(500), nullable=False)
     year = db.Column(db.Integer, nullable=False)
     month = db.Column(db.Integer)
@@ -168,7 +168,7 @@ class BlogPost(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
-    public = db.Column(db.String(128), nullable=False, default="True")
+    public = db.Column(db.String(128), default="True")
     title = db.Column(db.String(500), nullable=False)
     post_path = db.Column(db.String(512), nullable=False)
     pub_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
@@ -183,7 +183,7 @@ class Tag(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     tag_name = db.Column(db.String(500), nullable=False)
     tag_path = db.Column(db.String(500), nullable=False)
-    public = db.Column(db.String(128), nullable=False, default="True")
+    public = db.Column(db.String(128), default="True")
 
     def __repr__(self):
         return '<Tag %r >' % self.tag_name
