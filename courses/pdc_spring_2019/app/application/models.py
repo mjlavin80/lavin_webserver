@@ -170,7 +170,7 @@ class BlogPost(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
     public = db.Column(db.String(128), default="True")
     title = db.Column(db.String(500), nullable=False)
-    post_path = db.Column(db.String(512), nullable=False)
+    post_path = db.Column(db.String(512), default="")
     pub_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     teaser = db.Column(db.String(512))
     body = db.Column(db.Text(),info={'widget': CKTextAreaWidget()}, nullable=False)
@@ -182,7 +182,7 @@ class BlogPost(db.Model):
 class Tag(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     tag_name = db.Column(db.String(500), nullable=False)
-    tag_path = db.Column(db.String(500), nullable=False)
+    tag_path = db.Column(db.String(500), default="")
     public = db.Column(db.String(128), default="True")
 
     def __repr__(self):
@@ -205,7 +205,7 @@ class Basics(db.Model):
     github = db.Column(db.String(500))
     hypoth = db.Column(db.String(500))
     course_name = db.Column(db.String(500))
-    course_description = db.Column(db.Text(),info={'widget': CKTextAreaWidget()}, nullable=False)
+    course_description = db.Column(db.Text(),info={'widget': CKTextAreaWidget()}, default="")
     semester_year = db.Column(db.String(128))
     department = db.Column(db.String(128))
     institution = db.Column(db.String(128))
