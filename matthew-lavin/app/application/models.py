@@ -29,7 +29,7 @@ class UserProfile(db.Model):
     email = db.Column(db.String(250), index=True, unique=True)
     authenticated = db.Column(db.Boolean, default=False)
     custom_blog_title = db.Column(db.String(1224), nullable=True)
-    custom_blog_path = db.Column(db.String(512), nullable=False)
+    custom_blog_path = db.Column(db.String(512), default="")
     approved = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
@@ -58,9 +58,9 @@ class UserProfile(db.Model):
 class BlogPost(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
-    public = db.Column(db.String(128), nullable=False)
+    public = db.Column(db.String(128), default="True")
     title = db.Column(db.String(500), nullable=False)
-    post_path = db.Column(db.String(512), nullable=False)
+    post_path = db.Column(db.String(512), default="")
     pub_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     teaser = db.Column(db.String(512))
     body = db.Column(db.Text(),info={'widget': CKTextAreaWidget()}, nullable=False)
@@ -72,8 +72,8 @@ class BlogPost(db.Model):
 class Tag(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     tag_name = db.Column(db.String(500), nullable=False)
-    tag_path = db.Column(db.String(500), nullable=False)
-    public = db.Column(db.String(128), nullable=False)
+    tag_path = db.Column(db.String(500), default="")
+    public = db.Column(db.String(128), default="True")
 
     def __repr__(self):
         return '<Tag %r >' % self.tag_name

@@ -40,7 +40,7 @@ admin = Admin(app, name='Dashboard', template_mode='bootstrap3', index_view=MyAd
 # Add administrative and user views here
 admin.add_view(ModelViewUserProfile(UserProfile, db.session))
 admin.add_view(ModelViewBlog(BlogPost, db.session))
-admin.add_view(ModelViewTag(Tag, db.session))
+admin.add_view(ModelViewAdminTag(Tag, db.session))
 
 #required user loader method
 login_manager = LoginManager()
@@ -198,6 +198,6 @@ db.init_app(app)
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 80))
     #for production
-    #app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port)
     #for dev
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    #app.run(host='0.0.0.0', debug=True, port=5000)

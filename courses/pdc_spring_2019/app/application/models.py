@@ -164,8 +164,6 @@ class TimelineEntry(db.Model):
 
 class BlogPost(db.Model):
 
-    'title', 'pub_date', 'teaser', 'body', 'tags'
-
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
     public = db.Column(db.String(128), default="True")
