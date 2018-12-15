@@ -7,6 +7,7 @@
     {% if source_user.custom_blog_title %} {{ source_user.custom_blog_title }}
     {% else %}{{ source_user.username }}'s Blog{% endif %}</a></h1></div>
 </div>
+<div class="blog_description"><h2>{{ source_user.custom_blog_description }}</h2> </div>
 {% endblock %}
 
 {% block content %}

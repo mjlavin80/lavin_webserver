@@ -30,6 +30,7 @@ class UserProfile(db.Model):
     authenticated = db.Column(db.Boolean, default=False)
     custom_blog_title = db.Column(db.String(1224), nullable=True)
     custom_blog_path = db.Column(db.String(512), default="")
+    custom_blog_description = db.Column(db.Text(), default="")
     approved = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
