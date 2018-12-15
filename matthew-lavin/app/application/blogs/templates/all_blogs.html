@@ -13,7 +13,7 @@
     {% for blogger in bloggers %}
 
     <h4><strong><a href="/blogs/{{blogger.custom_blog_path}}">{% if blogger.custom_blog_title != "" %}{{ blogger.custom_blog_title }} {%else%} {{blogger.username}} {%endif%}:</a></strong> {{ blog_counts[loop.index0] }} posts</h4>
-    <div class="blog_description">{{ source_user.custom_blog_description }}</div>
+    <div class="blog_description">{{ blogger.custom_blog_description }}</div>
     
     {% endfor %}
   </div>
