@@ -3,11 +3,12 @@
 {% block menu %}
 {% include "menu.html" %}
 <div class="page-header">
-      <div><h1><a href="/blogs/{{source_user.custom_blog_path}}">
+      <div class="blog_title"><h1><a href="/blogs/{{source_user.custom_blog_path}}">
     {% if source_user.custom_blog_title %} {{ source_user.custom_blog_title }}
     {% else %}{{ source_user.username }}'s Blog{% endif %}</a></h1></div>
+    <div class="blog_description"><h4>{{ source_user.custom_blog_description }}</h4> </div>
 </div>
-<div class="blog_description"><h2>{{ source_user.custom_blog_description }}</h2> </div>
+
 {% endblock %}
 
 {% block content %}

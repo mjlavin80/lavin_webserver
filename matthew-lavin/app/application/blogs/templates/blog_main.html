@@ -6,13 +6,8 @@
       <div class="blog_title"><h1>{% if source_user.custom_blog_title %} {{ source_user.custom_blog_title }}
     {% else %}{{ source_user.username }}'s Blog{% endif %}</h1>
   </div>
-  <div class="blog_description"><h2>{{ source_user.custom_blog_description }}</h2> </div>
-  <div class="blog_author"><h3>
-    {% if source_user.display_name %} Posts by {{ source_user.display_name }}
-    {% else %}
-    Posts by {{ source_user.username }}
-    {% endif %}
-    </h3>
+  <div class="blog_description"><h4>{{ source_user.custom_blog_description }}</h4> </div>
+  <div class="blog_author"><h4>By {% if source_user.display_name %}{{ source_user.display_name }}{% else %}{{source_user.username}}{% endif %}</h4>
   </div>
 </div>
 
