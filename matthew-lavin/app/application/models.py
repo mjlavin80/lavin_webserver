@@ -1,15 +1,5 @@
 from application import db
-from wtforms import fields, widgets
 from datetime import datetime
-
-# Define wtforms widget and field
-class CKTextAreaWidget(widgets.TextArea):
-    def __call__(self, field, **kwargs):
-        kwargs.setdefault('class_', 'ckeditor')
-        return super(CKTextAreaWidget, self).__call__(field, **kwargs)
-
-class CKTextAreaField(fields.TextAreaField):
-    widget = CKTextAreaWidget()
 
 class GithubToken(db.Model):
     __tablename__ = 'tokens'
@@ -64,7 +54,7 @@ class BlogPost(db.Model):
     post_path = db.Column(db.String(512), default="")
     pub_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     teaser = db.Column(db.String(512))
-    body = db.Column(db.Text(),info={'widget': CKTextAreaWidget()}, nullable=False)
+    body = db.Column(db.Text(), nullable=False)
     tags = db.relationship('Tag', secondary="tags_posts", backref=db.backref('tags', 
         lazy='dynamic'))
     def __repr__(self):
