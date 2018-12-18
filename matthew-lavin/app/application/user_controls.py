@@ -90,9 +90,9 @@ class ModelViewUser(ModelView):
 
 class ModelViewBlog(ModelViewUser):
     column_hide_backrefs = False
-    column_list = ('title', 'body', 'teaser','tags')
+    column_list = ('title', 'public', 'body', 'teaser','tags')
     form_overrides = dict(body=CKEditorField)
-    form_columns = ('title', 'pub_date', 'teaser', 'body', 'tags')
+    form_columns = ('title', 'public', 'pub_date', 'teaser', 'body', 'tags')
     column_formatters = dict(body=lambda v, c, m, p: m.body[:100]+ " ...", teaser=lambda v, c, m, p: m.teaser[:25] if m.teaser else m.teaser)
     list_template = 'admin/model/custom_list.html'
 
