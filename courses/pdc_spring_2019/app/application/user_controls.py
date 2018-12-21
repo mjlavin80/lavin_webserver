@@ -34,6 +34,7 @@ class ModelViewUserTag(ModelView):
     column_list = ('tag_name',)
     form_columns = ('tag_name',)
     list_template = 'admin/model/custom_list.html'
+    create_template = 'admin/model/custom_create.html'
     can_delete = False
     can_edit = False
 
@@ -109,6 +110,8 @@ class ModelViewDataset(ModelViewUser):
     column_exclude_list = ('public', 'user_id', 'lib_id')
     form_excluded_columns = ('public', 'user_id', 'lib_id')
     list_template = 'admin/model/custom_list.html'
+    edit_template = 'admin/model/custom_edit.html'
+    create_template = 'admin/model/custom_create.html'
 
     def on_model_change(self, form, model, is_created):   
         model.public = "True"
@@ -126,6 +129,8 @@ class ModelViewBlog(ModelViewUser):
     form_columns = ('title', 'pub_date', 'teaser', 'body', 'tags')
     column_formatters = dict(body=lambda v, c, m, p: m.body[:100]+ " ...", teaser=lambda v, c, m, p: m.teaser[:25] if m.teaser else m.teaser)
     list_template = 'admin/model/custom_list.html'
+    edit_template = 'admin/model/custom_edit.html'
+    create_template = 'admin/model/custom_create.html'
 
     def on_model_change(self, form, model, is_created):
         if not self.is_owned(model.id):
@@ -142,6 +147,8 @@ class ModelViewAdmin(ModelView):
     form_overrides = dict(description=TextAreaField, course_description=TextAreaField)
     form_widget_args = dict(description=dict(rows=10), course_description=dict(rows=10))
     list_template = 'admin/model/custom_list.html'
+    edit_template = 'admin/model/custom_edit.html'
+    create_template = 'admin/model/custom_create.html'
  
     def is_accessible(self):
         if current_user.is_authenticated() and current_user.is_admin:
@@ -159,6 +166,9 @@ class ModelViewAdminOwned(ModelViewAdmin):
 class ModelViewAdminTag(ModelViewAdmin):
     column_hide_backrefs = False
     list_template = 'admin/model/custom_list.html'
+    edit_template = 'admin/model/custom_edit.html'
+    create_template = 'admin/model/custom_create.html'
+
     def on_model_change(self, form, model, is_created):   
         if model.public == "" or model.public == None or model.public == False:
             model.public = "True"
