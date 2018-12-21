@@ -1,4 +1,9 @@
 {% extends 'admin/model/edit.html' %}
+{% block page_body %}
+    {% include 'admin/menu.html' %}
+    {{ super() }}
+{% endblock %}
+
 
 {% block tail %}
 	{{ super() }}
