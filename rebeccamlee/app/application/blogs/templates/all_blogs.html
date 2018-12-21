@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+<div class="page-header">
+      <div><h1>Blogs</h1></div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="contentholder" class="col-md-9">
+  <div>
+    {% for blogger in bloggers %}
+
+    <h4><strong><a href="/blogs/{{blogger.custom_blog_path}}">{% if blogger.custom_blog_title != "" %}{{ blogger.custom_blog_title }} {%else%} {{blogger.username}} {%endif%}:</a></strong> {{ blog_counts[loop.index0] }} posts</h4>
+    <div class="blog_description">{{ blogger.custom_blog_description }}</div>
+    
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}

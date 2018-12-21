@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+<div class="page-header">
+      <div class="blog_title"><h1>{% if source_user.custom_blog_title %} {{ source_user.custom_blog_title }}
+    {% else %}{{ source_user.username }}'s Blog{% endif %}</h1>
+  </div>
+  <div class="blog_description"><h4>{{ source_user.custom_blog_description }}</h4> </div>
+  <div class="blog_author"><h4>By {% if source_user.display_name %}{{ source_user.display_name }}{% else %}{{source_user.username}}{% endif %}</h4>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block content %}
+<div id="contentholder" class="col-md-9">
+  
+  {% for post in all_posts|sort(attribute='pub_date', reverse=True)%}
+
+  <h3 class="title"><a href="/blogs/{{source_user.custom_blog_path}}/posts/{{post.post_path}}">{{ post.title }}</a></h3>
+  <div class="date">{{ post.pub_date.strftime('%B %d, %Y') }}</div>
+  <br/>
+  <div class="teaser">
+  {% if post.teaser %}
+  {{ post.teaser|safe }}
+  {% else %}
+  {{ post.body[:200]|safe }} ... 
+  <a href="/blogs/{{source_user.custom_blog_path}}/posts/{{post.post_path}}">[Read More]</a>
+  {% endif %}
+</div>
+  <div class="tags"><h4>Tags: </h4>{% for tag in post.tags %}<a href="/tags/{{tag.tag_path}}" class="tag btn btn-success" role="button">{{tag.tag_name}}</a> {% endfor %}</div>
+  <hr>
+  {% endfor %}
+
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}
