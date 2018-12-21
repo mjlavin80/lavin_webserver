@@ -26,6 +26,7 @@ services:
       - mtb_fall_2018
       - dh_fall_2018
       - pdc_spring_2019
+      - rebeccamlee
 
   flask_base:
     build: ./flaskbase
@@ -49,9 +50,17 @@ services:
     links:
       - flask_base
 
+  rebeccamlee:
+    build: ./rebeccamlee
+    container_name: rebeccamlee
+    links:
+      - flask_base_2019
+
   matthew-lavin:
     build: ./matthew-lavin
     container_name: matthew-lavin
+    links: 
+      - flask_base_2019
 
   humanitiesdata:
     build: ./humanitiesdata

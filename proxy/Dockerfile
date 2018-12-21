@@ -12,3 +12,5 @@ COPY certs/comp/fullchain.pem /etc/nginx/comp/fullchain.pem
 COPY certs/bh/privkey.pem /etc/nginx/bh/privkey.pem
 COPY certs/bh/fullchain.pem /etc/nginx/bh/fullchain.pem
 
+COPY certs/rml/privkey.pem /etc/nginx/rml/privkey.pem
+COPY certs/rml/fullchain.pem /etc/nginx/rml/fullchain.pem
