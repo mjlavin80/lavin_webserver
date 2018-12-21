@@ -48,14 +48,14 @@ def additional_context():
 admin = Admin(app, name='Dashboard', template_mode='bootstrap3', index_view=MyAdminIndexView())
 
 # Add administrative and user views here
-
-admin.add_view(ReadingViewAdmin(Reading, db.session, category="Admin Content"))
-admin.add_view(ModelViewAdmin(Assignment, db.session, category="Admin Content"))
-admin.add_view(ModelViewAdmin(Activity, db.session, category="Admin Content"))
+ 
+admin.add_view(ReadingViewAdminOwned(Reading, db.session, category="Admin Content"))
+admin.add_view(ModelViewAdminOwned(Assignment, db.session, category="Admin Content"))
+admin.add_view(ModelViewAdminOwned(Activity, db.session, category="Admin Content"))
 admin.add_view(ModelViewAdmin(Day, db.session, category="Admin Content"))
 admin.add_view(ModelViewAdmin(Week, db.session, category="Admin Content"))
-admin.add_view(ModelViewAdmin(Basics, db.session, category="Admin Content"))
-admin.add_view(ModelViewAdmin(Policy, db.session, category="Admin Content"))
+admin.add_view(ModelViewAdminOwned(Basics, db.session, category="Admin Content"))
+admin.add_view(ModelViewAdminOwned(Policy, db.session, category="Admin Content"))
 admin.add_view(ModelViewUserProfile(UserProfile, db.session, category="Student Content"))
 admin.add_view(ModelViewDataset(Dataset, db.session, category="Student Content"))
 admin.add_view(ModelViewUser(TimelineEntry, db.session, category="Student Content"))

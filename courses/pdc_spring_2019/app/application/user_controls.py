@@ -142,11 +142,7 @@ class ModelViewAdmin(ModelView):
     form_overrides = dict(description=TextAreaField, course_description=TextAreaField)
     form_widget_args = dict(description=dict(rows=10), course_description=dict(rows=10))
     list_template = 'admin/model/custom_list.html'
-
-    def on_model_change(self, form, model, is_created):
-        if model.user_id == "" or model.user_id == None or model.user_id == False:
-            model.user_id = current_user.id 
-        
+ 
     def is_accessible(self):
         if current_user.is_authenticated() and current_user.is_admin:
             return current_user.is_authenticated()
@@ -154,6 +150,11 @@ class ModelViewAdmin(ModelView):
     def inaccessible_callback(self, name, **kwargs):
         # redirect to login page if user doesn't have access
         return redirect(url_for('status'))
+
+class ModelViewAdminOwned(ModelViewAdmin):
+    def on_model_change(self, form, model, is_created):
+        if model.user_id == "" or model.user_id == None or model.user_id == False:
+            model.user_id = current_user.id 
 
 class ModelViewAdminTag(ModelViewAdmin):
     column_hide_backrefs = False
