@@ -4,7 +4,7 @@
 {% include "menu.html" %}
 <div class="page-header">
       
-      <div><h1>Teaching</h1></div>
+      <div><h1>{{ data.title }}</h1></div>
   
 </div>
 {% endblock %}
@@ -12,96 +12,7 @@
 {% block content %}
 
 <div id="contentholder" class="col-md-9">
-
-<table class='table table-striped'>
-<tbody>
-<tr>
-	<td>
-		<h3>Spring 2019</h3>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h4><a href="https://pdc-spring-2019.matthew-lavin.com">Projects in Digital Composition</a></h4>
-		<h4><a href="https://mtb-fall-2018.matthew-lavin.com">Making the Book</a></h4>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h3>Fall 2018</h3>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h4><a href="https://dh-fall-2018.matthew-lavin.com">Digital Humanities Approaches to Textual Objects</a></h4>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h3>Spring 2018</h3>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h4><a href="https://cdm-spring-2018.matthew-lavin.com">Composing Digital Media</a></h4>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h3>Fall 2017</h3>
-
-	</td>
-</tr>
-<tr>
-	<td>
-		<h4><a href="https://mtb-fall-2017.matthew-lavin.com">Making the Book</a></h4>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h3>Spring 2017</h3>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h4><a href="https://nt-spring-2017.matthew-lavin.com">Narrative and Technology</a></h4>
-		<h4><a href="https://acdm-spring-2017.matthew-lavin.com">Advanced Composing Digital Media</a></h4>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h3>Fall 2016</h3>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h4><a href="https://matthew-lavin.com/teaching/digital-pedagogy-fall-2016/">Digital Pedagogy</a></h4>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h3>Spring 2016</h3>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h4>Narrative and Technology ... has been archived</h4>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h3>Fall 2015</h3>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h4>Composing Digital Media ... has been archived</h4>
-		<h4>Narrative and Technology ... has been archived</h4>
-	</td>
-</tr>
-</tbody>
-</table>
-
+{{ data.page_data|safe }}
 </div>
 {% endblock %}
 

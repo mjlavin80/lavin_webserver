@@ -3,136 +3,14 @@
 {% block menu %}
 {% include "menu.html" %}
 <div class="page-header">
-      <div><h1>Projects</h1></div>
+      <div><h1>{{ data.title }}</h1></div>
 </div>
 {% endblock %}
 
 {% block content %}
 
 <div id="contentholder" class="col-md-9">
-<h3>University of Pittsburgh, 2015-present</h3>
-<table class='table table-striped'>
-<tbody>
-<tr>
-	<td>
-		<h4><a href="https://humanitiesdata.com">Humanitiesdata.com</a></h4>
-	</td>
-</tr>
-<tr>
-	<td>
-		<p>An initiative dedicated to increasing the overall number of digital pathways to humanities data and making it easier to search for data by its relevance to specific subfields.</p>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h4><a href="https://collectionsasdata.github.io/part2whole/cohort1">From Collection Records to Data Layers: A Critical Experiment in Collaborative Practice</a></h4>
-	</td>
-</tr>
-<tr>
-	<td>
-		<p>A collaboration with Tyrica Terry Kapral, Aaron Brenner, and University of Pittsburgh's University Library Services. The grant supports experimental pedagogy that engages students in creating "data layers" augmenting digital scans of serials and ephemera that represent traditionally excluded or marginalized perspectives.
-		</p>
-</tr>
-<tr>
-	<td>
-		<h4><a href="https://dmap.pitt.edu">Digital Media and Pedagogy Website</a></h4>
-	</td>
-</tr>
-<tr>
-	<td>
-		<p>An effort to collect, curate, and disseminate resources on the production and teaching of digital media in the English Department at the University of Pittsburgh.</p>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h4><a href="https://github.com/TextualNetworks">Computational Approaches to Textual Networks</a></h4>
-	</td>
-</tr>
-<tr>
-	<td>
-		<p>A small project team was awarded funds for two half-time Graduate Student Assistants during Summer 2016 in order to jump-start the process of assembling two research datasets related to textual networks.</p>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h4><a href="https://secretpittsburgh.pitt.edu">Secret Pittsburgh</a></h4>
-	</td>
-</tr>
-<tr>
-	<td>
-		<p>The "Secret Pittsburgh" Literature class invites University of Pittsburgh students to explore unusual or hidden spaces of the city, including "secret" spaces within well-known landmarks. Coursework requires them to explore connections among politics, environment, history, community, and written texts. The conclusion to a semester of reading, writing and on-the-ground investigation is the final project, where students construct entries for this online guidebook.</p>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h4><a href="https://courses.english.pitt.edu/">English Department Online Pedagogy Repository</a></h4>
-	</td>
-</tr>
-<tr>
-	<td>
-		<p>This repository seeks to curate and share teaching materials representing undergraduate and graduate courses from each of the department's four programs: Composition, Literature, Film, and Writing.</p>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h4><a href="http://digits.pub">Digits</a></h4>
-	</td>
-</tr>
-<tr>
-	<td>
-		<p>A Mellon-funded initiative to research software containerization for digital humanities.</p>
-	</td>
-</tr>
-</tbody>
-</table>
-
-<h3>St. Lawrence University, 2013-2015</h3>
-
-<table class='table table-striped'>
-<tbody>
-<tr>
-	<td>
-		<h4><a href="http://digital.stlawu.edu/project/paths-buddha">Paths to the Buddha</a></h4>
-	</td>
-</tr>
-<tr>
-	<td>
-		<p>A cluster of interrelated courses aimed at fostering inter-departmental collaborative teaching in ways that are unique to St. Lawrence University, creating opportunities for group participants to learn from each other’s research and teaching, developing an interdisciplinary course reader and online digital collections for use in St. Lawrence University classrooms and beyond.</p>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h4><a href="http://digital.stlawu.edu/project/peoples-history-archive">People's History Archive</a></h4>
-	</td>
-</tr>
-<tr>
-	<td>
-		<p>a multi-faceted, interdisciplinary collaborative project that offers students, faculty, alumni, and others documenting the creative ways in which ordinary people make use of public space to express themselves.</p>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h4><a href="http://digital.stlawu.edu/project/digital-london">Digital London</a></h4>
-	</td>
-</tr>
-<tr>
-	<td>
-		<p>A pedagogical experiment combining a digital humanities lab component with a topical focus on early modern London and the public sphere, co-taught by Matt Lavin and Juraj Kittler.</p>
-	</td>
-</tr>
-<tr>
-	<td>
-		<h4><a href="http://digital.stlawu.edu/project/twitter-society">Twitter and Society</a></h4>
-	</td>
-</tr>
-<tr>
-	<td>
-		<p>Sociology capstone course at St. Lawrence University taught by Stephen Barnard.</p>
-	</td>
-</tr>
-</tbody>
-</table>
-
+{{ data.page_data|safe }}
 </div>
 
 {% endblock %}
