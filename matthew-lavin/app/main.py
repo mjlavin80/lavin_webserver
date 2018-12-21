@@ -41,6 +41,7 @@ admin = Admin(app, name='Dashboard', template_mode='bootstrap3', index_view=MyAd
 admin.add_view(ModelViewUserProfile(UserProfile, db.session))
 admin.add_view(ModelViewBlog(BlogPost, db.session))
 admin.add_view(ModelViewAdminTag(Tag, db.session))
+admin.add_view(ModelViewAdmin(StaticPage, db.session))
 
 #required user loader method
 login_manager = LoginManager()
@@ -59,7 +60,8 @@ def load_user(user_id):
 # Begin route declarations
 @app.route("/")
 def index():
-    return render_template("index.html")
+    data = StaticPage.query.filter(StaticPage.route == "index").one_or_none()
+    return render_template("index.html", data=data)
 
 @app.before_request
 def before_request():

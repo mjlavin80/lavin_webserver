@@ -46,6 +46,14 @@ class UserProfile(db.Model):
         """False, as anonymous users aren't supported."""
         return False
 
+class StaticPage(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
+    public = db.Column(db.String(128), default="True")
+    title = db.Column(db.String(500), nullable=False)
+    route = db.Column(db.String(512), nullable=False)
+    page_data = db.Column(db.Text(), nullable=False)
+
 class BlogPost(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
