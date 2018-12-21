@@ -107,8 +107,8 @@ class ModelViewBlog(ModelViewUser):
             model.post_path = quote(model.title.lower().replace(" ", "-")) 
 
 class ModelViewAdmin(ModelView):
-    column_formatters = dict(course_description=lambda v, c, m, p: m.course_description[:25]+ " ...", description=lambda v, c, m, p: m.description[:25]+ " ...")
-    form_overrides = dict(description=TextAreaField, course_description=TextAreaField)
+    column_formatters = dict(page_data=lambda v, c, m, p: m.page_data[:25]+ " ...", description=lambda v, c, m, p: m.description[:25]+ " ...")
+    form_overrides = dict(description=TextAreaField, page_data=CKEditorField)
     form_widget_args = dict(description=dict(rows=10), course_description=dict(rows=10))
     list_template = 'admin/model/custom_list.html'
 
@@ -123,6 +123,7 @@ class ModelViewAdmin(ModelView):
     def inaccessible_callback(self, name, **kwargs):
         # redirect to login page if user doesn't have access
         return redirect(url_for('status'))
+        
 
 class ModelViewAdminTag(ModelViewAdmin):
     column_hide_backrefs = False
