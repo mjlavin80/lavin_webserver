@@ -49,7 +49,7 @@ admin = Admin(app, name='Dashboard', template_mode='bootstrap3', index_view=MyAd
 
 # Add administrative and user views here
  
-admin.add_view(ReadingViewAdminOwned(Reading, db.session, category="Admin Content"))
+admin.add_view(ReadingViewAdmin(Reading, db.session, category="Admin Content"))
 admin.add_view(ModelViewAdminOwned(Assignment, db.session, category="Admin Content"))
 admin.add_view(ModelViewAdminOwned(Activity, db.session, category="Admin Content"))
 admin.add_view(ModelViewAdmin(Day, db.session, category="Admin Content"))
