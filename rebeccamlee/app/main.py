@@ -16,12 +16,12 @@ from sqlalchemy.sql import and_, or_
 import json, requests
 import datetime
 from urllib.parse import quote
-from application.blogs import blogs_blueprint
+from application.blog import blog_blueprint
 from application.ml import ml_blueprint
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
-app.register_blueprint(blogs_blueprint)
+app.register_blueprint(blog_blueprint)
 app.register_blueprint(ml_blueprint)
 
 #bcrypt instance for password hashing

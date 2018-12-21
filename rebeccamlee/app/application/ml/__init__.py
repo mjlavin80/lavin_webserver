@@ -9,8 +9,14 @@ def teaching():
     data = StaticPage.query.filter(StaticPage.route == "teaching").one_or_none()
     return render_template('teaching.html', data=data)
 
-@ml_blueprint.route("/projects")
-@ml_blueprint.route("/projects/")
-def projects():
-    data = StaticPage.query.filter(StaticPage.route == "projects").one_or_none()
-    return render_template('projects.html', data=data)
+@ml_blueprint.route("/portfolio")
+@ml_blueprint.route("/portfolio/")
+def portfolio():
+    data = StaticPage.query.filter(StaticPage.route == "portfolio").one_or_none()
+    return render_template('portfolio.html', data=data)
+
+@ml_blueprint.route("/resume")
+@ml_blueprint.route("/resume/")
+def resume():
+    data = StaticPage.query.filter(StaticPage.route == "resume").one_or_none()
+    return render_template('resume.html', data=data)
