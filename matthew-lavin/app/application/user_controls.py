@@ -111,7 +111,9 @@ class ModelViewAdmin(ModelView):
     form_overrides = dict(description=TextAreaField, page_data=CKEditorField)
     form_widget_args = dict(description=dict(rows=10), course_description=dict(rows=10))
     list_template = 'admin/model/custom_list.html'
-
+    edit_template = 'admin/model/custom_edit.html'
+    create_template = 'admin/model/custom_create.html'
+    
     def on_model_change(self, form, model, is_created):
         if model.user_id == "" or model.user_id == None or model.user_id == False:
             model.user_id = current_user.id 
