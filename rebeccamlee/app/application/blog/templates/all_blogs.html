@@ -3,7 +3,7 @@
 {% block menu %}
 {% include "menu.html" %}
 <div class="page-header">
-      <div><h1>Blogs</h1></div>
+      <div><h1>Blog</h1></div>
 </div>
 {% endblock %}
 
@@ -12,7 +12,7 @@
   <div>
     {% for blogger in bloggers %}
 
-    <h4><strong><a href="/blogs/{{blogger.custom_blog_path}}">{% if blogger.custom_blog_title != "" %}{{ blogger.custom_blog_title }} {%else%} {{blogger.username}} {%endif%}:</a></strong> {{ blog_counts[loop.index0] }} posts</h4>
+    <h4><strong><a href="/blog/{{blogger.custom_blog_path}}">{% if blogger.custom_blog_title != "" %}{{ blogger.custom_blog_title }} {%else%} {{blogger.username}} {%endif%}:</a></strong> {{ blog_counts[loop.index0] }} posts</h4>
     <div class="blog_description">{{ blogger.custom_blog_description }}</div>
     
     {% endfor %}

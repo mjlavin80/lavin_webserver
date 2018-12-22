@@ -3,7 +3,7 @@
 {% block menu %}
 {% include "menu.html" %}
 <div class="page-header">
-      <div class="blog_title"><h1><a href="/blogs/{{source_user.custom_blog_path}}">
+      <div class="blog_title"><h1><a href="/blog/{{source_user.custom_blog_path}}">
     {% if source_user.custom_blog_title %} {{ source_user.custom_blog_title }}
     {% else %}{{ source_user.username }}'s Blog{% endif %}</a></h1></div>
     <div class="blog_description"><h4>{{ source_user.custom_blog_description }}</h4> </div>
@@ -45,7 +45,7 @@
 
 {% block customjs %}
 <script>
-  var disqus_config = function() { this.page.identifier = "{{this_post.post_path}}"; this.page.url = "https://matthew-lavin.com/blogs/{{source_user.custom_blog_path}}/posts/{{this_post.post_path}}"; };
+  var disqus_config = function() { this.page.identifier = "{{this_post.post_path}}"; this.page.url = "https://rebeccamlee.com/blog/{{source_user.custom_blog_path}}/posts/{{this_post.post_path}}"; };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = '//mjlavin80.disqus.com/embed.js';
