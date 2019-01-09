@@ -84,6 +84,8 @@ def planner(baseday=None):
             last_due = find_assignment(days_before)
             next_due = find_assignment(days_after, mode='after')
 
+            print(type(t))
+
             try:
                 _next_three = days_after[0:3]
             except:
@@ -98,7 +100,7 @@ def planner(baseday=None):
                 _last.name = "No data to display"
             try:
                 last_due_date = last_due[0]
-                days_passed = t - datetime.datetime.strptime(last_due_date.name, "%A, %B %d, %Y").date()
+                days_passed = t - datetime.strptime(last_due_date.name, "%A, %B %d, %Y").date()
                 days_ago = days_passed.days
             except:
                 last_due_date = Day()
@@ -108,9 +110,9 @@ def planner(baseday=None):
                 fake_assignment.title = "No data to display"
                 last_due_date.assignments.append(fake_assignment)
                 days_ago = 0
-            try:
+            try:    
                 next_due_date = next_due[0]
-                days_to = datetime.datetime.strptime(next_due_date.name, "%A, %B %d, %Y").date() - t
+                days_to = datetime.strptime(next_due_date.name, "%A, %B %d, %Y").date() - t
                 days_to_next = days_to.days
             except:
                 next_due_date = Day()
@@ -121,8 +123,8 @@ def planner(baseday=None):
                 next_due_date.assignments.append(fake_assignment)
                 days_to_next = 0
             
-
             today = t.strftime("%A, %B %d, %Y").replace(" 0", " ")
+            
             return render_template("planner.html", project_tasks=project_tasks, last=_last, next_three=_next_three, next_due_date=next_due_date, last_due_date=last_due_date, days_ago=days_ago, days_to_next=days_to_next, today=today) 
         else:
             return redirect(url_for('status'))
