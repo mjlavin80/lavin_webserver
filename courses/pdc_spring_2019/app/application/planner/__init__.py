@@ -84,8 +84,6 @@ def planner(baseday=None):
             last_due = find_assignment(days_before)
             next_due = find_assignment(days_after, mode='after')
 
-            print(type(t))
-
             try:
                 _next_three = days_after[0:3]
             except:
