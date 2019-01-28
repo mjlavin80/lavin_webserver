@@ -26,7 +26,6 @@ class AuthenticatedMenuLink(MenuLink):
         if current_user.is_authenticated() and current_user.is_approved():
             return current_user.is_authenticated()
 
-
 #begin admin and user views
 
 class ModelViewUserTag(ModelView):
@@ -71,8 +70,9 @@ class ModelViewUser(ModelView):
             return False
 
     def on_model_change(self, form, model, is_created):   
-        if not self.is_owned(model.id):
-            abort(403)
+        if model.id:
+            if not self.is_owned(model.id):
+                abort(403)
         if model.public == "" or model.public == None or model.public == False:
             model.public = "True" 
         if model.user_id == "" or model.user_id == None or model.user_id == False:
@@ -115,8 +115,9 @@ class ModelViewDataset(ModelViewUser):
 
     def on_model_change(self, form, model, is_created):   
         model.public = "True"
-        if not self.is_owned(model.id):
-            abort(403)
+        if model.id:
+            if not self.is_owned(model.id):
+                abort(403)
         if model.public == "" or model.public == None or model.public == False:
             model.public = "True"
         if model.user_id == "" or model.user_id == None or model.public == False:
@@ -133,8 +134,9 @@ class ModelViewBlog(ModelViewUser):
     create_template = 'admin/model/custom_create.html'
 
     def on_model_change(self, form, model, is_created):
-        if not self.is_owned(model.id):
-            abort(403)
+        if model.id:
+            if not self.is_owned(model.id):
+                abort(403)
         if model.user_id == "" or model.user_id == None or model.user_id == False:
             model.user_id = current_user.id
         if model.public == "" or model.public == None or model.public == False:
