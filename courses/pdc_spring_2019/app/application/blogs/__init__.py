@@ -62,9 +62,11 @@ def blogs(blog_id=None, post_id=None):
             abort(404)
         if post_id:
             # look up by path or id
-            this_post = BlogPost.query.filter(or_(BlogPost.id == post_id, BlogPost.post_path == quote(post_id))).one_or_none()
+            this_post = BlogPost.query.filter(or_(BlogPost.id == post_id, BlogPost.post_path == quote(post_id))).all()
             if not this_post:
                 abort(404)
+            else:
+                this_post = this_post[0]
             return render_template("blog_post.html", this_post=this_post, source_user=source_user)
             
         else:
