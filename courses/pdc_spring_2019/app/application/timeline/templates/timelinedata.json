@@ -30,7 +30,7 @@
  "thumb": "{{row.media_thumbnail if row.media_thumbnail}}" },
 "text": { 
  "headline": "{{row.headline if row.headline}}",
- "text": "{{row.entry_blurb if row.entry_blurb}} <a target=\"blank\" href=\"timeline/{{row.id if row.id}}\">View Full Essay</a>" },
+ "text": "{{row.entry_blurb if row.entry_blurb}} <a target=\"blank\" href=\"{{row.id if row.id}}\">View Full Essay</a>" },
 "type": "{% if row.entry_type %}{{row.entry_type}}{% else %}overview{% endif %}" 
  }
 {% if loop.index < timeline_rows|length %}
