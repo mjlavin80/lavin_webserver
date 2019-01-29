@@ -61,13 +61,16 @@ def blogs(blog_id=None, post_id=None):
         if not source_user:
             abort(404)
         if post_id:
+            all_posts = BlogPost.query.filter(BlogPost.user_id == source_user.id).all()
             # look up by path or id
-            this_post = BlogPost.query.filter(or_(BlogPost.id == post_id, BlogPost.post_path == quote(post_id))).all()
-            if not this_post:
-                abort(404)
+            this_post = [i for i in all_posts if i.post_path == post_id]
+            if len(this_post) == 0:
+                this_post = [i for i in all_posts if i.id == post_id]
+            if len(this_post) == 0:
+                #return template
+                return render_template("blog_main.html", all_posts=all_posts, source_user=source_user) 
             else:
-                this_post = this_post[0]
-            return render_template("blog_post.html", this_post=this_post, source_user=source_user)
+                return render_template("blog_post.html", this_post=this_post[0], source_user=source_user)
             
         else:
             all_posts = BlogPost.query.filter(BlogPost.user_id == source_user.id).all()
