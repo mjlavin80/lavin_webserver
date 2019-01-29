@@ -62,8 +62,9 @@ def blogs(blog_id=None, post_id=None):
             abort(404)
         if post_id:
             all_posts = BlogPost.query.filter(BlogPost.user_id == source_user.id).all()
+            print(all_posts)
             # look up by path or id
-            this_post = [i for i in all_posts if i.post_path == post_id]
+            this_post = [i for i in all_posts if i.post_path == quote(post_id)]
             if len(this_post) == 0:
                 this_post = [i for i in all_posts if i.id == post_id]
             if len(this_post) == 0:
