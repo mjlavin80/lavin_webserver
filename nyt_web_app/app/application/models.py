@@ -84,7 +84,7 @@ class ClusterMeta(db.Model):
     source_cluster = db.Column(db.Integer, db.ForeignKey('metadata.id'))
     nyt_id = db.Column(db.String(99))
     review_type = db.Column(db.String(500))
-    corrected_transcription = db.Column(db.String(99999))
+    full_text = db.Column(db.String(99999))
     perceived_author_name = db.Column(db.String(99))
     perceived_author_gender = db.Column(db.String(99))
     
