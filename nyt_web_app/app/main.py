@@ -91,6 +91,7 @@ admin = Admin(app, name='Dashboard', template_mode='bootstrap3', index_view=MyAd
 # Add administrative views here
 admin.add_view(ModelViewAdmin(User, db.session))
 admin.add_view(MetaViewAdmin(Metadata, db.session))
+admin.add_view(MetaViewAdmin(ClusterMeta, db.session))
 admin.add_view(ModelViewAdmin(Work, db.session))
 admin.add_view(ModelViewAdmin(Author, db.session))
 

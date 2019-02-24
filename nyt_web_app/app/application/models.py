@@ -74,9 +74,22 @@ class Metadata(db.Model):
     reviewed_work_title = db.Column(db.String(500))
     nyt_pdf_endpoint = db.Column(db.String(500))
     reviewed_work = db.Column(db.Integer, db.ForeignKey('work.id'))
+    cluster_meta_children = db.relationship('ClusterMeta', backref='cluster_meta_children', lazy='joined')
 
     def __repr__(self):
         return 'Review %r' % (self.nyt_id,)
+
+class ClusterMeta(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    source_cluster = db.Column(db.Integer, db.ForeignKey('metadata.id'))
+    nyt_id = db.Column(db.String(99))
+    review_type = db.Column(db.String(500))
+    corrected_transcription = db.Column(db.String(99999))
+    perceived_author_name = db.Column(db.String(99))
+    perceived_author_gender = db.Column(db.String(99))
+    
+    def __repr__(self):
+        return 'Cluster from %r - %r' % (self.nyt_id , self.id)
 
 class Work(db.Model):
     id = db.Column(db.Integer, primary_key=True)
