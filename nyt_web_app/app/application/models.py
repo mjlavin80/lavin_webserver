@@ -83,6 +83,7 @@ class ClusterMeta(db.Model):
     nyt_id = db.Column(db.String(99))
     review_type = db.Column(db.String(500))
     full_text = db.Column(db.String(99999))
+    reviewed_work_title =db.Column(db.String(500))
     perceived_author_name = db.Column(db.String(99))
     perceived_author_gender = db.Column(db.String(99))
     
