@@ -76,21 +76,17 @@ class ModelViewAdmin(ModelView):
         return redirect(url_for('login'))
 
 class MetaViewAdmin(ModelViewAdmin):
-    def _url_formatter(view, context, model, name):
-        return Markup(
-            u"<a href='%s' target='blank'>NYT Link</a>" % model.nyt_pdf_endpoint if model.nyt_pdf_endpoint else u"")
-    column_formatters = dict(corrected_transcription=lambda v, c, m, p: m.corrected_transcription[:25]+ " ...", ocr_transcription=lambda v, c, m, p: m.ocr_transcription[:25]+ " ...")
-    column_formatters['nyt_pdf_endpoint'] = _url_formatter
-    column_filters = ('review_type',)
+    column_filters = ('review_type', 'nyt_id')
     #column_list = ['nyt_id', 'review_type', 'headline', 'byline', 'pub_date', 'ocr_transcription', 'corrected_transcription', 'metadata_work']
-    column_exclude_list = ('month', 'year', 'byline', 'corrected_transcription','document_type', 'page', 'word_count')
-    form_excluded_columns = ('month', 'year', 'byline', 'corrected_transcription','document_type', 'page')
+    column_exclude_list = ('month', 'year', 'byline', 'corrected_transcription','document_type', 'page', 'word_count', 'full_text')
+    form_excluded_columns = ('month', 'year', 'byline','document_type', 'page')
 
 admin = Admin(app, name='Dashboard', template_mode='bootstrap3', index_view=MyAdminIndexView())
 
 # Add administrative views here
 admin.add_view(ModelViewAdmin(User, db.session))
 admin.add_view(MetaViewAdmin(Metadata, db.session))
+admin.add_view(MetaViewAdmin(ClusterMeta, db.session))
 admin.add_view(ModelViewAdmin(Work, db.session))
 admin.add_view(ModelViewAdmin(Author, db.session))
 
