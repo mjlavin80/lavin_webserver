@@ -137,57 +137,52 @@ def index(nyt_id=None):
     else:
         return render_template("index.html", nyt_id=None, endpoint=None)
 
-@app.route("/f")
-@app.route("/f/<nyt_id>")
-def female(nyt_id=None):
+@app.route("/cluster")
+@app.route("/cluster")
+def cluster(nyt_id=None):
     if current_user.is_authenticated and current_user.is_admin:
-        if nyt_id != None:
-            row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
-            endpoint = row.nyt_pdf_endpoint
+        row = Metadata().query.filter(and_(Metadata.review_type == "cluster", Metadata.year > 1905, Metadata.year < 1925)).order_by(func.rand()).first()
+        endpoint = row.nyt_pdf_endpoint
+        if ".xml" not in endpoint:
             r = requests.get(endpoint)
             html = BeautifulSoup(r.text, features="html.parser")
             link = html.find("a", {"class":"user-action archive-user-action"})
             pdf_link = link['href'].replace('.html', '.pdf')
+        else: pdf_link = endpoint
 
-            return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint, pdf_link=pdf_link)
-        else:
-            row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit_probably_female", Metadata.year > 1905, Metadata.year < 1925)).order_by(func.rand()).first()
-            endpoint = row.nyt_pdf_endpoint
-            if ".xml" not in endpoint:
-                r = requests.get(endpoint)
-                html = BeautifulSoup(r.text, features="html.parser")
-                link = html.find("a", {"class":"user-action archive-user-action"})
-                pdf_link = link['href'].replace('.html', '.pdf')
-            else: pdf_link = endpoint
+        return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint, pdf_link=pdf_link) 
+    else:
+        return render_template("index.html", nyt_id=None, endpoint=None, pdf_link=None)
 
-            return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint, pdf_link=pdf_link) 
+@app.route("/f")
+@app.route("/f/<nyt_id>")
+def female(nyt_id=None):
+    if current_user.is_authenticated and current_user.is_admin:
+        row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit_probably_female", Metadata.year > 1905, Metadata.year < 1925)).order_by(func.rand()).first()
+        endpoint = row.nyt_pdf_endpoint
+        if ".xml" not in endpoint:
+            r = requests.get(endpoint)
+            html = BeautifulSoup(r.text, features="html.parser")
+            link = html.find("a", {"class":"user-action archive-user-action"})
+            pdf_link = link['href'].replace('.html', '.pdf')
+        else: pdf_link = endpoint
+        return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint, pdf_link=pdf_link) 
     else:
         return render_template("index.html", nyt_id=None, endpoint=None, pdf_link=None)
 
 @app.route("/m")
 @app.route("/m/<nyt_id>")
 def male(nyt_id=None):
-    if current_user.is_authenticated and current_user.is_admin:
-        if nyt_id != None:
-            row = Metadata().query.filter(Metadata.nyt_id == nyt_id).one_or_none()
-            endpoint = row.nyt_pdf_endpoint
+    if current_user.is_authenticated and current_user.is_admin:    
+        row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit_probably_male", Metadata.year > 1905, Metadata.year < 1925)).filter(Metadata.headline.like("%$%")).order_by(func.rand()).first()
+        endpoint = row.nyt_pdf_endpoint
+        if ".xml" not in endpoint:
             r = requests.get(endpoint)
             html = BeautifulSoup(r.text, features="html.parser")
             link = html.find("a", {"class":"user-action archive-user-action"})
             pdf_link = link['href'].replace('.html', '.pdf')
-
-            return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint, pdf_link=pdf_link)
-        else:
-            row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit_probably_male", Metadata.year > 1905, Metadata.year < 1925)).filter(Metadata.headline.like("%$%")).order_by(func.rand()).first()
-            endpoint = row.nyt_pdf_endpoint
-            if ".xml" not in endpoint:
-                r = requests.get(endpoint)
-                html = BeautifulSoup(r.text, features="html.parser")
-                link = html.find("a", {"class":"user-action archive-user-action"})
-                pdf_link = link['href'].replace('.html', '.pdf')
-            else: pdf_link = endpoint
-            
-            return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint, pdf_link=pdf_link) 
+        else: pdf_link = endpoint
+        return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint, pdf_link=pdf_link) 
     else:
         return render_template("index.html", nyt_id=None, endpoint=None, pdf_link=None)
 
