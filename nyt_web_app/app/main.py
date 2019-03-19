@@ -174,7 +174,7 @@ def female(nyt_id=None):
 @app.route("/m/<nyt_id>")
 def male(nyt_id=None):
     if current_user.is_authenticated and current_user.is_admin:    
-        row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit_probably_male", Metadata.year > 1905, Metadata.year < 1925)).filter(Metadata.headline.like("%$%")).order_by(func.rand()).first()
+        row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit_probably_male", Metadata.year > 1905, Metadata.year < 1923)).order_by(func.rand()).first()
         endpoint = row.nyt_pdf_endpoint
         if ".xml" not in endpoint:
             r = requests.get(endpoint)
