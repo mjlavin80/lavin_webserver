@@ -159,6 +159,8 @@ def cluster(nyt_id=None):
 def female(nyt_id=None):
     if current_user.is_authenticated and current_user.is_admin:
         row = Metadata().query.filter(and_(Metadata.review_type == "needs_audit_probably_female", Metadata.year > 1905, Metadata.year < 1925)).order_by(func.rand()).first()
+        if not row:
+            return render_template("index.html", nyt_id=None, endpoint=None)
         endpoint = row.nyt_pdf_endpoint
         if ".xml" not in endpoint:
             r = requests.get(endpoint)
