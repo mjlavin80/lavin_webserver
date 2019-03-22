@@ -11,7 +11,7 @@ from flask_login import LoginManager, login_user, logout_user, current_user
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_github import GitHub
-from config import GITHUB_ADMIN
+from config import GITHUB_ADMIN, STORED_PW
 from sqlalchemy.sql import and_, or_
 import json, requests
 import datetime
@@ -111,6 +111,23 @@ def logout():
     except:
         pass
     return redirect(url_for('index'))
+
+@app.route('/nanzda', methods=["GET", "POST"])
+def nanzda():
+    try:
+        password =  request.form["password"]
+        pw_hash = bcrypt.generate_password_hash(STORED_PW)
+        result = bcrypt.check_password_hash(pw_hash, password)
+
+        if result == True:
+            return render_template("nanzda.html", auth=True)
+        else:
+            return render_template("nanzda.html", auth=False)
+    except:
+        return render_template("nanzda.html", auth=False)
+    
+    
+    
 
 @app.route('/status')
 def status(message=""):
