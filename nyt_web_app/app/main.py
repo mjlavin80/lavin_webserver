@@ -129,12 +129,13 @@ def index(nyt_id=None):
             #row = row[0]
             # BR1, 'BR2', 'BR3', 'BR4', 'BR5', 'BR6', 'BR7', 'BR8', 'BR9', 'BR10'
             endpoint = row.nyt_pdf_endpoint
-            if ".xml" not in endpoint:
+            if ".pdf" in endpoint:
+                pdf_link = endpoint
+            else:
                 r = requests.get(endpoint)
                 html = BeautifulSoup(r.text, features="html.parser")
                 link = html.find("a", {"class":"user-action archive-user-action"})
                 pdf_link = link['href'].replace('.html', '.pdf')
-            else: pdf_link = endpoint
 
             return render_template("index.html", nyt_id=row.nyt_id, row=row, endpoint=endpoint, pdf_link=pdf_link) 
     else:
