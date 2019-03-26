@@ -141,6 +141,27 @@ def index(nyt_id=None):
     else:
         return render_template("index.html", nyt_id=None, endpoint=None)
 
+@app.route("/year")
+@app.route("/year/<year>")
+def index(nyt_id=None):
+    if current_user.is_authenticated and current_user.is_admin:
+        if year != None:
+            row = Metadata().query.filter(Metadata.year == year).filter(Metadata.review_type.like("needs_audit%")).order_by(func.rand()).first()
+            endpoint = row.nyt_pdf_endpoint
+            if ".pdf" in endpoint:
+                pdf_link = endpoint
+            else:
+                r = requests.get(endpoint)
+                html = BeautifulSoup(r.text, features="html.parser")
+                link = html.find("a", {"class":"user-action archive-user-action"})
+                pdf_link = link['href'].replace('.html', '.pdf')                
+
+            return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint, pdf_link=pdf_link)
+        else:
+            return render_template("index.html", nyt_id=None, endpoint=None)
+    else:
+        return render_template("index.html", nyt_id=None, endpoint=None)
+
 @app.route("/cluster")
 @app.route("/cluster")
 def cluster(nyt_id=None):
