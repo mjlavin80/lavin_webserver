@@ -13,7 +13,7 @@ from flask_bcrypt import Bcrypt
 from flask_admin.base import MenuLink
 from wtforms.fields import TextAreaField
 from flask_github import GitHub
-from config import GITHUB_ADMIN
+from config import GITHUB_ADMIN, GITHUB_ADMIN_2
 from sqlalchemy.sql import and_
 from  sqlalchemy.sql.expression import func
 from flask_admin.form import rules
@@ -281,6 +281,12 @@ def status(message=""):
         c_u = github.get('user')
 
         if str(c_u['login']) == str(GITHUB_ADMIN):
+            user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
+            user.authenticated = True
+            db.session.add(user)
+            db.session.commit()
+            login_user(user, force=True)
+        if str(c_u['login']) == str(GITHUB_ADMIN_2):
             user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
             user.authenticated = True
             db.session.add(user)
