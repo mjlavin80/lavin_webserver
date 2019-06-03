@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+
+<channel>
+  <title>{% if source_user.custom_blog_title %} 
+    {{ source_user.custom_blog_title }}
+    {% else %}
+    {{ source_user.username }}'s Blog
+    {% endif %}</title>
+  <link>https://pdc-spring-2019.matthew-lavin.com/blogs/{{source_user.custom_blog_path}}</link>
+  <description>{% if source_user.display_name %} Posts by {{ source_user.display_name }}
+    {% else %}
+    Posts by {{ source_user.username }}
+    {% endif %}. {% for word in keywords %}{{word}} {% endfor %}</description>
+  <atom:link href="https://pdc-spring-2019.matthew-lavin.com/feeds/{{source_user.custom_blog_path}}" rel="self" type="application/rss+xml" />
+  {% for post in all_posts %}
+  <item>
+    <title>{{ post.title }}</title>
+    <link>https://pdc-spring-2019.matthew-lavin.com/blogs/{{source_user.custom_blog_path}}/posts/{{post.post_path}}</link>
+    <guid>https://pdc-spring-2019.matthew-lavin.com/blogs/{{source_user.custom_blog_path}}/posts/{{post.post_path}}</guid>
+    <pubDate>{{post.pub_date.strftime("%a, %d %b %Y %H:%M:%S %z")}}EST</pubDate>
+    <description>
+      {% if post.teaser %}
+      {{ post.teaser }}
+      {% else %}
+      {{ post.body[:200] }} ... 
+      {% endif %}
+    </description>
+    {% for tag in post.tags %}
+    <category>{{ tag.tag_name }}</category>
+    {% endfor %}
+  </item>
+  {% endfor %}
+</channel>
+
+</rss>

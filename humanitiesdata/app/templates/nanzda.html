@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block body %}
+{% if current_user.is_authenticated %}
+
+<div class="container outer">
+  <div class="jumbotron vertical-center">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-md-12">
+        <h2 class="container_head">About</h2>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-lg-12">
+      <h3 class="text-center">Static Text Here</h3>
+
+</div>
+</div>
+
+{% else %}
+
+{% include "public_login.html" %}
+
+{% endif %}
+
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}

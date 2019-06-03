@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+
+<div id="contentholder" class="col-md-9">
+
+<h3>{{timeline_entry.headline}}</h3>
+<hr>
+{{ timeline_entry.entry_essay|safe }}
+<hr>
+<h4>Close this tab to return to the timeline</h4>
+</div>
+{% endblock %}
+
+{% block footer %}
+
+
+{% endblock %}
+

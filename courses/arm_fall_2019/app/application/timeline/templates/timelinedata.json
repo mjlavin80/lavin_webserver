@@ -1,0 +1,42 @@
+{
+        "title": {
+                "text": {
+                    "headline": "Making the Book",
+                    "text":     "A Digital Timeline of Events Related to the History of the Book."
+                },
+                "media": {
+                    "url": "https://upload.wikimedia.org/wikipedia/commons/d/de/Albion_Press%2C_1830s_woodcut_by_George_Baxter.jpg",
+                    "thumb": "https://upload.wikimedia.org/wikipedia/commons/d/de/Albion_Press%2C_1830s_woodcut_by_George_Baxter.jpg"
+                }
+        },
+        "events": [
+
+{% for row in timeline_rows %}
+
+{
+ "start_date": { 
+ "year": "{{row.year if row.year}}",
+ "month": "{{row.month if row.month}}", 
+"day": "{{row.day if row.day}}" },
+"end_date": { 
+ "year": "{{row.end_year if row.end_year}}",
+ "month": "{{row.end_month if row.end_month}}",
+ "day": "{{row.end_day if row.end_day}}" },
+"display_date": "{{row.display_date if row.display_date}}",
+"media": { 
+ "url": "{{row.media if row.media}}" ,
+ "credit": "{{row.media_credit if row.media_credit}}" ,
+ "caption": "{{row.media_caption if row.media_caption}}",
+ "thumb": "{{row.media_thumbnail if row.media_thumbnail}}" },
+"text": { 
+ "headline": "{{row.headline if row.headline}}",
+ "text": "{{row.entry_blurb if row.entry_blurb}} <a target=\"blank\" href=\"{{row.id if row.id}}\">View Full Essay</a>" },
+"type": "{% if row.entry_type %}{{row.entry_type}}{% else %}overview{% endif %}" 
+ }
+{% if loop.index < timeline_rows|length %}
+,
+{% endif %} 
+
+{% endfor %}
+        ]
+    }

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+<div id="contentholder" class="col-md-9">
+
+  {% if this_assignment == "all" %}
+  <h3>Assignments</h3>
+  <hr>
+  {% for this_assignment in assignments %}
+  <h4><a href="/assignments/{{ this_assignment.link_title }}">{{this_assignment.title}}</a></h4>
+  <p><big><strong>Due Date:</strong> {% if this_assignment.day %}{{ this_assignment.day.name }}{% else %}{{this_assignment.text_date}}{% endif %}</big></p>
+
+  <p><strong>At a Glance:</strong> {{ this_assignment.slug }}</p>
+  <hr>
+  {% endfor %}
+
+  {% else %}
+  <h3>{{this_assignment.title}}</h3>
+  <p><big><strong>Due Date:</strong> {% if this_assignment.day %}{{ this_assignment.day.name }}{% else %}{{this_assignment.text_date}}{% endif %}</big></p>
+  <p><strong>Submission Instructions:</strong> {{ this_assignment.submit_instructions }}</p>
+
+  <p><strong>Assignment Description:</strong> {{ this_assignment.description|safe }}</p>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}

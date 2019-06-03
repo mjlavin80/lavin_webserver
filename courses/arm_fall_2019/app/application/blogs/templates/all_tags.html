@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+<div id="contentholder" class="col-md-9">
+  <h3>Blog Posts by Tag</h3>
+  <hr>
+  <div>
+    {% for tag in all_tags %}
+
+    <h4><strong><a href="/tags/{{tag.tag_path}}">{{tag.tag_name}}:</a></strong> {{ post_counts[loop.index0] }} posts</h4>
+    
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}
