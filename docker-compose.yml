@@ -144,7 +144,7 @@ services:
     links:
       - flask_base_2019
 
-  pdc_spring_2019:
+  arm_fall_2019:
     build: ./courses/arm_fall_2019
     container_name: arm_fall_2019
     volumes:
