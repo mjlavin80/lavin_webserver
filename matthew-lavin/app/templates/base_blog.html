@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+    <html>
+      <head>
+        <title>The Data Humanist: Posts about Book History, Cultural Analytics, and Humanities Data</title>
+        <meta charset="utf-8" />
+        <link type="text/css" rel="stylesheet" href="/static/dist/css/bootstrap.css" />
+        <link type="text/css" rel="stylesheet" href="/static/style.css" />
+        <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+        <script src="/static/js/jquery.min.js"></script>
+        <script src="https://hypothes.is/embed.js" async></script>
+        <style>
+          .caption {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid lightgray;
+          }
+          .sectionNav>li {
+            list-style-type: none;
+          }
+          .sectionNav>li>ul {
+            list-style-type: none;
+            margin: 5px;
+            padding: 5px;
+          }
+          .sectionNav>li>ul>li {
+            display: inline-block;
+            width: 60px;
+          }
+        </style>
+
+      </head>
+
+      <body>
+              {%block menu %} {% endblock %}
+              <!-- Begin page content -->
+              <div class="container">
+
+                {% block content %} {% endblock %}</div>
+
+
+              {%block footer%} {%endblock%}
+
+          <!-- JavaScript -->
+
+          <script src="/static/dist/js/bootstrap.js"></script>
+          {% block customjs %}{%endblock%}
+
+      </body>
+    </html>
