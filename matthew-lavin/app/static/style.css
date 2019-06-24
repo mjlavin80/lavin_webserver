@@ -129,6 +129,6 @@ a.assignment:active {
   padding-left: 25px;
 }
 
-.btn.btn-primary.btn-xs {
-  margin-bottom: 3px;
+.btn, .btn-success, .btn-primary, .btn-xs {
+  margin-bottom: 6px;
 }
