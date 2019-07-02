@@ -6,7 +6,12 @@ from flask_admin.contrib.sqla import ModelView
 from wtforms.fields import TextAreaField
 from application.forms import CKEditor, CKEditorField
 from application import db
-from urllib.parse import quote
+
+def custom_path(title):
+    url = title.lower().replace(" ", "-").replace(":", "-")
+    scrubbed_url = ''.join([o for o in url if o == "-" or o.isalpha()])
+    scrubbed_url = '-'.join([u for u in scrubbed_url.split('-') if u != ''])
+    return scrubbed_url
 
 # AdminView
 class MyAdminIndexView(AdminIndexView):
@@ -41,7 +46,7 @@ class ModelViewUserTag(ModelView):
         if model.public == "" or model.public == None or model.public == False:
             model.public = "True"
         if model.tag_path == "" or model.tag_path == None or model.tag_path == False:
-            model.tag_path = quote(model.tag_name.lower().replace(" ", "-"))
+            model.tag_path = custom_path(model.tag_name)
 
 class ModelViewUser(ModelView):
     column_exclude_list = ('public', 'user_id')
@@ -142,7 +147,7 @@ class ModelViewBlog(ModelViewUser):
         if model.public == "" or model.public == None or model.public == False:
             model.public = "True"
         if model.post_path == "" or model.post_path == None or model.post_path == False:
-            model.post_path = quote(model.title.lower().replace(" ", "-")) 
+            model.post_path = custom_path(model.title) 
 
 class ModelViewAdmin(ModelView):
     column_formatters = dict(course_description=lambda v, c, m, p: m.course_description[:25]+ " ...", description=lambda v, c, m, p: m.description[:25]+ " ...")
@@ -175,7 +180,7 @@ class ModelViewAdminTag(ModelViewAdmin):
         if model.public == "" or model.public == None or model.public == False:
             model.public = "True"
         if model.tag_path == "" or model.tag_path == None or model.tag_path == False:
-            model.tag_path = quote(model.tag_name.lower().replace(" ", "-"))
+            model.tag_path = custom_path(model.tag_name)
 
 class ReadingViewAdmin(ModelViewAdmin):
     column_filters = ('last_name', 'public', 'link')
@@ -216,7 +221,7 @@ class ModelViewUserProfile(ModelView):
             model.custom_blog_title = ""
         if model.custom_blog_path == "" or model.custom_blog_path == None or model.custom_blog_path == False:
             if model.custom_blog_title != "":
-                model.custom_blog_path = quote(model.custom_blog_title.lower().replace(" ", "-"))
+                model.custom_blog_path = custom_path(model.custom_blog_title)
             else:
                 model.custom_blog_path = model.username
 
