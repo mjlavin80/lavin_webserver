@@ -8,7 +8,7 @@ from application.forms import CKEditor, CKEditorField
 from application import db
 
 def custom_path(title):
-    url = title.lower().replace(" ", "-").replace(":", "-")
+    url = title.lower().replace(" ", "-").replace(":", "-").replace("'", "")
     scrubbed_url = ''.join([o for o in url if o == "-" or o.isalpha()])
     scrubbed_url = '-'.join([u for u in scrubbed_url.split('-') if u != ''])
     return scrubbed_url
@@ -224,6 +224,8 @@ class ModelViewUserProfile(ModelView):
                 model.custom_blog_path = custom_path(model.custom_blog_title)
             else:
                 model.custom_blog_path = model.username
+        else: 
+            model.custom_blog_path = custom_path(model.custom_blog_path)
 
     def on_form_prefill(self, form, id):
         if not self.is_owned(id):
