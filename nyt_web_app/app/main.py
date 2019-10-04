@@ -116,10 +116,13 @@ def index(nyt_id=None):
             if ".pdf" in endpoint:
                 pdf_link = endpoint
             else:
-                r = requests.get(endpoint)
-                html = BeautifulSoup(r.text, features="html.parser")
-                link = html.find("a", {"class":"user-action archive-user-action"})
-                pdf_link = link['href'].replace('.html', '.pdf')                
+                try:
+                    r = requests.get(endpoint)
+                    html = BeautifulSoup(r.text, features="html.parser")
+                    link = html.find("a", {"class":"user-action archive-user-action"})
+                    pdf_link = link['href'].replace('.html', '.pdf')
+                except:
+                    pdf_link = ""
 
             return render_template("index.html", nyt_id=nyt_id, row=row, endpoint=endpoint, pdf_link=pdf_link)
         else:
