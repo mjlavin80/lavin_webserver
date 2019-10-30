@@ -17,6 +17,6 @@ def projects():
 
 @ml_blueprint.route("/workshops")
 @ml_blueprint.route("/workshops/")
-def projects():
+def workshops():
     data = StaticPage.query.filter(StaticPage.route == "workshops").one_or_none()
     return render_template('workshops.html', data=data)
