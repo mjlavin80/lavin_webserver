@@ -1,2 +1,3 @@
-FROM lavinflaskbase
-COPY ./app /app
+FROM nginx
+
+COPY html /usr/share/nginx/html
