@@ -139,10 +139,7 @@ services:
     build: ./courses/pdc_spring_2019
     container_name: pdc_spring_2019
     volumes:
-      - ./courses/pdc_spring_2019/app/templates:/app/templates
       - ./courses/pdc_spring_2019/app/static:/app/static
-    links:
-      - flask_base_2019
 
   arm_fall_2019:
     build: ./courses/arm_fall_2019

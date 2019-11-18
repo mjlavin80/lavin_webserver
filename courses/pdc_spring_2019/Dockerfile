@@ -1,6 +1,3 @@
-FROM lavinflaskbase_2019
+FROM nginx
 
-RUN apt-get -y install \
-    libxml2-dev libxslt-dev
-
-COPY ./app /app
+COPY html /usr/share/nginx/html

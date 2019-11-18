@@ -1,0 +1,93 @@
+.navbar-toggle .icon-bar {
+background-color: black;
+}
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  /* margin-bottom: 70px; */
+}
+
+.footer {
+  margin-top: 45px;
+  padding-top: 35px;
+  padding-bottom: 36px;
+  border-top: 1px solid #E5E5E5;
+  width: 100%;
+}
+
+.list-group-item#previous {
+  background-color: #ddd;
+  border: 1px solid #fff;
+  color: gray;
+}
+.list-group-item.active
+{
+font-size: 115%;
+}
+.list-group-item.reading {
+    background-color: #E6F7FE;
+}
+.list-group-item.activity {
+    background-color: #FFFAF0;
+}
+.list-group-item.assignment {
+    background-color: #e38d13;
+    border: 1px solid #e38d13;
+    color: white;
+}
+.book-title {
+    font-style: italic;
+}
+.bibl { margin-left: 10px;}
+.bibl-canceled {
+    text-decoration: line-through
+}
+a.assignment {
+    color: white;
+    text-decoration: underline;
+
+}
+a.assignment:hover {
+    color: black;
+    cursor: pointer;
+}
+a.assignment:active {
+    color: white;
+    cursor: pointer;
+}
+.form_row {
+  margin-top: 8px;
+}
+#submit, #show_more {
+  margin-top: 15px;
+}
+#contentbank, #newcontent {
+  min-height: 200px;
+  padding: 15px;
+  list-style: none;
+  border: 1px solid black;
+}
+
+#collection_builder {
+  height: 0px;
+  overflow: hidden;
+}
+
+#contentbank {
+  background-image: linear-gradient(#FFFFFF, lightgray);
+  }
+#newcontent {
+  background-image: linear-gradient(#FFFFFF, lightblue);
+  }
+.highlight {
+  background-color:yellow;
+  opacity: .66;
+  }
+.btn.btn-primary.btn-xs {
+  margin-bottom: 3px;
+}
