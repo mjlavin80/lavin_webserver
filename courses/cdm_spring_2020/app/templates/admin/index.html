@@ -1,0 +1,12 @@
+{% extends 'admin/master.html' %}
+
+{% block page_body %}
+    {% include 'admin/menu.html' %}
+    {{ super() }}
+{% endblock %}
+
+{% block body %}
+{% if current_user.is_admin %}
+{% include 'admin/links.html' %}
+{% endif %}
+{% endblock %}
