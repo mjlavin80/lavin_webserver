@@ -1,0 +1,20 @@
+{% extends 'admin/master.html' %}
+
+{% block page_body %}
+	
+    {% include 'admin/menu.html' %}
+    {{ super() }}
+    
+    <div class="container outer">
+    	<div class="row">
+    		<div class="col-md-12"><div class="list-group">
+    			
+    			<div class="list-group-item"><a href="{{url_for('about')}}">About</a></div>
+    			<div class="list-group-item"><a href="{{url_for('resources')}}">Search or Browse Resources</a></div>
+    			<div class="list-group-item"><a href="{{url_for('tags')}}">Browse Tags</a></div>
+    			<div class="list-group-item"><a href="/logout">Logout</a></div>
+              
+    		</div></div>
+    	</div>
+    </div>
+{% endblock %}

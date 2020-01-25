@@ -1,45 +1,154 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, abort
+import os
+from config import *
+from flask import abort, Flask, render_template, make_response, redirect, url_for, send_from_directory, request, flash, g, session
 from flask_login import LoginManager, login_user, logout_user, current_user
 from flask_security import login_required
-from flask_admin import Admin#, AdminIndexView, BaseView, expose
+from flask_admin import Admin
+from application import db
 from application.models import *
-from application.views import *
-from flask_bcrypt import Bcrypt
-from application.forms import *
-from config import *
+from application.user_controls import *
 from datetime import datetime
-import json
-from application.form_processors import *
+from flask_bcrypt import Bcrypt
+from flask_github import GitHub
+from flask_login import login_required
+from flask_login import LoginManager, login_user, logout_user, current_user
+from flask_migrate import Migrate
+import json, requests
+from sqlalchemy.sql import and_, or_
+from urllib.parse import quote
+#from application.browse import browse_blueprint
+#from application.tag import tag_blueprint
+
 
 app = Flask(__name__)
+app.config.from_pyfile('config.py')
+#app.register_blueprint(browse_blueprint)
 
-app.secret_key = 'gskkrkemensbagakdoeksmss'
-app.config['RECAPTCHA_USE_SSL'] = False
-app.config['RECAPTCHA_PUBLIC_KEY'] = RECAPTCHA_PUBLIC_KEY
-app.config['RECAPTCHA_PRIVATE_KEY'] = RECAPTCHA_PRIVATE_KEY
+#bcrypt instance for password hashing
+bcrypt = Bcrypt(app)
+
+# setup github-flask
+github = GitHub(app)
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     db.session.remove()
 
 #admin instance
-admin = Admin(app, index_view=CustomBaseView(url='/admin'), name='Humanities Data', template_mode='bootstrap3', )
+admin = Admin(app, index_view=MyAdminIndexView(url='/admin'), name='Humanities Data', template_mode='bootstrap3', )
+
+# Add administrative and user views here
+admin.add_view(ModelViewUserProfile(UserProfile, db.session))
+admin.add_view(ModelViewResource(Resource, db.session))
+admin.add_view(ModelViewTag(Tag, db.session))
+admin.add_view(ModelViewCollection(Collection, db.session))
 
 #required user loader method
 login_manager = LoginManager()
 login_manager.init_app(app)
+#login_manager.login_view = "login"
 
 @login_manager.unauthorized_handler
 def unauthorized():
     # do stuff
     return redirect(url_for('login') )
 
-bcrypt = Bcrypt(app)
-
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(user_id)
+    return UserProfile.query.get(user_id)
 
+@app.before_request
+def before_request():
+    g.user = None
+    if 'user_id' in session:
+        g.user = GithubToken.query.get(session['user_id'])
+
+@app.after_request
+def after_request(response):
+    db.session.remove()
+    return response
+
+@github.access_token_getter
+def token_getter():
+    user = g.user
+    if user is not None:
+        return user.github_access_token
+
+@app.route('/github-callback')
+@github.authorized_handler
+def authorized(access_token):
+    next_url = request.args.get('next') or url_for('index')
+    if access_token is None:
+        return redirect(url_for('status'))
+    user = GithubToken.query.filter_by(github_access_token=access_token).first()
+    if user is None:
+        user = GithubToken(access_token)
+        db.session.add(user)
+    user.github_access_token = access_token
+    db.session.commit()
+    session['user_id'] = user.id
+    return redirect(url_for('status'))
+
+@app.route('/login')
+def login():
+    try:
+        c_u = github.get('user')
+        return "Already logged in."
+    except:
+        return github.authorize()
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    try:
+        logout_user()
+    except:
+        pass
+    return redirect(url_for('index'))
+
+@app.route('/status')
+def status(message=""):
+    user = False
+    try:
+        c_u = github.get('user')
+        user = UserProfile.query.filter(UserProfile.username==c_u['login']).one_or_none()
+        
+        if user: 
+            #check for approval 
+            if user.approved:
+                user.authenticated = True
+                db.session.add(user)
+                db.session.commit()
+                login_user(user, force=True)
+                message="in"
+            # else not approved 
+            else: 
+                user.authenticated = True
+                db.session.add(user)
+                db.session.commit()
+                login_user(user, force=True)
+                message="unapproved"
+        else:
+            # code for logged in but not registered
+            message="unregistered"
+    except:
+        message="out"
+
+        #for debugging locally
+    
+        user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
+        db.session.add(user)
+        db.session.commit()
+        login_user(user, force=True)
+        message="in"
+
+        # end local debugging block
+
+        return render_template('status.html', message=message)
+      
+    return render_template('status.html', message=message)
+
+# Begin route declarations
 @app.route("/")
 def index():
     return render_template("main.html")
@@ -47,7 +156,8 @@ def index():
 @app.route("/datastream")
 def datastream():
     #get from db
-    rows = db.session.query(Resource).filter(Resource.status=='published').all()
+    rows = db.session.query(Resource).filter(Resource.public=='True').all()
+    
     r = [setkeys(u.__dict__) for u in rows]
     #jsonify
     json_data = json.dumps(r)
@@ -59,24 +169,30 @@ def about():
     return render_template("about.html")
 
 @app.route("/tags")
-@app.route("/tags/<tagname>")
-def tags(tagname=None):
-    if tagname:
-        rows = Resource.query.join(Tag.resources).filter(Tag.tagname == tagname).filter(Resource.status=='published').all()
+@app.route("/tags/<tag_name>")
+def tags(tag_name=None):
+    if tag_name:
+        rows = Resource.query.join(Tag.resources).filter(Tag.tag_name == tag_name).filter(Resource.public=='True').all()
         if len(rows) == 0:
-            return redirect(url_for('tags', tagname=None))
+            return redirect(url_for('tags', tag_name=None))
+        #adds fields to resource
         r = [setkeys(u.__dict__) for u in rows]
         #jsonify
         json_data = json.dumps(r)
-        return render_template("tags.html", tagname=tagname, json_data = json_data)
+        return render_template("tags.html", tag_name=tag_name, json_data = json_data)
     else:
         _all = [i for i in Tag.query.all()]
-	all_tags = []
-	for tag in _all:
-	    published =  Resource.query.join(Tag.resources).filter(Tag.tagname == tag.tagname).filter(Resource.status=='published').all()
-	    if len(published) > 0:
-		all_tags.append(tag.tagname)
-	return render_template("tags.html", all_tags=all_tags)
+    
+    
+    all_tags = []
+    for tag in _all:
+        published = [i for i in tag.resources if i.public == "True"]
+        if len(published) > 0:
+            all_tags.append(tag.tag_name)
+    
+    all_tags.sort()
+
+    return render_template("tags.html", all_tags=all_tags)
 
 @app.route("/resources")
 @app.route("/resources/<_id>")
@@ -85,7 +201,7 @@ def resources(_id=None):
         obj = Resource.query.filter(Resource.id == _id).one_or_none()
         if not obj:
             return redirect(url_for('resources', _id=None))
-        tags_ = [str(i.tagname) for i in obj.tags]
+        tags_ = [str(i.tag_name) for i in obj.tags]
 
         return render_template("single_resource.html", tags=tags_, obj=obj.__dict__, _id=_id)
     else:
@@ -101,97 +217,11 @@ def edit_resources(_id=0):
     else:
         return redirect(url_for("resources"))
 
-@app.route("/approval", methods=["GET", "POST"])
-@login_required
-def approve():
-    try:
-        instruction = request.form.keys()[0].split("_")
-        if instruction[0] == "approve":
-            _id = instruction[1]
-            to_update = Resource.query.filter(Resource.id==_id).one_or_none()
-            to_update.status = "published"
-            db.session.commit()
-            return render_template("approve.html", approval_q=approval_q, q_ids=q_ids)
-    except:
-        pass
-    #for testing
-    #q_ids = Resource.query.all()
-    q_ids = Resource.query.filter(Resource.status=="draft").all()
-
-    approval_q = request.form.getlist('check-list[]')
-
-    if request.method == 'POST' and len(approval_q) > 0:
-        for _id in approval_q:
-            to_update = Resource.query.filter(Resource.id==_id).one_or_none()
-            to_update.status = "published"
-            db.session.commit()
-    return render_template("approve.html", approval_q=approval_q, q_ids=q_ids)
-
-@app.route("/signup", methods=["GET", "POST"])
-def signup():
-    signupform = SignupForm(request.form)
-    if request.method == 'POST':
-        if signupform.validate():
-            new_signup = Signup()
-            signupform.populate_obj(new_signup)
-            new_signup.date = datetime.utcnow()
-            db.session.add(new_signup)
-            db.session.commit()
-            return render_template("signup.html", signupform=signupform, status="success")
-        else:
-            errors = compile_errors(signupform)
-            return render_template("signup.html", signupform=signupform, status="error", errors=errors)
-    else:
-        return render_template("signup.html", signupform=signupform)
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        u = form.data['username']
-        user = User().query.filter(User.username==u).one_or_none()
-        if user:
-            #check password
-            next = request.args.get('next')
-            if bcrypt.check_password_hash(user.password, form.data['password']):
-                login_user(user)
-
-                flash('Logged in successfully.')
-
-                return redirect(next or url_for('login'))
-            else:
-                flash('Bad user name or password.')
-                return redirect(url_for('login'))
-    return render_template('login.html', form=form)
-
-@app.route("/submit/<resource_type>", methods=["GET", "POST"])
-@app.route("/submit", methods=["GET", "POST"])
-def submit(resource_type=None):
-    return process_resource(request, "submit", resource_type=resource_type)
-
-@app.route("/logout", methods=["GET", "POST"])
-def logout():
-    try:
-        logout_user()
-    except:
-        pass
-    return redirect(url_for('index'))
-
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('404.html'), 404
-
-@app.errorhandler(500)
-def server_error(e):
-    return render_template('500.html'), 500
-
-@app.errorhandler(502)
-def gateway_error(e):
-    return render_template('500.html'), 502
+db.init_app(app)
 
 if __name__ == "__main__":
     #for local dev
-    #app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
 
     #for production
-    app.run(host='0.0.0.0', debug=True, port=80)
+    #app.run(host='0.0.0.0', debug=True, port=80)

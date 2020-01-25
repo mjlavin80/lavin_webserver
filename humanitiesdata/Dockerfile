@@ -1,11 +1,10 @@
-FROM tiangolo/uwsgi-nginx-flask:flask
+FROM lavinflaskbase_2019
 
-ENV DEBIAN_FRONTEND noninteractive
-
-RUN apt-get update
 RUN apt-get -y install \
     libpq-dev \
     libmysqlclient-dev \
+    libxml2-dev \
+    libxslt-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY ./app /app

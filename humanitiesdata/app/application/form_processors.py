@@ -3,7 +3,7 @@ from flask_login import LoginManager, login_user, logout_user, current_user
 from flask_security import login_required
 from flask_admin import Admin#, AdminIndexView, BaseView, expose
 from application.models import *
-from application.views import *
+from application.user_controls import *
 from flask_bcrypt import Bcrypt
 from application.forms import *
 from config import *
@@ -14,7 +14,10 @@ def setkeys(d):
     #build href using id
     d["more_link"] = "".join(["<a href='/resources/", str("".join([i for i in str(d["id"]) if i.isalpha() == False])), "'>Full Record</a>"])
     d["excerpt"] = "".join([" ".join(d["description"].split(" ")[:9]), " ..."])
-    d["date_submitted"] = d["date_submitted"].isoformat()
+    try:
+        d["date_submitted"] = d["date_submitted"].isoformat()
+    except:
+        pass
     del d["id"]
     del d["_sa_instance_state"]
     return d
