@@ -78,6 +78,8 @@ class Review(db.Model):
     url_doc_view = db.Column(db.String(128), index=False)
     pub_id = db.Column(db.Integer, db.ForeignKey('publication.id'))
     contrib_id = db.Column(db.Integer, db.ForeignKey('contributor.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user_profile.id'))
+    last_edited = db.Column(db.String(128), index=False)
     year = db.Column(db.Integer)
     month = db.Column(db.Integer)
     day = db.Column(db.Integer)
