@@ -7,6 +7,7 @@ from application.forms import CKEditor, CKEditorField
 from wtforms import TextAreaField
 from application import db
 from urllib.parse import quote
+import datetime
 
 # AdminView
 class MyAdminIndexView(AdminIndexView):
@@ -101,6 +102,9 @@ class ModelViewAdmin(ModelView):
         # redirect to login page if user doesn't have access
         return redirect(url_for('status'))
 
+class ModelViewReview(ModelViewAdmin):
+    column_filters = ('status', 'user_id')
+
 class ModelViewStatic(ModelViewAdmin):
     column_formatters = dict(page_data=lambda v, c, m, p: m.page_data[:25]+ " ...", description=lambda v, c, m, p: m.description[:25]+ " ...")
     form_overrides = dict(description=TextAreaField, page_data=CKEditorField)
@@ -109,6 +113,7 @@ class ModelViewStatic(ModelViewAdmin):
     def on_model_change(self, form, model, is_created):
         if model.user_id == "" or model.user_id == None or model.user_id == False:
             model.user_id = current_user.id 
+        model.last_edited = datetime.date.today().strftime("%Y-%m-%d")
 
 class ModelViewUserProfile(ModelView):
     column_exclude_list = ('custom_blog_path', 'is_admin', 'profile_image', 'approved', 'authenticated')
