@@ -80,7 +80,7 @@ def token_getter():
 @app.route('/github-callback')
 @github.authorized_handler
 def authorized(access_token):
-    next_url = request.args.get('next') or url_for('index')
+    next_url = request.args.get('next') or url_for('data.index')
     if access_token is None:
         return redirect(url_for('status'))
     user = GithubToken.query.filter_by(github_access_token=access_token).first()
