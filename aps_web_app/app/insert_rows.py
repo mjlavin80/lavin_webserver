@@ -54,8 +54,8 @@ review_fields = [i for i in cols if i.split("_")[0] != 'Contributor' and i.split
 selectors = ", ".join(cols)
 #print(len(cols), cols)
 
-query = "".join(["SELECT", " ", selectors, " ", "FROM reviews ORDER BY random() LIMIT 499;"])
-#print(query)
+query = "".join(["SELECT", " ", selectors, " ", "FROM reviews ORDER BY random() LIMIT 1;"])
+#WHERE NumericPubDate < 19250000 AND NumericPubDate > 18800000 ??
 
 conn = sqlite3.connect('aps_reviews_datastore.db')
 c = conn.cursor()
@@ -68,56 +68,59 @@ rows = c.execute(query).fetchall()
 for e, u in enumerate(rows):
 	if e % 50 == 0:
 		print(e)
+	 
 	lookup = dict(zip(cols, u))
+	numeric_pub_date = lookup["NumericPubDate"]
+	if int(numeric_pub_date) < 19250000 and int(numeric_pub_date) > 18800000:
+		#id is foreign key
+		pub_id = lookup["Publication_PublicationID"]
+		pub = Publication.query.filter(Publication.id == pub_id).one_or_none()
+		
+		#insert pub if not exists
+		if not pub:
+			pub_cols = [mappings[i] for i in pub_fields]
+			pub = Publication()
+			for col in pub_cols:
+				setattr(pub, col, lookup[reverse_lookup[col]])
 
-	#id is foreign key
-	pub_id = lookup["Publication_PublicationID"]
-	pub = Publication.query.filter(Publication.id == pub_id).one_or_none()
-	
-	#insert pub if not exists
-	if not pub:
-		pub_cols = [mappings[i] for i in pub_fields]
-		pub = Publication()
-		for col in pub_cols:
-			setattr(pub, col, lookup[reverse_lookup[col]])
-
-	db.session.add(pub)
-	db.session.commit()
-	#insert contrib if not exists
-	contrib_cols = [mappings[i] for i in contrib_fields]
-	contrib_vals = [lookup[i] for i in contrib_fields]
-
-	#make sure there are values
-	data = False
-	for i in contrib_vals:
-		if len(i) > 0:
-			data = True
-			break
-	if data:
-		contrib = Contributor.query.filter(Contributor.original_form == lookup['Contributor_OriginalForm']).one_or_none()
-		if not contrib:
-			contrib = Contributor()
-			for col in contrib_cols:
-				setattr(contrib, col, lookup[reverse_lookup[col]])
-			db.session.add(contrib)
-			db.session.commit()
-			contrib_id = contrib.id
-	else:
-		contrib_id = None
-	
-	meta = Review().query.filter(Review.record_id == lookup['RecordID']).one_or_none()
-	#insert review with foreign keys 
-	if not meta:
-		review_cols = [mappings[i] for i in review_fields]
-
-		meta = Review()
-		for col in review_cols:
-			setattr(meta, col, lookup[reverse_lookup[col]])
-
-		meta.pub_id = pub_id
-		meta.contrib_id = contrib_id
-		meta.status = "needs_audit"
-		db.session.add(meta)
+		db.session.add(pub)
 		db.session.commit()
+		#insert contrib if not exists
+		contrib_cols = [mappings[i] for i in contrib_fields]
+		contrib_vals = [lookup[i] for i in contrib_fields]
+
+		#make sure there are values
+		data = False
+		for i in contrib_vals:
+			if len(i) > 0:
+				data = True
+				break
+		if data:
+			contrib = Contributor.query.filter(Contributor.original_form == lookup['Contributor_OriginalForm']).one_or_none()
+			if not contrib:
+				contrib = Contributor()
+				for col in contrib_cols:
+					setattr(contrib, col, lookup[reverse_lookup[col]])
+				db.session.add(contrib)
+				db.session.commit()
+				contrib_id = contrib.id
+		else:
+			contrib_id = None
+		
+		meta = Review().query.filter(Review.record_id == lookup['RecordID']).one_or_none()
+		#insert review with foreign keys 
+		if not meta:
+			review_cols = [mappings[i] for i in review_fields]
+
+			meta = Review()
+			for col in review_cols:
+				setattr(meta, col, lookup[reverse_lookup[col]])
+
+			meta.pub_id = pub_id
+			meta.contrib_id = contrib_id
+			meta.status = "needs_audit"
+			db.session.add(meta)
+			db.session.commit()
+	
 
 	
