@@ -110,7 +110,8 @@ class ModelViewReview(ModelViewAdmin):
     def on_model_change(self, form, model, is_created):
         if model.user_id == "" or model.user_id == None or model.user_id == False:
             model.user_id = current_user.id 
-        model.last_edited = datetime.date.today().strftime("%Y-%m-%d")
+        if model.last_edited == "" or model.last_edited == None or model.last_edited == False:
+            model.last_edited = datetime.date.today().strftime("%Y-%m-%d")
 
 class ModelViewStatic(ModelViewAdmin):
     column_formatters = dict(page_data=lambda v, c, m, p: m.page_data[:25]+ " ...", description=lambda v, c, m, p: m.description[:25]+ " ...")

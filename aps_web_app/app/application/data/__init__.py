@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from application.models import *
 from flask_login import current_user
 from  sqlalchemy.sql.expression import func
+import datetime
 
 data_blueprint = Blueprint('data', __name__, template_folder='templates')
 
@@ -41,7 +42,12 @@ def update(aps_id=None):
                 else:   
                     if request.form[key] != 'na':
                         meta.perceived_author_gender = request.form[key]
+
             meta.status = 'done'
+            meta.user_id = current_user.id 
+            meta.last_edited = datetime.date.today().strftime("%Y-%m-%d")
+
+
             db.session.commit()
             return render_template("success.html", aps_id=aps_id) 
             #return request.form
