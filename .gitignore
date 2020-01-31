@@ -7,3 +7,4 @@ user_create.py
 *.pickle
 .ipynb_checkpoints
 nyt_web_app/app/ocr/*
+*.db
