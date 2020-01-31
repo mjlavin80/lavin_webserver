@@ -105,7 +105,7 @@ class ModelViewAdmin(ModelView):
 class ModelViewReview(ModelViewAdmin):
     column_filters = ('status', 'user_id')
     column_formatters = dict(full_text=lambda v, c, m, p: m.full_text[:25] + " ..." if m.full_text else "", 
-        abstract=lambda v, c, m, p: m.abstract[:8]+" ..." if m.media else "")
+        abstract=lambda v, c, m, p: m.abstract[:8]+" ..." if m.abstract else "")
 
     def on_model_change(self, form, model, is_created):
         if model.user_id == "" or model.user_id == None or model.user_id == False:
