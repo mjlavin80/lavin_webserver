@@ -136,3 +136,4 @@ services:
     container_name: cdm_spring_2020
     volumes:
       - ./courses/cdm_spring_2020/app/static:/app/static
+

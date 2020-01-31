@@ -136,11 +136,11 @@ def status(message=""):
 
         #for debugging locally
     
-        user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
-        db.session.add(user)
-        db.session.commit()
-        login_user(user, force=True)
-        message="in"
+        #user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
+        #db.session.add(user)
+        #db.session.commit()
+        #login_user(user, force=True)
+        #message="in"
 
         # end local debugging block
 
@@ -207,21 +207,12 @@ def resources(_id=None):
     else:
         return render_template("search.html")
 
-@app.route("/resources/<_id>/edit", methods=["GET", "POST"])
-@login_required
-def edit_resources(_id=0):
-    if _id != 0:
-        #get resource_type
-        r = Resource.query.filter(Resource.id==_id).one_or_none()
-        return process_resource(request, "edit", _id=_id, resource_type=r.resource_type)
-    else:
-        return redirect(url_for("resources"))
 
 db.init_app(app)
 
 if __name__ == "__main__":
     #for local dev
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    #app.run(host='0.0.0.0', debug=True, port=5000)
 
     #for production
-    #app.run(host='0.0.0.0', debug=True, port=80)
+    app.run(host='0.0.0.0', debug=True, port=80)

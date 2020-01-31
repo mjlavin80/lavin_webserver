@@ -2,24 +2,25 @@ from datetime import date, timedelta
 from application import *
 from application.models import Week, Day
 
-start = date(2019, 1, 7)
-end = date(2019, 4, 19)
+start = date(2020, 1, 6)
+end = date(2020, 5, 1)
 topics = [
-"Web Design Principles",
-"Web Design Principles",
-"Web Design Principles",
-"Web Design Principles",
-"Web Design Principles",
-"Data-Driven Design Principles",
-"Data-Driven Design Principles",
-"Data-Driven Design Principles",
-"Spring Break",
-"Data-Driven Design Principles",
-"Data-Driven Design Principles",
-"Visualization Case Studies",
-"Visualization Case Studies",
-"Visualization Case Studies",
-"Visualization Case Studies",
+"Introductions",
+"Mulitmodal Composition",
+"Media and Affordances",
+"Principles of Design",
+"Analysis and Interpretation of Multimodal Texts",
+"Emphasis",
+"Expectations",
+"Indirect Expression",
+"Spring Break: No Class",
+"Invocation",
+"Structure",
+"Meaning",
+"Iteration",
+"Access",
+"Dialogue"
+"EXAM WEEK: No Class"
 ]
 
 delta = start - end
