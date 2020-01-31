@@ -8,7 +8,7 @@ data_blueprint = Blueprint('data', __name__, template_folder='templates')
 @data_blueprint.route("/")
 @data_blueprint.route("/<aps_id>")
 def index(aps_id=None):
-    if not current_user.is_authenticated or not current_user.is_admin:
+    if not current_user.is_authenticated or not current_user.approved:
         return render_template("index.html", aps_id=None, endpoint=None)
     else:
         if aps_id:
