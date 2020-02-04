@@ -107,7 +107,7 @@ def logout():
         logout_user()
     except:
         pass
-    return redirect(url_for('index'))
+    return redirect(url_for('data.index'))
     
 
 @app.route('/status')
