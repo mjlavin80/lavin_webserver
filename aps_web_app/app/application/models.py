@@ -128,5 +128,4 @@ class ExtractedParsed(db.Model):
     experiment = db.Column(db.String(256), index=False)
     annotation = db.Column(db.String(512), index=False)
     date_time = db.Column(db.String(256), index=False)
-
-
+    
