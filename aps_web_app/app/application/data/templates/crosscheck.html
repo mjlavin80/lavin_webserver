@@ -29,13 +29,14 @@
 		<label for="review_type" class="control-label">Category:</label>
 	</div>
 <div class="col-md-8">
-<select class="form-control" name="review_type">
+<select class="form-control" name="review_type" required>
   <option disabled="choose" selected>Choose One</option>
   <option value="single_focus">Single Work Review</option>
   <option value="multi">Multi-Work Review</option>
   <option value="not_review">Non-Review Content</option>
   <option value="brief">Brief or Mostly Quotes Review</option>
   <option value="cluster">Cluster of Reviews</option>
+  <option value="cluster">Review Link Doesn't Work</option>
 </select>
 </div>
 </div>
@@ -47,7 +48,7 @@
 		<label for="perceived_author_gender" class="control-label">Presumed gender:</label>
 	</div>
 <div class="col-md-8">
-<select class="form-control" name="perceived_author_gender">
+<select class="form-control" name="perceived_author_gender" required>
   <option disabled="choose" selected>Choose One</option>
   <option value="m">Presumed Gender(s) Male</option>
   <option value="f">Presumed Gender(s) Female</option>
