@@ -43,6 +43,7 @@ admin.add_view(ModelViewStatic(StaticPage, db.session))
 admin.add_view(ModelViewReview(Review, db.session))
 admin.add_view(ModelViewAdmin(Publication, db.session))
 admin.add_view(ModelViewAdmin(Contributor, db.session))
+admin.add_view(ModelViewReview(ExtractedParsed, db.session))
 
 #required user loader method
 login_manager = LoginManager()
