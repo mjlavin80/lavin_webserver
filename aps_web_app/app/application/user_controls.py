@@ -103,7 +103,7 @@ class ModelViewAdmin(ModelView):
         return redirect(url_for('status'))
 
 class ModelViewReview(ModelViewAdmin):
-    column_filters = ('status', 'user_id')
+    column_filters = ('status', 'user_id', 'record_id')
     column_formatters = dict(full_text=lambda v, c, m, p: m.full_text[:25] + " ..." if m.full_text else "", 
         abstract=lambda v, c, m, p: m.abstract[:8]+" ..." if m.abstract else "")
 
