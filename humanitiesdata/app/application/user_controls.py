@@ -236,6 +236,8 @@ class ModelViewResource(ModelViewAdmin):
         if model.excerpt == "" or model.excerpt == None:
             model.excerpt = "".join([" ".join(model.description.split(" ")[:9]), " ..."])
         more_link = "".join(["<a href='/resources/", str(model.id), "'>Full Record</a>"])
+    
+    def after_model_change(self, form, model, is_created):
         if model.more_link != more_link:
             model.more_link = more_link
 
