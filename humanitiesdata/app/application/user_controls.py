@@ -235,8 +235,9 @@ class ModelViewResource(ModelViewAdmin):
             model.date_submitted = datetime.today()
         if model.excerpt == "" or model.excerpt == None:
             model.excerpt = "".join([" ".join(model.description.split(" ")[:9]), " ..."])
-        if model.more_link == "" or model.more_link == None:
-            model.more_link = "".join(["<a href='/resources/", str(model.id), "'>Full Record</a>"])
+        more_link = "".join(["<a href='/resources/", str(model.id), "'>Full Record</a>"])
+        if model.more_link != more_link
+            model.more_link = more_link
 
 class ModelViewCollection(ModelViewAdmin):
     order = ("public", "title", "items")
