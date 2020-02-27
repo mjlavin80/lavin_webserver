@@ -236,7 +236,7 @@ class ModelViewResource(ModelViewAdmin):
         if model.excerpt == "" or model.excerpt == None:
             model.excerpt = "".join([" ".join(model.description.split(" ")[:9]), " ..."])
         more_link = "".join(["<a href='/resources/", str(model.id), "'>Full Record</a>"])
-        if model.more_link != more_link
+        if model.more_link != more_link:
             model.more_link = more_link
 
 class ModelViewCollection(ModelViewAdmin):
