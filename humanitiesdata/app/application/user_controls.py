@@ -235,8 +235,6 @@ class ModelViewResource(ModelViewAdmin):
             model.date_submitted = datetime.today()
         if model.excerpt == "" or model.excerpt == None:
             model.excerpt = "".join([" ".join(model.description.split(" ")[:9]), " ..."])
-    
-    def after_model_change(self, form, model, is_created):
         more_link = "".join(["<a href='/resources/", str(model.id), "'>Full Record</a>"])
         if model.more_link != more_link:
             model.more_link = more_link
