@@ -8,3 +8,4 @@ user_create.py
 .ipynb_checkpoints
 nyt_web_app/app/ocr/*
 *.db
+*.ipynb

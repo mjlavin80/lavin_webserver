@@ -8,7 +8,7 @@ from application import app, db
 with app.app_context():
   from application.models import *
 
-migrate = Migrate(app, db)
+migrate = Migrate(app, db, compare_type=True)
 manager = Manager(app)
 
 manager.add_command('db', MigrateCommand)

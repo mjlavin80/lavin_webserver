@@ -19,7 +19,7 @@
 <div>Abstract: {{row.abstract}}</div>
 <hr>
 <div>
-<a href="{{endpoint}}" target="blank"><button type="button" class="btn btn-primary btn-lg">Open Link in New Tab</button></a>
+<a href="/static/pdf/{{row.record_id}}.pdf" target="blank"><button type="button" class="btn btn-primary btn-lg">Open PDF in New Tab</button></a>
 </div>
 <hr>
 <form name="update" method="POST" action="/add_crosscheck/{{ aps_id }}/">

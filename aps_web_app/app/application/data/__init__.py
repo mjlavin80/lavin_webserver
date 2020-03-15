@@ -11,48 +11,43 @@ data_blueprint = Blueprint('data', __name__, template_folder='templates')
 @data_blueprint.route("/<aps_id>/")
 def index(aps_id=None):
     if not current_user.is_authenticated or not current_user.approved:
-        return render_template("index.html", aps_id=None, endpoint=None)
+        return render_template("index.html", aps_id=None)
     else:
         if aps_id:
             row = Review().query.filter(Review.record_id == aps_id).one_or_none()
-            endpoint = row.url_doc_view
 
-            return render_template("index.html", aps_id=aps_id, row=row, endpoint=endpoint)
+            return render_template("index.html", aps_id=aps_id, row=row)
         
         else:
         	#change to rand() for mysql
             row = Review().query.filter(Review.status == 'needs_audit').order_by(func.random()).first()
             try:
             	aps_id = row.record_id
-            	endpoint = row.url_doc_view
             except: 
             	aps_id = ""
-            	endpoint = ""
-            return render_template("index.html", aps_id=aps_id, row=row, endpoint=endpoint)
+            return render_template("index.html", aps_id=aps_id, row=row)
 
 @data_blueprint.route("/crosscheck")
 @data_blueprint.route("/crosscheck/<aps_id>")
 @data_blueprint.route("/crosscheck/<aps_id>/")
 def crosscheck(aps_id=None):
     if not current_user.is_authenticated or not current_user.approved:
-        return render_template("index.html", aps_id=None, endpoint=None)
+        return render_template("index.html", aps_id=None)
     else:
         if aps_id:
             row = Review().query.filter(Review.record_id == aps_id).one_or_none()
             if row.user_id == current_user.id:
-                return render_template("crosscheck.html", aps_id=None, endpoint=None)
-            endpoint = row.url_doc_view
-            return render_template("crosscheck.html", aps_id=aps_id, row=row, endpoint=endpoint)
+                return render_template("crosscheck.html", aps_id=None)
+            
+            return render_template("crosscheck.html", aps_id=aps_id, row=row)
         else:
             
             row = Review().query.filter(Review.status == 'needs_crosscheck').filter(Review.user_id != current_user.id).order_by(func.random()).first()
             try:
                 aps_id = row.record_id
-                endpoint = row.url_doc_view
             except: 
                 aps_id = ""
-                endpoint = ""
-            return render_template("crosscheck.html", aps_id=aps_id, row=row, endpoint=endpoint)
+            return render_template("crosscheck.html", aps_id=aps_id, row=row)
 
 @data_blueprint.route("/add_crosscheck", methods=["GET", "POST"])
 @data_blueprint.route("/add_crosscheck/<aps_id>", methods=["GET", "POST"])
