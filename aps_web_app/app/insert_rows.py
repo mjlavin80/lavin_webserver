@@ -1,7 +1,9 @@
 from sqlalchemy import create_engine
 from application import *
 from application.models import *
+import pandas as pd
 
+skipped = []
 
 mappings = {    
 'ObjectType':'object_type',
@@ -54,16 +56,14 @@ review_fields = [i for i in cols if i.split("_")[0] != 'Contributor' and i.split
 selectors = ", ".join(cols)
 #print(len(cols), cols)
 
-query = "".join(["SELECT", " ", selectors, " ", "FROM reviews ORDER BY random() LIMIT 50;"])
-#WHERE NumericPubDate < 19250000 AND NumericPubDate > 18800000 ??
+df = pd.read_csv('ids.csv')
+ids = list(df['aps_id'])
+formatter = ",".join(['?' for i in ids])
+query = "".join(["SELECT", " ", selectors, " ", "FROM reviews WHERE RecordID IN (", formatter, ")"])  
 
 conn = sqlite3.connect('aps_reviews_datastore.db')
 c = conn.cursor()
-rows = c.execute(query).fetchall()
-#print(rows[0])
-
-#dconn = sqlite3.connect('datastore.db')
-#dc = dconn.cursor()
+rows = c.execute(query, ids).fetchall()
 
 for e, u in enumerate(rows):
 	if e % 50 == 0:
@@ -125,6 +125,7 @@ for e, u in enumerate(rows):
 			db.session.add(meta)
 			db.session.commit()
 		else:
-			print(lookup['RecordID'])
+			skipped.append(lookup['RecordID'])
 
+print("skipped " + str(len(skipped)))
 	
