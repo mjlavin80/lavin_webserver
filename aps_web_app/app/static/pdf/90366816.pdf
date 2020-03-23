@@ -1,0 +1,15 @@
+Error status from host pqsvc104
+Status: Not Found (404) - Cannot retrieve PQ image:  error message[We were unable to complete this transaction.  Please verify the credit card number and try again. (254)].
+
+URI: http://mfg.prodservices.dc4.pqe/media/pq/hnp/doc/507306152/fmt/ai/rep/NONE
+Method: GET
+When: Wed Feb 07 07:15:42 EST 2018
+
+HTTP Headers:
+    Accept: */*
+    Connection: keep-alive
+    User-Agent: pkassal_PAO
+    X-Forwarded-For: 172.27.216.121
+    Host: mfg.prodservices.dc4.pqe
+
+Client side error occurred: Not Found
