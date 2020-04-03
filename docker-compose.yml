@@ -19,7 +19,6 @@ services:
       - nt_spring_2017
       - neo_web_app
       - nyt_web_app
-      - compvolution
       - faculty_activity
       - mtb_fall_2017
       - cdm_spring_2018
@@ -46,12 +45,6 @@ services:
     container_name: faculty_activity
     links:
       - flask_base_2019
-
-  compvolution:
-    build: ./compvolution
-    container_name: compvolution
-    links:
-      - flask_base
 
   rebeccamlee:
     build: ./rebeccamlee
