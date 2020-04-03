@@ -12,6 +12,7 @@ services:
     links:
       - flask_base
       - humanitiesdata
+      - humanities_analytics
       - matthew-lavin
       - digiped_fall_2016
       - acdm_spring_2017
@@ -68,7 +69,13 @@ services:
     build: ./humanitiesdata
     container_name: humanitiesdata
     links:
-      - flask_base
+      - flask_base_2019
+
+  humanities_analytics:
+    build: ./humanities_analytics
+    container_name: humanities_analytics
+    links:
+      - flask_base_2019
 
   neo_web_app:
     build: ./neo_web_app
