@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Humanities Analytics</title>
+  <meta charset="utf-8" />
+
+  <link type="text/css" rel="stylesheet" href="/static/dist/css/bootstrap.css" />
+  {% block custom_css %}{% endblock %}
+  <link type="text/css" rel="stylesheet" href="/static/style.css" />
+  <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+  <!-- Static navbar -->
+<!-- Top menu -->
+{% include "local_menu.html" %}
+
+<div class="container">
+  <div id ="contentholder" class="row">
+    <div class="col-md-9">
+    <h1>{{course_number}} - {{course_name}}</h1>
+    <h2>{{term_string}}</h2>
+
+    <div class="row">
+    <div class="col-md-5 reminders">
+        <p>Your Professor:</p>
+        <p class="text-muted">Matt Lavin</p>
+        
+        <p>My Email:</p>
+        <p class="text-muted">{{syllabus.email}}</p>
+
+        <p>My Office:</p>
+        <p class="text-muted">{{syllabus.office}}</p>
+
+        <p>Office Hours</p>
+        <p class="text-muted">{{syllabus.office_hours_brief}}</p>
+      </div> 
+      <div class="col-md-5 reminders">
+
+        <p>Our Classroom:</p> 
+        <p class="text-muted">{{syllabus.classroom}}</p>
+
+        <p>When We Meet:</p> 
+        <p class="text-muted">{{syllabus.meeting_time}}</p>
+
+        <p>When the Lab Meets:</p>
+        <p class="text-muted">{{syllabus.lab_time}}</p>
+      </div> 
+    </div>
+
+    <h3>Course Description</h3>
+      <div>
+        {{syllabus.course_description|safe}}
+      </div>
+    
+    <a name="office"></a>
+      <hr class="syllabus"/>
+
+      <h3>Office Hours</h3>
+      <div>
+        {{syllabus.office_hours|safe}}
+      </div>
+
+    <a name="policies"></a>
+    <hr class="syllabus"/>
+      <h3>Additional Norms and Policies</h3>
+      <div>
+        {{syllabus.policies|safe}}
+      </div>
+
+      <a name="assignments"></a>
+      <hr class="syllabus"/>
+
+      <h3>Assignments</h3>
+      <div> 
+        {{syllabus.assignments|safe}}
+      </div>
+
+      <a name="calendar"></a>
+      <hr class="syllabus"/>
+      <h3>Weekly Calendar</h3>
+        <div>
+          {{syllabus.calendar|safe}}
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <h4>License</h4>
+      <p>This page and all content on it is shared under a <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial License (CC BY-NC 4.0)</a>. Under this license, you are free to copy and redistribute the material in any medium or format, and you may remix, transform, and build upon the material. However, you must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. You may not use the material for commercial purposes.</p>
+    </div>
+ 
+  </div>
+</footer>
+  <!-- JavaScript -->
+  <script src="/static/js/jquery-3.1.0.min.js"></script>
+  <script src="/static/dist/js/bootstrap.js"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-89330016-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</body>
+</html>
+
+
+
+

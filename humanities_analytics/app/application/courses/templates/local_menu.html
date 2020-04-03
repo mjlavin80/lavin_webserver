@@ -1,0 +1,40 @@
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">DA 101</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+          <li><a href="#office">Office Hours</a></li>
+          <li><a href="#policies">Policies</a></li>
+          <li><a href="#assignments">Assignments</a></li>
+          <li><a href="#calendar">Weekly Calendar</a></li>
+          <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other Links <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="https://denison.edu/academics/data-analytics">Data Analytics at Denison</a></li>
+                  <li><a href="https://matthew-lavin.com">About Matt Lavin (CV)</a></li>
+                  <li><a href="https://humanitiesdata.com">Humanities Data</a></li>
+                  <li><a href="{{url_for('index')}}">Back to humanitiesanalytics.com</a></li>
+                </ul>
+              </li>
+        
+        {% if current_user.is_approved %}
+          <ul class="nav navbar-nav">
+            <li><a href="/admin">Admin Dashboard</a></li></ul>
+
+            {% endif %}
+        {% if current_user.is_authenticated %}
+          <li><a href="/logout">Logout</a></li>
+        {% endif %}
+          
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>

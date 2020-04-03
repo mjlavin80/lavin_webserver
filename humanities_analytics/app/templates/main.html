@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+
+{% endblock %}
+
+{% block body %}
+
+<div id="contentholder" class="col-md-9">
+  
+<h1>{{ data.title }}</h1>
+<hr/>
+
+{{ data.page_data|safe }}
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}
+

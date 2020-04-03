@@ -1,0 +1,14 @@
+
+sqlalchemy
+Flask
+Flask-SQLAlchemy==1.0
+Flask-WTF
+Flask-Script
+Flask-Migrate
+simplejson
+flask-login
+flask-security
+flask-admin
+flask-bcrypt
+dictalchemy
+WTForms-Alchemy
