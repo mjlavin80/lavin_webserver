@@ -28,25 +28,29 @@ def index(aps_id=None):
             return render_template("index.html", aps_id=aps_id, row=row)
 
 @data_blueprint.route("/crosscheck")
+@data_blueprint.route("/crosscheck/")
 @data_blueprint.route("/crosscheck/<aps_id>")
 @data_blueprint.route("/crosscheck/<aps_id>/")
-def crosscheck(aps_id=None):
+def crosscheck(aps_id="done"):
     if not current_user.is_authenticated or not current_user.approved:
-        return render_template("index.html", aps_id=None)
+        return render_template("index.html", aps_id="done")
     else:
         if aps_id:
-            row = Review().query.filter(Review.record_id == aps_id).one_or_none()
-            if row.user_id == current_user.id:
-                return render_template("crosscheck.html", aps_id=None)
-            
-            return render_template("crosscheck.html", aps_id=aps_id, row=row)
+            if aps_id == "done":
+                return render_template("crosscheck.html", aps_id="done", row=[])
+            else:
+                row = Review().query.filter(Review.record_id == aps_id).one_or_none()
+                if not row:
+                    return render_template("crosscheck.html", aps_id="done", row=[])
+                if row.user_id == current_user.id:
+                    return render_template("crosscheck.html", aps_id="done", row=[])
+                return render_template("crosscheck.html", aps_id=aps_id, row=row)
         else:
-            
             row = Review().query.filter(Review.status == 'needs_crosscheck').filter(Review.user_id != current_user.id).order_by(func.random()).first()
             try:
                 aps_id = row.record_id
             except: 
-                aps_id = ""
+                aps_id = "done"
             return render_template("crosscheck.html", aps_id=aps_id, row=row)
 
 @data_blueprint.route("/add_crosscheck", methods=["GET", "POST"])
