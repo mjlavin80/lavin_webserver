@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container outer">
+  <div class="jumbotron vertical-center">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-md-12">
+        <h2 class="container_head">About</h2>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-lg-12">
+      <big>
+      <p>Humanitiesdata.com seeks to help collect and disseminate information about publicly available data of particular
+        interest to digital humanities and humanities computing. It is founded on the premise that open data will be
+        crucial for the future of digital humanities. A culture of openness and collective access
+        to shared digital objects of study will enable digital humanists to:</p>
+        <ol>
+            <li>Collaborate more effectively</li>
+            <li>Interrogate and invalidate insufficiently rigorous scholarship</li>
+            <li>Verify and build upon excellent scholarship</li>
+            <li>Avoid duplicating the intense labor of data creation and normalization</li>
+            <li>Learn new methods and approaches at a pace that’s consistent with the speed at which DH moves</li>
+            </li>
+        </ol>
+      <p>Currently, the open data movement in digital humanities is growing but not yet dominant. It’s all too common to
+        publish data-driven humanities scholarship without making one’s data available to the public. Concerns about
+        proprietary data, copyright, vendors’ terms and conditions, and long-term data curation are significant roadblocks
+        and are not to be dismissed out of hand. In turn, an overall reticence about data for the humanities (or using the
+        term <em>data</em> when discussing DH) creates a climate where discussions about open data are more difficult to
+        have.</p>
+      <p>There are numerous places to find data of relevance to the humanities, including the Corpora listserv and the digital humanities Slack channel,
+        but a more consolidated web-based clearinghouse for web-hosted resources can only
+        increase visibility and help newcomers to digital humanities find their way. As a result, the mission of
+        humanitiesdata.com is not to replace any existing resources but, rather, to
+        increase the overall number of digital pathways to humanities data, and to make it easier to search for data by
+        its relevance to specific subfields.</p></big>
+        </div>
+        <div class="col-lg-12">
+          <div id="faq" class="glyphicon glyphicon-question-sign text-center"></div>
+          <h3 class="text-center">Frequently Asked Questions</h3>
+          <big>
+            <div class="list-group">
+  <p class="list-group-item disabled">
+    Do you host datasets?
+  </p>
+  <p class="list-group-item">No, we do not. We only collect links to datasets and "recipes" that demonstrate some kind of data fetch operation (scraping, API, etc.).</p>
+</div>
+<div class="list-group">
+<p class="list-group-item disabled">
+  Then how can I host a dataset?
+</p>
+<p class="list-group-item">You can use <a href="http://ckan.org">CKAN</a> services like datahub.io, host your own
+  data via Github or Github Large File Storage, and share recipes using Gist.
+  If hosting your own data, you can use our metadata schema to make sure you've filled in the required and
+  required-if-applicable data fields associated with
+  <a href="https://project-open-data.cio.gov/v1.1/schema/">Project Open Data version 1.1</a>.
+  These fields are specifically design to map to
+  <a href="https://www.w3.org/TR/vocab-dcat/">Data Catalog Vocabulary (DCAT)</a> and
+  <a href="http://ckan.org">CKAN</a> sites.
+  Some <a href="https://project-open-data.cio.gov/schema/">POD schema version 1.0</a>
+  fields are also included in order to assure mappings.</p>
+</div>
+<div class="list-group">
+<p class="list-group-item disabled">
+How can I help with this project?
+</p>
+<p class="list-group-item">
+  We are looking for volunteers to be a part of our project evaluation period.
+  Your contributions might involve peer reviewing the website, testing its functionality,
+  or filling at a short user survey. We promise not to spam your email address.
+  To be a part of humanitiesdata.com, go to <a href="/signup">Sign Up</a> and provide your name and email.</p>
+  <p class="list-group-item">Other forms of support include adding datasets and recipes,
+    letting me know if anything seems to be broken, and spreading the word about this site via social media, word-of-mouth,
+    or messenger bird.</p>
+  <p class="list-group-item"> We are also accepting small financial contributions to pay for web hosting so that we can move
+    humanitiesdata.com to its own virtual host.</p>
+</div>
+</div>
+</big>
+        <div class="col-lg-12">
+          <h3 class="text-center">Some Additional Details</h3>
+
+            <p><big><strong>Correspondence Address</strong></big></p>
+            <p><big> Matthew J. Lavin
+            <br/>Department of English
+            <br/>526 Cathedral of Learning
+            <br/>4200 Fifth Ave.
+            <br/>Pittsburgh, PA 15260</big></p>
+            <p><big><strong>Email</strong></big></p>
+            <p><big>lavin [at] pitt.edu</big></p>
+            <h4>Under the Hood</h4>
+            <p><big>Humanitiesdata.com is one component of the webserver, which is represented by this
+              <a href="https://github.com/mjlavin80/lavin_webserver">Github repository</a>.
+              The webserver uses Docker to containerize a proxy server (nginx), and several other Docker containers.
+              Humanitiesdata.com is container running Flask (Python for the web) with WSGI. The page design uses bootstrap3
+              to achieve responsiveness (i.e., mobile website compatible). As the site grows in size, it would ideal to add elasticsearch to power
+              a search engine but, for now, a lightweight javascript search (over json) seems to be performin adequately.
+            </big></p>
+    </div>
+</div>
+{% endblock %}

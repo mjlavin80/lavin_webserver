@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+
+{% endblock %}
+
+{% block body %}
+<div id="contentholder" class="col-md-9">
+
+<h1>Research and Teaching Notebook</h1>
+  
+<hr/>
+
+<h2 class="title">{{ this_post.title }}</h2>
+
+<hr/>
+
+<div class="body">
+    {{ this_post.body|safe }}
+</div>
+
+<hr/>
+
+<div class="date"><h4>Last Updated: </h4>{{ this_post.pub_date.strftime('%B %d, %Y') }}</div>
+  
+  <hr/>
+
+<div class="tags">
+	<h4>Tags: </h4> {% for tag in this_post.tags %} <a href="/tags/{{tag.tag_path}}" class="tag btn btn-success" role="button">{{tag.tag_name}}</a> {% endfor %}
+</div>
+ 
+
+
+
+
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}
+
+{% block customjs %}
+
+{%endblock%}
+

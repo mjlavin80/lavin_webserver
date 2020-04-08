@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+
+{% endblock %}
+
+{% block body %}
+<div id="contentholder" class="col-md-9">
+  <div><h2>Notebook pages tagged as <em>{{source_tag.tag_name}}</em></h2></div>
+  {% for post in with_tag %}
+  <div class="col-md-3">
+
+  <h3 class="title"><a href="/notebook/{{post.post_path}}">{{post.title}}</a></h3>
+  
+  <hr/>
+  
+  <div class="teaser">
+  {% if post.teaser %}
+  {{ post.teaser }} ... 
+  {% else %}
+  {{ post.body[:200] }} ... 
+  {% endif %}
+  <a href="/notebook/{{post.post_path}}">[Read More]</a>
+  </div>
+  
+  <hr/>
+
+  <div class="date"><h4>Last Updated: </h4>{{ post.pub_date.strftime('%B %d, %Y') }}</div>
+  <hr/>
+
+  {% endfor %}
+</div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}

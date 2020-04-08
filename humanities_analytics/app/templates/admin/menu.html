@@ -1,0 +1,55 @@
+
+<!-- Static navbar -->
+    <nav class="navbar navbar-static-top navbar-inverse">
+
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Humanities Analytics</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/da-101">DA 101</a></li>
+                  <li><a href="/da-301">DA 301</a></li>
+                  <li><a href="/da-401">DA 401</a></li>
+                  <li><a href="/courses">Full List</a></li>
+                </ul>
+              </li>
+
+              <li><a href="/notebook">Research and Teaching Notebook</a></li>
+            
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Related Websites <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="https://denison.edu/academics/data-analytics">Data Analytics at Denison</a></li>
+                  <li><a href="https://matthew-lavin.com">About Matt Lavin (CV)</a></li>
+                  <li><a href="https://humanitiesdata.com">Humanities Data</a></li>
+                  
+                </ul>
+              </li>
+            
+            
+            
+            {% if current_user.is_authenticated %}
+            <li><a href="/logout">Logout</a></li>
+            {% else %}
+            <li><a href="/login">Login</a></li>
+            {% endif %}
+            {% if current_user.is_approved %}
+            <ul class="nav navbar-nav">
+              <li><a href="/admin">Admin Dashboard</a>
+
+              {% endif %}
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </nav>
