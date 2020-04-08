@@ -56,9 +56,10 @@ review_fields = [i for i in cols if i.split("_")[0] != 'Contributor' and i.split
 selectors = ", ".join(cols)
 #print(len(cols), cols)
 
-df = pd.read_csv('ids.csv')
+df = pd.read_csv('match_ids.csv')
 ids = list(df['aps_id'])
 formatter = ",".join(['?' for i in ids])
+
 query = "".join(["SELECT", " ", selectors, " ", "FROM reviews WHERE RecordID IN (", formatter, ")"])  
 
 conn = sqlite3.connect('aps_reviews_datastore.db')
@@ -66,6 +67,9 @@ c = conn.cursor()
 rows = c.execute(query, ids).fetchall()
 
 for e, u in enumerate(rows):
+	if e > 500:
+		break
+
 	if e % 50 == 0:
 		print(e)
 	 
