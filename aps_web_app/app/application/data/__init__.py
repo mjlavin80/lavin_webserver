@@ -31,7 +31,7 @@ def index(aps_id=None):
 @data_blueprint.route("/crosscheck/")
 @data_blueprint.route("/crosscheck/<aps_id>")
 @data_blueprint.route("/crosscheck/<aps_id>/")
-def crosscheck(aps_id="done"):
+def crosscheck(aps_id=None):
     if not current_user.is_authenticated or not current_user.approved:
         return render_template("index.html", aps_id="done")
     else:
