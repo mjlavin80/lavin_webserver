@@ -9,7 +9,7 @@
   <h2><big>Book Reviews</big>, American Periodicals Series</h2>
 
   <h3>Crosschecking Form</h3>
-{% if aps_id %}
+{% if aps_id != "done" %}
 <div>Headline: {{row.record_title}}</div>
 <div>Periodical: {{row.pub.title}}</div>
 <div>Publication Date: {{row.numeric_pub_date}}</div>

@@ -37,13 +37,13 @@ def crosscheck(aps_id="done"):
     else:
         if aps_id:
             if aps_id == "done":
-                return render_template("crosscheck.html", aps_id="done")
+                return render_template("crosscheck.html", aps_id="done", , row=[])
             else:
                 row = Review().query.filter(Review.record_id == aps_id).one_or_none()
                 if not row:
-                    return render_template("crosscheck.html", aps_id="done")
+                    return render_template("crosscheck.html", aps_id="done", row=[])
                 if row.user_id == current_user.id:
-                    return render_template("crosscheck.html", aps_id="done")
+                    return render_template("crosscheck.html", aps_id="done", row=[])
                 return render_template("crosscheck.html", aps_id=aps_id, row=row)
         else:
             
@@ -53,7 +53,7 @@ def crosscheck(aps_id="done"):
                 return render_template("crosscheck.html", aps_id=aps_id, row=row)
             except: 
                 aps_id = "done"
-                return render_template("crosscheck.html", aps_id=aps_id)
+                return render_template("crosscheck.html", aps_id=aps_id, row=[])
             
 
 @data_blueprint.route("/add_crosscheck", methods=["GET", "POST"])
