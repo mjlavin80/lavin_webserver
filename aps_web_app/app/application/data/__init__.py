@@ -37,7 +37,7 @@ def crosscheck(aps_id="done"):
     else:
         if aps_id:
             if aps_id == "done":
-                return render_template("crosscheck.html", aps_id="done", , row=[])
+                return render_template("crosscheck.html", aps_id="done", row=[])
             else:
                 row = Review().query.filter(Review.record_id == aps_id).one_or_none()
                 if not row:
