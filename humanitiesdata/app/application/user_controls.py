@@ -185,7 +185,7 @@ class ModelViewUser(ModelView):
         return redirect(url_for('status'))
         
 class ModelViewAdmin(ModelView):
-    form_choices = { 'public': [ (0, "True",), (1, "False",)],
+    form_choices = { 'public': [ ("True", "True",), ("False", "False",)],
                    }
 
     list_template = 'admin/model/custom_list.html'

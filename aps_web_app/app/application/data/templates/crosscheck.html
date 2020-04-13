@@ -9,7 +9,7 @@
   <h2><big>Book Reviews</big>, American Periodicals Series</h2>
 
   <h3>Crosschecking Form</h3>
-{% if aps_id != "done" %}
+{% if aps_id != "done" and aps_id %}
 <div>Headline: {{row.record_title}}</div>
 <div>Periodical: {{row.pub.title}}</div>
 <div>Publication Date: {{row.numeric_pub_date}}</div>
@@ -25,7 +25,7 @@
 <form name="update" method="POST" action="/add_crosscheck/{{ aps_id }}/">
 <div class="col-md-12">
 <div class="form-group">
-	<div class="col-md-2">
+	<div class="col- md-2">
 		<label for="review_type" class="control-label">Category:</label>
 	</div>
 <div class="col-md-8">
