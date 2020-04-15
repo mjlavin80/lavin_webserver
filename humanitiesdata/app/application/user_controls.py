@@ -12,7 +12,7 @@ from datetime import datetime
 
 #audit need for this function
 def setkeys(d):
-    try:s
+    try:
         d["date_submitted"] = d["date_submitted"].isoformat()
     except:
         pass
