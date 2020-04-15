@@ -4,6 +4,7 @@ from flask_admin.base import MenuLink
 from flask_admin import AdminIndexView, expose
 from flask_admin.contrib.sqla import ModelView
 from wtforms import TextAreaField
+from application.forms import CKEditor, CKEditorField
 from application import db
 from application.models import *
 from urllib.parse import quote
@@ -11,7 +12,7 @@ from datetime import datetime
 
 #audit need for this function
 def setkeys(d):
-    try:
+    try:s
         d["date_submitted"] = d["date_submitted"].isoformat()
     except:
         pass
@@ -244,6 +245,7 @@ class ModelViewResource(ModelViewAdmin):
             db.session.commit()
             
 class ModelViewCollection(ModelViewAdmin):
-    order = ("public", "title", "items")
+    order = ("public", "title", "description", "items")
+    form_overrides = dict(description=CKEditorField)
     column_list = order
     form_columns = order
