@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-<div id="contentholder" class="col-md-9">
+<div id="contentholder" class="col-md-12">
   
   <h1>Research and Teaching Notebook</h1>
   <hr/>
@@ -18,9 +18,9 @@
   	<hr/>
   <div class="teaser">
   {% if post.teaser %}
-  {{ post.teaser }} 
+  {{ post.teaser|safe }} 
   {% else %}
-  {{ post.body[:200] }} 
+  {{ post.body[:200]|safe }} 
   {% endif %}
 
 	</div>
