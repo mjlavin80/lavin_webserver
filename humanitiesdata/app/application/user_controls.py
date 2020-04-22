@@ -4,6 +4,7 @@ from flask_admin.base import MenuLink
 from flask_admin import AdminIndexView, expose
 from flask_admin.contrib.sqla import ModelView
 from wtforms import TextAreaField
+from application.forms import CKEditor, CKEditorField
 from application import db
 from application.models import *
 from urllib.parse import quote
@@ -185,7 +186,7 @@ class ModelViewUser(ModelView):
         return redirect(url_for('status'))
         
 class ModelViewAdmin(ModelView):
-    form_choices = { 'public': [ (0, "True",), (1, "False",)],
+    form_choices = { 'public': [ ("True", "True",), ("False", "False",)],
                    }
 
     list_template = 'admin/model/custom_list.html'
@@ -244,6 +245,7 @@ class ModelViewResource(ModelViewAdmin):
             db.session.commit()
             
 class ModelViewCollection(ModelViewAdmin):
-    order = ("public", "title", "items")
+    order = ("public", "title", "description", "items")
+    form_overrides = dict(description=CKEditorField)
     column_list = order
     form_columns = order
