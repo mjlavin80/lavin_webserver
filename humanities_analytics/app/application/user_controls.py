@@ -111,6 +111,7 @@ class ModelViewUser(ModelView):
     #display only user's own content
     def is_owned(self, _id):
         model = db.session.query(self.model).filter(self.model.id == _id).one_or_none()
+
         if current_user.is_admin:
             return True
         if not model:
@@ -184,9 +185,9 @@ class ModelViewNotebook(ModelViewUser):
     list_template = 'admin/model/custom_list.html'
 
     def on_model_change(self, form, model, is_created):
-        model.pub_date = datetime.utcnow
         if not self.is_owned(model.id):
             abort(403)
+
         if model.user_id == "" or model.user_id == None or model.user_id == False:
             model.user_id = current_user.id
         if model.public == "" or model.public == None or model.public == False:
