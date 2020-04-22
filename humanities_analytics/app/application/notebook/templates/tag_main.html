@@ -6,10 +6,10 @@
 {% endblock %}
 
 {% block body %}
-<div id="contentholder" class="col-md-9">
+<div id="contentholder" class="col-md-12">
   <div><h2>Notebook pages tagged as <em>{{source_tag.tag_name}}</em></h2></div>
   {% for post in with_tag %}
-  <div class="col-md-3">
+  <div class="col-md-4 notebook_page">
 
   <h3 class="title"><a href="/notebook/{{post.post_path}}">{{post.title}}</a></h3>
   
