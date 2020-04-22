@@ -139,12 +139,13 @@ font-weight: 200;
 }
 
 .notebook_page {
-
+  margin-top: 10px;
   margin-right: 25px;
   border: 1px solid #eee;
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 7px;
+  min-height: 500px;
 }
 
 .reminders{
