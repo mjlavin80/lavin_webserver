@@ -229,7 +229,7 @@ class ModelViewResource(ModelViewAdmin):
     
     column_list = order
     form_columns = order
-    column_filters = ("status", "user_id", "record_id", "title", "description")
+    column_filters = ("public", "user_id", "record_id", "title", "description")
 
     def on_model_change(self, form, model, is_created):
         if model.public == "" or model.public == None:
