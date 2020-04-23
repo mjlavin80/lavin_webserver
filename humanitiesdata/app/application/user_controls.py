@@ -226,8 +226,10 @@ class ModelViewResource(ModelViewAdmin):
         "access_url", "web_service", "modified", "publisher", "contact_point", "contact_email", 
         "identifier", "access_level", "access_level_comment", "bureau_code", "program_code", 
         "format_", "license", "rights", "spatial", "temporal", "collections", "tags")
+    
     column_list = order
     form_columns = order
+    column_filters = ("status", "user_id", "record_id", "title", "description")
 
     def on_model_change(self, form, model, is_created):
         if model.public == "" or model.public == None:
