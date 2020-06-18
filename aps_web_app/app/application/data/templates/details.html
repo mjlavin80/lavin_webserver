@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+<div id="contentholder" class="col-md-12">
+  <h2><big>Book Reviews</big>, American Periodicals Series</h2>
+{% if aps_id %}
+<div>Headline: {{row.record_title}}</div>
+<div>Periodical: {{row.pub.title}}</div>
+<div>Publication Date: {{row.numeric_pub_date}}</div>
+<div>Volume: {{row.volume}}</div>
+<div>Issue: {{row.issue}}</div>
+<div>APS Record ID: {{ aps_id }}</div>
+<div>Abstract: {{row.abstract}}</div>
+<div>Review Type: Single focus</div>
+<hr>
+<div>
+<a href="/static/pdf/{{row.record_id}}.pdf" target="blank"><button type="button" class="btn btn-primary btn-lg">Open PDF in New Tab</button></a>
+</div>
+<hr>
+<form name="update" method="POST" action="/update/{{ aps_id }}/">
+
+<div class="col-md-12">
+	<hr>
+<div class="form-group">
+	<div class="col-md-2">
+		<label for="perceived_author_gender" class="control-label">Presumed gender:</label>
+	</div>
+<div class="col-md-8">
+<select class="form-control" name="perceived_author_gender" required>
+  <option disabled="choose" selected>Choose One</option>
+  <option value="m">Presumed Gender(s) Male</option>
+  <option value="f">Presumed Gender(s) Female</option>
+  <option value="multi">Presumed Genders Mixed</option>
+  <option value="none">Gender Unknown or Not Used</option>
+  <option value="na">Not single-work review</option>
+</select>
+</div>
+</div>
+</div>
+
+<div class="col-md-12">
+	<hr>
+<div class="form-group">
+    <label for="reviewed_book_title" class="col-md-2 control-label">Reviewed book title:</label>
+    <div class="col-md-8">
+      	<input class="form-control" id="reviewed_book_title" name="reviewed_book_title" type="text">
+    </div>
+</div>
+</div>
+
+<div class="col-md-12">
+	<hr>
+<div class="form-group">
+    <label for="reviewed_book_pub_date" class="col-md-2 control-label">Book pub date:</label>
+    <div class="col-md-8">
+      	<input class="form-control" id="reviewed_book_pub_date" name="reviewed_book_pub_date" type="text">
+    </div>
+</div>
+</div>
+<div class="col-md-12">
+	<hr>
+<div class="form-group">
+    <label for="reviewed_book_publisher" class="col-md-2 control-label">Book publisher:</label>
+    <div class="col-md-8">
+      	<input class="form-control" id="reviewed_book_publisher" name="reviewed_book_publisher" type="text">
+    </div>
+</div>
+</div>
+<div class="col-md-12">
+  <hr>
+<div class="form-group">
+    <label for="reviewed_book_publisher_viaf_match" class="col-md-2 control-label">Book publisher VIAF:</label>
+    <div class="col-md-8">
+        <input class="form-control" id="reviewed_book_publisher_viaf_match" name="reviewed_book_publisher_viaf_match" type="text">
+    </div>
+</div>
+</div>
+<div class="col-md-12">
+	<hr>
+<div class="form-group">
+    <label for="reviewed_book_genre" class="col-md-2 control-label">Book genre:</label>
+    <div class="col-md-8">
+      	<input class="form-control" id="reviewed_book_genre" name="reviewed_book_genre" type="text">
+    </div>
+</div>
+</div>
+<div class="col-md-12">
+	<hr>
+<div class="form-group">
+    <label for="reviewed_book_price" class="col-md-2 control-label">Book price:</label>
+    <div class="col-md-8">
+      	<input class="form-control" id="reviewed_book_price" name="reviewed_book_price" type="text">
+    </div>
+    <hr>
+</div>
+</div>
+<div class="col-md-12">
+	<hr>
+<div class="form-group">
+    <label for="reviewed_author_viaf_match" class="col-md-2 control-label">Author VIAF:</label>
+    <div class="col-md-8">
+      	<input class="form-control" id="reviewed_author_viaf_match" name="reviewed_author_viaf_match" type="text">
+    </div>
+</div>
+</div>
+<div class="col-md-12">
+	<hr>
+<div class="form-group">
+    <label for="reviewed_author_name" class="col-md-2 control-label">Author name:</label>
+    <div class="col-md-8">
+      	<input class="form-control" id="reviewed_author_name" name="reviewed_author_name" type="text">
+    </div>
+</div>
+</div>
+<div class="col-md-12">
+	<hr>
+	<input id="submit" class="btn btn-primary btn-lg" type="submit" value="Submit"> 
+</div>
+</form>
+	<hr>
+</div>
+{% endif %}
+</div>
+{% endblock %}
+
+{% block footer %}
+{% if aps_id %}
+<script>
+
+
+</script>
+{% endif %}
+{% endblock %}

@@ -15,17 +15,35 @@ def index(aps_id=None):
     else:
         if aps_id:
             row = Review().query.filter(Review.record_id == aps_id).one_or_none()
-
             return render_template("index.html", aps_id=aps_id, row=row)
         
         else:
-        	#change to rand() for mysql
             row = Review().query.filter(Review.status == 'needs_audit').order_by(func.random()).first()
             try:
             	aps_id = row.record_id
             except: 
             	aps_id = ""
             return render_template("index.html", aps_id=aps_id, row=row)
+
+@data_blueprint.route("/details")
+@data_blueprint.route("/details/")
+@data_blueprint.route("/details/<aps_id>")
+@data_blueprint.route("/details/<aps_id>/")
+def details(aps_id=None):
+    if not current_user.is_authenticated or not current_user.approved:
+        return render_template("index.html", aps_id=None)
+    else:
+        if aps_id:
+            row = Review().query.filter(Review.record_id == aps_id).one_or_none()
+            return render_template("details.html", aps_id=aps_id, row=row)
+        
+        else:
+            row = Review().query.filter(Review.status == 'needs_details').order_by(func.random()).first()
+            try:
+                aps_id = row.record_id
+            except: 
+                aps_id = ""
+            return render_template("details.html", aps_id=aps_id, row=row)
 
 @data_blueprint.route("/crosscheck")
 @data_blueprint.route("/crosscheck/")
@@ -69,7 +87,7 @@ def add_crosscheck(aps_id=None):
             crosscheck = ExtractedParsed()
             
             crosscheck.review_id = meta.id
-            crosscheck.experiment = "crosscheck "
+            crosscheck.experiment = "crosscheck"
             crosscheck.annotation = str(current_user.id)
             crosscheck.date_time = datetime.date.today().strftime("%Y-%m-%d")
             
@@ -96,18 +114,32 @@ def update(aps_id=None):
     if aps_id:
         if request.method == 'POST':
             meta = Review().query.filter(Review.record_id == aps_id).one_or_none()
-            for key in request.form.keys():
-                if key != "perceived_author_gender":
-                    setattr(meta, key, request.form[key])
-                else:   
-                    if request.form[key] != 'na':
-                        meta.perceived_author_gender = request.form[key]
 
-            meta.status = 'needs_crosscheck'
+            form_keys = [i for i in request.form.keys()]
+            #check if review_type is in form_keys
+            if "review_type" in form_keys:
+                #if yes, check if review_type == single_focus
+                meta.review_type = request.form["review_type"]
+                if request.form["review_type"] == "single_focus":
+                    #if single_focus, set status to "needs_details"
+                    meta.status = "needs_details"
+                else:
+                    #if not, set status to "needs_crosscheck"
+                    meta.status = "needs_crosscheck"
+
+            else:
+                #if no, update details and set status to "needs_crosscheck"
+                for key in form_keys:
+                    if key != "perceived_author_gender":
+                        setattr(meta, key, request.form[key])
+                    else:   
+                        if request.form[key] != 'na':
+                            meta.perceived_author_gender = request.form[key]
+
+                meta.status = 'needs_crosscheck'
+            
             meta.user_id = current_user.id 
             meta.last_edited = datetime.date.today().strftime("%Y-%m-%d")
-
-
             db.session.commit()
             return render_template("success.html", aps_id=aps_id) 
             #return request.form
