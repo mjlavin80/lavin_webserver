@@ -2,6 +2,7 @@ from sqlalchemy import create_engine
 from application import *
 from application.models import *
 import pandas as pd
+import sqlite3
 
 skipped = []
 
@@ -40,8 +41,6 @@ mappings = {
 'SourceType':'source_type',
 }
 
-import sqlite3
-
 cols = list(mappings.keys())
 cols.sort()
 
@@ -67,7 +66,7 @@ c = conn.cursor()
 rows = c.execute(query, ids).fetchall()
 
 for e, u in enumerate(rows):
-	if e > 500:
+	if e > 50:
 		break
 
 	if e % 50 == 0:
@@ -75,7 +74,7 @@ for e, u in enumerate(rows):
 	 
 	lookup = dict(zip(cols, u))
 	numeric_pub_date = lookup["NumericPubDate"]
-	if int(numeric_pub_date) < 19250000 and int(numeric_pub_date) > 18800000:
+	if int(numeric_pub_date) < 19260000 and int(numeric_pub_date) > 18800000:
 		meta = Review().query.filter(Review.record_id == lookup['RecordID']).one_or_none()
 		
 		#insert review with foreign keys 
