@@ -70,6 +70,7 @@ class Syllabus(db.Model):
     office_hours= db.Column(db.Text(), nullable=False)
     policies = db.Column(db.Text(), nullable=False)
     assignments = db.Column(db.Text(), nullable=False)
+    lab_schedule = db.Column(db.Text(), nullable=False)
     calendar = db.Column(db.Text(), nullable=False)
     instructor = db.Column(db.String(512), nullable=False)
     email = db.Column(db.String(512), nullable=False)
