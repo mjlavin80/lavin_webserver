@@ -203,7 +203,7 @@ class ModelViewAdmin(ModelView):
     edit_template = 'admin/model/custom_edit.html'
     create_template = 'admin/model/custom_create.html'
 
-    form_overrides = dict(course_description=CKEditorField, office_hours=CKEditorField, policies=CKEditorField, assignments=CKEditorField, calendar=CKEditorField, lab_schedule=CKEditorField)
+    form_overrides = dict(course_description=CKEditorField, office_hours=CKEditorField, policies=CKEditorField, assignments=CKEditorField, due_dates=CKEditorField, calendar=CKEditorField, lab_schedule=CKEditorField)
 
     def on_model_change(self, form, model, is_created):
         try:
