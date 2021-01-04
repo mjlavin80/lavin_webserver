@@ -13,7 +13,14 @@ def courses():
 @courses_blueprint.route("/da-101/<semester>")
 def da_101(semester=None):
     if not semester:
-        return redirect(url_for("courses.da_101", semester="fall-2020"))
+        # this doesn't work because I might be working on syllabus for next term
+        # latest_term = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.course == "da-101").all()
+        # latest_term = [i.semester.replace('spring','0').replace('fall', '1') for i in latest_term]
+        # latest_tuple = [i.split('-') for i in latest_term]
+        # latest_tuple = [(int(i[0]), int(i[1])) for i in latest_tuple]
+        # latest_tuple = sorted(latest_tuple, key = lambda x: (-x[1],-x[0]))
+        # latest = str(latest_tuple[0][0]).replace('0', 'spring').replace('1','fall') + "-" + str(latest_tuple[0][1])
+        return redirect(url_for("courses.da_101", semester="spring-2021"))
     term_string = " ".join(semester.split("-")).capitalize()
     syllabus = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.course == "da-101").filter(Syllabus.semester == semester).one_or_none()
     
