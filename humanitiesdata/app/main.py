@@ -136,11 +136,11 @@ def status(message=""):
 
         #for debugging locally
     
-        #user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
-        #db.session.add(user)
-        #db.session.commit()
-        #login_user(user, force=True)
-        #message="in"
+        # user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
+        # db.session.add(user)
+        # db.session.commit()
+        # login_user(user, force=True)
+        # message="in"
 
         # end local debugging block
 
@@ -158,12 +158,31 @@ def datastream():
     #get from db
     rows = db.session.query(Resource).filter(Resource.public=='True').all()
     
-    r = [setkeys(u.__dict__) for u in rows]
-    #jsonify
-    json_data = json.dumps(r)
-    #return json_data
-    return json_data
+    all_tags = []
+    for u in rows:
+        tags = [] 
+        for i in u.tags:
+            data = {"id":i.id, "tag_name":i.tag_name, "tag_path":i.tag_path}
+            tags.append(data)    
+        all_tags.append(tags)
 
+    r = [setkeys(u.__dict__) for u in rows]
+    
+    r_w_tags = []
+    for e, i in enumerate(r):
+        i["tags"] = all_tags[e]
+        r_w_tags.append(i)
+
+    #jsonify
+    json_data = json.dumps(r_w_tags)
+
+
+    r = make_response(json_data)
+    r.headers.set('Content-Type', 'application/json')
+    r.headers.set('Accept', 'application/json')
+    
+    return r
+    
 @app.route("/about")
 def about():
     return render_template("about.html")
@@ -212,7 +231,7 @@ db.init_app(app)
 
 if __name__ == "__main__":
     #for local dev
-    #app.run(host='0.0.0.0', debug=True, port=5000)
+    # app.run(host='0.0.0.0', debug=True, port=5000)
 
     #for production
     app.run(host='0.0.0.0', debug=True, port=80)

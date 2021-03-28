@@ -16,7 +16,9 @@ def setkeys(d):
         d["date_submitted"] = d["date_submitted"].isoformat()
     except:
         pass
-    del d["id"]
+    #del d["id"]
+    d["id"] = str(d["id"])
+    del d["tags"]
     del d["_sa_instance_state"]
     return d
 
