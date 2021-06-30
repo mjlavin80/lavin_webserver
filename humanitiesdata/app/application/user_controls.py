@@ -18,8 +18,14 @@ def setkeys(d):
         pass
     #del d["id"]
     d["id"] = str(d["id"])
-    del d["tags"]
-    del d["_sa_instance_state"]
+    try:
+        del d["tags"]
+    except:
+        pass
+    try:
+        del d["_sa_instance_state"]
+    except:
+        pass
     return d
 
 # AdminView

@@ -195,6 +195,7 @@ def tags(tag_name=None):
         if len(rows) == 0:
             return redirect(url_for('tags', tag_name=None))
         #adds fields to resource
+
         r = [setkeys(u.__dict__) for u in rows]
         #jsonify
         json_data = json.dumps(r)
