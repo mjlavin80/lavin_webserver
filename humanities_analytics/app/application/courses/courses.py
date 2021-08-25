@@ -23,7 +23,7 @@ def da_101(semester=None):
 @courses_blueprint.route("/da-200/<semester>")
 def da_200(semester=None):
     if not semester:
-        current = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.current=='True').filter(Syllabus.course == "da-101").one_or_none()
+        current = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.current=='True').filter(Syllabus.course == "da-200").one_or_none()
         return redirect(url_for("courses.da_200", semester=current.semester))
     term_string = " ".join(semester.split("-")).capitalize()
     syllabus = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.course == "da-200").filter(Syllabus.semester == semester).one_or_none()
@@ -33,7 +33,7 @@ def da_200(semester=None):
 @courses_blueprint.route("/da-301/<semester>")
 def da_301(semester=None):
     if not semester:
-        current = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.current=='True').filter(Syllabus.course == "da-101").one_or_none()
+        current = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.current=='True').filter(Syllabus.course == "da-301").one_or_none()
         return redirect(url_for("courses.da_301", semester=current.semester))
     term_string = " ".join(semester.split("-")).capitalize()
     syllabus = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.course == "da-301").filter(Syllabus.semester == semester).one_or_none()
@@ -43,7 +43,7 @@ def da_301(semester=None):
 @courses_blueprint.route("/da-401/<semester>")
 def da_401(semester=None):
     if not semester:
-        current = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.current=='True').filter(Syllabus.course == "da-101").one_or_none()
+        current = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.current=='True').filter(Syllabus.course == "da-401").one_or_none()
         return redirect(url_for("courses.da_401", semester=current.semester))
     term_string = " ".join(semester.split("-")).capitalize()
     syllabus = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.course == "da-401").filter(Syllabus.semester == semester).one_or_none()
