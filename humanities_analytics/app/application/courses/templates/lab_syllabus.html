@@ -14,7 +14,7 @@
 <body>
   <!-- Static navbar -->
 <!-- Top menu -->
-{% include "local_menu.html" %}
+{% include "lab_local_menu.html" %}
 
 <div class="container">
   <div id ="contentholder" class="row">
@@ -43,6 +43,9 @@
 
         <p>When We Meet:</p> 
         <p class="text-muted">{{syllabus.meeting_time}}</p>
+
+        <p>When the Lab Meets:</p>
+        <p class="text-muted">{{syllabus.lab_time}}</p>
       </div> 
     </div>
 
@@ -72,6 +75,15 @@
       <h3>Assignments</h3>
       <div> 
         {{syllabus.assignments|safe}}
+      </div>
+
+
+
+      <a name="lab"></a>
+      <hr class="syllabus"/>
+      <h3>Lab Schedule</h3>
+        <div>
+          {{syllabus.lab_schedule|safe}}
       </div>
 
       <a name="due_dates"></a>
