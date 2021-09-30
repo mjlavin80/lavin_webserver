@@ -29,6 +29,17 @@ def da_200(semester=None):
     syllabus = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.course == "da-200").filter(Syllabus.semester == semester).one_or_none()
     return render_template("syllabus.html", syllabus=syllabus, term_string=term_string, course_number="DA 200", course_name=syllabus.course_name)
 
+@courses_blueprint.route("/da-245")
+@courses_blueprint.route("/da-245/<semester>")
+def da_245(semester=None):
+    if not semester:
+        current = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.current=='True').filter(Syllabus.course == "da-200").one_or_none()
+        return redirect(url_for("courses.da_245", semester=current.semester))
+    term_string = " ".join(semester.split("-")).capitalize()
+    syllabus = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.course == "da-245").filter(Syllabus.semester == semester).one_or_none()
+    return render_template("syllabus.html", syllabus=syllabus, term_string=term_string, course_number="DA 245", course_name=syllabus.course_name)
+
+
 @courses_blueprint.route("/da-301")
 @courses_blueprint.route("/da-301/<semester>")
 def da_301(semester=None):
