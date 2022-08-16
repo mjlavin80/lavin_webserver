@@ -11,6 +11,7 @@ def courses():
 
 @courses_blueprint.route("/da-101")
 @courses_blueprint.route("/da-101/<semester>")
+@courses_blueprint.route("/da-101/<semester>/")
 def da_101(semester=None):
     if not semester:
         current = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.current=='True').filter(Syllabus.course == "da-101").one_or_none()
@@ -21,6 +22,7 @@ def da_101(semester=None):
 
 @courses_blueprint.route("/da-200")
 @courses_blueprint.route("/da-200/<semester>")
+@courses_blueprint.route("/da-200/<semester>/")
 def da_200(semester=None):
     if not semester:
         current = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.current=='True').filter(Syllabus.course == "da-200").one_or_none()
@@ -31,6 +33,7 @@ def da_200(semester=None):
 
 @courses_blueprint.route("/da-245")
 @courses_blueprint.route("/da-245/<semester>")
+@courses_blueprint.route("/da-245/<semester>/")
 def da_245(semester=None):
     if not semester:
         current = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.current=='True').filter(Syllabus.course == "da-200").one_or_none()
@@ -42,6 +45,7 @@ def da_245(semester=None):
 
 @courses_blueprint.route("/da-301")
 @courses_blueprint.route("/da-301/<semester>")
+@courses_blueprint.route("/da-301/<semester>/")
 def da_301(semester=None):
     if not semester:
         current = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.current=='True').filter(Syllabus.course == "da-301").one_or_none()
@@ -52,6 +56,7 @@ def da_301(semester=None):
 
 @courses_blueprint.route("/da-350")
 @courses_blueprint.route("/da-350/<semester>")
+@courses_blueprint.route("/da-350/<semester>/")
 def da_350(semester=None):
     if not semester:
         current = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.current=='True').filter(Syllabus.course == "da-350").one_or_none()
@@ -62,6 +67,7 @@ def da_350(semester=None):
 
 @courses_blueprint.route("/da-401")
 @courses_blueprint.route("/da-401/<semester>")
+@courses_blueprint.route("/da-401/<semester>/")
 def da_401(semester=None):
     if not semester:
         current = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.current=='True').filter(Syllabus.course == "da-401").one_or_none()
