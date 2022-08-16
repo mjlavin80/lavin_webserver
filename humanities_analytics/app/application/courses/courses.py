@@ -10,6 +10,7 @@ def courses():
     return render_template("main.html", data=data)
 
 @courses_blueprint.route("/da-101")
+@courses_blueprint.route("/da-101/")
 @courses_blueprint.route("/da-101/<semester>")
 @courses_blueprint.route("/da-101/<semester>/")
 def da_101(semester=None):
@@ -21,6 +22,7 @@ def da_101(semester=None):
     return render_template("lab_syllabus.html", syllabus=syllabus, term_string=term_string, course_number="DA 101", course_name=syllabus.course_name)
 
 @courses_blueprint.route("/da-200")
+@courses_blueprint.route("/da-200/")
 @courses_blueprint.route("/da-200/<semester>")
 @courses_blueprint.route("/da-200/<semester>/")
 def da_200(semester=None):
@@ -32,6 +34,7 @@ def da_200(semester=None):
     return render_template("syllabus.html", syllabus=syllabus, term_string=term_string, course_number="DA 200", course_name=syllabus.course_name)
 
 @courses_blueprint.route("/da-245")
+@courses_blueprint.route("/da-245/")
 @courses_blueprint.route("/da-245/<semester>")
 @courses_blueprint.route("/da-245/<semester>/")
 def da_245(semester=None):
@@ -44,6 +47,7 @@ def da_245(semester=None):
 
 
 @courses_blueprint.route("/da-301")
+@courses_blueprint.route("/da-301/")
 @courses_blueprint.route("/da-301/<semester>")
 @courses_blueprint.route("/da-301/<semester>/")
 def da_301(semester=None):
@@ -55,6 +59,7 @@ def da_301(semester=None):
     return render_template("syllabus.html", syllabus=syllabus, term_string=term_string, course_number="DA 301", course_name=syllabus.course_name)
 
 @courses_blueprint.route("/da-350")
+@courses_blueprint.route("/da-350/")
 @courses_blueprint.route("/da-350/<semester>")
 @courses_blueprint.route("/da-350/<semester>/")
 def da_350(semester=None):
@@ -66,6 +71,7 @@ def da_350(semester=None):
     return render_template("syllabus.html", syllabus=syllabus, term_string=term_string, course_number="DA 350", course_name=syllabus.course_name)
 
 @courses_blueprint.route("/da-401")
+@courses_blueprint.route("/da-401/")
 @courses_blueprint.route("/da-401/<semester>")
 @courses_blueprint.route("/da-401/<semester>/")
 def da_401(semester=None):
