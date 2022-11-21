@@ -284,12 +284,12 @@ def status(message=""):
 
     #for debugging locally
 
-    # user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
-    # user.authenticated = True
-    # db.session.add(user)
-    # db.session.commit()
-    # login_user(user, force=True)
-    # message="in"
+    user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
+    user.authenticated = True
+    db.session.add(user)
+    db.session.commit()
+    login_user(user, force=True)
+    message="in"
 
     #end local debug block
 
@@ -312,6 +312,6 @@ db.init_app(app)
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 80))
     #for production
-    app.run(host='0.0.0.0', port=port)
+    #app.run(host='0.0.0.0', port=port)
     #for dev
-    #app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
