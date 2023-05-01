@@ -3,7 +3,7 @@ argparse==1.2.1
 Click==7.0
 dictalchemy
 
-Flask==1.0.2
+Flask==2.3.2
 flask-login
 flask-security
 flask-admin
