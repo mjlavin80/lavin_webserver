@@ -33,6 +33,22 @@ def da_200(semester=None):
     syllabus = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.course == "da-200").filter(Syllabus.semester == semester).one_or_none()
     return render_template("syllabus.html", syllabus=syllabus, term_string=term_string, course_number="DA 200", course_name=syllabus.course_name)
 
+def load_course(semester=None, course=None, template=None):
+    if not semester:
+        current = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.current=='True').filter(Syllabus.course == course).one_or_none()
+        return redirect(url_for("courses." + course.replace("-", "_"), semester=current.semester))
+    term_string = " ".join(semester.split("-")).capitalize()
+    cn= course.replace("-", " ").capitalize()
+    syllabus = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.course == course).filter(Syllabus.semester == semester).one_or_none()
+    return render_template(template, syllabus=syllabus, term_string=term_string, course_number=cn, course_name=syllabus.course_name)
+
+@courses_blueprint.route("/da-210")
+@courses_blueprint.route("/da-210/")
+@courses_blueprint.route("/da-210/<semester>")
+@courses_blueprint.route("/da-210/<semester>/")
+def da_210(semester=None):
+    return load_course(semester=None, course="da-210", template="syllabus.html")
+
 @courses_blueprint.route("/da-245")
 @courses_blueprint.route("/da-245/")
 @courses_blueprint.route("/da-245/<semester>")
@@ -44,7 +60,6 @@ def da_245(semester=None):
     term_string = " ".join(semester.split("-")).capitalize()
     syllabus = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.course == "da-245").filter(Syllabus.semester == semester).one_or_none()
     return render_template("syllabus.html", syllabus=syllabus, term_string=term_string, course_number="DA 245", course_name=syllabus.course_name)
-
 
 @courses_blueprint.route("/da-301")
 @courses_blueprint.route("/da-301/")
@@ -69,6 +84,13 @@ def da_350(semester=None):
     term_string = " ".join(semester.split("-")).capitalize()
     syllabus = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.course == "da-350").filter(Syllabus.semester == semester).one_or_none()
     return render_template("syllabus.html", syllabus=syllabus, term_string=term_string, course_number="DA 350", course_name=syllabus.course_name)
+
+@courses_blueprint.route("/da-351")
+@courses_blueprint.route("/da-351/")
+@courses_blueprint.route("/da-351/<semester>")
+@courses_blueprint.route("/da-351/<semester>/")
+def da_210(semester=None):
+    return load_course(semester=None, course="da-351", template="syllabus.html")
 
 @courses_blueprint.route("/da-401")
 @courses_blueprint.route("/da-401/")
