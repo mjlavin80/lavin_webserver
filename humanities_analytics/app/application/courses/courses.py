@@ -46,8 +46,8 @@ def load_course(semester=None, course=None, template=None):
 @courses_blueprint.route("/da-210/")
 @courses_blueprint.route("/da-210/<semester>")
 @courses_blueprint.route("/da-210/<semester>/")
-def da_210(semester=None):
-    return load_course(semester=None, course="da-210", template="syllabus.html")
+def da_210():
+    return load_course(course="da-210", template="syllabus.html")
 
 @courses_blueprint.route("/da-245")
 @courses_blueprint.route("/da-245/")
@@ -89,8 +89,8 @@ def da_350(semester=None):
 @courses_blueprint.route("/da-351/")
 @courses_blueprint.route("/da-351/<semester>")
 @courses_blueprint.route("/da-351/<semester>/")
-def da_351(semester=None):
-    return load_course(semester=None, course="da-351", template="syllabus.html")
+def da_351():
+    return load_course(course="da-351", template="syllabus.html")
 
 @courses_blueprint.route("/da-401")
 @courses_blueprint.route("/da-401/")
