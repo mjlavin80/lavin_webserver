@@ -14,7 +14,7 @@ def load_course(semester=None, course=None, template=None):
         current = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.current=='True').filter(Syllabus.course == course).one_or_none()
         return redirect(url_for("courses." + course.replace("-", "_"), semester=current.semester))
     term_string = " ".join(semester.split("-")).capitalize()
-    cn= course.replace("-", " ").capitalize()
+    cn = course.replace("-", " ").capitalize().replace("Da ", "DA ")
     syllabus = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.course == course).filter(Syllabus.semester == semester).one_or_none()
     return render_template(template, syllabus=syllabus, term_string=term_string, course_number=cn, course_name=syllabus.course_name)
 
