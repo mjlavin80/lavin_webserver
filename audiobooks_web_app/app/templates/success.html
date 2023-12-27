@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block menu %}
+{% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div id="contentholder" class="col-md-9 text-center">
+      <h3 class="alert alert-success">Success Updating {{aps_id}}</h3>
+      <hr>
+      <a href="/"><button type="button" class="btn btn-primary btn-lg">Categorize Reviews</button></a>
+      <hr>
+      <a href="/details"><button type="button" class="btn btn-primary btn-lg">Add Details</button></a>
+      <hr>
+      <a href="/crosscheck"><button type="button" class="btn btn-primary btn-lg">Crosscheck Reviews</button></a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

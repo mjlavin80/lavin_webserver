@@ -11,6 +11,7 @@ services:
 
     links:
       - flask_base
+      - flask_base_2019
       - humanitiesdata
       - humanities_analytics
       - matthew-lavin
@@ -39,6 +40,11 @@ services:
     build: ./flaskbase-2019
     container_name: flask_empty_2019
     image: lavinflaskbase_2019
+
+  flask_base_2024:
+    build: ./flaskbase-2024
+    container_name: flask_empty_2024
+    image: lavinflaskbase_2024   
 
   faculty_activity:
     build: ./faculty-activity
@@ -89,6 +95,14 @@ services:
       - ./aps_web_app/app/static:/app/static
     links:
       - flask_base
+
+  audiobooks_web_app:
+    build: ./audiobooks_web_app
+    container_name: audiobooks_web_app
+    volumes:
+      - ./audiobooks_web_app/app/static:/app/static
+    links:
+      - flask_base_2024
 
   digiped_fall_2016:
     build: ./courses/digiped_fall_2016
