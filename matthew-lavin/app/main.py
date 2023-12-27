@@ -112,6 +112,11 @@ def logout():
         pass
     return redirect(url_for('index'))
 
+@app.route("/cv")
+def index():
+    data = StaticPage.query.filter(StaticPage.route == "cv").one_or_none()
+    return render_template("index.html", data=data)
+
 @app.route('/nanzda', methods=["GET", "POST"])
 def nanzda():
     try:
