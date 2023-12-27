@@ -113,7 +113,7 @@ def logout():
     return redirect(url_for('index'))
 
 @app.route("/cv")
-def index():
+def cv():
     data = StaticPage.query.filter(StaticPage.route == "cv").one_or_none()
     return render_template("index.html", data=data)
 
