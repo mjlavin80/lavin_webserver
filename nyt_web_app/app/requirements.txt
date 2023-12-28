@@ -1,2 +1,3 @@
 requests
 wtforms_alchemy
+bs4
