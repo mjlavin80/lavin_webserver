@@ -1,20 +1,2 @@
-pymysql
-sqlalchemy
-Flask
-Flask-SQLAlchemy
-Flask-WTF
-Flask-Script
-Flask-Migrate
-simplejson
-flask-login
-flask-security
-flask-admin
-flask-bcrypt
-dictalchemy
-WTForms-Alchemy
-requests[security]
-github-flask
-pandas
-asana
 requests
 
