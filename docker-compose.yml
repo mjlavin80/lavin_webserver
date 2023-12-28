@@ -10,26 +10,15 @@ services:
       - /root/apps/proxy/nginx.conf:/etc/nginx/conf.d/matthew-lavin.conf
 
     links:
-      - flask_base
+      - flask_base_2024
       - flask_base_2019
       - humanitiesdata
       - humanities_analytics
       - matthew-lavin
-      - digiped_fall_2016
-      - acdm_spring_2017
-      - nt_spring_2017
-      - neo_web_app
-      - nyt_web_app
-      - faculty_activity
-      - mtb_fall_2017
-      - cdm_spring_2018
-      - mtb_spring_2018
-      - mtb_fall_2018
-      - dh_fall_2018
-      - pdc_spring_2019
-      - cdm_spring_2020
       - rebeccamlee
+      - nyt_web_app
       - aps_web_app
+      - audiobooks_web_app
 
   flask_base:
     build: ./flaskbase
@@ -44,13 +33,7 @@ services:
   flask_base_2024:
     build: ./flaskbase-2024
     container_name: flask_empty_2024
-    image: lavinflaskbase_2024   
-
-  faculty_activity:
-    build: ./faculty-activity
-    container_name: faculty_activity
-    links:
-      - flask_base_2019
+    image: lavinflaskbase_2024 
 
   rebeccamlee:
     build: ./rebeccamlee
@@ -76,17 +59,11 @@ services:
     links:
       - flask_base_2019
 
-  neo_web_app:
-    build: ./neo_web_app
-    container_name: neo_web_app
-    links:
-      - flask_base
-
   nyt_web_app:
     build: ./nyt_web_app
     container_name: nyt_web_app
     links:
-      - flask_base_2019
+      - flask_base_2024
   
   aps_web_app:
     build: ./aps_web_app
@@ -94,7 +71,7 @@ services:
     volumes:
       - ./aps_web_app/app/static:/app/static
     links:
-      - flask_base
+      - flask_base_2024
 
   audiobooks_web_app:
     build: ./audiobooks_web_app
@@ -103,60 +80,4 @@ services:
       - ./audiobooks_web_app/app/static:/app/static
     links:
       - flask_base_2024
-
-  digiped_fall_2016:
-    build: ./courses/digiped_fall_2016
-    container_name: digiped_fall_2016
-
-  acdm_spring_2017:
-    build: ./courses/acdm_spring_2017
-    container_name: acdm_spring_2017
-
-  nt_spring_2017:
-    build: ./courses/nt_spring_2017
-    container_name: nt_spring_2017
-
-  mtb_fall_2017:
-    build: ./courses/mtb_fall_2017
-    container_name: mtb_fall_2017
-
-  cdm_spring_2018:
-    build: ./courses/cdm_spring_2018
-    container_name: cdm_spring_2018
-
-  mtb_spring_2018:
-    build: ./courses/mtb_spring_2018
-    container_name: mtb_spring_2018
-    links:
-      - flask_base
- 
-  mtb_fall_2018:
-    build: ./courses/mtb_fall_2018
-    container_name: mtb_fall_2018
-    volumes:
-      - ./courses/mtb_fall_2018/app/templates:/app/templates
-      - ./courses/mtb_fall_2018/app/static:/app/static
-    links:
-      - flask_base
-
-  dh_fall_2018:
-    build: ./courses/dh_fall_2018
-    container_name: dh_fall_2018
-    volumes:
-      - ./courses/dh_fall_2018/app/templates:/app/templates
-      - ./courses/dh_fall_2018/app/static:/app/static
-    links:
-      - flask_base
-
-  pdc_spring_2019:
-    build: ./courses/pdc_spring_2019
-    container_name: pdc_spring_2019
-    volumes:
-      - ./courses/pdc_spring_2019/app/static:/app/static
-
-  cdm_spring_2020:
-    build: ./courses/cdm_spring_2020
-    container_name: cdm_spring_2020
-    volumes:
-      - ./courses/cdm_spring_2020/app/static:/app/static
 

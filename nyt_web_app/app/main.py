@@ -18,7 +18,6 @@ from sqlalchemy.sql import and_
 from  sqlalchemy.sql.expression import func
 from flask_admin.form import rules
 import json
-from flask import Markup
 import requests
 from bs4 import BeautifulSoup
 
@@ -284,12 +283,12 @@ def status(message=""):
 
     #for debugging locally
 
-    user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
-    user.authenticated = True
-    db.session.add(user)
-    db.session.commit()
-    login_user(user, force=True)
-    message="in"
+    # user = AdminUser.query.filter(AdminUser.username=='admin').one_or_none()
+    # user.authenticated = True
+    # db.session.add(user)
+    # db.session.commit()
+    # login_user(user, force=True)
+    # message="in"
 
     #end local debug block
 
@@ -314,4 +313,4 @@ if __name__ == "__main__":
     #for production
     #app.run(host='0.0.0.0', port=port)
     #for dev
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    #app.run(host='0.0.0.0', debug=True, port=5000)
