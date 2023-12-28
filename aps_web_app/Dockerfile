@@ -1,4 +1,4 @@
-FROM lavinflaskbase_2019
+FROM lavinflaskbase_2024
 
 COPY ./app /app
 
