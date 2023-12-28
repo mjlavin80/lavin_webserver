@@ -20,11 +20,6 @@ services:
       - aps_web_app
       - audiobooks_web_app
 
-  flask_base:
-    build: ./flaskbase
-    container_name: flask_empty
-    image: lavinflaskbase
-
   flask_base_2019:
     build: ./flaskbase-2019
     container_name: flask_empty_2019
