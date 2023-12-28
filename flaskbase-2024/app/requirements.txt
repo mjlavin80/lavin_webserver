@@ -1,4 +1,4 @@
-PyMySQL==1.1.0
+PyMySQL
 SQLAlchemy==2.0.23
 Flask==3.0.0
 Flask-Admin==1.6.1
