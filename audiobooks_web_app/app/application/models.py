@@ -112,6 +112,11 @@ class Main(db.Model):
 	subgenres = db.relationship('Subgenre', secondary='main_subgenre', backref=db.backref('subgenres', 
         lazy='dynamic'))
 
+class AudioBookFeatures(db.Model):
+    _id = db.Column(db.Integer, primary_key=True)
+    main_id = db.Column(db.Integer(), db.ForeignKey('main._id', ondelete='CASCADE'))
+    main_asin = db.Column(db.String(128))
+
 class FullReview(db.Model):
 	_id = db.Column(db.Integer, primary_key=True)
 	main_id = db.Column(db.Integer(), db.ForeignKey('main._id', ondelete='CASCADE'))

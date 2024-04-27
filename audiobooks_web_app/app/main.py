@@ -41,10 +41,13 @@ admin = Admin(app, name='Dashboard', template_mode='bootstrap3', index_view=MyAd
 # Add administrative and user views here
 admin.add_view(ModelViewUserProfile(UserProfile, db.session))
 admin.add_view(ModelViewStatic(StaticPage, db.session))
-#admin.add_view(ModelViewReview(Review, db.session))
-#admin.add_view(ModelViewAdmin(Publication, db.session))
-#admin.add_view(ModelViewAdmin(Contributor, db.session))
-#admin.add_view(ModelViewAdmin(ExtractedParsed, db.session))
+admin.add_view(ModelViewMain(Main, db.session))
+admin.add_view(ModelViewAdmin(AudioBookFeatures, db.session))
+admin.add_view(ModelViewAdmin(PriceReviews, db.session))
+admin.add_view(ModelViewAdmin(Author, db.session))
+admin.add_view(ModelViewAdmin(Narrator, db.session))
+admin.add_view(ModelViewAdmin(FullReview, db.session))
+admin.add_view(ModelViewAdmin(GuidedResponse, db.session))
 
 #required user loader method
 login_manager = LoginManager()
@@ -111,7 +114,6 @@ def logout():
         pass
     return redirect(url_for('data.index'))
     
-
 @app.route('/status')
 def status(message=""):
     user = False
@@ -142,11 +144,11 @@ def status(message=""):
 
         #for debugging locally
     
-        user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
-        db.session.add(user)
-        db.session.commit()
-        login_user(user, force=True)
-        message="in"
+        #user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
+        #db.session.add(user)
+        #db.session.commit()
+        #login_user(user, force=True)
+        #message="in"
 
         # end local debugging block
 
@@ -198,8 +200,8 @@ def gateway_error(e):
 db.init_app(app)
 
 if __name__ == "__main__":
-    # port = int(os.environ.get("PORT", 80))
+    port = int(os.environ.get("PORT", 80))
     # for production
-    # app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port)
     # for dev
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    #app.run(host='0.0.0.0', debug=True, port=5000)
