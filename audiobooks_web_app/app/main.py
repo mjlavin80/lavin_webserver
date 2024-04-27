@@ -197,6 +197,13 @@ def server_error(e):
 def gateway_error(e):
     return render_template('500.html'), 502
 
+# Base URL route declaration
+@app.route("/")
+def index():
+    data = StaticPage.query.filter(StaticPage.route == "index").one_or_none()
+    return render_template("main.html", data=data)
+
+
 db.init_app(app)
 
 if __name__ == "__main__":
