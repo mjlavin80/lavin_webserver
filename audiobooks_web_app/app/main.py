@@ -12,6 +12,7 @@ from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_github import GitHub
 from config import GITHUB_ADMIN
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import and_, or_
 import json, requests
 import datetime
@@ -21,8 +22,8 @@ from urllib.parse import quote
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 
-# blueprints
-# app.register_blueprint(data_blueprint)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 #bcrypt instance for password hashing
 bcrypt = Bcrypt(app)
@@ -35,19 +36,15 @@ github = GitHub(app)
 def shutdown_session(exception=None):
     db.session.remove()
 
-admin = Admin(app, name='Views', template_mode='bootstrap3', index_view=MyAdminIndexView())
+admin = Admin(app, name='Dashboard', template_mode='bootstrap3', index_view=MyAdminIndexView())
 
 # Add administrative and user views here
 admin.add_view(ModelViewUserProfile(UserProfile, db.session))
 admin.add_view(ModelViewStatic(StaticPage, db.session))
-admin.add_view(ModelViewAdmin(Main, db.session))
-admin.add_view(ModelViewAdmin(FullReview, db.session))
-admin.add_view(ModelViewAdmin(GuidedResponse, db.session))
-admin.add_view(ModelViewAdmin(Author, db.session))
-admin.add_view(ModelViewAdmin(Narrator, db.session))
-admin.add_view(ModelViewAdmin(Genre, db.session))
-admin.add_view(ModelViewAdmin(Subgenre, db.session))
-admin.add_view(ModelViewAdmin(PriceReviews, db.session))
+#admin.add_view(ModelViewReview(Review, db.session))
+#admin.add_view(ModelViewAdmin(Publication, db.session))
+#admin.add_view(ModelViewAdmin(Contributor, db.session))
+#admin.add_view(ModelViewAdmin(ExtractedParsed, db.session))
 
 #required user loader method
 login_manager = LoginManager()
@@ -82,15 +79,10 @@ def token_getter():
     if user is not None:
         return user.github_access_token
 
-@app.route('/')
-def index():
-    data = StaticPage.query.filter(StaticPage.route == "index").one_or_none()
-    return render_template("main.html", data=data)
-
 @app.route('/github-callback')
 @github.authorized_handler
 def authorized(access_token):
-    next_url = request.args.get('next') or url_for('index')
+    next_url = request.args.get('next') or url_for('data.index')
     if access_token is None:
         return redirect(url_for('status'))
     user = GithubToken.query.filter_by(github_access_token=access_token).first()
@@ -150,11 +142,11 @@ def status(message=""):
 
         #for debugging locally
     
-        # user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
-        # db.session.add(user)
-        # db.session.commit()
-        # login_user(user, force=True)
-        # message="in"
+        user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
+        db.session.add(user)
+        db.session.commit()
+        login_user(user, force=True)
+        message="in"
 
         # end local debugging block
 
@@ -206,8 +198,8 @@ def gateway_error(e):
 db.init_app(app)
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 80))
+    # port = int(os.environ.get("PORT", 80))
     # for production
-    app.run(host='0.0.0.0', port=port)
+    # app.run(host='0.0.0.0', port=port)
     # for dev
-    # app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
