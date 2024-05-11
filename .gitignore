@@ -11,3 +11,4 @@ nyt_web_app/app/ocr/*
 *.ipynb
 aps_web_app/app/summer_2023_meta.csv
 aps_web_app/app/summer_2023_txt/
+dumps/
