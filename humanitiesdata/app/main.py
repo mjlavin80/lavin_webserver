@@ -169,12 +169,14 @@ def datastream():
         tag_dict = {k: tag[k] for k in ['id', 'tag_name', 'tag_path']} 
 
         try:
-            r[int(_id)]['tags'].append(tag_dict)
+            r[_id]['tags'].append(tag_dict)
         except:
-            r[int(_id)]['tags'] = [tag_dict,]
+            r[_id]['tags'] = [tag_dict,]
     
+    data = [i for i in r.values()]
+
     #jsonify
-    json_data = json.dumps(r)
+    json_data = json.dumps(data)
     
     r = make_response(json_data)
     r.headers.set('Content-Type', 'application/json')
