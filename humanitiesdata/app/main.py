@@ -1,4 +1,4 @@
-import os
+import os, time
 from config import *
 from flask import abort, Flask, render_template, make_response, redirect, url_for, send_from_directory, request, flash, g, session
 from flask_login import LoginManager, login_user, logout_user, current_user
@@ -136,11 +136,11 @@ def status(message=""):
 
         #for debugging locally
     
-        # user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
-        # db.session.add(user)
-        # db.session.commit()
-        # login_user(user, force=True)
-        # message="in"
+        user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
+        db.session.add(user)
+        db.session.commit()
+        login_user(user, force=True)
+        message="in"
 
         # end local debugging block
 
@@ -155,32 +155,31 @@ def index():
 
 @app.route("/datastream")
 def datastream():
-    #get from db
+    # about 3 seconds ... 
+
     rows = db.session.query(Resource).filter(Resource.public=='True').all()
+    tags = db.session.query(TagsResources,Resource,Tag).join(Resource).join(Tag).filter(Resource.public=='True').all()
     
-    all_tags = []
-    for u in rows:
-        tags = [] 
-        for i in u.tags:
-            data = {"id":i.id, "tag_name":i.tag_name, "tag_path":i.tag_path}
-            tags.append(data)    
-        all_tags.append(tags)
-
-    r = [setkeys(u.__dict__) for u in rows]
+    r = {u.id: setkeys(u.__dict__) for u in rows}
     
-    r_w_tags = []
-    for e, i in enumerate(r):
-        i["tags"] = all_tags[e]
-        r_w_tags.append(i)
+    t = [(u.id, setkeys(v.__dict__)) for j,u,v in tags]
 
+    for _id, tag in t:
+
+        tag_dict = {k: tag[k] for k in ['id', 'tag_name', 'tag_path']} 
+
+        try:
+            r[int(_id)]['tags'].append(tag_dict)
+        except:
+            r[int(_id)]['tags'] = [tag_dict,]
+    
     #jsonify
-    json_data = json.dumps(r_w_tags)
-
-
+    json_data = json.dumps(r)
+    
     r = make_response(json_data)
     r.headers.set('Content-Type', 'application/json')
     r.headers.set('Accept', 'application/json')
-    
+
     return r
     
 @app.route("/about")
@@ -232,7 +231,7 @@ db.init_app(app)
 
 if __name__ == "__main__":
     #for local dev
-    # app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
 
     #for production
-    app.run(host='0.0.0.0', debug=True, port=80)
+    # app.run(host='0.0.0.0', debug=True, port=80)

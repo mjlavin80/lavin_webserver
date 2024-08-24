@@ -52,6 +52,8 @@ class UserProfile(db.Model):
         return False
 
 class Resource(db.Model):
+    __tablename__ = 'resource'
+
     id = db.Column(db.Integer, primary_key=True)
     public = db.Column(db.String(128), nullable=False)
     resource_type = db.Column(db.String(128), index=True, nullable=False)
@@ -78,47 +80,57 @@ class Resource(db.Model):
     spatial = db.Column(db.String(128), index=True)
     temporal = db.Column(db.String(128), index=True)
     date_submitted = db.Column(db.DateTime, default=datetime.today())
-    collections = db.relationship('Collection', secondary="collection_items", backref=db.backref('collections', 
-        lazy='dynamic'))
-    tags = db.relationship('Tag', secondary="tags_resources", backref=db.backref('tags', 
-        lazy='dynamic'))
+    
+    tags = db.relationship('TagsResources', back_populates='resources', lazy='joined')
+    collections = db.relationship('CollectionItems', back_populates='resources')
 
     def __repr__(self):
         return '<Resource %r>' % self.title
 
+
 class Tag(db.Model):
+    __tablename__ = 'tag'
+
     id = db.Column(db.Integer(), primary_key=True)
     public = db.Column(db.String(128), nullable=False)
     tag_name = db.Column(db.String(500), nullable=False)
     tag_path = db.Column(db.String(500), nullable=False)
-    resources = db.relationship('Resource', secondary='tags_resources', backref=db.backref('resources', 
-        lazy='dynamic'))
+    resources = db.relationship('TagsResources', back_populates='tags')
 
     def __repr__(self):
         return '<Tag %r >' % self.tag_name
 
-class TagsResources(db.Model):
-    __tablename__="tags_resources"
-    id = db.Column(db.Integer(), primary_key=True)
-    tag_id = db.Column(db.Integer(), db.ForeignKey('tag.id', ondelete='CASCADE'))
-    resource_id = db.Column(db.Integer(), db.ForeignKey('resource.id', ondelete='CASCADE'))
-
 class Collection(db.Model):
+    __tablename__ = 'collection'
+
     id = db.Column(db.Integer, primary_key=True)
     public = db.Column(db.String(128), nullable=False)
     title = db.Column(db.String(999), nullable=False)
     description = db.Column(db.String(2000)) 
-    items = db.relationship('Resource', secondary="collection_items", backref=db.backref('items', 
-        lazy='dynamic'))
+    items = db.relationship('CollectionItems', back_populates='collections')
 
     def __repr__(self):
         return '<Collection %r >' % self.title
 
 class CollectionItems(db.Model):
-    __tablename__="collection_items"
+    __tablename__='collection_items'
+
     id = db.Column(db.Integer, primary_key=True)
     collection_id = db.Column(db.Integer, db.ForeignKey('collection.id', ondelete='CASCADE'), nullable=False)
     resource_id = db.Column(db.Integer, db.ForeignKey('resource.id', ondelete='CASCADE'), nullable=False)
     collection_title = db.Column(db.String(128))
     resource_title = db.Column(db.String(128))
     order = db.Column(db.Integer)
+
+    collections = db.relationship('Collection', back_populates='items')
+    resources =  db.relationship('Resource', back_populates='collections')
+
+class TagsResources(db.Model):
+    __tablename__='tags_resources'
+
+    id = db.Column(db.Integer(), primary_key=True)
+    tag_id = db.Column(db.Integer(), db.ForeignKey('tag.id', ondelete='CASCADE'))
+    resource_id = db.Column(db.Integer(), db.ForeignKey('resource.id', ondelete='CASCADE'))
+    tags = db.relationship('Tag', back_populates='resources')
+    resources =  db.relationship('Resource', back_populates='tags')
+
