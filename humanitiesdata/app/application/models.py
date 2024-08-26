@@ -81,7 +81,7 @@ class Resource(db.Model):
     temporal = db.Column(db.String(128), index=True)
     date_submitted = db.Column(db.DateTime, default=datetime.today())
     
-    tags = db.relationship('TagsResources', back_populates='resources', lazy='joined')
+    tags = db.relationship('TagsResources', back_populates='resource', lazy='joined')
     collections = db.relationship('CollectionItems', back_populates='resources')
 
     def __repr__(self):
@@ -95,7 +95,7 @@ class Tag(db.Model):
     public = db.Column(db.String(128), nullable=False)
     tag_name = db.Column(db.String(500), nullable=False)
     tag_path = db.Column(db.String(500), nullable=False)
-    resources = db.relationship('TagsResources', back_populates='tags')
+    resources = db.relationship('TagsResources', back_populates='tag')
 
     def __repr__(self):
         return '<Tag %r >' % self.tag_name
@@ -131,6 +131,6 @@ class TagsResources(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     tag_id = db.Column(db.Integer(), db.ForeignKey('tag.id', ondelete='CASCADE'))
     resource_id = db.Column(db.Integer(), db.ForeignKey('resource.id', ondelete='CASCADE'))
-    tags = db.relationship('Tag', back_populates='resources')
-    resources =  db.relationship('Resource', back_populates='tags')
+    tag = db.relationship('Tag', back_populates='resources')
+    resource =  db.relationship('Resource', back_populates='tags')
 

@@ -136,11 +136,11 @@ def status(message=""):
 
         #for debugging locally
     
-        user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
-        db.session.add(user)
-        db.session.commit()
-        login_user(user, force=True)
-        message="in"
+        # user = UserProfile.query.filter(UserProfile.id==1).one_or_none()
+        # db.session.add(user)
+        # db.session.commit()
+        # login_user(user, force=True)
+        # message="in"
 
         # end local debugging block
 
@@ -155,7 +155,7 @@ def index():
 
 @app.route("/datastream")
 def datastream():
-    # about 3 seconds ... 
+    # about 3 seconds ... fix with code from /resources/<id>
 
     rows = db.session.query(Resource).filter(Resource.public=='True').all()
     tags = db.session.query(TagsResources,Resource,Tag).join(Resource).join(Tag).filter(Resource.public=='True').all()
@@ -169,9 +169,9 @@ def datastream():
         tag_dict = {k: tag[k] for k in ['id', 'tag_name', 'tag_path']} 
 
         try:
-            r[_id]['tags'].append(tag_dict)
+            r[int(_id)]['tags'].append(tag_dict)
         except:
-            r[_id]['tags'] = [tag_dict,]
+            r[int(_id)]['tags'] = [tag_dict,]
     
     data = [i for i in r.values()]
 
@@ -191,39 +191,37 @@ def about():
 @app.route("/tags")
 @app.route("/tags/<tag_name>")
 def tags(tag_name=None):
+
     if tag_name:
+        # get resources that match tag_name
+
         rows = Resource.query.join(Tag.resources).filter(Tag.tag_name == tag_name).filter(Resource.public=='True').all()
+        
         if len(rows) == 0:
             return redirect(url_for('tags', tag_name=None))
-        #adds fields to resource
-
+        
         r = [setkeys(u.__dict__) for u in rows]
-        #jsonify
+
         json_data = json.dumps(r)
+
         return render_template("tags.html", tag_name=tag_name, json_data = json_data)
     else:
-        _all = [i for i in Tag.query.all()]
-    
-    
-    all_tags = []
-    for tag in _all:
-        published = [i for i in tag.resources if i.public == "True"]
-        if len(published) > 0:
-            all_tags.append(tag.tag_name)
-    
-    all_tags.sort()
+        _tags = db.session.query(Tag).join(Resource.tags).filter(Resource.public=='True').all()
+        all_tags = list(set([i.tag_name for i in _tags]))
+        all_tags.sort()
 
-    return render_template("tags.html", all_tags=all_tags)
+        return render_template("tags.html", all_tags=all_tags)
 
 @app.route("/resources")
 @app.route("/resources/<_id>")
 def resources(_id=None):
     if _id:
         obj = Resource.query.filter(Resource.id == _id).one_or_none()
+        
         if not obj:
             return redirect(url_for('resources', _id=None))
-        tags_ = [str(i.tag_name) for i in obj.tags]
 
+        tags_ = [str(i.tag.tag_name) for i in obj.tags]
         return render_template("single_resource.html", tags=tags_, obj=obj.__dict__, _id=_id)
     else:
         return render_template("search.html")
@@ -233,7 +231,7 @@ db.init_app(app)
 
 if __name__ == "__main__":
     #for local dev
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    # app.run(host='0.0.0.0', debug=True, port=5000)
 
     #for production
-    # app.run(host='0.0.0.0', debug=True, port=80)
+    app.run(host='0.0.0.0', debug=True, port=80)
