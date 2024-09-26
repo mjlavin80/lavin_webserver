@@ -1,5 +1,6 @@
 import os, time
 from config import *
+from collections import Counter
 from flask import abort, Flask, render_template, make_response, redirect, url_for, send_from_directory, request, flash, g, session
 from flask_login import LoginManager, login_user, logout_user, current_user
 from flask_security import login_required
@@ -190,27 +191,27 @@ def about():
 
 @app.route("/tags")
 @app.route("/tags/<tag_name>")
-def tags(tag_name=None):
-
-    if tag_name:
+def tags(tag_name='all'):
+    if not tag_name:
+        return redirect(url_for('tags', tag_name='all'))
+    if tag_name !='all':
         # get resources that match tag_name
-
-        rows = Resource.query.join(Tag.resources).filter(Tag.tag_name == tag_name).filter(Resource.public=='True').all()
+        rows = db.session.query(TagsResources,Resource,Tag).join(Resource).join(Tag).filter(Tag.tag_name == tag_name).filter(Resource.public=='True').all()
         
         if len(rows) == 0:
-            return redirect(url_for('tags', tag_name=None))
+            return redirect(url_for('tags', tag_name='all'))
         
-        r = [setkeys(u.__dict__) for u in rows]
+        r = [setkeys(u[1].__dict__) for u in rows]
 
         json_data = json.dumps(r)
 
         return render_template("tags.html", tag_name=tag_name, json_data = json_data)
     else:
-        _tags = db.session.query(Tag).join(Resource.tags).filter(Resource.public=='True').all()
-        all_tags = list(set([i.tag_name for i in _tags]))
-        all_tags.sort()
-
-        return render_template("tags.html", all_tags=all_tags)
+        _tags = db.session.query(TagsResources,Resource,Tag).join(Resource).join(Tag).filter(Resource.public=='True').all()
+        all_tags = [i[2].tag_name for i in _tags]
+        c = [ i for i in Counter(all_tags).most_common(500) if i[1] > 1]
+    
+        return render_template("tags.html", all_tags=c)
 
 @app.route("/resources")
 @app.route("/resources/<_id>")
@@ -222,6 +223,8 @@ def resources(_id=None):
             return redirect(url_for('resources', _id=None))
 
         tags_ = [str(i.tag.tag_name) for i in obj.tags]
+        tags_.sort()
+        
         return render_template("single_resource.html", tags=tags_, obj=obj.__dict__, _id=_id)
     else:
         return render_template("search.html")
@@ -231,7 +234,7 @@ db.init_app(app)
 
 if __name__ == "__main__":
     #for local dev
-    # app.run(host='0.0.0.0', debug=True, port=5000)
+    #app.run(host='0.0.0.0', debug=True, port=5000)
 
     #for production
     app.run(host='0.0.0.0', debug=True, port=80)
