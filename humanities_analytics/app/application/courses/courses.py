@@ -18,6 +18,20 @@ def load_course(semester=None, course=None, template=None):
     syllabus = db.session.query(Syllabus).filter(Syllabus.public=='True').filter(Syllabus.course == course).filter(Syllabus.semester == semester).one_or_none()
     return render_template(template, syllabus=syllabus, term_string=term_string, course_number=cn, course_name=syllabus.course_name)
 
+@courses_blueprint.route("/fy-sem")
+@courses_blueprint.route("/fy-sem/")
+@courses_blueprint.route("/fy-sem/<semester>")
+@courses_blueprint.route("/fy-sem/<semester>/")
+def fy_sem(semester=None, course="fy-sem", template="syllabus.html"):
+    return load_course(semester=semester, course=course, template=template)
+
+@courses_blueprint.route("/data-121")
+@courses_blueprint.route("/data-121/")
+@courses_blueprint.route("/data-121/<semester>")
+@courses_blueprint.route("/data-121/<semester>/")
+def data_121(semester=None, course="data-121", template="lab_syllabus.html"):
+    return load_course(semester=semester, course=course, template=template)
+
 @courses_blueprint.route("/da-101")
 @courses_blueprint.route("/da-101/")
 @courses_blueprint.route("/da-101/<semester>")
