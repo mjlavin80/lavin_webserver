@@ -3,12 +3,23 @@ from flask_login import current_user
 from flask_admin.base import MenuLink
 from flask_admin import AdminIndexView, expose
 from flask_admin.contrib.sqla import ModelView
+from flask_admin.model import typefmt
 from application import db
 from application.models import *
 from application.forms import CKEditor, CKEditorField
 from urllib.parse import quote
 from datetime import datetime
 
+def text_truncate_formatter(view, value):
+    if value and isinstance(value, str) and len(value) > 30:
+        return value[:30] + "..."
+    return value
+
+# Copy existing base formatters and override for string/text types
+MY_STR_FORMATTERS = dict(typefmt.BASE_FORMATTERS)
+MY_STR_FORMATTERS.update({
+    str: text_truncate_formatter
+})
 
 # AdminView
 class MyAdminIndexView(AdminIndexView):
@@ -176,12 +187,13 @@ class ModelViewUser(ModelView):
         # redirect to login page if user doesn't have access
         return redirect(url_for('status'))
 
+
 class ModelViewNotebook(ModelViewUser):
     column_hide_backrefs = False
     column_list = ('title', 'public', 'body', 'teaser','tags')
     form_overrides = dict(body=CKEditorField)
     form_columns = ('title', 'public', 'pub_date', 'teaser', 'body', 'tags')
-    column_formatters = dict(body=lambda v, c, m, p: m.body[:100]+ " ...", teaser=lambda v, c, m, p: m.teaser[:25] if m.teaser else m.teaser)
+    column_type_formatters = MY_STR_FORMATTERS
     list_template = 'admin/model/custom_list.html'
 
     def on_model_change(self, form, model, is_created):
@@ -197,8 +209,7 @@ class ModelViewNotebook(ModelViewUser):
 
 class ModelViewAdmin(ModelView):
     form_choices = { 'public': [ ("True", "True",), ("False", "False",)],}
-    column_formatters = dict(course_description=lambda v, c, m, p: m.course_description[:100], office_hours=lambda v, c, m, p: m.office_hours[:100], 
-        policies=lambda v, c, m, p: m.policies[:100], assignments=lambda v, c, m, p: m.assignments[:100], calendar=lambda v, c, m, p: m.calendar[:100])
+    column_type_formatters = MY_STR_FORMATTERS
     list_template = 'admin/model/custom_list.html'
     edit_template = 'admin/model/custom_edit.html'
     create_template = 'admin/model/custom_create.html'

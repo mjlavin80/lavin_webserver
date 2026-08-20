@@ -159,7 +159,7 @@ db.init_app(app)
 
 if __name__ == "__main__":
     #for local dev
-    #app.run(host='0.0.0.0', debug=True, port=5000)
+    #app.run(host='0.0.0.0', debug=True, port=5001)
 
     #for production
     app.run(host='0.0.0.0', debug=True, port=80)
