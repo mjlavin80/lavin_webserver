@@ -210,6 +210,7 @@ class ModelViewNotebook(ModelViewUser):
 class ModelViewAdmin(ModelView):
     form_choices = { 'public': [ ("True", "True",), ("False", "False",)],}
     column_type_formatters = MY_STR_FORMATTERS
+    column_default_sort = ('id', True)  
     list_template = 'admin/model/custom_list.html'
     edit_template = 'admin/model/custom_edit.html'
     create_template = 'admin/model/custom_create.html'
